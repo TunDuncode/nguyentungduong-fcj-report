@@ -15,12 +15,12 @@ pre: " <b> 1.8. </b> "
 
 ### Tasks to be carried out this week:
 | Day | Task | Start Date | Completion Date | Reference Material |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | --------------- | ----------------------------------------- |
-| 2   | - Study Amazon RDS architecture (Relational Databases) <br>&emsp; + Supported Database Engines (MySQL, PostgreSQL) <br>&emsp; + Automated platform management features | 08/06/2026 | 08/06/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 3   | - Research High Availability (HA) models for data storage <br>&emsp; + Multi-AZ Deployments (Synchronous data replication) <br>&emsp; + Read Replicas (Horizontal scaling for read workloads) | 09/06/2026 | 09/06/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Learn non-relational NoSQL database options <br>&emsp; + Amazon DynamoDB core elements <br>&emsp; + Key concepts of Partition Keys and Sort Keys <br>&emsp; + Provisioned vs On-demand capacity modes | 10/06/2026 | 10/06/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Analyze business use-cases to evaluate when to choose RDS vs DynamoDB <br> - Sketch a sample logical relational database schema template | 11/06/2026 | 11/06/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - Study network isolation principles to safely secure cloud databases <br> - Understand the basic functionalities of DB Subnet Groups | 12/06/2026 | 12/06/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| --- | --- | --- | --- | --- |
+| 7   | - Study Amazon RDS architecture (Relational Databases) <br>&emsp; + Supported Database Engines (MySQL, PostgreSQL) <br>&emsp; + Automated platform management features | 26/09/2026 | 26/09/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| sunday   | - Research High Availability (HA) models for data storage <br>&emsp; + Multi-AZ Deployments (Synchronous data replication) <br>&emsp; + Read Replicas (Horizontal scaling for read workloads) | 27/09/2026 | 27/09/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| 2   | - Learn non-relational NoSQL database options <br>&emsp; + Amazon DynamoDB core elements <br>&emsp; + Key concepts of Partition Keys and Sort Keys <br>&emsp; + Provisioned vs On-demand capacity modes | 28/09/2026 | 28/09/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| 3   | - Analyze business use-cases to evaluate when to choose RDS vs DynamoDB <br> - Sketch a sample logical relational database schema template | 29/09/2026 | 29/09/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| 4   | - Study network isolation principles to safely secure cloud databases <br> - Understand the basic functionalities of DB Subnet Groups | 30/09/2026 | 30/09/2026      | <https://cloudjourney.awsstudygroup.com/> |
 
 
 ### Week 8 Achievements:

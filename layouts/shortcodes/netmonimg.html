@@ -1,0 +1,12 @@
+{{- $src := strings.TrimPrefix "/" (.Get "src") -}}
+{{- $url := $src | relURL -}}
+{{- $file := printf "static/%s" $src -}}
+{{- if fileExists $file -}}
+<figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+  <a href="{{ $url }}" target="_blank" rel="noopener"><img src="{{ $url }}" alt="{{ .Get "alt" }}" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" /></a>
+  <figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">{{ .Get "caption" }}</figcaption>
+</figure>
+{{- else -}}
+{{- warnf "NetMon missing image: %s on page %s" $file .Page.RelPermalink -}}
+<p style="padding:.75rem;border-left:4px solid #d44;">Thiếu ảnh <code>{{ $src }}</code>. Hãy kiểm tra thư mục <code>static/images/netmon-workshop</code> trong dự án Hugo.</p>
+{{- end -}}

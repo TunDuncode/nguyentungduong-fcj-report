@@ -3,7 +3,7 @@ title : "Event 1: GenAI-powered App-DB Modernization Workshop"
 date : 2026-05-23
 weight : 1
 chapter : false
-pre : " <b> 4.2. </b> "
+pre : " <b> 4.1. </b> "
 ---
 
 ### Event Objectives & Overview

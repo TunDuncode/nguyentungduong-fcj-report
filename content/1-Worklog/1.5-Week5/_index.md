@@ -15,12 +15,12 @@ pre: " <b> 1.5. </b> "
 
 ### Tasks to be carried out this week:
 | Day | Task | Start Date | Completion Date | Reference Material |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Learn Elastic Load Balancing (ELB) <br>&emsp; + Application Load Balancer (ALB) <br>&emsp; + Network Load Balancer (NLB) <br> | 18/05/2026   | 18/05/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 3   | - Study Target Groups & Health Checks <br>&emsp; + Concepts of routing algorithms <br> | 19/05/2026   | 19/05/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Learn Amazon EC2 Auto Scaling (ASG) <br>&emsp; + Launch Templates <br>&emsp; + Scaling Policies <br> | 20/05/2026   | 20/05/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - **Practice:** <br>&emsp; + Create EC2 Launch Template (with pre-installed Apache) <br>&emsp; + Create Target Group for HTTP (Port 80) <br> | 21/05/2026   | 21/05/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Practice:** <br>&emsp; + Configure Application Load Balancer <br>&emsp; + Launch Auto Scaling Group across 2 AZs <br>&emsp; + Test self-healing capability | 22/05/2026   | 22/05/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| --- | --- | --- | --- | --- |
+| 7   | - Learn Elastic Load Balancing (ELB) <br>&emsp; + Application Load Balancer (ALB) <br>&emsp; + Network Load Balancer (NLB) <br> | 05/09/2026   | 05/09/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| sunday   | - Study Target Groups & Health Checks <br>&emsp; + Concepts of routing algorithms <br> | 06/09/2026   | 06/09/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| 2   | - Learn Amazon EC2 Auto Scaling (ASG) <br>&emsp; + Launch Templates <br>&emsp; + Scaling Policies <br> | 07/09/2026   | 07/09/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| 3   | - **Practice:** <br>&emsp; + Create EC2 Launch Template (with pre-installed Apache) <br>&emsp; + Create Target Group for HTTP (Port 80) <br> | 08/09/2026   | 08/09/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| 4   | - **Practice:** <br>&emsp; + Configure Application Load Balancer <br>&emsp; + Launch Auto Scaling Group across 2 AZs <br>&emsp; + Test self-healing capability | 09/09/2026   | 09/09/2026      | <https://cloudjourney.awsstudygroup.com/> |
 
 
 ### Week 5 Achievements:

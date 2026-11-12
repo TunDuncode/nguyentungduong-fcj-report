@@ -6,8 +6,6 @@ chapter: false
 pre: " <b> 4.1. </b> "
 ---
 
-
-
 # Bài thu hoạch “GenAI-powered App-DB Modernization workshop”
 
 ### Mục Đích Của Sự Kiện

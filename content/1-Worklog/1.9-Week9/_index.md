@@ -15,12 +15,12 @@ pre: " <b> 1.9. </b> "
 
 ### Tasks to be carried out this week:
 | Day | Task | Start Date | Completion Date | Reference Material |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | --------------- | ----------------------------------------- |
-| 2   | - Research safe network group configurations for DB layer <br>&emsp; + Formulate DB Subnet Groups isolated inside Private Subnets | 15/06/2026 | 15/06/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 3   | - Configure firewall rules guarding the Database layer <br>&emsp; + Create DB Security Groups <br>&emsp; + Allow inbound traffic exclusively from the Web/App Security Group | 16/06/2026 | 16/06/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - **Practice (Part 1):** <br>&emsp; + Provision an Amazon RDS MySQL Instance using Free Tier allocations <br>&emsp; + Bind prepared DB Subnet Groups and Security Groups to the instance | 17/06/2026 | 17/06/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - **Practice (Part 2):** <br>&emsp; + Connect securely via SSH into the EC2 Bastion Host compute environment <br>&emsp; + Install native MySQL CLI tools locally onto the EC2 host | 18/06/2026 | 18/06/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Practice (Part 3):** <br>&emsp; + Establish an internal link from EC2 to the RDS Endpoint <br>&emsp; + Run basic SQL operations (CREATE TABLE, INSERT, SELECT) <br>&emsp; + Tear down resources to avoid extra costs | 19/06/2026 | 19/06/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| --- | --- | --- | --- | --- |
+| 7   | - Research safe network group configurations for DB layer <br>&emsp; + Formulate DB Subnet Groups isolated inside Private Subnets | 03/10/2026 | 03/10/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| sunday   | - Configure firewall rules guarding the Database layer <br>&emsp; + Create DB Security Groups <br>&emsp; + Allow inbound traffic exclusively from the Web/App Security Group | 04/10/2026 | 04/10/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| 2   | - **Practice (Part 1):** <br>&emsp; + Provision an Amazon RDS MySQL Instance using Free Tier allocations <br>&emsp; + Bind prepared DB Subnet Groups and Security Groups to the instance | 05/10/2026 | 05/10/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| 3   | - **Practice (Part 2):** <br>&emsp; + Connect securely via SSH into the EC2 Bastion Host compute environment <br>&emsp; + Install native MySQL CLI tools locally onto the EC2 host | 06/10/2026 | 06/10/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| 4   | - **Practice (Part 3):** <br>&emsp; + Establish an internal link from EC2 to the RDS Endpoint <br>&emsp; + Run basic SQL operations (CREATE TABLE, INSERT, SELECT) <br>&emsp; + Tear down resources to avoid extra costs | 07/10/2026 | 07/10/2026      | <https://cloudjourney.awsstudygroup.com/> |
 
 
 ### Week 9 Achievements:

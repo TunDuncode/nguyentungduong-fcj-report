@@ -5,9 +5,7 @@ weight: 3
 chapter: false
 pre: " <b> 3.3. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Note:** The information below is for reference only, please **do not copy verbatim** for your report, including this warning.
-{{% /notice %}}
+
 
 # HOW AWS OPTIMIZES AI FOR AUTONOMOUS ROBOTS (CASE STUDY: AIGEN)
 

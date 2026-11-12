@@ -15,13 +15,12 @@ pre: " <b> 1.8. </b> "
 
 ### Các công việc cần triển khai trong tuần này:
 | Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Tìm hiểu kiến trúc Amazon RDS (Cơ sở dữ liệu quan hệ) <br>&emsp; + Các loại Database Engine trợ giúp (MySQL, PostgreSQL) <br>&emsp; + Tính năng tự động hóa quản lý hệ thống | 08/06/2026   | 08/06/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 3   | - Nghiên cứu kiến trúc sẵn sàng cao HA cho dữ liệu <br>&emsp; + Multi-AZ Deployments (Đồng bộ dữ liệu đa vùng) <br>&emsp; + Read Replicas (Bản sao mở rộng luồng đọc) | 09/06/2026   | 09/06/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tìm hiểu giải pháp cơ sở dữ liệu phi quan hệ NoSQL <br>&emsp; + Amazon DynamoDB cơ bản <br>&emsp; + Khái niệm cơ chế khóa Partition Keys và Sort Keys <br>&emsp; + Chế độ Provisioned vs On-demand | 10/06/2026   | 10/06/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Phân tích đánh giá kịch bản Use-case thực tế nên chọn lựa RDS hay DynamoDB <br> - Thiết kế phác thảo một sơ đồ cấu trúc cơ sở dữ liệu quan hệ mẫu | 11/06/2026   | 11/06/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - Tìm hiểu nguyên lý thiết kế phân vùng lưu trữ an toàn cách ly mạng cho Database <br> - Tìm hiểu tổng quan khái niệm cấu hình DB Subnet Groups | 12/06/2026   | 12/06/2026      | <https://cloudjourney.awsstudygroup.com/> |
-
+| --- | --- | --- | --- | --- |
+| 7   | - Nghiên cứu kiến trúc Amazon RDS (Cơ sở dữ liệu quan hệ) <br>&emsp; + Các Engine Cơ sở dữ liệu hỗ trợ (MySQL, PostgreSQL) <br>&emsp; + Các tính năng quản lý nền tảng tự động | 26/09/2026 | 26/09/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| chủ nhật   | - Nghiên cứu các mô hình Tính sẵn sàng cao (HA) cho lưu trữ dữ liệu <br>&emsp; + Triển khai Multi-AZ (Sao chép dữ liệu đồng bộ) <br>&emsp; + Read Replicas (Mở rộng theo chiều ngang cho các khối lượng công việc đọc) | 27/09/2026 | 27/09/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| 2   | - Tìm hiểu các tùy chọn cơ sở dữ liệu NoSQL phi quan hệ <br>&emsp; + Các thành phần cốt lõi của Amazon DynamoDB <br>&emsp; + Các khái niệm chính về Partition Keys (Khóa phân vùng) và Sort Keys (Khóa sắp xếp) <br>&emsp; + Chế độ dung lượng Provisioned (Cấp phát trước) so với On-demand (Theo nhu cầu) | 28/09/2026 | 28/09/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| 3   | - Phân tích các trường hợp sử dụng thực tế để đánh giá khi nào nên chọn RDS hay DynamoDB <br> - Phác thảo một mẫu lược đồ cơ sở dữ liệu quan hệ logic mẫu | 29/09/2026 | 29/09/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| 4   | - Nghiên cứu các nguyên tắc cách ly mạng để bảo mật an toàn cho cơ sở dữ liệu trên cloud <br> - Hiểu các chức năng cơ bản của DB Subnet Groups (Nhóm Subnet cho DB) | 30/09/2026 | 30/09/2026      | <https://cloudjourney.awsstudygroup.com/> |
 ### Kết quả đạt được tuần 8:
 
 * Phân biệt sâu sắc các mô hình kiến trúc lưu trữ dữ liệu có cấu trúc và phi cấu trúc đám mây:

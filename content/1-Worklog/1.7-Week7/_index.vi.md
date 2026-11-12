@@ -15,12 +15,12 @@ pre: " <b> 1.7. </b> "
 
 ### Các công việc cần triển khai trong tuần này:
 | Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Tìm hiểu mạng phân phối nội dung CDN toàn cầu <br>&emsp; + Amazon CloudFront cơ bản <br>&emsp; + Cơ chế Edge Locations và lưu bộ nhớ đệm (Caching) | 01/06/2026   | 01/06/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 3   | - Nghiên cứu tính năng bảo mật điểm cuối CDN nâng cao <br>&emsp; + Origin Access Control (OAC) <br> - Thiết kế luồng traffic chặn truy cập public trực tiếp vào bộ lưu trữ | 02/06/2026   | 02/06/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - **Thực hành (Phần 1):** <br>&emsp; + Tạo Amazon S3 Bucket với cấu hình bảo mật riêng tư <br>&emsp; + Kích hoạt tính năng Static Website Hosting <br>&emsp; + Upload các tệp nguồn HTML/CSS/JS lên Bucket | 03/06/2026   | 03/06/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - **Thực hành (Phần 2):** <br>&emsp; + Khởi tạo một CloudFront Distribution trỏ gốc về S3 <br>&emsp; + Thiết lập tính năng Origin Access Control (OAC) an toàn | 04/06/2026   | 04/06/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành (Phần 3):** <br>&emsp; + Cập nhật S3 Bucket Policy chỉ cho phép CloudFront OAC truy cập <br>&emsp; + Kiểm chứng chặn hoàn toàn truy cập public trực tiếp vào S3 <br>&emsp; + Truy cập thử nghiệm website qua domain bảo mật của CloudFront | 05/06/2026   | 05/06/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| --- | --- | --- | --- | --- |
+| 7   | - Tìm hiểu về Mạng phân phối nội dung toàn cầu (CDN) <br>&emsp; + Kiến thức cơ bản về Amazon CloudFront <br>&emsp; + Cơ chế bộ nhớ đệm (Caching) và các Edge Locations (Vị trí biên) | 19/09/2026 | 19/09/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| chủ nhật   | - Nghiên cứu các tính năng bảo mật nâng cao cho nguồn (origin) của CDN <br>&emsp; + Kiểm soát truy cập nguồn (OAC) <br> - Thiết kế luồng lưu lượng để chặn truy cập công khai trực tiếp vào kho lưu trữ đối tượng | 20/09/2026 | 20/09/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| 2   | - **Thực hành (Phần 1):** <br>&emsp; + Tạo Amazon S3 Bucket với cấu hình riêng tư <br>&emsp; + Bật tính năng Lưu trữ trang web tĩnh (Static Website Hosting) <br>&emsp; + Tải lên các tệp nguồn tĩnh (HTML/CSS/JS) | 21/09/2026 | 21/09/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| 3   | - **Thực hành (Phần 2):** <br>&emsp; + Tạo Phân phối CloudFront trỏ đến nguồn (origin) S3 <br>&emsp; + Cấu hình các thiết lập Kiểm soát truy cập nguồn (OAC) an toàn | 22/09/2026 | 22/09/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| 4   | - **Thực hành (Phần 3):** <br>&emsp; + Cập nhật S3 Bucket Policy để chỉ cấp quyền truy cập rõ ràng cho CloudFront OAC <br>&emsp; + Xác minh việc chặn truy cập trực tiếp <br>&emsp; + Truy cập trang web thông qua tên miền CloudFront bảo mật | 23/09/2026 | 23/09/2026      | <https://cloudjourney.awsstudygroup.com/> |
 
 ### Kết quả đạt được tuần 7:
 

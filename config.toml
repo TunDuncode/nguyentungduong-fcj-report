@@ -1,4 +1,4 @@
-baseURL = "http://localhost:1313/"
+baseURL = "https://tunduncode.github.io/nguyentungduong-fcj-report/"
 relativeURLs = false
 canonifyURLs = false
 defaultContentLanguage = "en"

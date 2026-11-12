@@ -15,12 +15,12 @@ pre: " <b> 1.6. </b> "
 
 ### Tasks to be carried out this week:
 | Day | Task | Start Date | Completion Date | Reference Material |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Learn Amazon S3 storage architecture <br>&emsp; + Bucket & Object identification structure <br>&emsp; + Key-Value principles of Object Storage <br> | 25/05/2026   | 25/05/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 3   | - Deep dive into S3 Storage Classes <br>&emsp; + S3 Standard <br>&emsp; + S3 Standard-IA <br>&emsp; + S3 Glacier (Instant/Flexible/Deep Archive) | 26/05/2026   | 26/05/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Learn mechanisms for protecting and managing large data <br>&emsp; + S3 Versioning <br>&emsp; + Lifecycle Rules <br> | 27/05/2026   | 27/05/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Differentiate S3 access control mechanisms <br>&emsp; + S3 Bucket Policies <br>&emsp; + IAM Policies <br> - Prepare Static Website source code (HTML/CSS/JS) | 28/05/2026   | 28/05/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - Study theoretical optimization for large file storage costs <br> - Summarize unstructured storage architectures for various system models | 29/05/2026   | 29/05/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| --- | --- | --- | --- | --- |
+| 7   | - Learn Amazon S3 storage architecture <br>&emsp; + Bucket & Object identification structure <br>&emsp; + Key-Value principles of Object Storage <br> | 12/09/2026   | 12/09/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| sunday   | - Deep dive into S3 Storage Classes <br>&emsp; + S3 Standard <br>&emsp; + S3 Standard-IA <br>&emsp; + S3 Glacier (Instant/Flexible/Deep Archive) | 13/09/2026   | 13/09/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| 2   | - Learn mechanisms for protecting and managing large data <br>&emsp; + S3 Versioning <br>&emsp; + Lifecycle Rules <br> | 14/09/2026   | 14/09/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| 3   | - Differentiate S3 access control mechanisms <br>&emsp; + S3 Bucket Policies <br>&emsp; + IAM Policies <br> - Prepare Static Website source code (HTML/CSS/JS) | 15/09/2026   | 15/09/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| 4   | - Study theoretical optimization for large file storage costs <br> - Summarize unstructured storage architectures for various system models | 16/09/2026   | 16/09/2026      | <https://cloudjourney.awsstudygroup.com/> |
 
 
 ### Week 6 Achievements:

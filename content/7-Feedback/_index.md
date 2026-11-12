@@ -6,42 +6,40 @@ chapter: false
 pre: " <b> 7. </b> "
 ---
 
-{{% notice warning %}}
-⚠️ **Note:** The information below is for reference purposes only. Please **do not copy verbatim** for your report, including this warning.
-{{% /notice %}}
+
 
 > Here, you can freely share your personal opinions about your experience participating in the First Cloud AI Journey program. This will help the FCAJ team improve any shortcomings based on the following aspects:
 
-### Overall Evaluation
+### General Evaluation
 
-**1. Working Environment**  
-The working environment is very friendly and open. FCAJ members are always willing to help whenever I encounter difficulties, even outside working hours. The workspace is tidy and comfortable, helping me focus better. However, I think it would be nice to have more social gatherings or team bonding activities to strengthen relationships.
+**1. Learning & Working Environment:**
+The program is highly structured and professional. The learning roadmap is clear and detailed, which helps interns track their weekly progress easily. Combining self-paced study with workshops offers maximum flexibility.
 
-**2. Support from Mentor / Team Admin**  
-The mentor provides very detailed guidance, explains clearly when I don’t understand, and always encourages me to ask questions. The admin team supports administrative tasks, provides necessary documents, and creates favorable conditions for me to work effectively. I especially appreciate that the mentor allows me to try and solve problems myself instead of just giving the answer.
+**2. Support from Mentors & Admin Team:**
+The mentors are highly experienced and enthusiastic. Whenever I faced issues configuring secure networks or debugging CI/CD workflows, the mentors guided me through tracing system logs rather than giving immediate solutions, which helped sharpen my problem-solving mindset. The admin team also supported sandbox accounts and technical issues promptly.
 
-**3. Relevance of Work to Academic Major**  
-The tasks I was assigned align well with the knowledge I learned at university, while also introducing me to new areas I had never encountered before. This allowed me to both strengthen my foundational knowledge and gain practical skills.
+**3. Relevance of Work to Academic Major:**
+As a Cybersecurity student at HUTECH, I found the practical exercises extremely relevant. Configuring VPC Isolation, Public/Private Subnets, establishing Security Groups, Network ACLs, and applying the Principle of Least Privilege via IAM policies helped me deeply understand cloud infrastructure security.
 
-**4. Learning & Skill Development Opportunities**  
-During the internship, I learned many new skills such as using project management tools, teamwork skills, and professional communication in a corporate environment. The mentor also shared valuable real-world experiences that helped me better plan my career path.
+**4. Learning & Skill Development Opportunities:**
+The bootcamp gave me great exposure to modern cloud components like Serverless (Lambda, API Gateway), Containers (Docker, ECS), and Infrastructure as Code (Terraform, CloudFormation). Beyond technical skills, I improved my technical reporting and time management.
 
-**5. Company Culture & Team Spirit**  
-The company culture is very positive: everyone respects each other, works seriously but still keeps things enjoyable. When there are urgent projects, everyone works together and supports one another regardless of their position. This made me feel like a real part of the team, even as an intern.
+**5. Culture & Team Spirit:**
+The knowledge-sharing culture within the AWS Study Group community is vibrant. Everyone is open, supportive, and active in helping peers debug issues in complex lab assignments.
 
-**6. Internship Policies / Benefits**  
-The company provides an internship allowance and offers flexible working hours when needed. In addition, having the opportunity to join internal training sessions is a big plus.
+### Survey Questions
 
----
+**What did you find most satisfying during your internship?**
+Being provisioned with actual AWS sandbox accounts to perform hands-on exercises directly, which translated abstract theoretical concepts into working cloud configurations.
 
-### Additional Questions
-- What did you find **most satisfying** during your internship?  
-- What do you think the company **should improve** for future interns?  
-- If recommending to a friend, would you **suggest they intern here**? Why or why not?  
+**What do you think the program should improve for future interns?**
+Add brief weekly checking sessions for study groups so that interns can interact directly and share common configuration errors they faced.
 
----
+**Would you suggest your friends join this program?**
+Definitely yes. It is one of the best structured cloud learning bootcamps available to bridge the gap between academic theory and industry practice.
 
 ### Suggestions & Expectations
-- Do you have any suggestions to improve the internship experience?  
-- Would you like to continue this program in the future?  
-- Any other comments (free sharing):
+
+**Suggestion:** The organizers could design some deep-dive sessions on real-world cloud security breaches to provide cybersecurity students with practical security incident handling viewpoints.
+
+**Expectation:** I would love to continue engaging with the AWS Study Group community in the future to keep up with cloud technology updates.

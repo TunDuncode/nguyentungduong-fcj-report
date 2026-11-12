@@ -14,12 +14,12 @@ pre: " <b> 1.2. </b> "
 
 ### Các công việc cần triển khai trong tuần này:
 | Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Tìm hiểu kiến trúc mạng AWS cơ bản <br>&emsp; + VPC <br>&emsp; + Subnets (Public/Private) <br>&emsp; + Route Tables <br> | 27/04/2026   | 27/04/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 3   | - Tìm hiểu các cổng kết nối mạng <br>&emsp; + Internet Gateway (IGW) <br>&emsp; + NAT Gateway <br> - Vẽ sơ đồ mạng 2 lớp (2-tier) | 28/04/2026   | 28/04/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Khái niệm định tuyến CIDR block <br> - Tìm hiểu Security Groups vs Network ACLs <br>&emsp; + Stateful <br>&emsp; + Stateless <br> | 29/04/2026   | 29/04/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - **Thực hành:** <br>&emsp; + Tạo VPC tùy chỉnh <br>&emsp; + Cấu hình 1 Public & 1 Private Subnet <br>&emsp; + Gắn Internet Gateway | 30/04/2026   | 30/04/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Cấu hình Route Table <br>&emsp; + Triển khai NAT Gateway <br>&emsp; + Kiểm tra kết nối ping/SSH | 01/05/2026   | 01/05/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| --- | --- | --- | --- | --- |
+| 7 | - Tìm hiểu kiến trúc mạng AWS cơ bản <br>&emsp; + VPC <br>&emsp; + Subnets (Public/Private) <br>&emsp; + Route Tables <br> | 15/08/2026 | 15/08/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| chủ nhật | - Tìm hiểu các cổng kết nối mạng <br>&emsp; + Internet Gateway (IGW) <br>&emsp; + NAT Gateway <br> - Vẽ sơ đồ mạng 2 lớp (2-tier) | 16/08/2026 | 16/08/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 2 | - Khái niệm định tuyến CIDR block <br> - Tìm hiểu Security Groups vs Network ACLs <br>&emsp; + Stateful <br>&emsp; + Stateless <br> | 17/08/2026 | 17/08/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 3 | - **Thực hành:** <br>&emsp; + Tạo VPC tùy chỉnh <br>&emsp; + Cấu hình 1 Public & 1 Private Subnet <br>&emsp; + Gắn Internet Gateway | 18/08/2026 | 18/08/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 4 | - **Thực hành:** <br>&emsp; + Cấu hình Route Table <br>&emsp; + Triển khai NAT Gateway <br>&emsp; + Kiểm tra kết nối ping/SSH | 19/08/2026 | 19/08/2026 | <https://cloudjourney.awsstudygroup.com/> |
 
 ### Kết quả đạt được tuần 2:
 

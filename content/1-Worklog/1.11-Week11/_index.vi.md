@@ -15,12 +15,12 @@ pre: " <b> 1.11. </b> "
 
 ### Các công việc cần triển khai trong tuần này:
 | Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - **Thực hành (Phần 1):** <br>&emsp; + Tạo một bản thiết kế Launch Template cho EC2 <br>&emsp; + Cài đặt script tự động cài đặt Apache Web Server trong mục User Data | 29/06/2026   | 29/06/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 3   | - **Thực hành (Phần 2):** <br>&emsp; + Tạo Target Group cấu hình giao thức HTTP trên cổng tiêu chuẩn Port 80 <br>&emsp; + Khởi tạo bộ cân bằng tải Application Load Balancer (ALB) public | 30/06/2026   | 30/06/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - **Thực hành (Phần 3):** <br>&emsp; + Khởi tạo hệ thống Auto Scaling Group (ASG) kết nối với Launch Template <br>&emsp; + Cấu hình ASG trải rộng trên 2 Vùng sẵn sàng (Availability Zones) | 01/07/2026   | 01/07/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - **Thực hành (Phần 4):** <br>&emsp; + Thiết lập các thông số tải mong muốn: Desired = 2, Min = 2, Max = 4 máy chủ <br>&emsp; + Đăng ký nhận luồng kiểm tra sức khỏe từ bộ cân bằng tải ALB | 02/07/2026   | 02/07/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành (Phần 5):** <br>&emsp; + Giả lập kịch bản thảm họa bằng cách chủ động Terminate một máy chủ đang hoạt động <br>&emsp; + Quan sát hệ thống tự động nhận diện lỗi và khởi chạy máy ảo mới bù đắp tải <br>&emsp; + Dọn dẹp tài nguyên | 03/07/2026   | 03/07/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| --- | --- | --- | --- | --- |
+| 7   | - **Thực hành (Phần 1):** <br>&emsp; + Tạo một bản thiết kế EC2 Launch Template <br>&emsp; + Nhập shell script vào User Data để cài đặt sẵn máy chủ Apache | 17/10/2026 | 17/10/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| chủ nhật   | - **Thực hành (Phần 2):** <br>&emsp; + Xây dựng một Target Group ánh xạ lưu lượng HTTP trên Cổng 80 <br>&emsp; + Khởi tạo một Application Load Balancer (ALB) hướng ra công cộng | 18/10/2026 | 18/10/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| 2   | - **Thực hành (Phần 3):** <br>&emsp; + Khởi tạo một Auto Scaling Group (ASG) được liên kết với Launch Template <br>&emsp; + Phân bổ phạm vi hoạt động của ASG trên 2 Availability Zones (Vùng sẵn sàng) khác biệt | 19/10/2026 | 19/10/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| 3   | - **Thực hành (Phần 4):** <br>&emsp; + Xác định các giới hạn dung lượng: Desired (Mong muốn) = 2, Min (Tối thiểu) = 2, Max (Tối đa) = 4 instances <br>&emsp; + Đăng ký cụm ASG với các trình theo dõi Health Check (Kiểm tra sức khỏe) đang hoạt động của ALB | 20/10/2026 | 20/10/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| 4   | - **Thực hành (Phần 5):** <br>&emsp; + Mô phỏng một kịch bản thảm họa bằng cách chấm dứt thủ công một instance đang chạy <br>&emsp; + Giám sát hệ thống phát hiện lỗi và cấp phát một instance thay thế <br>&emsp; + Dọn dẹp hệ thống | 21/10/2026 | 21/10/2026      | <https://cloudjourney.awsstudygroup.com/> |
 
 ### Kết quả đạt được tuần 11:
 

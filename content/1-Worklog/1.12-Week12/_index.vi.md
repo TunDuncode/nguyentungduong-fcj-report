@@ -15,12 +15,12 @@ pre: " <b> 1.12. </b> "
 
 ### Các công việc cần triển khai trong tuần này:
 | Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Tìm hiểu mô hình điện toán không máy chủ Serverless <br>&emsp; + AWS Lambda cơ bản <br>&emsp; + Khái niệm kiến trúc hướng sự kiện (Event-driven Architecture) <br>&emsp; + Amazon API Gateway | 06/07/2026   | 06/07/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 3   | - **Thực hành (Phần 1):** <br>&emsp; + Lập trình viết một hàm AWS Lambda cơ bản bằng ngôn ngữ Python <br>&emsp; + Cấu hình Event Trigger tự động kích hoạt hàm khi có file mới đẩy vào Amazon S3 | 07/07/2026   | 07/07/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - **Thực hành (Phần 2):** <br>&emsp; + Thực hiện upload file ảnh lên S3 <br>&emsp; + Truy cập Amazon CloudWatch theo dõi nhật ký thực thi logs hành vi <br>&emsp; + Thực hiện dọn dẹp các tài nguyên | 08/07/2026   | 08/07/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Kiểm tra, rà soát toàn bộ tệp tin nội dung văn bản `.md` từ tuần 1 đến tuần 12 trong thư mục content của mã nguồn báo cáo | 09/07/2026   | 09/07/2026      | |
-| 6   | - Thực thi câu lệnh biên dịch hệ thống `hugo` tĩnh <br> - Đóng gói thư mục sản phẩm `public` và tiến hành triển khai đẩy lên môi trường trực tuyến thành công | 10/07/2026   | 10/07/2026      | |
+| --- | --- | --- | --- | --- |
+| 7   | - Tìm hiểu cơ chế điện toán serverless (không máy chủ) <br>&emsp; + Các tính năng cơ bản của AWS Lambda <br>&emsp; + Khái niệm Kiến trúc hướng sự kiện (Event-driven) <br>&emsp; + Amazon API Gateway | 24/10/2026 | 24/10/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| chủ nhật   | - **Thực hành (Phần 1):** <br>&emsp; + Lập trình một hàm AWS Lambda cơ bản sử dụng môi trường Python gốc <br>&emsp; + Thiết lập một Event Trigger (Trình kích hoạt sự kiện) tự động được ánh xạ tới các tệp tải lên Amazon S3 | 25/10/2026 | 25/10/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| 2   | - **Thực hành (Phần 2):** <br>&emsp; + Tải các tệp lên S3 để kích hoạt quá trình thực thi <br>&emsp; + Truy cập nhật ký Amazon CloudWatch để xem chi tiết quá trình thực thi <br>&emsp; + Hoàn tất các thủ tục dọn dẹp tài nguyên cloud cuối cùng | 26/10/2026 | 26/10/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| 3   | - Xem xét và kiểm tra tất cả các tệp văn bản markdown (`.md`) đã biên soạn từ Tuần 1 đến Tuần 12 được lưu trữ bên trong các thư mục nội dung | 27/10/2026 | 27/10/2026      | |
+| 4   | - Chạy các lệnh biên dịch tĩnh `hugo` gốc <br> - Đóng gói thư mục đầu ra `public` và thực thi thành công các quy trình triển khai lên cloud | 28/10/2026 | 28/10/2026      | |
 
 ### Kết quả đạt được tuần 12:
 

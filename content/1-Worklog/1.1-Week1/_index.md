@@ -15,11 +15,11 @@ pre: " <b> 1.1. </b> "
 ### Tasks to be carried out this week:
 | Day | Task | Start Date | Completion Date | Reference Material |
 | --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Get acquainted with FCAJ members <br> - Read and take note of internship unit rules and regulations | 20/04/2026   | 20/04/2026      | |
-| 3   | - Learn about AWS and its types of services <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br> | 21/04/2026   | 21/04/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Create AWS Free Tier account <br> - Learn about AWS Console & AWS CLI <br> - **Practice:** <br>&emsp; + Create AWS account <br>&emsp; + Install & configure AWS CLI <br> &emsp; + How to use AWS CLI | 22/04/2026   | 22/04/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Learn basic EC2: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - SSH connection methods to EC2 <br> - Learn about Elastic IP <br> | 23/04/2026   | 23/04/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Practice:** <br>&emsp; + Launch an EC2 instance <br>&emsp; + Connect via SSH <br>&emsp; + Attach an EBS volume | 24/04/2026   | 24/04/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| 7   | - Get acquainted with FCAJ members <br> - Read and take note of internship unit rules and regulations | 08/08/2026   | 08/08/2026      | https://hn-rules.awsfcaj.com |
+| sunday   | - Learn about AWS and its types of services <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br> | 09/08/2026   | 09/08/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| 2   | - Create AWS Free Tier account <br> - Learn about AWS Console & AWS CLI <br> - **Practice:** <br>&emsp; + Create AWS account <br>&emsp; + Install & configure AWS CLI <br> &emsp; + How to use AWS CLI | 10/08/2026   | 10/08/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| 3   | - Learn basic EC2: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - SSH connection methods to EC2 <br> - Learn about Elastic IP <br> | 11/08/2026   | 11/08/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| 4   | - **Practice:** <br>&emsp; + Launch an EC2 instance <br>&emsp; + Connect via SSH <br>&emsp; + Attach an EBS volume | 12/08/2026   | 12/08/2026      | <https://cloudjourney.awsstudygroup.com/> |
 
 
 ### Week 1 Achievements:

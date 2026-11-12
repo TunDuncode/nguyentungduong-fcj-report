@@ -16,12 +16,12 @@ pre: " <b> 1.4. </b> "
 
 ### Các công việc cần triển khai trong tuần này:
 | Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Tìm hiểu Amazon RDS (Relational DB) <br>&emsp; + MySQL, PostgreSQL <br>&emsp; + Multi-AZ Deployments <br>&emsp; + Read Replicas <br> | 11/05/2026   | 11/05/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 3   | - Tìm hiểu Amazon DynamoDB (NoSQL DB) <br>&emsp; + Partition Keys <br>&emsp; + Sort Keys <br>&emsp; + Provisioned vs On-demand <br> | 12/05/2026   | 12/05/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Phân tích Use-case cho RDS và DynamoDB <br> - Học cách thiết kế DB Subnet Groups <br> | 13/05/2026   | 13/05/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - **Thực hành:** <br>&emsp; + Cấu hình Private Subnet cho DB <br>&emsp; + Tạo DB Security Group (chỉ nhận traffic từ EC2) <br> | 14/05/2026   | 14/05/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Khởi tạo RDS MySQL (Free Tier) <br>&emsp; + SSH vào EC2 và test kết nối Database <br>&emsp; + Dọn dẹp tài nguyên | 15/05/2026   | 15/05/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| --- | --- | --- | --- | --- |
+| 7   | - Tìm hiểu Amazon RDS (Cơ sở dữ liệu quan hệ) <br>&emsp; + MySQL, PostgreSQL <br>&emsp; + Triển khai Multi-AZ <br>&emsp; + Read Replicas (Bản sao đọc) <br> | 29/08/2026   | 29/08/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| chủ nhật   | - Tìm hiểu Amazon DynamoDB (CSDL NoSQL) <br>&emsp; + Partition Keys (Khóa phân vùng) <br>&emsp; + Sort Keys (Khóa sắp xếp) <br>&emsp; + Provisioned vs On-demand (Cấp phát trước vs Theo nhu cầu) <br> | 30/08/2026   | 30/08/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| 2   | - Phân tích các trường hợp sử dụng RDS và DynamoDB <br> - Học cách thiết kế DB Subnet Groups (Nhóm Subnet cho DB) <br> | 31/08/2026   | 31/08/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| 3   | - **Thực hành:** <br>&emsp; + Cấu hình Private Subnet cho DB <br>&emsp; + Tạo DB Security Group (chỉ cho phép lưu lượng từ EC2) <br> | 01/09/2026   | 01/09/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| 4   | - **Thực hành:** <br>&emsp; + Khởi tạo RDS MySQL (Gói Free Tier) <br>&emsp; + SSH vào EC2 và kiểm tra kết nối Cơ sở dữ liệu <br>&emsp; + Dọn dẹp tài nguyên | 02/09/2026   | 02/09/2026      | <https://cloudjourney.awsstudygroup.com/> |
 
 ### Kết quả đạt được tuần 4:
 

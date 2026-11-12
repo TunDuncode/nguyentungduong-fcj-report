@@ -15,12 +15,12 @@ pre: " <b> 1.6. </b> "
 
 ### Các công việc cần triển khai trong tuần này:
 | Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Tìm hiểu kiến trúc lưu trữ Amazon S3 <br>&emsp; + Định danh cấu trúc Bucket & Object <br>&emsp; + Nguyên lý Key-Value của Object Storage <br> | 25/05/2026   | 25/05/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 3   | - Nghiên cứu chuyên sâu các lớp lưu trữ S3 Storage Classes <br>&emsp; + S3 Standard <br>&emsp; + S3 Standard-IA <br>&emsp; + S3 Glacier (Instant/Flexible/Deep Archive) | 26/05/2026   | 26/05/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tìm hiểu các cơ chế bảo vệ và quản trị dữ liệu lớn <br>&emsp; + S3 Versioning (Quản lý phiên bản) <br>&emsp; + Lifecycle Rules (Quy trình vòng đời) <br> | 27/05/2026   | 27/05/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Phân biệt cơ chế kiểm soát quyền truy cập S3 <br>&emsp; + S3 Bucket Policies <br>&emsp; + IAM Policies <br> - Chuẩn bị source code Website tĩnh (HTML/CSS/JS) | 28/05/2026   | 28/05/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - Nghiên cứu lý thuyết tối ưu hóa chi phí lưu trữ tệp tin lớn <br> - Tổng hợp kiến trúc lưu trữ phi cấu trúc phục vụ các mô hình hệ thống | 29/05/2026   | 29/05/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| --- | --- | --- | --- | --- |
+| 7   | - Tìm hiểu kiến trúc lưu trữ Amazon S3 <br>&emsp; + Cấu trúc nhận dạng Bucket & Object <br>&emsp; + Nguyên lý Key-Value của Object Storage (Lưu trữ đối tượng) <br> | 12/09/2026   | 12/09/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| chủ nhật   | - Tìm hiểu sâu về các Lớp lưu trữ S3 (Storage Classes) <br>&emsp; + S3 Standard <br>&emsp; + S3 Standard-IA <br>&emsp; + S3 Glacier (Instant/Flexible/Deep Archive) | 13/09/2026   | 13/09/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| 2   | - Tìm hiểu cơ chế bảo vệ và quản lý dữ liệu lớn <br>&emsp; + S3 Versioning (Tạo phiên bản) <br>&emsp; + Lifecycle Rules (Quy tắc vòng đời) <br> | 14/09/2026   | 14/09/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| 3   | - Phân biệt các cơ chế kiểm soát truy cập S3 <br>&emsp; + S3 Bucket Policies (Chính sách Bucket) <br>&emsp; + IAM Policies (Chính sách IAM) <br> - Chuẩn bị mã nguồn website tĩnh (HTML/CSS/JS) | 15/09/2026   | 15/09/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| 4   | - Nghiên cứu lý thuyết tối ưu chi phí lưu trữ tệp lớn <br> - Tóm tắt kiến trúc lưu trữ phi cấu trúc cho các mô hình hệ thống khác nhau | 16/09/2026   | 16/09/2026      | <https://cloudjourney.awsstudygroup.com/> |
 
 ### Kết quả đạt được tuần 6:
 

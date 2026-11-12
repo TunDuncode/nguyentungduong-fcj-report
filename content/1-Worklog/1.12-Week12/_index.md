@@ -15,12 +15,12 @@ pre: " <b> 1.12. </b> "
 
 ### Tasks to be carried out this week:
 | Day | Task | Start Date | Completion Date | Reference Material |
-| --- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- | --------------- | ----------------------------------------- |
-| 2   | - Learn serverless computing mechanics <br>&emsp; + AWS Lambda basic features <br>&emsp; + Event-driven Architecture concepts <br>&emsp; + Amazon API Gateway | 06/07/2026 | 06/07/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 3   | - **Practice (Part 1):** <br>&emsp; + Program a basic AWS Lambda function using native Python environments <br>&emsp; + Set up an automated Event Trigger mapped to Amazon S3 uploads | 07/07/2026 | 07/07/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - **Practice (Part 2):** <br>&emsp; + Upload file items into S3 to trigger execution <br>&emsp; + Access Amazon CloudWatch logs to inspect execution details <br>&emsp; + Complete final cloud resource cleanup procedures | 08/07/2026 | 08/07/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Review and audit all compiled markdown text files (`.md`) from Week 1 to Week 12 stored inside the content directories | 09/07/2026 | 09/07/2026      | |
-| 6   | - Run the native `hugo` static compilation commands <br> - Package the output folder `public` and execute cloud deployment sequences successfully | 10/07/2026 | 10/07/2026      | |
+| --- | --- | --- | --- | --- |
+| 7   | - Learn serverless computing mechanics <br>&emsp; + AWS Lambda basic features <br>&emsp; + Event-driven Architecture concepts <br>&emsp; + Amazon API Gateway | 24/10/2026 | 24/10/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| sunday   | - **Practice (Part 1):** <br>&emsp; + Program a basic AWS Lambda function using native Python environments <br>&emsp; + Set up an automated Event Trigger mapped to Amazon S3 uploads | 25/10/2026 | 25/10/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| 2   | - **Practice (Part 2):** <br>&emsp; + Upload file items into S3 to trigger execution <br>&emsp; + Access Amazon CloudWatch logs to inspect execution details <br>&emsp; + Complete final cloud resource cleanup procedures | 26/10/2026 | 26/10/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| 3   | - Review and audit all compiled markdown text files (`.md`) from Week 1 to Week 12 stored inside the content directories | 27/10/2026 | 27/10/2026      | |
+| 4   | - Run the native `hugo` static compilation commands <br> - Package the output folder `public` and execute cloud deployment sequences successfully | 28/10/2026 | 28/10/2026      | |
 
 
 ### Week 12 Achievements:

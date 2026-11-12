@@ -1,12 +1,12 @@
 ---
-title: "ỨNG DỤNG GAMEHUB VỚI KIẾN TRÚC SERVERLESS"
+title: "Bản đề xuất"
 date: 2026-07-01
 weight: 2
 chapter: false
 pre: "<b> 2. </b>"
 ---
 
-# Real-time Serverless Game Platform
+# Xây dựng hệ thống quản lý và giám sát hạ tầng mạng doanh nghiệp trên AWS Serverless
 ## Giải pháp AWS Serverless hợp nhất cho Game Multiplayer Real-time thời gian thực
 
 ### 1. Tóm tắt điều hành

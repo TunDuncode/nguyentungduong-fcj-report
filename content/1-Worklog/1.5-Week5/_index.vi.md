@@ -15,12 +15,12 @@ pre: " <b> 1.5. </b> "
 
 ### Các công việc cần triển khai trong tuần này:
 | Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Tìm hiểu Elastic Load Balancing (ELB) <br>&emsp; + Application Load Balancer (ALB) <br>&emsp; + Network Load Balancer (NLB) <br> | 18/05/2026   | 18/05/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 3   | - Nghiên cứu Target Groups & Health Checks <br>&emsp; + Khái niệm thuật toán định tuyến (Routing) <br> | 19/05/2026   | 19/05/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tìm hiểu Amazon EC2 Auto Scaling (ASG) <br>&emsp; + Launch Templates <br>&emsp; + Scaling Policies <br> | 20/05/2026   | 20/05/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - **Thực hành:** <br>&emsp; + Tạo EC2 Launch Template (cài sẵn Apache) <br>&emsp; + Tạo Target Group cho HTTP (Port 80) <br> | 21/05/2026   | 21/05/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Thiết lập Application Load Balancer <br>&emsp; + Khởi tạo Auto Scaling Group qua 2 AZs <br>&emsp; + Test khả năng tự phục hồi | 22/05/2026   | 22/05/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| --- | --- | --- | --- | --- |
+| 7   | - Tìm hiểu Elastic Load Balancing (ELB) <br>&emsp; + Application Load Balancer (ALB) <br>&emsp; + Network Load Balancer (NLB) <br> | 05/09/2026   | 05/09/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| chủ nhật   | - Tìm hiểu Target Groups & Health Checks <br>&emsp; + Các khái niệm về thuật toán định tuyến <br> | 06/09/2026   | 06/09/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| 2   | - Tìm hiểu Amazon EC2 Auto Scaling (ASG) <br>&emsp; + Launch Templates (Mẫu khởi chạy) <br>&emsp; + Scaling Policies (Chính sách mở rộng) <br> | 07/09/2026   | 07/09/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| 3   | - **Thực hành:** <br>&emsp; + Tạo EC2 Launch Template (cài sẵn Apache) <br>&emsp; + Tạo Target Group cho HTTP (Cổng 80) <br> | 08/09/2026   | 08/09/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| 4   | - **Thực hành:** <br>&emsp; + Cấu hình Application Load Balancer <br>&emsp; + Khởi tạo Auto Scaling Group trên 2 AZ <br>&emsp; + Kiểm tra khả năng tự phục hồi | 09/09/2026   | 09/09/2026      | <https://cloudjourney.awsstudygroup.com/> |
 
 ### Kết quả đạt được tuần 5:
 

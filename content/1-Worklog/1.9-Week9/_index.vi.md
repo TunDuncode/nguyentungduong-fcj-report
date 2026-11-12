@@ -14,12 +14,12 @@ pre: " <b> 1.9. </b> "
 
 ### Các công việc cần triển khai trong tuần này:
 | Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Nghiên cứu cấu hình phân vùng mạng an toàn cho DB <br>&emsp; + Tạo nhóm DB Subnet Groups giới hạn trong Private Subnets <br> | 15/06/2026   | 15/06/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 3   | - Cấu hình hệ thống tường lửa lớp Database <br>&emsp; + Thiết lập DB Security Group <br>&emsp; + Cấu hình luật Inbound chỉ cho phép duy nhất dải IP hoặc Security Group của tầng Web/App đi vào | 16/06/2026   | 16/06/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - **Thực hành (Phần 1):** <br>&emsp; + Khởi tạo một phiên làm việc Amazon RDS MySQL Engine thuộc gói Free Tier <br>&emsp; + Gắn kết cấu hình DB Subnet Groups và Security Group đã chuẩn bị | 17/06/2026   | 17/06/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - **Thực hành (Phần 2):** <br>&emsp; + Điều khiển truy cập từ xa kết nối SSH vào máy chủ ứng dụng EC2 Bastion Host <br>&emsp; + Cài đặt công cụ dòng lệnh MySQL CLI cục bộ trên EC2 | 18/06/2026   | 18/06/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành (Phần 3):** <br>&emsp; + Sử dụng Endpoint nội bộ thực hiện lệnh kết nối từ EC2 sang RDS MySQL <br>&emsp; + Thực thi các thao tác SQL cơ bản (CREATE TABLE, INSERT, SELECT) <br>&emsp; + Dọn dẹp tài nguyên tránh cước phí phát sinh | 19/06/2026   | 19/06/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| --- | --- | --- | --- | --- |
+| 7   | - Nghiên cứu cấu hình nhóm mạng an toàn cho lớp DB <br>&emsp; + Thiết lập DB Subnet Groups (Nhóm Subnet cho DB) bị cô lập bên trong các Private Subnet | 03/10/2026 | 03/10/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| chủ nhật   | - Cấu hình các quy tắc tường lửa bảo vệ lớp Cơ sở dữ liệu <br>&emsp; + Tạo DB Security Groups (Nhóm bảo mật DB) <br>&emsp; + Chỉ cho phép lưu lượng đầu vào từ Web/App Security Group | 04/10/2026 | 04/10/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| 2   | - **Thực hành (Phần 1):** <br>&emsp; + Khởi tạo một Instance Amazon RDS MySQL sử dụng hạn mức gói Free Tier <br>&emsp; + Liên kết các DB Subnet Groups và Security Groups đã chuẩn bị vào instance | 05/10/2026 | 05/10/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| 3   | - **Thực hành (Phần 2):** <br>&emsp; + Kết nối an toàn qua SSH vào môi trường máy chủ EC2 Bastion Host <br>&emsp; + Cài đặt các công cụ MySQL CLI gốc cục bộ trên máy chủ EC2 | 06/10/2026 | 06/10/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| 4   | - **Thực hành (Phần 3):** <br>&emsp; + Thiết lập kết nối nội bộ từ EC2 đến RDS Endpoint <br>&emsp; + Chạy các thao tác SQL cơ bản (CREATE TABLE, INSERT, SELECT) <br>&emsp; + Dọn dẹp tài nguyên để tránh phát sinh thêm chi phí | 07/10/2026 | 07/10/2026      | <https://cloudjourney.awsstudygroup.com/> |
 
 ### Kết quả đạt được tuần 9:
 

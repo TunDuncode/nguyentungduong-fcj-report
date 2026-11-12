@@ -15,12 +15,12 @@ pre: " <b> 1.10. </b> "
 
 ### Tasks to be carried out this week:
 | Day | Task | Start Date | Completion Date | Reference Material |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | --------------- | ----------------------------------------- |
-| 2   | - Study Elastic Load Balancing (ELB) models <br>&emsp; + Application Load Balancer (ALB) handling Layer 7 traffic <br>&emsp; + Network Load Balancer (NLB) handling Layer 4 traffic | 22/06/2026 | 22/06/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 3   | - Deep dive into routing configuration units <br>&emsp; + Setting up Target Groups <br>&emsp; + Implementing continuous Health Check rule behaviors | 23/06/2026 | 23/06/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Explore automated compute capacity provisioning frameworks <br>&emsp; + Role of Amazon EC2 Auto Scaling Groups (ASG) within architectures | 24/06/2026 | 24/06/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Study infrastructure standardization blueprints <br>&emsp; + Creating immutable Launch Templates <br> - Analyze metric triggers that drive dynamic Scaling Policies | 25/06/2026 | 25/06/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - Review enterprise whitepapers detailing how production applications survive sudden traffic bottlenecks using automated scaling tools | 26/06/2026 | 26/06/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| --- | --- | --- | --- | --- |
+| 7   | - Study Elastic Load Balancing (ELB) models <br>&emsp; + Application Load Balancer (ALB) handling Layer 7 traffic <br>&emsp; + Network Load Balancer (NLB) handling Layer 4 traffic | 10/10/2026 | 10/10/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| sunday   | - Deep dive into routing configuration units <br>&emsp; + Setting up Target Groups <br>&emsp; + Implementing continuous Health Check rule behaviors | 11/10/2026 | 11/10/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| 2   | - Explore automated compute capacity provisioning frameworks <br>&emsp; + Role of Amazon EC2 Auto Scaling Groups (ASG) within architectures | 12/10/2026 | 12/10/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| 3   | - Study infrastructure standardization blueprints <br>&emsp; + Creating immutable Launch Templates <br> - Analyze metric triggers that drive dynamic Scaling Policies | 13/10/2026 | 13/10/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| 4   | - Review enterprise whitepapers detailing how production applications survive sudden traffic bottlenecks using automated scaling tools | 14/10/2026 | 14/10/2026      | <https://cloudjourney.awsstudygroup.com/> |
 
 
 ### Week 10 Achievements:

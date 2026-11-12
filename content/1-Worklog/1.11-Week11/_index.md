@@ -14,12 +14,12 @@ pre: " <b> 1.11. </b> "
 
 ### Tasks to be carried out this week:
 | Day | Task | Start Date | Completion Date | Reference Material |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | --------------- | ----------------------------------------- |
-| 2   | - **Practice (Part 1):** <br>&emsp; + Create an EC2 Launch Template blueprint <br>&emsp; + Input shell script kịch bản into User Data to pre-install Apache servers | 29/06/2026 | 29/06/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 3   | - **Practice (Part 2):** <br>&emsp; + Build a Target Group mapping HTTP traffic on Port 80 <br>&emsp; + Launch a public-facing Application Load Balancer (ALB) | 30/06/2026 | 30/06/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - **Practice (Part 3):** <br>&emsp; + Initialize an Auto Scaling Group (ASG) linked to the Launch Template <br>&emsp; + Distribute the ASG footprint across 2 distinct Availability Zones | 01/07/2026 | 01/07/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - **Practice (Part 4):** <br>&emsp; + Define capacity boundaries: Desired = 2, Min = 2, Max = 4 instances <br>&emsp; + Register the ASG cluster with the active ALB Health Check trackers | 02/07/2026 | 02/07/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Practice (Part 5):** <br>&emsp; + Simulate a disaster scenario by terminating a running instance manually <br>&emsp; + Monitor the system detecting failure and provisioning a replacement <br>&emsp; + Clean up systems | 03/07/2026 | 03/07/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| --- | --- | --- | --- | --- |
+| 7   | - **Practice (Part 1):** <br>&emsp; + Create an EC2 Launch Template blueprint <br>&emsp; + Input shell script into User Data to pre-install Apache servers | 17/10/2026 | 17/10/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| sunday   | - **Practice (Part 2):** <br>&emsp; + Build a Target Group mapping HTTP traffic on Port 80 <br>&emsp; + Launch a public-facing Application Load Balancer (ALB) | 18/10/2026 | 18/10/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| 2   | - **Practice (Part 3):** <br>&emsp; + Initialize an Auto Scaling Group (ASG) linked to the Launch Template <br>&emsp; + Distribute the ASG footprint across 2 distinct Availability Zones | 19/10/2026 | 19/10/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| 3   | - **Practice (Part 4):** <br>&emsp; + Define capacity boundaries: Desired = 2, Min = 2, Max = 4 instances <br>&emsp; + Register the ASG cluster with the active ALB Health Check trackers | 20/10/2026 | 20/10/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| 4   | - **Practice (Part 5):** <br>&emsp; + Simulate a disaster scenario by terminating a running instance manually <br>&emsp; + Monitor the system detecting failure and provisioning a replacement <br>&emsp; + Clean up systems | 21/10/2026 | 21/10/2026      | <https://cloudjourney.awsstudygroup.com/> |
 
 
 ### Week 11 Achievements:

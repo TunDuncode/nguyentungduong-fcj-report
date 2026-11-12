@@ -17,11 +17,11 @@ pre: " <b> 1.4. </b> "
 ### Tasks to be carried out this week:
 | Day | Task | Start Date | Completion Date | Reference Material |
 | --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Learn Amazon RDS (Relational DB) <br>&emsp; + MySQL, PostgreSQL <br>&emsp; + Multi-AZ Deployments <br>&emsp; + Read Replicas <br> | 11/05/2026   | 11/05/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 3   | - Learn Amazon DynamoDB (NoSQL DB) <br>&emsp; + Partition Keys <br>&emsp; + Sort Keys <br>&emsp; + Provisioned vs On-demand <br> | 12/05/2026   | 12/05/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Analyze Use-cases for RDS and DynamoDB <br> - Learn to design DB Subnet Groups <br> | 13/05/2026   | 13/05/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - **Practice:** <br>&emsp; + Configure Private Subnet for DB <br>&emsp; + Create DB Security Group (only allow traffic from EC2) <br> | 14/05/2026   | 14/05/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Practice:** <br>&emsp; + Launch RDS MySQL (Free Tier) <br>&emsp; + SSH into EC2 and test Database connection <br>&emsp; + Clean up resources | 15/05/2026   | 15/05/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| 7   | - Learn Amazon RDS (Relational DB) <br>&emsp; + MySQL, PostgreSQL <br>&emsp; + Multi-AZ Deployments <br>&emsp; + Read Replicas <br> | 29/08/2026   | 29/08/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| sunday   | - Learn Amazon DynamoDB (NoSQL DB) <br>&emsp; + Partition Keys <br>&emsp; + Sort Keys <br>&emsp; + Provisioned vs On-demand <br> | 30/08/2026   | 30/08/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| 2   | - Analyze Use-cases for RDS and DynamoDB <br> - Learn to design DB Subnet Groups <br> | 31/08/2026   | 31/08/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| 3   | - **Practice:** <br>&emsp; + Configure Private Subnet for DB <br>&emsp; + Create DB Security Group (only allow traffic from EC2) <br> | 01/09/2026   | 01/09/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| 4   | - **Practice:** <br>&emsp; + Launch RDS MySQL (Free Tier) <br>&emsp; + SSH into EC2 and test Database connection <br>&emsp; + Clean up resources | 02/09/2026   | 02/09/2026      | <https://cloudjourney.awsstudygroup.com/> |
 
 
 ### Week 4 Achievements:

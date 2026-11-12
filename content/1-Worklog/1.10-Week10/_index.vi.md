@@ -15,12 +15,12 @@ pre: " <b> 1.10. </b> "
 
 ### Các công việc cần triển khai trong tuần này:
 | Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Tìm hiểu dịch vụ cân bằng tải Elastic Load Balancing (ELB) <br>&emsp; + Cơ chế Application Load Balancer (ALB) xử lý tầng 7 <br>&emsp; + Cơ chế Network Load Balancer (NLB) xử lý tầng 4 | 22/06/2026   | 22/06/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 3   | - Nghiên cứu sâu thành phần cấu tạo điều hướng định tuyến luồng mạng <br>&emsp; + Cấu hình Target Groups (Nhóm mục tiêu) <br>&emsp; + Quy tắc Health Checks (Kiểm tra trạng thái sức khỏe) | 23/06/2026   | 23/06/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tìm hiểu hệ thống co giãn quy mô máy chủ tự động Amazon EC2 Auto Scaling <br>&emsp; + Vai trò kiến trúc Auto Scaling Groups (ASG) <br> | 24/06/2026   | 24/06/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Nghiên cứu tệp cấu hình khuôn mẫu hạ tầng bất biến <br>&emsp; + Thiết kế Launch Templates <br> - Phân tích các chính sách kích hoạt co giãn hệ thống (Scaling Policies) | 25/06/2026   | 25/06/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - Đọc tài liệu phân tích Use-case thực tế từ các doanh nghiệp lớn xử lý hiện tượng nghẽn mạng đột biến nhờ công cụ tự động co giãn | 26/06/2026   | 26/06/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| --- | --- | --- | --- | --- |
+| 7   | - Nghiên cứu các mô hình Elastic Load Balancing (ELB) <br>&emsp; + Application Load Balancer (ALB) xử lý lưu lượng Lớp 7 <br>&emsp; + Network Load Balancer (NLB) xử lý lưu lượng Lớp 4 | 10/10/2026 | 10/10/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| chủ nhật   | - Tìm hiểu sâu về các đơn vị cấu hình định tuyến <br>&emsp; + Thiết lập Target Groups (Nhóm mục tiêu) <br>&emsp; + Triển khai các hành vi quy tắc Health Check (Kiểm tra sức khỏe) liên tục | 11/10/2026 | 11/10/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| 2   | - Khám phá các khuôn khổ cấp phát năng lực tính toán tự động <br>&emsp; + Vai trò của Amazon EC2 Auto Scaling Groups (ASG) trong các kiến trúc | 12/10/2026 | 12/10/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| 3   | - Nghiên cứu các bản thiết kế tiêu chuẩn hóa cơ sở hạ tầng <br>&emsp; + Tạo Launch Templates (Mẫu khởi chạy) bất biến <br> - Phân tích các yếu tố kích hoạt chỉ số (metric triggers) thúc đẩy Scaling Policies (Chính sách mở rộng) động | 13/10/2026 | 13/10/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| 4   | - Xem xét các sách trắng doanh nghiệp (whitepapers) trình bày chi tiết cách các ứng dụng production vượt qua các nút thắt lưu lượng truy cập đột ngột bằng cách sử dụng các công cụ mở rộng tự động | 14/10/2026 | 14/10/2026      | <https://cloudjourney.awsstudygroup.com/> |
 
 ### Kết quả đạt được tuần 10:
 
