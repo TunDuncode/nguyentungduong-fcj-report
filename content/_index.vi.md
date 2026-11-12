@@ -25,7 +25,9 @@ chapter: false
 
 &emsp; **Thời gian thực tập:** Từ ngày 08/08/2026 đến ngày 14/11/2026
 
-{{< profilephoto >}}
+
+![Ảnh đại diện](https://tunduncode.github.io/nguyentungduong-fcj-report/images/avatar.jpg)
+
 
 
 
