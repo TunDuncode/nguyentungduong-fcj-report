@@ -1,45 +1,31 @@
 ---
-title: "Worklog Tuần 6"
-date: 2026-05-25
+title: "6. Viết Lambda netmon-api và truy vấn DynamoDB"
+date: 2026-09-26T09:00:00+07:00
 weight: 6
-chapter: false
-pre: " <b> 1.6. </b> "
+draft: false
+description: "Viết Lambda netmon-api và truy vấn DynamoDB"
 ---
 
-
+# 6. Viết Lambda netmon-api và truy vấn DynamoDB
 
 ### Mục tiêu tuần 6:
 
-* Hiểu sâu về dịch vụ lưu trữ đối tượng toàn diện Amazon S3.
-* Nắm vững các quy tắc quản lý vòng đời dữ liệu và chính sách bảo mật lưu trữ đám mây.
+- Tạo Lambda Python làm backend không cần máy chủ riêng.
+- Đọc danh sách thiết bị từ NetworkDevices bằng boto3.
+- Biết kiểm tra IAM execution role, CloudWatch Logs và statusCode.
 
 ### Các công việc cần triển khai trong tuần này:
-| Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
-| --- | --- | --- | --- | --- |
-| 7   | - Tìm hiểu kiến trúc lưu trữ Amazon S3 <br>&emsp; + Cấu trúc nhận dạng Bucket & Object <br>&emsp; + Nguyên lý Key-Value của Object Storage (Lưu trữ đối tượng) <br> | 12/09/2026   | 12/09/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| chủ nhật   | - Tìm hiểu sâu về các Lớp lưu trữ S3 (Storage Classes) <br>&emsp; + S3 Standard <br>&emsp; + S3 Standard-IA <br>&emsp; + S3 Glacier (Instant/Flexible/Deep Archive) | 13/09/2026   | 13/09/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 2   | - Tìm hiểu cơ chế bảo vệ và quản lý dữ liệu lớn <br>&emsp; + S3 Versioning (Tạo phiên bản) <br>&emsp; + Lifecycle Rules (Quy tắc vòng đời) <br> | 14/09/2026   | 14/09/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 3   | - Phân biệt các cơ chế kiểm soát truy cập S3 <br>&emsp; + S3 Bucket Policies (Chính sách Bucket) <br>&emsp; + IAM Policies (Chính sách IAM) <br> - Chuẩn bị mã nguồn website tĩnh (HTML/CSS/JS) | 15/09/2026   | 15/09/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Nghiên cứu lý thuyết tối ưu chi phí lưu trữ tệp lớn <br> - Tóm tắt kiến trúc lưu trữ phi cấu trúc cho các mô hình hệ thống khác nhau | 16/09/2026   | 16/09/2026      | <https://cloudjourney.awsstudygroup.com/> |
+
+| Ngày | Công việc | Bắt đầu | Hoàn thành | Tài liệu tham khảo |
+| :--- | :--- | :--- | :--- | :--- |
+| Thứ Bảy (tại cơ sở) | Tạo/kiểm tra hàm netmon-api, runtime Python và execution role có quyền DynamoDB cần thiết. | 26/09/2026 | 26/09/2026 | [AWS Lambda](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html) |
+| Chủ nhật (tự học) | Dùng boto3.resource("dynamodb") và table.scan() để đọc dữ liệu; xem LastEvaluatedKey cho phân trang. | 27/09/2026 | 27/09/2026 | [Boto3 DynamoDB Table](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/dynamodb/table/index.html) |
+| Thứ Hai (tự học) | Xử lý Decimal sang số JSON phù hợp và trả statusCode, headers, body. | 28/09/2026 | 28/09/2026 | [AWS Lambda](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html) |
+| Thứ Ba (tự học) | Chạy Test event, xem kết quả và tìm lỗi trong CloudWatch Logs nếu không thấy dữ liệu. | 29/09/2026 | 29/09/2026 | [AWS Lambda](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html) |
 
 ### Kết quả đạt được tuần 6:
 
-* Phân biệt rõ ràng bản chất giữa hai nền tảng lưu trữ cốt lõi:
-  * Object Storage (Amazon S3)
-  * Block Storage (Amazon EBS)
-  * ...
+- Tạo được luồng đọc thiết bị bằng **Lambda `netmon-api` → DynamoDB `NetworkDevices`**.
+- Đã có mã xử lý phân trang `LastEvaluatedKey` và chuyển đổi kiểu số để trả JSON.
+- Biết kiểm tra lỗi quyền truy cập bảng khi Lambda trả 500 thay vì suy đoán là lỗi giao diện.
 
-* Làm chủ kỹ thuật tối ưu hóa chi phí hệ thống dựa trên tần suất truy cập tệp tin qua S3 Storage Classes:
-  * Lớp Standard dành cho dữ liệu truy cập thường xuyên
-  * Lớp Infrequent Access (IA) tiết kiệm chi phí cho dữ liệu ít dùng
-  * Lớp Glacier chuyên dụng cho việc lưu trữ lưu kho dài hạn
-  * ...
-
-* Hiểu rõ cơ chế quản lý và bảo vệ toàn vẹn tài nguyên trên Cloud:
-  * Cơ chế S3 Versioning giúp khôi phục các tệp tin bị ghi đè hoặc xóa nhầm
-  * Quy tắc Lifecycle Rules tự động hóa tiến trình chuyển lớp lưu trữ hoặc hủy tệp tin hết hạn
-  * ...
-
-* Nắm vững cách phân cấp và thực thi quyền hạn truy cập an toàn bảo mật:
-  * Thiết lập S3 Bucket Policies áp dụng trực tiếp cho tài nguyên chứa
-  * Kết hợp IAM Policies phân quyền chi tiết cho định danh người dùng

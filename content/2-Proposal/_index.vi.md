@@ -1,118 +1,195 @@
 ---
-title: "Bản đề xuất"
-date: 2026-07-01
+title: "2. Đề xuất"
+date: 2026-11-12
 weight: 2
-chapter: false
-pre: "<b> 2. </b>"
+draft: false
 ---
 
-# Xây dựng hệ thống quản lý và giám sát hạ tầng mạng doanh nghiệp trên AWS Serverless
-## Giải pháp AWS Serverless hợp nhất cho Game Multiplayer Real-time thời gian thực
+# ĐỀ XUẤT DỰ ÁN
 
-### 1. Tóm tắt điều hành
-Dự án **DoAnMiniGame** được thiết kế nhằm xây dựng một hệ thống nền tảng Game Multiplayer Real-time (Thời gian thực) tối ưu. Hệ thống hỗ trợ xử lý mượt mà các luồng kết nối đồng thời từ ứng dụng client viết bằng Flutter. Nền tảng tận dụng tối đa sức mạnh của mô hình **AWS Serverless** và quy trình **CI/CD tự động (GitHub Actions + AWS SAM)** giúp loại bỏ hoàn toàn chi phí quản lý hạ tầng máy chủ vật lý, cung cấp khả năng giám sát thời gian thực, tối ưu hóa bảo mật và tiết kiệm chi phí vận hành dựa trên lượng tài nguyên thực tế tiêu thụ.
+**Tên đề tài:** Xây dựng hệ thống quản lý và giám sát hạ tầng mạng doanh nghiệp vừa và nhỏ trên AWS tích hợp dịch vụ Serverless.
 
----
+**Hình thức thực hiện:** Đồ án nhóm (3 sinh viên), triển khai mô phỏng trên AWS tại khu vực **US East (N. Virginia) – `us-east-1`**.
 
-### 2. Tuyên bố vấn đề
+## 1. Tóm tắt điều hành
 
-#### Vấn đề hiện tại
-Các kiến trúc game multiplayer truyền thống yêu cầu duy trì cụm máy chủ chuyên dụng chạy liên tục 24/7, dẫn đến chi phí cố định rất cao ngay cả khi không có người chơi. Bên cạnh đó, việc cấu hình co giãn tự động (Auto-scaling) thủ công thường không đáp ứng kịp thời khi lượng người chơi tăng đột biến, dễ gây nghẽn mạng hoặc sập hệ thống. Việc đồng bộ hóa trạng thái game (Game State) thời gian thực giữa các phòng chơi cũng rất phức tạp và đòi hỏi hạ tầng có độ trễ cực thấp.
+Đề tài hướng tới xây dựng một hệ thống giúp doanh nghiệp vừa và nhỏ quản lý danh sách thiết bị mạng, theo dõi tài nguyên máy chủ và phát hiện sớm các dấu hiệu bất thường. Thay vì chỉ sử dụng bảng tính để ghi chép thiết bị hoặc đăng nhập vào từng máy chủ để kiểm tra, người quản trị có thể theo dõi thông tin trên một giao diện tập trung.
 
-#### Giải pháp
-Nền tảng sử dụng **Amazon API Gateway (WebSocket API)** để duy trì kết nối hai chiều liên tục, **AWS Lambda** để xử lý logic game độc lập (Event-driven), và **Amazon DynamoDB** làm cơ sở dữ liệu NoSQL lưu trữ session kết nối (`Connections`) và trạng thái phòng chơi (`Games`). Tầng Phân phối & Cổng vào (Edge Layer) được tinh giản hoàn toàn bằng cách sử dụng **AWS Amplify (Web Hosting & CDN)** để phân phối Flutter Web ổn định, kết hợp **AWS WAF** chặn DDoS và **Route 53** phân giải tên miền. Quy trình triển khai được tự động hóa hoàn toàn thông qua **GitHub Actions** phối hợp với **AWS SAM CLI** để đóng gói và deploy hạ tầng dưới dạng mã (IaC).
+Nhóm lựa chọn **Amazon VPC và EC2** để mô phỏng hạ tầng mạng; **Amazon CloudWatch** để thu thập chỉ số CPU, RAM và dung lượng đĩa; **Amazon SNS** để gửi cảnh báo qua email; **Amazon EventBridge và AWS Lambda** để ghi nhận sự kiện; **Amazon DynamoDB** để lưu danh sách thiết bị và lịch sử cảnh báo. Phần quản lý thiết bị sử dụng **Amazon API Gateway, AWS Lambda và Amazon Cognito** để cung cấp API và kiểm soát truy cập.
 
-#### Lợi ích và hoàn vốn đầu tư (ROI)
-Giải pháp tạo nền tảng cơ sở vững chắc cho một hệ thống game multiplayer thời gian thực chạy ổn định với độ trễ tối thiểu (chỉ vài mili-giây) và khả năng co giãn tự động. Hệ thống giảm bớt gánh nặng quản trị hạ tầng, đơn giản hóa quy trình cập nhật mã nguồn backend và frontend, đồng thời cải thiện độ tin cậy của dữ liệu phòng chơi. Chi phí hằng tháng ước tính cực kỳ tối ưu vì hầu hết các dịch vụ đều nằm trong hạn mức AWS Free Tier khi chạy thử nghiệm, thời gian hoàn vốn nhanh nhờ tiết kiệm tối đa chi phí tài nguyên máy chủ cố định.
+Đề tài kết hợp một máy chủ EC2 với các dịch vụ Serverless, **không phải hệ thống Serverless 100%**. Mục tiêu chính là xây dựng được một mô hình có thể chạy thử, kiểm tra và trình bày rõ quá trình phát hiện — gửi — lưu — xử lý cảnh báo. Đây là mô hình phục vụ học tập, chưa phải sản phẩm triển khai cho doanh nghiệp thực tế.
 
 ---
 
-### 3. Kiến trúc giải pháp
-Nền tảng áp dụng kiến trúc Serverless Game Topology để quản lý các phiên kết nối thời gian thực dài hạn từ client Flutter. Toàn bộ hạ tầng được định nghĩa bằng mã nguồn (IaC) thông qua AWS SAM template để đảm nhận tính đồng nhất.
+## 2. Tuyên bố vấn đề
 
-#### Sơ đồ kiến trúc hệ thống
-Để sơ đồ hiển thị trực quan và thu hút trong tài liệu, hình ảnh kiến trúc được tích hợp trực tiếp bên dưới:
+### 2.1. Vấn đề hiện tại
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/thienluhoan/fcj-workshop-template/main/images/edited.drawio.png" alt="AWS Serverless Game Architecture" width="100%">
-  <br>
-  <i>Hình 3.1: Sơ đồ kiến trúc Real-time Serverless Game Platform sử dụng AWS SAM và GitHub Actions</i>
-</p>
+Ở các doanh nghiệp quy mô nhỏ, việc quản lý thiết bị và giám sát máy chủ thường phân tán. Thông tin thiết bị có thể được lưu riêng lẻ, tình trạng CPU/RAM khó theo dõi liên tục, còn người quản trị chỉ biết có sự cố khi dịch vụ đã chạy chậm hoặc ngừng hoạt động. Nếu không có nhật ký cảnh báo, việc kiểm tra sự cố đã được xử lý hay chưa cũng mất thời gian.
 
-> **Lưu ý:** Bạn có thể thay đổi đường dẫn `src` ở trên thành link dẫn tới file ảnh trong kho lưu trữ GitHub chính thức của nhóm bạn sau khi hoàn tất đẩy mã nguồn lên (ví dụ: `../images/edited.drawio.png`).
+Ngoài ra, các giải pháp giám sát truyền thống có thể cần máy chủ giám sát riêng, nhân lực bảo trì và quy trình triển khai phức tạp. Với một đồ án giới hạn thời gian và ngân sách, nhóm cần một mô hình đủ đơn giản để tự triển khai nhưng vẫn thể hiện được quy trình quản trị hạ tầng mạng.
 
-#### Dịch vụ AWS sử dụng
-* **AWS Amplify**: Lưu trữ và phân phối giao diện ứng dụng Flutter Web nhanh chóng qua hệ thống CDN toàn cầu.
-* **AWS Lambda**: Xử lý logic nghiệp vụ game, xác thực và phát (broadcast) sự kiện (Hệ thống gồm 4 hàm Node.js biệt lập).
-* **Amazon API Gateway**: Thiết lập cổng WebSocket API định tuyến chuẩn xác các gói tin dựa trên JSON action.
-* **Amazon DynamoDB**: Lưu trữ session kết nối người chơi và trạng thái các phòng game (2 bảng dữ liệu NoSQL tốc độ cao).
-* **Amazon Route 53 & AWS WAF**: Phân giải DNS Alias linh hoạt và thiết lập tường lửa biên ngăn chặn bot tấn công spam hoặc vượt giới hạn truy cập (Rate Limit).
-* **Amazon Cognito**: Quản lý quy trình đăng ký, đăng nhập và cấp mã token JWT an toàn để xác thực thông tin người chơi.
-* **Amazon CloudWatch**: Giám sát nhật ký (logs) toàn bộ hệ thống, giới hạn thời gian lưu trữ giúp tối ưu hóa chi phí phát sinh.
+### 2.2. Giải pháp đề xuất
 
-#### Thiết kế thành phần
-* **Ứng dụng Client**: Ứng dụng xây dựng trên Flutter tích hợp bộ công cụ AWS Amplify SDK phục vụ luồng xác thực (Auth), thiết lập kết nối hai chiều trực tiếp bằng giao thức mạng mã hóa `wss://` đến cổng API Gateway.
-* **Tiếp nhận & Bảo mật biên**: Dịch vụ Route 53 điều phối toàn bộ lưu lượng truy cập qua bộ lọc an toàn AWS WAF, bảo vệ hệ thống trước khi chuyển tiếp gói tin kết nối đến bộ xác thực định danh Cognito Lambda Authorizer.
-* **Xử lý dữ liệu**: Các hàm AWS Lambda tiếp nhận tín hiệu sự kiện từ API Gateway, tự động ghi nhận mã kết nối vào bảng lưu trữ DynamoDB, thực thi toàn bộ logic trò chơi và gửi cập nhật trạng thái mới nhất tới phòng chơi.
-* **Lưu trữ dữ liệu**: Bảng dữ liệu `Connections` quản lý các phiên kết nối hiện hành (được cấu hình thêm chỉ mục Global Secondary Index dựa trên trường dữ liệu `roomId`); bảng `Games` đảm nhận cấu trúc ma trận trạng thái trận đấu. Cả hai bảng đều được kích hoạt thuộc tính TTL (Time to Live) để tự động xóa sạch dữ liệu lỗi thời hoặc rác hệ thống.
+Hệ thống tập trung vào bốn chức năng chính:
+
+1. **Quản lý thiết bị:** thêm, xem, chỉnh sửa, xóa và tìm kiếm thông tin thiết bị mạng qua API, dữ liệu lưu tại bảng `NetworkDevices`.
+2. **Giám sát tài nguyên:** sử dụng CloudWatch để theo dõi CPU và các chỉ số RAM/đĩa được thu thập qua CloudWatch Agent hoặc chỉ số tùy chỉnh.
+3. **Cảnh báo tự động:** cấu hình CloudWatch Alarms; dùng SNS gửi email và EventBridge chuyển sự kiện trạng thái cảnh báo sang Lambda để ghi lịch sử vào bảng `NetworkAlerts`.
+4. **Giao diện quản trị:** xác thực với Cognito; hiển thị thiết bị, thông số, cảnh báo và trạng thái xử lý trên dashboard.
+
+### 2.3. Lợi ích dự kiến
+
+Mô hình giúp giảm thao tác kiểm tra thủ công, tập trung hóa thông tin và lưu được lịch sử khi xảy ra cảnh báo. Các dịch vụ được chia thành những khối riêng nên dễ kiểm thử và mở rộng trong tương lai. Chi phí sẽ được theo dõi bằng AWS Budgets; **ngân sách 20 USD/tháng là ngưỡng theo dõi, không phải cam kết hệ thống chỉ tốn 20 USD hoặc tự động dừng tính phí**.
 
 ---
 
-### 4. Triển khai kỹ thuật
+## 3. Kiến trúc giải pháp
 
-#### Các giai đoạn triển khai
-Dự án được thực hiện toàn diện qua 4 giai đoạn nối tiếp cuốn chiếu:
-1.  **Nghiên cứu và vẽ kiến trúc**: Khảo sát sâu về giao thức WebSocket API trên API Gateway, xây dựng cấu trúc sơ đồ thực thể (schema) cho DynamoDB NoSQL và hoàn thiện mô hình thiết kế đồ họa hệ thống trên nền tảng trực tuyến Draw.io.
-2.  **Tính toán chi phí và kiểm tra tính khả thi**: Sử dụng công cụ AWS Pricing Calculator chuyên nghiệp từ AWS để dự toán chính xác ngân sách vận hành và cấu hình các mốc cảnh báo chi phí.
-3.  **Điều chỉnh kiến trúc tối ưu**: Tinh chỉnh toàn bộ mô hình sang giải pháp Serverless 100%. Chuyển dịch phân phối tầng giao diện web sang **AWS Amplify**, tích hợp luồng tự động hóa CI/CD thông qua **GitHub Actions + AWS SAM** để hoàn thiện việc quản lý hạ tầng bằng mã (IaC).
-4.  **Phát triển, kiểm thử, triển khai**: Viết mã nguồn nghiệp vụ Lambda bằng Node.js, lập trình hoàn thiện ứng dụng phía máy khách (Flutter client), tổ chức viết file kịch bản workflow CI/CD và tiến hành đo kiểm hiệu năng chịu tải (load test) kết nối thông qua công cụ dòng lệnh wscat.
+Hệ thống gồm hai luồng chính: **quản lý thiết bị qua API** và **giám sát — cảnh báo — lưu lịch sử**. Toàn bộ dịch vụ AWS được cấu hình và thử nghiệm chủ yếu tại `us-east-1`.
 
-#### Yêu cầu kỹ thuật môi trường
-* **Môi trường Phát triển**: Hệ thống máy trạm cài đặt sẵn AWS CLI v2, AWS SAM CLI, môi trường Node.js phiên bản 18+, bộ công cụ Flutter SDK và thư viện wscat trên local.
-* **Hệ thống Backend (IaC)**: Toàn bộ cấu trúc thành phần từ API Gateway, Lambda, cho tới DynamoDB đều được định nghĩa tập trung và quản lý tường minh trong tệp tin `template.yaml` của AWS SAM, áp dụng triệt để các biến môi trường cấu hình linh hoạt nhằm tránh việc hardcode mã nguồn.
-* **Ứng dụng Frontend (Flutter)**: Tích hợp tệp liên kết cấu hình `amplifyconfiguration.dart` đồng bộ phần xác thực với Cognito User Pool. Sử dụng thư viện bảo mật `flutter_secure_storage` tại client để lưu giữ chuỗi Token JWT an toàn tuyệt đối.
+### 3.1. Sơ đồ kiến trúc hệ thống
 
----
+{{< netmonarchitecture lang="vi" >}}
 
-### 5. Lộ trình & Mốc triển khai
-* **Trước thực tập (Tháng 0)**: Dành ra 1 tháng nghiên cứu chuyên sâu cơ chế kết nối thời gian thực WebSocket và phác thảo sơ bộ bản vẽ kiến trúc trên phần mềm Draw.io.
-* **Thực tập (Tháng 1–3)**:
-    * **Tháng 1**: Làm chủ công cụ AWS SAM CLI để tự động hóa định nghĩa tài nguyên mã nguồn IaC. Khởi tạo dịch vụ quản lý người dùng Cognito User Pool và thiết lập mô hình chính sách IAM Role theo nguyên tắc đặc quyền tối thiểu (Least Privilege).
-    * **Tháng 2**: Khởi tạo cấu trúc các phân vùng bảng lưu trữ DynamoDB Tables, cấu hình hệ thống Index tăng tốc truy vấn và cơ chế tự hủy TTL. Tập trung phát triển mã nguồn xử lý cho 4 hàm chức năng Lambda Node.js và hoàn thiện cấu trúc định tuyến dữ liệu cho WebSocket API Gateway.
-    * **Tháng 3**: Hoàn thiện toàn bộ giao diện và chức năng của ứng dụng Flutter, cấu hình chuẩn tệp mã lệnh workflow của GitHub Actions giúp chạy kiểm thử và deploy song song cả thành phần Frontend (Amplify) lẫn Backend (SAM). Cấu hình bộ cảnh báo CloudWatch Alarms tự động gửi thư điện tử thông báo nếu xuất hiện lỗi phát sinh từ Lambda.
+*Hình 3.1. Sơ đồ kiến trúc đề xuất cho hệ thống quản lý và giám sát NetMon trên AWS (sơ đồ thiết kế, không phải ảnh chụp AWS Console).*
 
----
+### 3.2. Các thành phần sử dụng
 
-### 6. Ước tính ngân sách
-Bảng dự toán kinh phí vận hành hàng tháng dưới đây được tính toán chi tiết dựa trên công cụ AWS Pricing Calculator tại trung tâm dữ liệu khu vực khu vực Singapore (`ap-southeast-1`):
+| Thành phần | Vai trò trong hệ thống |
+|---|---|
+| **Amazon VPC** | Tạo mạng riêng `netmon-vpc` với CIDR `10.0.0.0/16`, tách public subnet và private subnet. |
+| **Amazon EC2** | Chạy máy chủ mô phỏng `netmon-ec2-server` (Ubuntu 24.04 LTS, loại `t3.micro`). |
+| **Security Groups và IAM** | Kiểm soát luồng truy cập mạng và quyền của EC2/Lambda theo nhu cầu. |
+| **Amazon CloudWatch** | Theo dõi CPU, RAM, dung lượng đĩa, log và ba ngưỡng cảnh báo. |
+| **Amazon SNS** | Gửi thông báo cảnh báo tới email đã xác nhận đăng ký. |
+| **Amazon EventBridge** | Nhận sự kiện thay đổi trạng thái CloudWatch Alarm và chuyển tới Lambda. |
+| **AWS Lambda** | `netmon-api` xử lý API; `netmon-save-alert` ghi sự kiện cảnh báo vào DynamoDB. |
+| **Amazon API Gateway** | Cung cấp HTTP API để giao diện gọi các chức năng quản lý thiết bị, cảnh báo và metrics. |
+| **Amazon Cognito** | Quản lý người đăng nhập và cung cấp JWT để API Gateway kiểm tra quyền truy cập. |
+| **Amazon DynamoDB** | Hai bảng `NetworkDevices` và `NetworkAlerts` lưu thiết bị và nhật ký cảnh báo. |
+| **AWS Budgets** | Giám sát mức chi phí so với ngân sách dự kiến. |
 
-| Thành phần dịch vụ AWS | Chi phí hàng tháng (USD) | Ghi chú & Tối ưu hóa chi phí |
-| :--- | :--- | :--- |
-| **AWS Lambda** | 0.00 USD | Nằm trong giới hạn Free Tier lâu dài (Miễn phí 1 triệu lượt triệu gọi đầu tiên). |
-| **Amazon API Gateway (WebSocket)** | 0.00 USD | Tận dụng gói Free Tier cơ bản (Miễn phí hoàn toàn cho 1 triệu tin nhắn trao đổi). |
-| **Amazon Cognito** | 0.00 USD | Không phát sinh chi phí đối với lượng người dùng hoạt động hàng tháng (MAUs) quy mô nhỏ. |
-| **AWS Amplify** | ~0.35 USD | Tích lũy chi phí dung lượng thấp dựa trên không gian lưu trữ thực tế của ứng dụng Web. |
-| **Amazon DynamoDB** | ~0.30 USD | Áp dụng cấu hình chế độ chi trả theo lượng tài nguyên sử dụng thực tế (On-Demand). |
-| **Amazon CloudWatch** | ~0.15 USD | Tối ưu hóa ngân sách nhờ giới hạn thời gian lưu giữ nhật ký vết (Retention) xuống còn 14 ngày. |
-| **AWS WAF** | ~5.00 USD | Mức phí duy trì cố định áp dụng cho 1 cấu hình quy tắc Web ACL cơ bản ở lớp biên. |
-| **TỔNG CỘNG** | **~5.80 USD / tháng** | *Tương đương khoảng ~69.60 USD cho cả năm vận hành hệ thống thử nghiệm.* |
+### 3.3. Luồng xử lý dữ liệu
+
+**Luồng 1 — Quản lý thiết bị:** Người dùng đăng nhập qua Cognito → giao diện gọi API Gateway kèm token → API Gateway kiểm tra JWT → Lambda `netmon-api` đọc/ghi DynamoDB → trả dữ liệu thiết bị hoặc cảnh báo về giao diện.
+
+**Luồng 2 — Giám sát và cảnh báo:** EC2 cung cấp số liệu CPU/RAM/đĩa → CloudWatch đánh giá ngưỡng → khi trạng thái Alarm thay đổi, hệ thống gửi thông báo qua SNS và phát sinh sự kiện cho EventBridge → Lambda `netmon-save-alert` ghi lại vào bảng `NetworkAlerts` → trang nhật ký hiển thị lịch sử để theo dõi xử lý.
+
+Thiết kế VPC mô phỏng gồm **public subnet `10.0.0.0/20`**, **private subnet `10.0.128.0/20`**, route table riêng và Internet Gateway `netmon-igw`. EC2 thuộc public subnet. Private subnet được sử dụng để minh họa phân vùng mạng; không giả định đã có NAT Gateway hoặc máy chủ trong private subnet.
 
 ---
 
-### 7. Đánh giá rủi ro
+## 4. Triển khai kỹ thuật
 
-#### Ma trận đánh giá rủi ro
-* **Zombie Connection (Hiện tượng treo kết nối ngầm)**: Xảy ra khi người dùng ẩn ứng dụng game xuống chế độ chạy nền (background) nhưng phiên kết nối WebSocket không được giải phóng hoàn toàn, khiến hệ thống tiếp tục tính phí duy trì liên tục gây lãng phí tài nguyên mạng. *(Mức độ ảnh hưởng: Trung bình | Xác suất xảy ra: Cao)*
-* **Cold Start Delay (Độ trễ do khởi động nguội)**: Đối với các hàm Lambda không được gọi liên tục trong thời gian dài, môi trường thực thi sẽ tự động bị thu hồi, dẫn tới việc người dùng đầu tiên truy cập lại sẽ gặp hiện tượng trễ từ 1-3 giây để hệ thống tái khởi động môi trường. *(Mức độ ảnh hưởng: Thấp | Xác suất xảy ra: Trung bình)*
-* **Rò rỉ thông tin cấu hình (Credential Leak)**: Sơ suất kỹ thuật dẫn tới việc commit nhầm các tệp tin chứa mã khóa truy cập bảo mật nguy hiểm (như AWS Access Key/Secret Key) công khai lên các kho lưu trữ chung trên GitHub. *(Mức độ ảnh hưởng: Rất cao | Xác suất xảy ra: Thấp)*
+### 4.1. Các giai đoạn thực hiện
 
-#### Chiến lược giảm thiểu & Kế hoạch dự phòng
-* **Xử lý treo kết nối**: Phía ứng dụng máy khách (Flutter Client) chủ động bắt sự kiện ứng dụng thay đổi trạng thái và thực hiện ngắt kết nối WebSocket ngay khi phát hiện người dùng chuyển ứng dụng sang chạy ngầm. Ở phần Backend, viết mã lệnh cho hàm Lambda tích hợp cơ chế kiểm tra nhịp tim định kỳ (Heartbeat Ping/Pong) đồng thời kết hợp linh hoạt với thuộc tính cấu hình tự hủy dữ liệu TTL trên cơ sở dữ liệu DynamoDB để dọn dẹp triệt để mọi kết nối ảo.
-* **Giảm thiểu hiện tượng Cold Start**: Tổ chức khởi tạo toàn bộ các kết nối SDK mở rộng (ví dụ như kết nối đến DynamoDB) nằm hoàn toàn ở bên ngoài hàm xử lý sự kiện chính (`exports.handler`) nhằm tái sử dụng tối đa môi trường thực thi của các request trước đó. Thu nhỏ dung lượng gói deploy mã nguồn backend bằng câu lệnh tối ưu hóa `npm ci --production`.
-* **Bảo mật mã nguồn tuyệt đối**: Khai báo đầy đủ các tệp định nghĩa môi trường `.env` hoặc các thư mục cấu hình nhạy cảm vào danh sách tệp tin bỏ qua của `.gitignore` trước khi đẩy bất kỳ mã nguồn nào lên GitHub. Đồng thời, thiết lập hệ thống cảnh báo ngân sách AWS Billing Alert để nhận thông báo khẩn cấp bằng Email ngay khi tổng chi phí vượt quá ngưỡng thiết lập kiểm soát ban đầu.
+1. **Khảo sát và chuẩn bị:** tìm hiểu AWS, lựa chọn vùng triển khai, phân chia nhiệm vụ, tạo AWS Budget và thiết kế sơ đồ kiến trúc.
+2. **Dựng hạ tầng:** tạo VPC, subnet, route table, Internet Gateway, Security Group, IAM Role và một EC2 Ubuntu để mô phỏng máy chủ cần giám sát.
+3. **Xây dựng Serverless API và cơ sở dữ liệu:** tạo `NetworkDevices`, `NetworkAlerts`; viết Lambda Python dùng `boto3`; cấu hình các route HTTP API và xác thực Cognito.
+4. **Giám sát và hoàn thiện:** tạo CloudWatch metrics/alarms, SNS email, EventBridge rule, Lambda lưu cảnh báo; xây dựng giao diện và kiểm thử các luồng chức năng.
+
+### 4.2. API và dữ liệu
+
+Các route chính được thiết kế theo phương thức HTTP:
+
+| Phương thức | Route | Mục đích |
+|---|---|---|
+| GET | `/devices` | Xem danh sách thiết bị. |
+| POST | `/devices` | Thêm thiết bị. |
+| GET | `/devices/{id}` | Xem chi tiết một thiết bị. |
+| PUT | `/devices/{id}` | Cập nhật thiết bị. |
+| DELETE | `/devices/{id}` | Xóa thiết bị. |
+| GET | `/alerts` | Xem nhật ký cảnh báo. |
+| PUT | `/alerts/{id}` | Cập nhật trạng thái xử lý cảnh báo. |
+| GET | `/metrics` | Lấy chỉ số giám sát phục vụ dashboard. |
+
+Bảng `NetworkDevices` có các thuộc tính như `deviceId`, `deviceName`, `deviceType`, `ipAddress`, `status`, `instanceId` và `region` tùy thiết bị. Bảng `NetworkAlerts` dùng `eventId` để nhận diện sự kiện; các trường nghiệp vụ gồm `alarmName`, `alarmState`, `alarmType`, `deviceId`, `eventTime` và `handlingStatus`.
+
+### 4.3. Công nghệ và kiểm thử
+
+- **Backend:** AWS Lambda viết bằng Python, dùng thư viện `boto3` làm việc với DynamoDB và CloudWatch.
+- **Frontend:** giao diện quản lý dự kiến sử dụng HTML, CSS, JavaScript; phát triển bằng Visual Studio Code và chạy kiểm tra qua localhost.
+- **Xác thực:** Cognito User Pool và JWT authorizer trong API Gateway; cấu hình CORS cho địa chỉ giao diện dùng để thử nghiệm.
+- **Giám sát:** CloudWatch Alarms gồm `netmon-cpu-high-80`, `netmon-ram-high-80`, `netmon-disk-high-85`.
+- **Kiểm thử:** kiểm tra API trả đúng dữ liệu, thao tác CRUD, điều kiện cảnh báo, email SNS, lưu lịch sử vào DynamoDB, phân quyền và giao diện.
+
+Đồ án sử dụng ảnh chụp cấu hình AWS Console và kết quả thử nghiệm làm minh chứng trong phần **5. Workshop**, không coi mọi tính năng dự kiến đã hoàn thiện chỉ vì tài nguyên AWS đã được tạo.
+
+### 4.4. Phân công nhóm
+
+| Thành viên | Công việc chính |
+|---|---|
+| **Tùng Dương** | VPC, EC2, public/private subnet, route table, Internet Gateway, Security Group và bảo mật hạ tầng. |
+| **Xuân Đức** | Lambda, API Gateway, DynamoDB, CRUD thiết bị và tích hợp dữ liệu. |
+| **Mạnh Quân** | CloudWatch, cảnh báo, giao diện giám sát và kiểm thử. |
 
 ---
 
-### 8. Kết quả kỳ vọng
-* **Cải tiến kỹ thuật vượt trội**: Xây dựng thành công hệ thống trò chơi multiplayer thời gian thực chạy ổn định trên nền tảng kiến trúc Serverless tiên tiến dựa theo mô hình Event-driven, đạt toàn bộ các chứng chỉ về tiêu chuẩn vận hành an toàn bảo mật. Ứng dụng đảm bảo độ trễ thấp tối thiểu, triệt tiêu hoàn toàn điểm nghẽn hệ thống (Bottleneck) và có khả năng tự co giãn (Auto-scaling) linh hoạt theo số lượng người truy cập thực tế.
-* **Giá trị lâu dài đóng góp cho dự án**: Toàn bộ kho mã nguồn định nghĩa kiến trúc cơ sở hạ tầng (AWS SAM Template) cùng hệ thống kịch bản workflow tự động hóa CI/CD của GitHub Actions được chuẩn hóa, đóng gói bài bản và lưu trữ khoa học. Đây sẽ là nền tảng vững chắc giúp đội ngũ kỹ thuật dễ dàng phát triển, kế thừa và mở rộng quy mô các dự án game multiplayer lớn hơn trong tương lai.
+## 5. Lộ trình và mốc triển khai
+
+Dự án dự kiến được thực hiện trong **12 tuần**, mỗi tuần một buổi thực hành. Các tuần có thể điều chỉnh theo tiến độ thực tế của nhóm.
+
+| Tuần | Nội dung thực hiện | Kết quả cần có |
+|---|---|---|
+| **1** | Tìm hiểu đề tài, phạm vi và các dịch vụ AWS. | Xác định yêu cầu và phân công nhóm. |
+| **2** | Vẽ kiến trúc tổng quát, chọn region và lập ngân sách. | Sơ đồ hệ thống, AWS Budget. |
+| **3** | Tạo VPC, subnet, Internet Gateway và route table. | Mạng mô phỏng cơ bản. |
+| **4** | Tạo Security Group, IAM Role và EC2 Ubuntu. | EC2 hoạt động trong VPC. |
+| **5** | Thiết kế bảng DynamoDB. | `NetworkDevices`, `NetworkAlerts`. |
+| **6** | Viết Lambda xử lý danh sách và CRUD thiết bị. | Lambda `netmon-api` và kiểm thử cơ bản. |
+| **7** | Cấu hình API Gateway, các route và CORS. | API có thể được gọi từ client kiểm thử. |
+| **8** | Thiết lập CloudWatch metrics và Alarm CPU/RAM/đĩa. | Dữ liệu metrics và ba ngưỡng cảnh báo. |
+| **9** | Tích hợp SNS, EventBridge và Lambda ghi lịch sử. | Email cảnh báo, sự kiện lưu trong DynamoDB. |
+| **10** | Cấu hình Cognito, JWT authorizer và đăng nhập. | Luồng xác thực cơ bản. |
+| **11** | Hoàn thiện giao diện quản lý, nhật ký và kiểm thử tích hợp. | Demo các luồng chính, ghi nhận lỗi còn tồn tại. |
+| **12** | Tổng hợp ảnh minh chứng, kiểm tra chi phí, viết tài liệu và báo cáo. | Workshop, đề xuất, kết quả kiểm thử và bài trình bày. |
+
+---
+
+## 6. Ước tính và kiểm soát ngân sách
+
+Nhóm sử dụng AWS ở khu vực `us-east-1` với **AWS Cost Budget 20 USD/tháng** và các mốc thông báo khi chi phí thực tế vượt **25% (5 USD)**, **50% (10 USD)** và **100% (20 USD)** ngân sách. Đây là **mức cảnh báo được cấu hình**, không phải số tiền đã chi hoặc dự toán chi phí chính xác.
+
+| Dịch vụ | Yếu tố có thể phát sinh chi phí | Cách kiểm soát |
+|---|---|---|
+| **EC2 và EBS** | Thời gian máy hoạt động, ổ đĩa và tài nguyên liên quan. | Dừng máy khi không thử nghiệm; kiểm tra ổ đĩa còn tồn tại. |
+| **Địa chỉ IPv4 công khai** | Có thể phát sinh phí theo giờ. | Chỉ giữ địa chỉ khi thực sự cần. |
+| **CloudWatch** | Alarm, log, metrics tùy chỉnh và thời gian lưu log. | Giới hạn dữ liệu thử nghiệm, đặt retention hợp lý. |
+| **Lambda và API Gateway** | Số lần gọi, thời gian chạy và lưu lượng yêu cầu. | Tránh vòng lặp gọi API hoặc mô phỏng không giới hạn. |
+| **DynamoDB** | Số lần đọc/ghi và dung lượng lưu trữ. | Giữ dữ liệu thử nghiệm ở quy mô nhỏ. |
+| **SNS, EventBridge và Cognito** | Số sự kiện, thông báo và cách sử dụng dịch vụ. | Theo dõi usage, không tạo lưu lượng thử nghiệm quá mức. |
+
+**Nguyên tắc:** đối chiếu AWS Billing/Cost Explorer với AWS Budgets trong suốt quá trình làm đồ án. Điều kiện Free Tier tùy loại tài khoản và thời điểm; không mặc định mọi dịch vụ đều miễn phí. Cảnh báo ngân sách **không tự động dừng EC2 hoặc các tài nguyên AWS**.
+
+---
+
+## 7. Đánh giá rủi ro
+
+### 7.1. Rủi ro chính
+
+| Rủi ro | Mức ảnh hưởng | Hướng xử lý |
+|---|---|---|
+| **Cấu hình Security Group quá rộng** | Cao | Không mở SSH (22) ra toàn Internet nếu không cần; áp dụng quyền truy cập tối thiểu. |
+| **Lộ khóa hoặc dữ liệu tài khoản AWS khi đẩy GitHub** | Cao | Không commit Access Key, Secret Key, token và ảnh chứa dữ liệu nhạy cảm; che thông tin trước khi công khai. |
+| **Lỗi xác thực JWT hoặc CORS** | Trung bình | Kiểm tra issuer, audience, scopes, callback URL và origin thực tế của frontend. |
+| **Cảnh báo không gửi email hoặc thiếu lịch sử** | Trung bình | Kiểm tra SNS subscription đã xác nhận, CloudWatch action, EventBridge rule, Lambda permission và logs. |
+| **Chi phí tăng ngoài dự kiến** | Trung bình–cao | Thiết lập AWS Budget, kiểm tra chi phí thường xuyên, tắt/xóa tài nguyên không dùng. |
+| **Số liệu RAM/đĩa không cập nhật** | Trung bình | Kiểm tra CloudWatch Agent hoặc metric tùy chỉnh, namespace, dimension và quyền IAM. |
+
+### 7.2. Kế hoạch dự phòng
+
+Duy trì bản sao mã nguồn trên GitHub, phân quyền IAM theo nhiệm vụ, sử dụng dữ liệu mô phỏng khi chưa có đủ thiết bị vật lý và lưu lại ảnh thử nghiệm của từng bước. Khi một dịch vụ lỗi, kiểm tra CloudWatch Logs trước, sau đó kiểm thử riêng từng mắt xích trong luồng xử lý. Nếu cảnh báo không phát sinh thực tế, nhóm có thể sử dụng sự kiện thử nghiệm **được đánh dấu là test** để xác minh đường ghi lịch sử; không trình bày dữ liệu thử nghiệm như một sự cố thật.
+
+---
+
+## 8. Kết quả kỳ vọng
+
+- **Quản lý thiết bị:** có API cho thêm, xem, sửa, xóa thiết bị; dữ liệu lưu được trong DynamoDB và hiển thị trên giao diện.
+- **Giám sát EC2:** theo dõi được chỉ số CPU, RAM, đĩa và trạng thái máy chủ qua CloudWatch.
+- **Phát hiện và thông báo:** cấu hình ngưỡng CPU/RAM 80%, đĩa 85%; SNS gửi email khi cảnh báo thay đổi theo thiết lập.
+- **Nhật ký cảnh báo:** EventBridge và Lambda ghi được các sự kiện CloudWatch vào `NetworkAlerts`, kèm thời gian và trạng thái xử lý để tra cứu.
+- **Bảo mật truy cập:** sử dụng Cognito và JWT để hạn chế API chỉ cho người dùng hợp lệ; phân quyền IAM phù hợp chức năng.
+- **Báo cáo và trình diễn:** có sơ đồ kiến trúc, ảnh cấu hình thực tế, kịch bản thử nghiệm và Workshop có thể xem trên Hugo/GitHub Pages sau khi triển khai.
+
+Kết quả cuối cùng được đánh giá bằng **những chức năng kiểm thử chạy được và bằng chứng trên AWS**, không chỉ dựa vào danh sách dịch vụ đã tạo. Mô hình có thể làm cơ sở phát triển tiếp thành hệ thống giám sát nhiều máy chủ, nhưng chưa thay thế một nền tảng giám sát doanh nghiệp hoàn chỉnh.

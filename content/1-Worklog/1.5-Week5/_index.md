@@ -1,48 +1,31 @@
 ---
-title: "Week 5 Worklog"
-date: 2026-05-18
+title: "5. DynamoDB design for devices and alert history"
+date: 2026-09-19T09:00:00+07:00
 weight: 5
-chapter: false
-pre: " <b> 1.5. </b> "
+draft: false
+description: "DynamoDB design for devices and alert history"
 ---
 
-
+# 5. DynamoDB design for devices and alert history
 
 ### Week 5 Objectives:
 
-* Master the principles of High Availability and Scalability.
-* Study the operational mechanisms of Elastic Load Balancing.
+- Choose partition keys and attributes for device records.
+- Prepare the alert-history structure used by the dashboard.
+- Learn item operations through the AWS Console and boto3.
 
 ### Tasks to be carried out this week:
-| Day | Task | Start Date | Completion Date | Reference Material |
-| --- | --- | --- | --- | --- |
-| 7   | - Learn Elastic Load Balancing (ELB) <br>&emsp; + Application Load Balancer (ALB) <br>&emsp; + Network Load Balancer (NLB) <br> | 05/09/2026   | 05/09/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| sunday   | - Study Target Groups & Health Checks <br>&emsp; + Concepts of routing algorithms <br> | 06/09/2026   | 06/09/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 2   | - Learn Amazon EC2 Auto Scaling (ASG) <br>&emsp; + Launch Templates <br>&emsp; + Scaling Policies <br> | 07/09/2026   | 07/09/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 3   | - **Practice:** <br>&emsp; + Create EC2 Launch Template (with pre-installed Apache) <br>&emsp; + Create Target Group for HTTP (Port 80) <br> | 08/09/2026   | 08/09/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - **Practice:** <br>&emsp; + Configure Application Load Balancer <br>&emsp; + Launch Auto Scaling Group across 2 AZs <br>&emsp; + Test self-healing capability | 09/09/2026   | 09/09/2026      | <https://cloudjourney.awsstudygroup.com/> |
 
+| Day | Task | Start Date | Completion Date | Reference Material |
+| :--- | :--- | :--- | :--- | :--- |
+| Saturday (on-site) | Design NetworkDevices with deviceId (String) as its partition key. | 19/09/2026 | 19/09/2026 | [Amazon DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html) |
+| Sunday (independent study) | Agree on deviceName, deviceType, ipAddress, location, status, cpuUsage, memoryUsage, and lastUpdated. | 20/09/2026 | 20/09/2026 | [Amazon DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html) |
+| Monday (independent study) | Outline NetworkAlerts with eventId, alarmName, alarmState, eventTime, and handlingStatus. | 21/09/2026 | 21/09/2026 | [Amazon DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html) |
+| Tuesday (independent study) | Inspect items in Explore table items and distinguish String, Number, and Python Decimal values. | 22/09/2026 | 22/09/2026 | [Boto3 DynamoDB Table](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/dynamodb/table/index.html) |
 
 ### Week 5 Achievements:
 
-* Deeply understood how cloud systems handle massive traffic via:
-  * Layer 7 Load Balancing (ALB)
-  * Layer 4 Load Balancing (NLB)
-  * ...
+- Defined a shared **NetworkDevices** schema and device-based partition key.
+- Prepared **NetworkAlerts** to record alarm times and handling states.
+- Learned to verify writes using **Explore table items** rather than trusting the frontend alone.
 
-* Grasped the importance of automated server health monitoring:
-  * Configuring Target Groups
-  * Setting up Health Checks
-
-* Manually configured an automated virtual server cloning environment, including:
-  * Creating Launch Templates with pre-packaged web server configurations
-  * Building Scaling Policies to scale resources based on demand
-  * ...
-
-* Fully deployed a High Availability architecture:
-  * Running a Load Balancer distributing traffic across multiple Availability Zones
-  * Simulating server failure and verifying Auto Scaling's automatic replacement capability
-  * ...
-
-* Proven the flexibility and fault-tolerance of a deployed web application.
-* ...

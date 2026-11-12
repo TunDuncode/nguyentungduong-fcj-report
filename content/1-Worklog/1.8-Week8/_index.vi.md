@@ -1,38 +1,31 @@
 ---
-title: "Worklog Tuần 8"
-date: 2026-06-08
+title: "8. Xử lý CRUD và chuẩn hóa API quản lý thiết bị"
+date: 2026-10-10T09:00:00+07:00
 weight: 8
-chapter: false
-pre: " <b> 1.8. </b> "
+draft: false
+description: "Xử lý CRUD và chuẩn hóa API quản lý thiết bị"
 ---
 
-
+# 8. Xử lý CRUD và chuẩn hóa API quản lý thiết bị
 
 ### Mục tiêu tuần 8:
 
-* Nghiên cứu sâu toàn diện các dịch vụ giải pháp Cơ sở dữ liệu của hạ tầng AWS.
-* Phân tích thiết kế cấu trúc dữ liệu và chuẩn bị kiến trúc phân vùng lưu trữ cho hệ thống.
+- Hoàn thiện thiết kế thêm, sửa, xóa, xem danh sách và xem chi tiết thiết bị.
+- Thống nhất phương thức HTTP và đường dẫn với giao diện.
+- Biết phân biệt route đã cấu hình và route đã kiểm thử đầy đủ.
 
 ### Các công việc cần triển khai trong tuần này:
-| Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
-| --- | --- | --- | --- | --- |
-| 7   | - Nghiên cứu kiến trúc Amazon RDS (Cơ sở dữ liệu quan hệ) <br>&emsp; + Các Engine Cơ sở dữ liệu hỗ trợ (MySQL, PostgreSQL) <br>&emsp; + Các tính năng quản lý nền tảng tự động | 26/09/2026 | 26/09/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| chủ nhật   | - Nghiên cứu các mô hình Tính sẵn sàng cao (HA) cho lưu trữ dữ liệu <br>&emsp; + Triển khai Multi-AZ (Sao chép dữ liệu đồng bộ) <br>&emsp; + Read Replicas (Mở rộng theo chiều ngang cho các khối lượng công việc đọc) | 27/09/2026 | 27/09/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 2   | - Tìm hiểu các tùy chọn cơ sở dữ liệu NoSQL phi quan hệ <br>&emsp; + Các thành phần cốt lõi của Amazon DynamoDB <br>&emsp; + Các khái niệm chính về Partition Keys (Khóa phân vùng) và Sort Keys (Khóa sắp xếp) <br>&emsp; + Chế độ dung lượng Provisioned (Cấp phát trước) so với On-demand (Theo nhu cầu) | 28/09/2026 | 28/09/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 3   | - Phân tích các trường hợp sử dụng thực tế để đánh giá khi nào nên chọn RDS hay DynamoDB <br> - Phác thảo một mẫu lược đồ cơ sở dữ liệu quan hệ logic mẫu | 29/09/2026 | 29/09/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Nghiên cứu các nguyên tắc cách ly mạng để bảo mật an toàn cho cơ sở dữ liệu trên cloud <br> - Hiểu các chức năng cơ bản của DB Subnet Groups (Nhóm Subnet cho DB) | 30/09/2026 | 30/09/2026      | <https://cloudjourney.awsstudygroup.com/> |
+
+| Ngày | Công việc | Bắt đầu | Hoàn thành | Tài liệu tham khảo |
+| :--- | :--- | :--- | :--- | :--- |
+| Thứ Bảy (tại cơ sở) | Cấu hình GET /devices, POST /devices và GET /devices/{id}. | 10/10/2026 | 10/10/2026 | [Amazon API Gateway](https://docs.aws.amazon.com/apigateway/latest/developerguide/welcome.html) |
+| Chủ nhật (tự học) | Bổ sung PUT /devices/{id} và DELETE /devices/{id} trong Lambda và API Gateway. | 11/10/2026 | 11/10/2026 | [AWS Lambda](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html) |
+| Thứ Hai (tự học) | Đọc httpMethod hoặc requestContext.http.method, pathParameters, JSON body để chia nhánh xử lý. | 12/10/2026 | 12/10/2026 | [AWS Lambda](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html) |
+| Thứ Ba (tự học) | Kiểm tra bản ghi mẫu trong DynamoDB sau thao tác; bổ sung CORS và mã lỗi cho trường hợp không hợp lệ. | 13/10/2026 | 13/10/2026 | [Amazon DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html) |
+
 ### Kết quả đạt được tuần 8:
 
-* Phân biệt sâu sắc các mô hình kiến trúc lưu trữ dữ liệu có cấu trúc và phi cấu trúc đám mây:
-  * Amazon RDS phù hợp cho các truy vấn quan hệ phức tạp cần tính toàn vẹn cao (ACID)
-  * Amazon DynamoDB đáp ứng các ứng dụng quy mô lớn cần độ trễ micro-second ổn định
-  * ...
+- Có cấu hình nhóm route quản lý thiết bị và định dạng JSON dùng chung với giao diện.
+- Biết xác minh bản ghi qua **DynamoDB Explore table items**, không chỉ nhìn thông báo trên trình duyệt.
+- Các route còn phải kiểm thử với access token thật trước khi khẳng định toàn bộ CRUD đã chạy end-to-end.
 
-* Nắm vững các mô hình thiết kế đảm bảo dữ liệu không bị gián đoạn hoạt động:
-  * Mô hình Multi-AZ tự động chuyển đổi dự phòng (Failover) khi có thảm họa phần cứng
-  * Mô hình Read Replicas phân tách tải, tăng tốc độ xử lý cho các hệ thống đọc nhiều
-  * ...
-
-* Hiểu rõ cơ chế bảo mật và quản lý tệp lưu trữ sao lưu tự động (Automated Snapshots).
-* Thiết kế thành công lược đồ dữ liệu logic, xác định rõ ràng luồng liên kết thực thể phù hợp để chuẩn bị triển khai lên cloud thực tế.
-* ...

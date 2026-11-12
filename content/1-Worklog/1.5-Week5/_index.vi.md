@@ -1,47 +1,31 @@
 ---
-title: "Worklog Tuần 5"
-date: 2026-05-18
+title: "5. Thiết kế DynamoDB cho thiết bị và lịch sử cảnh báo"
+date: 2026-09-19T09:00:00+07:00
 weight: 5
-chapter: false
-pre: " <b> 1.5. </b> "
+draft: false
+description: "Thiết kế DynamoDB cho thiết bị và lịch sử cảnh báo"
 ---
 
-
+# 5. Thiết kế DynamoDB cho thiết bị và lịch sử cảnh báo
 
 ### Mục tiêu tuần 5:
 
-* Nắm vững nguyên lý Tính sẵn sàng cao (High Availability) và Khả năng mở rộng (Scalability).
-* Nghiên cứu cơ chế hoạt động của Elastic Load Balancing.
+- Thiết kế khóa chính và thuộc tính cho dữ liệu thiết bị.
+- Chuẩn bị cấu trúc nhật ký cảnh báo phục vụ Dashboard.
+- Tìm hiểu đọc/ghi item qua AWS Console và boto3.
 
 ### Các công việc cần triển khai trong tuần này:
-| Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
-| --- | --- | --- | --- | --- |
-| 7   | - Tìm hiểu Elastic Load Balancing (ELB) <br>&emsp; + Application Load Balancer (ALB) <br>&emsp; + Network Load Balancer (NLB) <br> | 05/09/2026   | 05/09/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| chủ nhật   | - Tìm hiểu Target Groups & Health Checks <br>&emsp; + Các khái niệm về thuật toán định tuyến <br> | 06/09/2026   | 06/09/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 2   | - Tìm hiểu Amazon EC2 Auto Scaling (ASG) <br>&emsp; + Launch Templates (Mẫu khởi chạy) <br>&emsp; + Scaling Policies (Chính sách mở rộng) <br> | 07/09/2026   | 07/09/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 3   | - **Thực hành:** <br>&emsp; + Tạo EC2 Launch Template (cài sẵn Apache) <br>&emsp; + Tạo Target Group cho HTTP (Cổng 80) <br> | 08/09/2026   | 08/09/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - **Thực hành:** <br>&emsp; + Cấu hình Application Load Balancer <br>&emsp; + Khởi tạo Auto Scaling Group trên 2 AZ <br>&emsp; + Kiểm tra khả năng tự phục hồi | 09/09/2026   | 09/09/2026      | <https://cloudjourney.awsstudygroup.com/> |
+
+| Ngày | Công việc | Bắt đầu | Hoàn thành | Tài liệu tham khảo |
+| :--- | :--- | :--- | :--- | :--- |
+| Thứ Bảy (tại cơ sở) | Thiết kế bảng NetworkDevices với deviceId (String) là Partition Key. | 19/09/2026 | 19/09/2026 | [Amazon DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html) |
+| Chủ nhật (tự học) | Thống nhất trường deviceName, deviceType, ipAddress, location, status, cpuUsage, memoryUsage và lastUpdated. | 20/09/2026 | 20/09/2026 | [Amazon DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html) |
+| Thứ Hai (tự học) | Phác thảo NetworkAlerts với eventId, alarmName, alarmState, eventTime và handlingStatus. | 21/09/2026 | 21/09/2026 | [Amazon DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html) |
+| Thứ Ba (tự học) | Thực hành kiểm tra item trên Explore table items, phân biệt kiểu String, Number và giá trị Decimal trong Python. | 22/09/2026 | 22/09/2026 | [Boto3 DynamoDB Table](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/dynamodb/table/index.html) |
 
 ### Kết quả đạt được tuần 5:
 
-* Thấu hiểu sâu sắc cách hệ thống đám mây xử lý lưu lượng truy cập lớn thông qua:
-  * Cân bằng tải lớp 7 (ALB)
-  * Cân bằng tải lớp 4 (NLB)
-  * ...
+- Có cấu trúc thống nhất cho bảng **NetworkDevices**; xác định khóa chính theo mã thiết bị.
+- Chuẩn bị mô hình **NetworkAlerts** để lưu thời gian và trạng thái xử lý cảnh báo.
+- Biết sử dụng **Explore table items** để xác nhận yêu cầu thêm/sửa có ghi thật vào DynamoDB hay không.
 
-* Hiểu tầm quan trọng của việc giám sát sức khỏe máy chủ tự động:
-  * Thiết lập Target Groups
-  * Cấu hình Health Checks
-
-* Đã tự tay cấu hình môi trường nhân bản máy chủ ảo hóa tự động, bao gồm:
-  * Tạo Launch Templates đóng gói sẵn cấu hình web server
-  * Xây dựng Scaling Policies để co giãn theo nhu cầu
-  * ...
-
-* Triển khai hoàn thiện kiến trúc sẵn sàng cao (High Availability):
-  * Chạy Load Balancer phân bổ tải qua nhiều Availability Zones
-  * Giả lập sự cố máy chủ và xác nhận khả năng Auto Scaling tự động thay thế máy hỏng
-  * ...
-
-* Chứng minh được tính linh hoạt và khả năng chịu lỗi (fault-tolerance) của ứng dụng web.
-* ...

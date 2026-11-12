@@ -1,48 +1,31 @@
 ---
-title: "Week 2 Worklog"
-date: 2026-04-27
+title: "2. IAM, team permissions, and AWS Budgets"
+date: 2026-08-29T09:00:00+07:00
 weight: 2
-chapter: false
-pre: " <b> 1.2. </b> "
+draft: false
+description: "IAM, team permissions, and AWS Budgets"
 ---
 
-
+# 2. IAM, team permissions, and AWS Budgets
 
 ### Week 2 Objectives:
 
-* Understand core networking architectures of AWS (Amazon VPC).
-* Master the concepts of network traffic security and routing.
+- Understand IAM Users, Roles, Policies, and least privilege.
+- Separate team member permissions from Lambda execution permissions.
+- Learn to configure cost alerts for the AWS learning account.
 
 ### Tasks to be carried out this week:
-| Day | Task | Start Date | Completion Date | Reference Material |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 7   | - Learn basic AWS networking architecture <br>&emsp; + VPC <br>&emsp; + Subnets (Public/Private) <br>&emsp; + Route Tables <br> | 15/08/2026   | 15/08/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| sunday   | - Learn about network gateways <br>&emsp; + Internet Gateway (IGW) <br>&emsp; + NAT Gateway <br> - Design a 2-tier network diagram | 16/08/2026   | 16/08/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 2   | - Understand CIDR block routing <br> - Compare Security Groups vs Network ACLs <br>&emsp; + Stateful <br>&emsp; + Stateless <br> | 17/08/2026   | 17/08/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 3   | - **Practice:** <br>&emsp; + Create custom VPC <br>&emsp; + Configure 1 Public & 1 Private Subnet <br>&emsp; + Attach Internet Gateway | 18/08/2026   | 18/08/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - **Practice:** <br>&emsp; + Configure Route Table <br>&emsp; + Deploy NAT Gateway <br>&emsp; + Check ping/SSH connectivity | 19/08/2026   | 19/08/2026      | <https://cloudjourney.awsstudygroup.com/> |
 
+| Day | Task | Start Date | Completion Date | Reference Material |
+| :--- | :--- | :--- | :--- | :--- |
+| Saturday (on-site) | Study how several team members can access one AWS account through individual IAM identities. | 29/08/2026 | 29/08/2026 | [AWS IAM](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html) |
+| Sunday (independent study) | Map the permissions needed for VPC/EC2, Serverless, and CloudWatch tasks. | 30/08/2026 | 30/08/2026 | [IAM security best practices](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html) |
+| Monday (independent study) | Review a USD 20 monthly budget with 25%, 50%, and 100% notifications; distinguish alerts from a spending cap. | 31/08/2026 | 31/08/2026 | [AWS Budgets](https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-managing-costs.html) |
+| Tuesday (independent study) | Review cost drivers for EC2/EBS, public IPv4, CloudWatch, Lambda, and DynamoDB. | 01/09/2026 | 01/09/2026 | [AWS Budgets](https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-managing-costs.html) |
 
 ### Week 2 Achievements:
 
-* Grasped the AWS networking architecture and mastered core components:
-  * VPC (Virtual Private Cloud)
-  * Subnets (Public vs Private)
-  * Route Tables
-  * ...
+- Outlined permission separation for the three workstreams and why root credentials should not be shared.
+- Understood the **USD 20/month AWS Budget** and alert thresholds; these are not actual incurred charges.
+- Learned to inspect Lambda execution roles when DynamoDB access fails.
 
-* Successfully designed an isolated and secure 2-tier network diagram.
-
-* Clearly differentiated between network security layers:
-  * Security Groups (Instance-level firewall)
-  * Network ACLs (Subnet-level firewall)
-  * ...
-
-* Successfully deployed and configured a custom VPC from scratch, including:
-  * Custom CIDR allocations
-  * Internet Gateways
-  * NAT Gateways
-  * ...
-
-* Verified routing capabilities and network isolation using practical ping and SSH commands.
-* ...

@@ -1,75 +1,67 @@
 ---
-title : "Blog 2: Automated Medical Record Digitization with AI"
-date : 2026-06-19
-weight : 2
-chapter : false
-pre : " <b> 5.2. </b> "
+title: "3.2. Monitoring EC2 and Recording Alerts on AWS"
+date: 2026-11-12T00:00:00+07:00
+weight: 2
+chapter: false
+draft: false
 ---
 
-### Automating Patient Record Digitization with AI — AWS Just Announced a Pipeline That Does This in 20 Minutes
+## 1. Why our monitoring project needs alert history
 
-Paper medical records are killing patient care quality — and here is how AI solves it
+A device inventory alone does not tell an administrator whether a server is healthy. In our NetMon internship project, the team explored **Amazon CloudWatch, SNS, EventBridge, Lambda and DynamoDB** to collect metrics, send notifications and keep a record of alarm events.
 
-A patient is admitted for an emergency. The doctor needs to know the medical history, medications currently being taken, and the most recent test results. 
+Our hands-on infrastructure includes the Ubuntu 24.04 EC2 instance **`netmon-ec2-server`**, together with additional simulated network-device records. My responsibility was primarily the Serverless backend; I collaborated with the monitoring and UI workstreams to understand how alert data reaches the application.
 
-But all that information is sitting in a physical paper folder at an old hospital — or worse, trapped inside a scanned PDF file that no software can read automatically. This is not just a single hospital's problem. This is the reality of the global healthcare industry. And AWS has just announced a solution that hits right at that pain point.
+## 2. Two connected workflows
 
-#### What is the real issue?
-Paper medical records do not just take up physical storage space. They create information gaps that directly impact treatment decisions. Manual data entry is expensive, slow, and highly prone to errors. 
+**Notification path:**
 
-Scanning to PDF still does not help — because computers cannot "read and understand" the content inside a snapshot of a piece of paper. The core technical problem is: how do you transform a scanned piece of paper into structured data that any hospital system can read and exchange?
+`EC2 → CloudWatch metrics → CloudWatch Alarm → Amazon SNS → Email`
 
-#### The Solution: An Automated Pipeline from PDF to Internationally Standardized Medical Data
-AWS just announced an architecture combining Amazon Bedrock Data Automation and AWS HealthLake to automate this entire process — no need to build custom AI models, and no manual parser programming required for each distinct form. Let's break down each piece for easy comprehension.
+**Alert-history path:**
 
-##### What is FHIR — and why does it matter?
-FHIR is the international standard for healthcare systems to exchange data with one another. Simply put: it is like a "common language" that every hospital software in the world understands. When patient data is stored in the FHIR standard, any system — whether from Hospital A or Clinic B — can read and use it seamlessly.
+`Alarm state change → EventBridge → Lambda netmon-save-alert → DynamoDB NetworkAlerts`
 
-#### How does the entire pipeline work?
-<img width="865" height="359" alt="Blog 2-1" src="/images/3-Blogs/blog2-1.png" />
+SNS helps notify an administrator promptly. The DynamoDB history makes it possible to display when alerts happened and whether they have been handled.
 
-The workflow runs fully autonomously through sequential event triggers:
+## 3. Metrics and alarm states
 
-<div style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 10px; margin: 20px 0; font-weight: bold; font-size: 0.95em;">
-  <div style="background-color: #f0f4f8; color: #1a365d; padding: 8px 12px; border-radius: 6px; border: 1px solid #cbd5e1;">Step 1: Upload PDF to S3</div>
-  <div style="color: #64748b; font-size: 1.2em;">&rarr;</div>
-  <div style="background-color: #f0f4f8; color: #1a365d; padding: 8px 12px; border-radius: 6px; border: 1px solid #cbd5e1;">Step 2: Intelligent AI Extraction</div>
-  <div style="color: #64748b; font-size: 1.2em;">&rarr;</div>
-  <div style="background-color: #f0f4f8; color: #1a365d; padding: 8px 12px; border-radius: 6px; border: 1px solid #cbd5e1;">Step 3: Lambda FHIR Mapping</div>
-  <div style="color: #64748b; font-size: 1.2em;">&rarr;</div>
-  <div style="background-color: #f0f4f8; color: #1a365d; padding: 8px 12px; border-radius: 6px; border: 1px solid #cbd5e1;">Step 4: AWS HealthLake Ingestion</div>
-</div>
+The main monitoring topics were:
 
-* **Step 1 — Upload PDF:** You upload the scanned patient record to Amazon S3 (AWS's cloud storage service). That is it. From here, the system runs automatically.
-* **Step 2 — AI Reading and Extraction:** Amazon Bedrock Data Automation receives the file, automatically reads the content, and extracts over 50 clinical data attributes — patient name, date of birth, diagnosis with ICD-10 codes, active medications, vital signs, and lab results. Every extracted piece of info comes with a confidence score bounded between 0 and 1 — the system itself knows how confident it is.
-* **Step 3 — Conversion to FHIR Standard:** AWS Lambda (an automated processing service) receives the extracted data and maps it into the globally compliant FHIR R4 format.
-* **Step 4 — Storing into Healthcare Data Stores:** AWS HealthLake ingests it, validates structural integrity, indexes properties, and saves it. You can then immediately query the data via standard APIs.
+- **CPU utilization** of the EC2 instance.
+- **Memory utilization** of the operating system.
+- **Disk utilization** to spot storage pressure.
+- **Alarm states** such as `OK`, `ALARM` and `INSUFFICIENT_DATA`.
 
-#### What does the actual system output look like?
-Here is an example of an actual output from the system after processing a sample medical record:
+A technical distinction matters: EC2 publishes `CPUUtilization` as a standard CloudWatch metric, whereas **OS memory and filesystem metrics usually require the CloudWatch Agent or custom metrics**. They should not be described as built-in EC2 metrics without that setup.
 
-<img width="865" height="550" alt="Blog 2-2" src="/images/3-Blogs/blog2-2.png" />
+## 4. Alarm configuration and testing
 
-*“All the above information was extracted automatically from a scanned PDF file — within 2 to 3 minutes.”*
+For every CloudWatch Alarm, we need to verify the metric and dimensions, threshold, evaluation periods and intended SNS action. A test threshold used during the internship should be documented as an **educational setting**, not recommended blindly for production systems.
 
-#### Cost metrics to run this infrastructure
-AWS published a granular cost estimation modeled against a processing volume of roughly 100 documents per month:
+We also learned to distinguish CloudWatch operational alarms from **AWS Budgets cost notifications**. Both send alerts, but they monitor different conditions.
 
-<img width="865" height="445" alt="image" src="https://github.com/user-attachments/assets/2f73776b-ad02-49f0-854f-837a4d75d8f4" />
+## 5. Using DynamoDB for alert history
 
+Our alert history is stored in **`NetworkAlerts`**. A useful record can include the source Alarm name, the related device or instance, timestamp, severity and handling status. In the UI, I wanted two clearly visible states: **New** and **Resolved**, making the history useful after the original email notification.
 
-“At a larger volume — 10,000 records/month — infrastructure operating costs reach around \$2,000–\$3,000. Whether this is expensive or cost-effective depends on benchmarking it directly against human manual data-entry labor costs.”
+A more robust implementation should consider duplicate EventBridge events, consistent timestamps, event identifiers and safe status updates when two administrators act on the same alert.
 
-#### Critical safeguards to keep in mind
-AWS explicitly clarifies right in the article: this represents a prototype solution using synthesized mockup records (not live, actual patient data). 
+## 6. Lessons learned
 
-To transition this framework to handle real production workloads with actual patient records, you must implement comprehensive security controls to comply with rigid HIPAA regulations — enforcing robust at-rest/in-transit data encryption, strict IAM access configurations, and formal Business Associate Addendums (BAA) with AWS. This is not a weakness of the solution — it is an admirable level of transparency. Medical records belong to the most sensitive data classification, and there should be absolute zero shortcuts taken in security.
+The key lesson is that monitoring is a workflow, not simply a CPU chart:
 
-#### Why is this article worth noting?
-The most compelling aspect does not sit at the core technology level — but in how AWS packaged it. The complete architectural blueprint, sample code, and deployment instructions have been published openly on GitHub. 
+`Metric → detection threshold → notification → stored history → administrator action`
 
-Any healthcare institution or medical tech team can clone the repository, run it within a sandbox for 20 minutes, and evaluate its accuracy against localized forms. This is a much more practical approach than grand marketing demos that no one can execute in reality.
+Combining real EC2 monitoring with simulated device records makes it easier to demonstrate the system while identifying where actual AWS telemetry ends and test data begins.
 
-> Compiled from the AWS Architecture Blog, published June 2026.
-> * **Production Reference Codebase:** [github.com/aws-samples/sample-bedrock-data-automation-fhir-pipeline](https://github.com/aws-samples/sample-bedrock-data-automation-fhir-pipeline)
-> * **Original Source Article:** [https://aws.amazon.com/blogs/architecture/automate-medical-record-digitization-with-amazon-bedrock-data-automation-and-aws-healthlake/](https://aws.amazon.com/blogs/architecture/automate-medical-record-digitization-with-amazon-bedrock-data-automation-and-aws-healthlake/)
+**Potential improvements:** filtering by date and status, consistent event schemas, duplicate-event handling and cost tracking through AWS Billing and Budgets.
+
+## 7. References
+
+- [Amazon CloudWatch](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html)
+- [CloudWatch Agent metrics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/metrics-collected-by-CloudWatch-agent.html)
+- [Amazon EventBridge](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-what-is.html)
+- [Amazon SNS](https://docs.aws.amazon.com/sns/latest/dg/welcome.html)
+
+*Publication status: personal draft, not yet published on AWS Study Group.*

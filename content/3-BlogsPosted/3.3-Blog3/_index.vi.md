@@ -1,33 +1,72 @@
 ---
-title: "Blog 3: Cách AWS tối ưu hóa AI cho robot tự hành ngoài thực tế"
-date: 2026-07-08
+title: "3.3. Đăng nhập Amazon Cognito và bảo vệ API bằng JWT"
+date: 2026-11-12T00:00:00+07:00
 weight: 3
 chapter: false
-pre: " <b> 3.3. </b> "
+draft: false
 ---
 
+## 1. Vì sao NetMon cần đăng nhập?
 
-# CÁCH AWS TỐI ƯU HÓA AI CHO ROBOT TỰ HÀNH (CASE STUDY: AIGEN)
+Trong ứng dụng quản lý thiết bị mạng, các thao tác như thêm hoặc xóa thiết bị không nên cho phép thực hiện tự do. Vì vậy, khi ghép giao diện với API, nhóm tìm hiểu cách sử dụng **Amazon Cognito** để quản lý người dùng và **JWT Authorizer của API Gateway** để kiểm tra yêu cầu gọi API.
 
-Bài blog từ AWS phân tích cách công ty Aigen giải quyết bài toán đưa AI xuống chạy ở môi trường thực tế cho hệ thống robot nông nghiệp tự động diệt cỏ dại chạy bằng năng lượng mặt trời. Hệ thống Edge AI này phải đối mặt với các vấn đề cốt lõi: kết nối Internet ngoài đồng chập chờn nên khó gửi data về server, dữ liệu ảnh khổng lồ gây tốn kém và chậm trễ nếu gán nhãn thủ công, và phần cứng trên robot quá giới hạn để chạy các mô hình AI khổng lồ.
+Đây là bước tiếp theo sau khi phần Lambda và DynamoDB đã có thể xử lý dữ liệu. Em muốn người dùng đăng nhập trước, sau đó mới xem danh sách thiết bị và các cảnh báo của hệ thống.
 
-Các điểm chính cần nắm về cách Aigen tối ưu hóa với hệ sinh thái AWS SageMaker:
+## 2. Vai trò các dịch vụ
 
-* Hệ thống dùng GenAI kết hợp các mô hình nền tảng thị giác (như SAM2, Grounding DINO) để tự động phân vùng và vẽ bounding box (Auto-labeling).
-* Kỹ thuật Active Learning được áp dụng để hệ thống tự động lọc ra những tấm ảnh khó xử lý nhất (ví dụ: góc sáng lạ, cây bị che khuất) và đẩy cho con người kiểm tra lại.
-* Nhờ quy trình tự động hóa này, thời gian xử lý ảnh giảm mạnh từ gần 15 phút xuống vỏn vẹn 41 giây/ảnh, đồng thời cắt giảm chi phí dán nhãn lên tới 22.5 lần.
-* Quá trình "chưng cất" mô hình (Model Distillation & Quantization) để giải bài toán phần cứng yếu được chia thành 4 cấp độ từ lớn đến nhỏ.
-* Các cấp độ bao gồm: Foundation Models siêu lớn tổng quát chạy trên cloud (Lớp 1), Expert & Student Models được chưng cất nhỏ lại cho các tác vụ cụ thể (Lớp 2, 3), và cuối cùng là Edge Models (Lớp 4).
-* Ở Lớp 4, mô hình được ép kiểu (Quantization) về chuẩn INT8 và chuyển sang định dạng TFLite. Khối lượng mô hình lúc này chỉ còn khoảng 2MB và tiêu thụ vỏn vẹn 1.5W điện nhưng vẫn đảm bảo chạy mượt theo thời gian thực trên bo mạch của robot.
-* Robot duy trì một vòng lặp cập nhật liên tục (Closed-loop): tải data thô lên AWS S3 khi có mạng -> Tự động gán nhãn -> Train lại mô hình trên cụm GPU mạnh của Cloud -> Đẩy bản cập nhật siêu nhẹ ngược về lại cánh đồng để robot thích nghi ngay với môi trường mới.
-* Việc đưa AI ra khỏi phòng lab để chạy mượt trên thực tế đòi hỏi sự kết hợp khéo léo giữa năng lực tính toán cực mạnh của Cloud và kỹ thuật nén mô hình tối đa ở thiết bị Edge.
+`Người dùng → Cognito User Pool (đăng nhập) → nhận token → giao diện → API Gateway JWT Authorizer → Lambda → DynamoDB`
 
-### 1. Kiến trúc phân tầng và chưng cất mô hình AI
-![Ảnh 1: Mô hình đi qua 4 cấp độ chưng cất](/images/3-Blogs/blog3-1.jpeg)
-*Chú thích: Mô hình đi qua 4 cấp độ: từ Foundation (siêu lớn, chạy trên Cloud) -> Expert -> Student -> Edge (chỉ còn 2MB, tiêu thụ 1.5W chạy trên bo mạch robot).*
+- **Cognito User Pool:** quản lý tài khoản và quy trình xác thực người dùng.
+- **Cognito App Client:** đại diện cho ứng dụng kết nối tới User Pool.
+- **Cognito managed login/Hosted UI:** giao diện đăng nhập do Cognito cung cấp.
+- **API Gateway JWT Authorizer:** xác minh chữ ký, issuer, audience/client ID, thời hạn token và scope nếu route yêu cầu.
+- **Lambda:** chỉ nhận yêu cầu đã qua lớp xác thực của route được bảo vệ, rồi thực hiện logic nghiệp vụ.
 
-### 2. Vòng lặp khép kín cập nhật dữ liệu (Closed-loop)
-![Ảnh 2: Vòng lặp khép kín của AWS SageMaker](/images/3-Blogs/blog3-2.jpeg)
-*Chú thích: Dữ liệu thô từ robot tải lên S3 -> tự động gán nhãn -> Train lại mô hình trên Cloud -> đẩy bản cập nhật Edge về cánh đồng.*
+Cần lưu ý: **đăng nhập thành công không có nghĩa toàn bộ API đã được phân quyền đúng**. Mỗi route vẫn cần cấu hình authorization phù hợp.
 
-**Tham khảo bài viết gốc trên blog AWS:** [How Aigen transformed agricultural robotics for sustainable farming with Amazon SageMaker AI](https://aws.amazon.com/blogs/architecture/how-aigen-transformed-agricultural-robotics-for-sustainable-farming-with-amazon-sagemaker-ai/)
+## 3. Quy trình tích hợp trên giao diện
+
+Các bước em tìm hiểu và thực hành gồm:
+
+1. Tạo **User Pool** trong Amazon Cognito.
+2. Tạo **App Client** phù hợp với ứng dụng trình duyệt.
+3. Cấu hình domain đăng nhập và địa chỉ callback.
+4. Tạo tài khoản thử nghiệm và kiểm tra quy trình đăng nhập, đổi mật khẩu ban đầu nếu được yêu cầu.
+5. Cấu hình **JWT Authorizer** cho các route cần bảo vệ ở HTTP API Gateway.
+6. Sau khi đăng nhập, gửi token hợp lệ trong header `Authorization: Bearer ...` khi gọi API.
+7. Kiểm tra phản hồi khi thiếu token, token hết hạn hoặc route chưa được phép truy cập.
+
+Ví dụ request minh họa:
+
+```http
+GET /devices HTTP/1.1
+Host: example.execute-api.us-east-1.amazonaws.com
+Authorization: Bearer <valid-access-token>
+```
+
+Không chép token thật, mật khẩu, Client Secret hoặc mã định danh tài khoản riêng vào bài công khai. Với ứng dụng chạy trực tiếp trong trình duyệt, nên dùng App Client phù hợp với **public client** và quy trình đăng nhập an toàn.
+
+## 4. Khó khăn khi kiểm thử
+
+Một số lỗi thường làm người mới học AWS nhầm lẫn là:
+
+- **Sai Callback URL:** đăng nhập xong không quay về đúng trang ứng dụng.
+- **Sai issuer hoặc audience:** API Gateway từ chối token dù trang Cognito vẫn đăng nhập được.
+- **CORS:** trình duyệt chặn request dù backend và quyền xác thực về cơ bản có thể đã đúng.
+- **Token hết hạn:** cần xử lý phiên đăng nhập và đăng xuất hợp lý.
+- **Quyền theo route:** `GET` có thể được phép nhưng `DELETE` cần kiểm soát chặt hơn.
+
+Khi thử hệ thống, em tách việc kiểm tra thành ba mức: **đăng nhập Cognito**, **gọi API có token**, và **thao tác trên giao diện**. Cách này giúp biết lỗi nằm ở đâu thay vì sửa nhiều dịch vụ cùng lúc.
+
+## 5. Những gì em rút ra
+
+Phần Cognito giúp em hiểu thêm về ranh giới giữa **xác thực (authentication)** và **phân quyền (authorization)**. Việc có trang đăng nhập đẹp chưa đủ; API phải kiểm tra token, quy tắc truy cập và cả dữ liệu đầu vào ở phía backend.
+
+**Hướng hoàn thiện:** thống nhất cơ chế chuyển trang sau đăng nhập, kiểm thử phiên đăng nhập hết hạn, bảo vệ các thao tác CRUD nhạy cảm và chuẩn hóa thông báo khi người dùng không có quyền.
+
+## 6. Tài liệu tham khảo
+
+- [Amazon Cognito User Pools](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools.html)
+- [JWT Authorizer cho API Gateway HTTP API](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-jwt-authorizer.html)
+
+*Trạng thái bài viết: Bản thảo cá nhân, chưa xuất bản lên AWS Study Group.*

@@ -1,37 +1,24 @@
 ---
-title: "Worklog"
-date: 2026-04-20
+title: "1. Worklog"
 weight: 1
-chapter: false
-pre: " <b> 1. </b> "
+draft: false
 ---
 
+# Worklog — 12 weeks
 
+AWS NetMon internship at 36 Cat Linh, Hanoi (Aug 8–Nov 14, 2026). Weekday independent-study dates are suggested allocations and should be verified against actual records.
 
+- [1. Getting started with FCAJ, AWS, and the NetMon topic]({{< relref "1.1-Week1" >}})
+- [2. IAM, team permissions, and AWS Budgets]({{< relref "1.2-Week2" >}})
+- [3. VPC network design and infrastructure separation]({{< relref "1.3-Week3" >}})
+- [4. Ubuntu EC2, EBS, and basic monitoring]({{< relref "1.4-Week4" >}})
+- [5. DynamoDB design for devices and alert history]({{< relref "1.5-Week5" >}})
+- [6. Building netmon-api Lambda and querying DynamoDB]({{< relref "1.6-Week6" >}})
+- [7. API Gateway, HTTP routes, and CORS]({{< relref "1.7-Week7" >}})
+- [8. CRUD operations and a consistent device API]({{< relref "1.8-Week8" >}})
+- [9. Simulated device metrics and FCAJ Community Day]({{< relref "1.9-Week9" >}})
+- [10. CloudWatch, SNS, EventBridge, and alert history]({{< relref "1.10-Week10" >}})
+- [11. Cognito sign-in, JWT, and test-frontend integration]({{< relref "1.11-Week11" >}})
+- [12. NetMon project review, report, and Hugo worklog]({{< relref "1.12-Week12" >}})
 
-
-Typically, and as a standard, a worklog is carried out over about 3 months (throughout the internship period) with weekly contents as follows:
-
-**Week 1:** [Getting familiar with AWS Cloud, Console, and basic EC2 instances](1.1-week1/)
-
-**Week 2:** [Designing and configuring custom Virtual Private Cloud (VPC) environments](1.2-week2/)
-
-**Week 3:** [Deploying global Static Website Hosting with Amazon S3 and CloudFront](1.3-week3/)
-
-**Week 4:** [Exploring AWS Database options and setting up secure RDS MySQL instances](1.4-week4/)
-
-**Week 5:** [Building fault-tolerant environments with Load Balancers and Auto Scaling](1.5-week5/)
-
-**Week 6:** [Deep dive into Amazon S3 storage classes and data lifecycle rules](1.6-week6/)
-
-**Week 7:** [Implementing secure CDN endpoints using CloudFront and S3 Origin Access Control](1.7-week7/)
-
-**Week 8:** [Studying database engines and high availability Multi-AZ patterns](1.8-week8/)
-
-**Week 9:** [Deploying multi-tier networks connecting EC2 instances to isolated RDS layers](1.9-week9/)
-
-**Week 10:** [Analyzing scalability paradigms, health checks, and capacity planning metrics](1.10-week10/)
-
-**Week 11:** [Testing self-healing cloud clusters using cross-zone Auto Scaling Groups](1.11-week11/)
-
-**Week 12:** [Developing event-driven serverless architectures using AWS Lambda and CloudWatch](1.12-week12/)
+*November 14, 2026 remains planned; no outcome is claimed for that date.*

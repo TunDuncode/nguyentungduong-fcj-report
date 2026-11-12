@@ -1,20 +1,28 @@
 ---
-title: "Blogs Posted"
-date: 2024-01-01
+title: "3. Technical Blogs"
 weight: 3
-chapter: false
-pre: " <b> 3. </b> "
+chapter: true
+draft: false
 ---
 
+## Technical writing from my AWS NetMon internship project
 
+During my internship (August 8 – November 14, 2026), I worked with my team on **NetMon**, an experimental network infrastructure management and monitoring solution for small and medium-sized businesses, using AWS Serverless services in the **us-east-1** Region.
 
-This section lists and introduces the blogs I have posted to [AWS Study Group](https://www.facebook.com/groups/awsstudygroupfcj).
+The three articles below document the technologies I learned, the configuration and testing process, and lessons for future improvements. **These are personal technical drafts prepared for publication, not articles already published on AWS Study Group.**
 
-### [Blog 1 - How Synthesia Optimizes Generative AI Video Inference on Amazon EC2 G7e Instances](3.1-Blog1/)
-This blog explains how Synthesia improved the efficiency of generative video inference by redesigning the pipeline to keep the GPU busy continuously, reduce idle time, and lower operational costs.
+| Article | Main topic | Link |
+|---|---|---|
+| **3.1** | Device CRUD using Lambda, HTTP API Gateway and DynamoDB | [Read Blog 1](./3.1-blog1/) |
+| **3.2** | Monitoring and alerts with CloudWatch, SNS and EventBridge | [Read Blog 2](./3.2-blog2/) |
+| **3.3** | Cognito sign-in, JWT authorization and dashboard integration | [Read Blog 3](./3.3-blog3/) |
 
-### [Blog 2 - Automated Medical Record Digitization with AI](3.2-Blog2/)
-This blog describes how AWS services such as Amazon Bedrock Data Automation and AWS HealthLake can transform scanned medical records into structured, standards-based data, helping hospitals reduce manual processing and improve data usability.
+### Project architecture at a glance
 
-### [Blog 3 - How AWS Optimizes AI for Autonomous Robots in the Field](3.3-Blog3/)
-This blog highlights how Aigen uses AWS SageMaker AI, auto-labeling, active learning, and model distillation to deploy lightweight and adaptive AI models on agricultural robots operating in real-world environments.
+`Web UI → Amazon Cognito → API Gateway → AWS Lambda → DynamoDB`
+
+`EC2 → Amazon CloudWatch Alarm → Amazon SNS (email)`
+
+`CloudWatch alarm state change → EventBridge → Lambda → DynamoDB (alert history)`
+
+> **Publication status:** Drafts hosted on the internship report site. Once an external blog is published, add its verified public URL here.

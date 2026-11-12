@@ -1,40 +1,31 @@
 ---
-title: "Week 8 Worklog"
-date: 2026-06-08
+title: "8. CRUD operations and a consistent device API"
+date: 2026-10-10T09:00:00+07:00
 weight: 8
-chapter: false
-pre: " <b> 1.8. </b> "
+draft: false
+description: "CRUD operations and a consistent device API"
 ---
 
-
+# 8. CRUD operations and a consistent device API
 
 ### Week 8 Objectives:
 
-* Conduct a comprehensive study on AWS cloud database service offerings.
-* Analyze data schemas and design network partition strategies for storage layers.
+- Complete the design for adding, editing, deleting, listing, and viewing devices.
+- Align HTTP methods and endpoints with the frontend.
+- Separate configured routes from fully tested functionality.
 
 ### Tasks to be carried out this week:
-| Day | Task | Start Date | Completion Date | Reference Material |
-| --- | --- | --- | --- | --- |
-| 7   | - Study Amazon RDS architecture (Relational Databases) <br>&emsp; + Supported Database Engines (MySQL, PostgreSQL) <br>&emsp; + Automated platform management features | 26/09/2026 | 26/09/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| sunday   | - Research High Availability (HA) models for data storage <br>&emsp; + Multi-AZ Deployments (Synchronous data replication) <br>&emsp; + Read Replicas (Horizontal scaling for read workloads) | 27/09/2026 | 27/09/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 2   | - Learn non-relational NoSQL database options <br>&emsp; + Amazon DynamoDB core elements <br>&emsp; + Key concepts of Partition Keys and Sort Keys <br>&emsp; + Provisioned vs On-demand capacity modes | 28/09/2026 | 28/09/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 3   | - Analyze business use-cases to evaluate when to choose RDS vs DynamoDB <br> - Sketch a sample logical relational database schema template | 29/09/2026 | 29/09/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Study network isolation principles to safely secure cloud databases <br> - Understand the basic functionalities of DB Subnet Groups | 30/09/2026 | 30/09/2026      | <https://cloudjourney.awsstudygroup.com/> |
 
+| Day | Task | Start Date | Completion Date | Reference Material |
+| :--- | :--- | :--- | :--- | :--- |
+| Saturday (on-site) | Configure GET /devices, POST /devices, and GET /devices/{id}. | 10/10/2026 | 10/10/2026 | [Amazon API Gateway](https://docs.aws.amazon.com/apigateway/latest/developerguide/welcome.html) |
+| Sunday (independent study) | Add PUT /devices/{id} and DELETE /devices/{id} in Lambda and API Gateway. | 11/10/2026 | 11/10/2026 | [AWS Lambda](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html) |
+| Monday (independent study) | Handle httpMethod or requestContext.http.method, pathParameters, and JSON body. | 12/10/2026 | 12/10/2026 | [AWS Lambda](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html) |
+| Tuesday (independent study) | Inspect sample records after actions and add CORS and error codes for invalid inputs. | 13/10/2026 | 13/10/2026 | [Amazon DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html) |
 
 ### Week 8 Achievements:
 
-* Differentiated structural variations between relational and non-relational cloud data storage engines:
-  * Amazon RDS addresses intricate transactional queries needing ACID compliance parameters.
-  * Amazon DynamoDB satisfies high-scale applications requiring predictable sub-millisecond latencies.
-  * ...
+- Configured the device-management routes and JSON conventions for the frontend.
+- Learned to verify writes in **DynamoDB Explore table items**, not only via browser messages.
+- The routes still require real-token tests before claiming every CRUD flow works end to end.
 
-* Mastered architectural designs optimized to maintain continuous data operations:
-  * Multi-AZ failover frameworks protecting systems against hardware infrastructure outages.
-  * Read Replica separation models increasing performance for read-heavy system structures.
-  * ...
-
-* Grasped backend administrative features surrounding managed automated backup procedures (Automated Snapshots).
-* Created a clean logical data schema defining entity relationships clearly before physical deployment workflows.
-* ...

@@ -1,42 +1,31 @@
 ---
-title: "Week 10 Worklog"
-date: 2026-06-22
+title: "10. CloudWatch, SNS, EventBridge, and alert history"
+date: 2026-10-31T09:00:00+07:00
 weight: 10
-chapter: false
-pre: " <b> 1.10. </b> "
+draft: false
+description: "CloudWatch, SNS, EventBridge, and alert history"
 ---
 
-
+# 10. CloudWatch, SNS, EventBridge, and alert history
 
 ### Week 10 Objectives:
 
-* Internalize architectural concepts regarding self-healing, fault-tolerant, and elastic systems.
-* Study the cooperative relationships between Load Balancers and Auto Scaling groups.
+- Understand CloudWatch Alarm → SNS email and EventBridge → Lambda → DynamoDB.
+- Collaborate with the monitoring workstream led by Mạnh Quân.
+- Check stored alarm records and distinguish test events.
 
 ### Tasks to be carried out this week:
-| Day | Task | Start Date | Completion Date | Reference Material |
-| --- | --- | --- | --- | --- |
-| 7   | - Study Elastic Load Balancing (ELB) models <br>&emsp; + Application Load Balancer (ALB) handling Layer 7 traffic <br>&emsp; + Network Load Balancer (NLB) handling Layer 4 traffic | 10/10/2026 | 10/10/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| sunday   | - Deep dive into routing configuration units <br>&emsp; + Setting up Target Groups <br>&emsp; + Implementing continuous Health Check rule behaviors | 11/10/2026 | 11/10/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 2   | - Explore automated compute capacity provisioning frameworks <br>&emsp; + Role of Amazon EC2 Auto Scaling Groups (ASG) within architectures | 12/10/2026 | 12/10/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 3   | - Study infrastructure standardization blueprints <br>&emsp; + Creating immutable Launch Templates <br> - Analyze metric triggers that drive dynamic Scaling Policies | 13/10/2026 | 13/10/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Review enterprise whitepapers detailing how production applications survive sudden traffic bottlenecks using automated scaling tools | 14/10/2026 | 14/10/2026      | <https://cloudjourney.awsstudygroup.com/> |
 
+| Day | Task | Start Date | Completion Date | Reference Material |
+| :--- | :--- | :--- | :--- | :--- |
+| Saturday (on-site) | Review the three CPU, RAM, and disk alarms with 80%, 80%, and 85% test thresholds. | 31/10/2026 | 31/10/2026 | [CloudWatch alarms](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Alarms.html) |
+| Sunday (independent study) | Inspect the netmon-alerts SNS topic, confirmed email subscription, and controlled test alerts. | 01/11/2026 | 01/11/2026 | [Amazon SNS](https://docs.aws.amazon.com/sns/latest/dg/welcome.html) |
+| Monday (independent study) | Review netmon-alarm-state-rule receiving CloudWatch Alarm State Change events. | 02/11/2026 | 02/11/2026 | [CloudWatch events and EventBridge](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch-and-eventbridge.html) |
+| Tuesday (independent study) | Check the netmon-save-alert Lambda and PutItem permission for recording alarms in NetworkAlerts. | 03/11/2026 | 03/11/2026 | [Amazon DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html) |
 
 ### Week 10 Achievements:
 
-* Mastered core industry design definitions underlying advanced cloud systems:
-  * Scalability (Modifying resource footprints horizontally or vertically).
-  * High Availability (Ensuring services remain continuously active without single failure points).
-  * Elasticity (Automatically shrinking or expanding allocations according to active load parameters).
-  * ...
+- Documented the team’s alert workflow across **CloudWatch, SNS, EventBridge, and DynamoDB**.
+- The team confirmed SNS email delivery and resolved a `dynamodb:PutItem` access issue for alert recording.
+- Recognized that CloudWatch thresholds alone do not prove simulated-device alerting is fully integrated.
 
-* Acquired deep comprehension regarding intelligent public web traffic distribution methods:
-  * Contrasted path-aware Layer 7 ALB systems with high-throughput Layer 4 NLB protocols.
-  * Evaluated server isolation sequences driven by automated recurring Health Check features.
-  * ...
-
-* Understood batch duplication workflows used to preserve infrastructure uniformity:
-  * Handled Launch Templates to provide consistent runtime environments for newly generated instances.
-  * Analyzed hardware utilization thresholds (CPU/RAM metrics) required to trigger proper capacity expansions.
-* ...
