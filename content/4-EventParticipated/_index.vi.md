@@ -1,43 +1,20 @@
 ---
-title: "Các events đã tham gia"
-date: 2024-01-01
+title: "4. Các sự kiện đã tham gia"
+date: 2026-11-12T00:00:00+07:00
 weight: 4
-chapter: false
-pre: " <b> 4. </b> "
+chapter: true
+pre: "<b>4. </b>"
 ---
 
+# CÁC SỰ KIỆN ĐÃ THAM GIA
 
+Trong thời gian thực tập tại khu vực 36 Cát Linh, Hà Nội (08/08–14/11/2026), tôi đã tham dự hai buổi gặp gỡ và chia sẻ kỹ thuật của cộng đồng **First Cloud AI Journey (FCAJ)**. Đây là dịp để tôi nghe những kinh nghiệm triển khai thực tế và liên hệ lại với đồ án **Xây dựng hệ thống quản lý và giám sát hạ tầng mạng trên AWS tích hợp Serverless**.
 
+| Ngày | Hoạt động | Nội dung nổi bật |
+|---|---|---|
+| **17/10/2026** | **FCAJ Weekly Meetup – Hà Nội** | Bảo mật AI, AWS Landing Zone, Apache Iceberg, bảo mật mạng AWS |
+| **24/10/2026** | **VOI & CNVN × AWS FCAJ – Cloud & AI Infrastructure** | Object Storage, GPU/LLM Serving, RAG và Agentic AI |
 
-> Mỗi sự kiện nên được trình bày theo định dạng Event 1, Event 2, Event 3…, kèm theo các thông tin:
-> * Tên sự kiện
-> * Thời gian tổ chức
-> * Địa điểm (nếu có)
-> * Vai trò của bạn trong sự kiện (người tham dự, hỗ trợ tổ chức, diễn giả, v.v.)
-> * Mô tả ngắn gọn nội dung và hoạt động chính trong sự kiện
-> * Kết quả hoặc giá trị đạt được (bài học, kỹ năng mới, đóng góp cho nhóm/dự án)
-> * Việc liệt kê này giúp thể hiện rõ sự tham gia thực tế của bạn, cũng như các kỹ năng mềm và kinh nghiệm bạn đã tích lũy qua từng sự kiện.
+Nội dung dưới đây tóm tắt chương trình dựa trên thông tin từ ban tổ chức, đồng thời ghi lại các kiến thức có thể áp dụng cho dự án. Ảnh minh chứng cá nhân sẽ được bổ sung khi chọn được ảnh chụp đúng ngày.
 
-
-Trong quá trình thực tập, em đã tham gia 2 events, với mỗi event là một trải nghiệm đáng nhớ với những kiến thức mới, hay và bổ ích, cùng với đó là nhứng món quà và những khoảnh khắc rất tuyệt vời.
-
-### [Event 1](4.1-Event1/)
-&emsp;**Tên sự kiện:** GenAI-powered App-DB Modernization workshop
-
-&emsp;**Thời gian:** 09:00 ngày 13/08/2025
-
-&emsp;**Địa điểm:** Tầng 26, tòa nhà Bitexco, số 02 đường Hải Triều, phường Sài Gòn, thành phố Hồ Chí Minh
-
-&emsp;**Vai trò trong sự kiện:** Người tham dự 
-
-
-
-### [Event 2](4.2-Event2/)
-&emsp;**Tên sự kiện:** GenAI-powered App-DB Modernization workshop
-
-&emsp;**Thời gian:** 09:00 ngày 13/08/2025
-
-&emsp;**Địa điểm:** Tầng 26, tòa nhà Bitexco, số 02 đường Hải Triều, phường Sài Gòn, thành phố Hồ Chí Minh
-
-&emsp;**Vai trò trong sự kiện:** Người tham dự 
-
+**Nguồn tham khảo:** [Tổng kết FCAJ 17/10 và 24/10](https://vn.linkedin.com/in/phongpham95) · [Chương trình chính thức 24/10](https://ocgroups.dev/cncf/group/d2e22fa/event/5z4fnze)

@@ -1,123 +1,75 @@
 ---
-title: "Event 2"
-date: 2024-01-01
-weight: 1
+title: "4.2. Cloud & AI Infrastructure Meetup – 24/10/2026"
+date: 2026-10-24T00:00:00+07:00
+weight: 2
 chapter: false
-pre: " <b> 4.2. </b> "
 ---
 
+# 4.2. CLOUD & AI INFRASTRUCTURE MEETUP
 
+## 1. Thông tin chương trình
 
-# Bài thu hoạch “GenAI-powered App-DB Modernization workshop”
+- **Tên chính thức:** VOI & CNVN × AWS FCAJ (First Cloud AI Journey) Meetup: Cloud & AI Infrastructure
+- **Ngày:** Thứ Bảy, 24/10/2026
+- **Giờ theo thông báo ban tổ chức:** 9:00-12:00 
+- **Địa điểm:** Tầng 7, Grand Terra, 36 Cát Linh, Hà Nội (văn phòng AWS Hà Nội)
+- **Đồng tổ chức:** VietOpenInfra, Cloud Native Vietnam và AWS First Cloud AI Journey
 
-### Mục Đích Của Sự Kiện
+## 2. Giới thiệu
 
-- Chia sẻ best practices trong thiết kế ứng dụng hiện đại
-- Giới thiệu phương pháp DDD và event-driven architecture
-- Hướng dẫn lựa chọn compute services phù hợp
-- Giới thiệu công cụ AI hỗ trợ development lifecycle
+Ngày 24/10/2026, tôi đã tham dự buổi Meetup với chủ đề **Cloud & AI Infrastructure** tại địa điểm thực tập ở 36 Cát Linh. Sự kiện mang tính chia sẻ kỹ thuật và thảo luận kinh nghiệm triển khai thực tế, tập trung vào ba nhóm vấn đề: lưu trữ dữ liệu quy mô lớn, tối ưu tài nguyên GPU phục vụ mô hình AI và xây dựng ứng dụng AI có thể khai thác dữ liệu riêng.
 
-### Danh Sách Diễn Giả
+## 3. Nội dung chính
 
-- **Jignesh Shah** - Director, Open Source Databases
-- **Erica Liu** - Sr. GTM Specialist, AppMod
-- **Fabrianne Effendi** - Assc. Specialist SA, Serverless Amazon Web Services
+### 3.1. Beyond S3: Kiến trúc Object Storage và cuộc chơi dữ liệu AI
 
-### Nội Dung Nổi Bật
+**Diễn giả:** Hà Mạnh Đông (Dong Ha) – Tech Lead, OMZ JSC.
 
-#### Đưa ra các ảnh hưởng tiêu cực của kiến trúc ứng dụng cũ
+Chủ đề phân tích vai trò của Object Storage đối với dataset, video và dữ liệu huấn luyện AI. Diễn giả so sánh các hướng thiết kế Ceph, MinIO và SeaweedFS; chỉ ra các yếu tố cần cân nhắc khi mở rộng hệ thống, như số lượng object, metadata, độ trễ thao tác PUT/GET và chi phí vận hành. Nội dung cũng đề cập hướng phát triển từ lưu trữ đối tượng sang dịch vụ hỗ trợ phân tích dữ liệu.
 
-- Thời gian release sản phẩm lâu → Mất doanh thu/bỏ lỡ cơ hội
-- Hoạt động kém hiệu quả → Mất năng suất, tốn kém chi phí
-- Không tuân thủ các quy định về bảo mật → Mất an ninh, uy tín
+### 3.2. Turning GPU-Hours into Tokens, and Tokens into a Service: Agent Router and NVIDIA Dynamo
 
-#### Chuyển đổi sang kiến trúc ứng dụng mới - Microservice Architecture
+**Diễn giả:** Nguyễn Thế Anh và Phùng Quang Minh – Viettel Networks.
 
-Chuyển đổi thành hệ thống modular – từng chức năng là một **dịch vụ độc lập** giao tiếp với nhau qua **sự kiện** với 3 trụ cột cốt lõi:
+Phiên này giới thiệu kiến trúc phục vụ mô hình ngôn ngữ lớn (LLM) trên nhiều cụm GPU, cách định tuyến và kiểm soát request, tối ưu sử dụng bộ nhớ KV-cache và tăng khả năng mở rộng. Các khái niệm Agent Router, NVIDIA Dynamo, vLLM và SGLang được nhắc đến trong chương trình.
 
-- **Queue Management**: Xử lý tác vụ bất đồng bộ
-- **Caching Strategy:** Tối ưu performance
-- **Message Handling:** Giao tiếp linh hoạt giữa services
+### 3.3. Confessions of an AI Addict
 
-#### Domain-Driven Design (DDD)
+**Diễn giả:** Quân Phương – Senior Solutions Architect, AWS Việt Nam.
 
-- **Phương pháp 4 bước**: Xác định domain events → sắp xếp timeline → identify actors → xác định bounded contexts
-- **Case study bookstore**: Minh họa cách áp dụng DDD thực tế
-- **Context mapping**: 7 patterns tích hợp bounded contexts
+Bài nói chia sẻ quá trình ứng dụng AI từ chatbot, RAG (Retrieval-Augmented Generation) đến Agentic AI. Trọng tâm gồm hạn chế của mô hình khi thiếu ngữ cảnh, nhu cầu cập nhật kiến thức, quản lý bộ nhớ dài hạn và khả năng cho AI thực hiện các tác vụ thay vì chỉ trả lời câu hỏi.
 
-#### Event-Driven Architecture
+### 3.4. Panel Discussion & Q&A
 
-- **3 patterns tích hợp**: Publish/Subscribe, Point-to-point, Streaming
-- **Lợi ích**: Loose coupling, scalability, resilience
-- **So sánh sync vs async**: Hiểu rõ trade-offs (sự đánh đổi)
+Chương trình có phần trao đổi, hỏi đáp về hạ tầng Cloud và AI. Theo bài tổng kết của ban tổ chức, các thảo luận đề cập đến kinh nghiệm kỹ thuật và lựa chọn giải pháp trong thực tế.
 
-#### Compute Evolution
+## 4. Liên hệ với đề tài AWS NetMon
 
-- **Shared Responsibility Model**: Từ EC2 → ECS → Fargate → Lambda
-- **Serverless benefits**: No server management, auto-scaling, pay-for-value
-- **Functions vs Containers**: Criteria lựa chọn phù hợp
+Mặc dù đồ án của nhóm chủ yếu sử dụng EC2, CloudWatch, Lambda, API Gateway và DynamoDB chứ không triển khai cụm GPU, buổi Meetup vẫn mang lại những gợi ý có ích:
 
-#### Amazon Q Developer
+- **Chi phí hệ thống:** Cần đánh giá chi phí lưu trữ và thao tác đọc/ghi, không chỉ tính riêng chi phí máy chủ.
+- **Giám sát và vận hành:** Với các hệ thống phức tạp, quan sát số liệu và phát hiện nút thắt là cơ sở để tối ưu hiệu năng.
+- **Bảo mật API:** Những ứng dụng dùng nhiều thành phần và request cần cơ chế phân quyền, kiểm soát và ghi log đầy đủ.
+- **Khả năng mở rộng:** Kiến trúc nên chia thành các thành phần độc lập để dễ kiểm thử và mở rộng trong tương lai.
 
-- **SDLC automation**: Từ planning đến maintenance
-- **Code transformation**: Java upgrade, .NET modernization
-- **AWS Transform agents**: VMware, Mainframe, .NET migration
+Sau sự kiện, tôi nhận thấy việc chọn công nghệ không chỉ dựa vào tính năng mà còn cần cân nhắc hiệu suất, chi phí và khả năng quản trị khi vận hành thật.
 
-### Những Gì Học Được
+## 5. Hình ảnh minh chứng
 
-#### Tư Duy Thiết Kế
+**Ảnh 1:** Toàn cảnh buổi Meetup tại tầng 7, Grand Terra ngày 24/10/2026 *(sử dụng ảnh bạn chụp hoặc ảnh ban tổ chức cho phép dùng)*.
 
-- **Business-first approach**: Luôn bắt đầu từ business domain, không phải technology
-- **Ubiquitous language**: Importance của common vocabulary giữa business và tech teams
-- **Bounded contexts**: Cách identify và manage complexity trong large systems
+![FCAJ Event 24/10/2026](/images/4-Events/PicEvent/event2.jpg)
 
-#### Kiến Trúc Kỹ Thuật
+**Ảnh 2:** Hình chụp một trong các bài trình bày hoặc phần hỏi đáp *(kiểm tra đúng ngày và ghi nguồn)*.
 
-- **Event storming technique**: Phương pháp thực tế để mô hình hóa quy trình kinh doanh
-- Sử dụng **Event-driven communication** thay vì synchronous calls
-- **Integration patterns**: Hiểu khi nào dùng sync, async, pub/sub, streaming
-- **Compute spectrum**: Criteria chọn từ VM → containers → serverless
+<!-- Khi có ảnh xác thực và đã lưu đúng đường dẫn, bỏ comment dòng sau:
+![Cloud and AI Infrastructure Meetup 24/10/2026](/images/4-EventParticipated/fcaj-2026-10-24.jpg)
+-->
 
-#### Chiến Lược Hiện Đại Hóa
+## 6. Tài liệu tham khảo
 
-- **Phased approach**: Không rush, phải có roadmap rõ ràng
-- **7Rs framework**: Nhiều con đường khác nhau tùy thuộc vào đặc điểm của mỗi ứng dụng
-- **ROI measurement**: Cost reduction + business agility
+- [Trang chương trình, nội dung bài nói và diễn giả](https://ocgroups.dev/cncf/group/d2e22fa/event/5z4fnze)
+- [Thông báo chính thức từ VietOpenInfra](https://vn.linkedin.com/posts/voi-vn_vietopeninfra-cloudnativevietnam-awscommunityvietnam-activity-7516060456709550080-yaxC)
+- [Bài tổng kết của ban tổ chức](https://vn.linkedin.com/posts/voi-vn_vietopeninfra-cloudnativevietnam-awsfcaj-activity-7521419750535610369-mDaT)
 
-### Ứng Dụng Vào Công Việc
-
-- **Áp dụng DDD** cho project hiện tại: Event storming sessions với business team
-- **Refactor microservices**: Sử dụng bounded contexts để identify service boundaries
-- **Implement event-driven patterns**: Thay thế một số sync calls bằng async messaging
-- **Serverless adoption**: Pilot AWS Lambda cho một số use cases phù hợp
-- **Try Amazon Q Developer**: Integrate vào development workflow để boost productivity
-
-### Trải nghiệm trong event
-
-Tham gia workshop **“GenAI-powered App-DB Modernization”** là một trải nghiệm rất bổ ích, giúp tôi có cái nhìn toàn diện về cách hiện đại hóa ứng dụng và cơ sở dữ liệu bằng các phương pháp và công cụ hiện đại. Một số trải nghiệm nổi bật:
-
-#### Học hỏi từ các diễn giả có chuyên môn cao
-- Các diễn giả đến từ AWS và các tổ chức công nghệ lớn đã chia sẻ **best practices** trong thiết kế ứng dụng hiện đại.
-- Qua các case study thực tế, tôi hiểu rõ hơn cách áp dụng **Domain-Driven Design (DDD)** và **Event-Driven Architecture** vào các project lớn.
-
-#### Trải nghiệm kỹ thuật thực tế
-- Tham gia các phiên trình bày về **event storming** giúp tôi hình dung cách **mô hình hóa quy trình kinh doanh** thành các domain events.
-- Học cách **phân tách microservices** và xác định **bounded contexts** để quản lý sự phức tạp của hệ thống lớn.
-- Hiểu rõ trade-offs giữa **synchronous và asynchronous communication** cũng như các pattern tích hợp như **pub/sub, point-to-point, streaming**.
-
-#### Ứng dụng công cụ hiện đại
-- Trực tiếp tìm hiểu về **Amazon Q Developer**, công cụ AI hỗ trợ SDLC từ lập kế hoạch đến maintenance.
-- Học cách **tự động hóa code transformation** và pilot serverless với **AWS Lambda**, từ đó nâng cao năng suất phát triển.
-
-#### Kết nối và trao đổi
-- Workshop tạo cơ hội trao đổi trực tiếp với các chuyên gia, đồng nghiệp và team business, giúp **nâng cao ngôn ngữ chung (ubiquitous language)** giữa business và tech.
-- Qua các ví dụ thực tế, tôi nhận ra tầm quan trọng của **business-first approach**, luôn bắt đầu từ nhu cầu kinh doanh thay vì chỉ tập trung vào công nghệ.
-
-#### Bài học rút ra
-- Việc áp dụng DDD và event-driven patterns giúp giảm **coupling**, tăng **scalability** và **resilience** cho hệ thống.
-- Chiến lược hiện đại hóa cần **phased approach** và đo lường **ROI**, không nên vội vàng chuyển đổi toàn bộ hệ thống.
-- Các công cụ AI như Amazon Q Developer có thể **boost productivity** nếu được tích hợp vào workflow phát triển hiện tại.
-
-#### Một số hình ảnh khi tham gia sự kiện
-* Thêm các hình ảnh của các bạn tại đây
-> Tổng thể, sự kiện không chỉ cung cấp kiến thức kỹ thuật mà còn giúp tôi thay đổi cách tư duy về thiết kế ứng dụng, hiện đại hóa hệ thống và phối hợp hiệu quả hơn giữa các team.
+*Lưu ý: Nội dung trên tổng hợp thông tin được công bố. Không mô tả các hoạt động cá nhân chưa có minh chứng, ví dụ phát biểu, nhận giải thưởng hoặc chụp ảnh cùng diễn giả.*

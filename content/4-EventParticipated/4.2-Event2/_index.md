@@ -1,124 +1,66 @@
 ---
-title: "Event 2"
-date: 2024-01-01
-weight: 1
+title: "4.2. Cloud & AI Infrastructure Meetup – October 24, 2026"
+date: 2026-10-24T00:00:00+07:00
+weight: 2
 chapter: false
-pre: " <b> 4.2. </b> "
 ---
 
+# 4.2. CLOUD & AI INFRASTRUCTURE MEETUP
 
+## 1. Event information
 
-# Summary Report: “GenAI-powered App-DB Modernization workshop”
+- **Official title:** VOI & CNVN × AWS FCAJ (First Cloud AI Journey) Meetup: Cloud & AI Infrastructure
+- **Date:** Saturday, October 24, 2026
+- **Time:** 9:00-12:00 AM per the organizer announcement 
+- **Venue:** Level 7, Grand Terra, 36 Cat Linh Street, Hanoi (AWS Hanoi Office)
+- **Co-organizers:** VietOpenInfra, Cloud Native Vietnam and AWS First Cloud AI Journey
 
-### Event Objectives
+## 2. Overview
 
-- Share best practices in modern application design
-- Introduce Domain-Driven Design (DDD) and event-driven architecture
-- Provide guidance on selecting the right compute services
-- Present AI tools to support the development lifecycle
+I attended the Cloud & AI Infrastructure Meetup on October 24, 2026, during my internship in Hanoi. The event brought together cloud engineers and AI practitioners to discuss data storage at scale, GPU infrastructure for LLMs, and practical AI applications.
 
-### Speakers
+## 3. Main sessions
 
-- **Jignesh Shah** – Director, Open Source Databases
-- **Erica Liu** – Sr. GTM Specialist, AppMod
-- **Fabrianne Effendi** – Assc. Specialist SA, Serverless Amazon Web Services
+### 3.1. Beyond S3: Object Storage Architecture and the AI Data Landscape
 
-### Key Highlights
+**Speaker:** Hà Mạnh Đông (Dong Ha), Tech Lead at OMZ JSC.
 
-#### Identifying the drawbacks of legacy application architecture
+The presentation compared Ceph, MinIO and SeaweedFS as object-storage architectures and discussed scalability, metadata management, PUT/GET latency and operational costs for large AI datasets and workloads.
 
-- Long product release cycles → Lost revenue/missed opportunities  
-- Inefficient operations → Reduced productivity, higher costs  
-- Non-compliance with security regulations → Security breaches, loss of reputation  
+### 3.2. Turning GPU-Hours into Tokens, and Tokens into a Service: Agent Router and NVIDIA Dynamo
 
-#### Transitioning to modern application architecture – Microservices
+**Speakers:** Nguyễn Thế Anh and Phùng Quang Minh, Viettel Networks.
 
-Migrating to a modular system — each function is an **independent service** communicating via **events**, built on three core pillars:
+This talk covered multi-cluster LLM serving, request routing and authentication, GPU utilization, KV-cache-aware optimization and scaling. Agent Router, NVIDIA Dynamo, vLLM and SGLang were among the technologies discussed.
 
-- **Queue Management**: Handle asynchronous tasks  
-- **Caching Strategy**: Optimize performance  
-- **Message Handling**: Flexible inter-service communication  
+### 3.3. Confessions of an AI Addict
 
-#### Domain-Driven Design (DDD)
+**Speaker:** Quân Phương, Senior Solutions Architect at AWS Vietnam.
 
-- **Four-step method**: Identify domain events → arrange timeline → identify actors → define bounded contexts  
-- **Bookstore case study**: Demonstrates real-world DDD application  
-- **Context mapping**: 7 patterns for integrating bounded contexts  
+The presentation explored the progression from chatbots and retrieval-augmented generation (RAG) to Agentic AI, including long-term memory, digital twins and methods for enabling AI systems to perform practical tasks.
 
-#### Event-Driven Architecture
+### 3.4. Panel discussion and Q&A
 
-- **3 integration patterns**: Publish/Subscribe, Point-to-point, Streaming  
-- **Benefits**: Loose coupling, scalability, resilience  
-- **Sync vs async comparison**: Understanding the trade-offs  
+The event concluded with an open discussion about practical engineering decisions and lessons learned from infrastructure and AI deployments.
 
-#### Compute Evolution
+## 4. Relevance to my AWS NetMon project
 
-- **Shared Responsibility Model**: EC2 → ECS → Fargate → Lambda  
-- **Serverless benefits**: No server management, auto-scaling, pay-for-value  
-- **Functions vs Containers**: Criteria for appropriate choice  
+Although our internship project does not include a GPU cluster, the event offered useful lessons: evaluate storage as well as compute costs; observe performance bottlenecks before attempting optimization; protect APIs and control access; and use modular system components that are easier to test, monitor and scale.
 
-#### Amazon Q Developer
+## 5. Event photos
 
-- **SDLC automation**: From planning to maintenance  
-- **Code transformation**: Java upgrade, .NET modernization  
-- **AWS Transform agents**: VMware, Mainframe, .NET migration  
+**Photo 1:** Overall view of the meetup at Grand Terra on October 24 *(insert a verified personal or permitted organizer photo)*.
 
-### Key Takeaways
+![FCAJ Event 24/10/2026](/images/4-Events/PicEvent/event2.jpg)
 
-#### Design Mindset
+**Photo 2:** Technical presentation or Q&A from the same day *(confirm date and credit)*.
 
-- **Business-first approach**: Always start from the business domain, not the technology  
-- **Ubiquitous language**: Importance of a shared vocabulary between business and tech teams  
-- **Bounded contexts**: Identifying and managing complexity in large systems  
+<!-- Uncomment after saving the matching photo:
+![Cloud and AI Infrastructure Meetup, October 24](/images/4-EventParticipated/fcaj-2026-10-24.jpg)
+-->
 
-#### Technical Architecture
+## 6. References
 
-- **Event storming technique**: Practical method for modeling business processes  
-- Use **event-driven communication** instead of synchronous calls  
-- **Integration patterns**: When to use sync, async, pub/sub, streaming  
-- **Compute spectrum**: Criteria for choosing between VM, containers, and serverless  
-
-#### Modernization Strategy
-
-- **Phased approach**: No rushing — follow a clear roadmap  
-- **7Rs framework**: Multiple modernization paths depending on the application  
-- **ROI measurement**: Cost reduction + business agility  
-
-### Applying to Work
-
-- **Apply DDD** to current projects: Event storming sessions with business teams  
-- **Refactor microservices**: Use bounded contexts to define service boundaries  
-- **Implement event-driven patterns**: Replace some sync calls with async messaging  
-- **Adopt serverless**: Pilot AWS Lambda for suitable use cases  
-- **Try Amazon Q Developer**: Integrate into the dev workflow to boost productivity  
-
-### Event Experience
-
-Attending the **“GenAI-powered App-DB Modernization”** workshop was extremely valuable, giving me a comprehensive view of modernizing applications and databases using advanced methods and tools. Key experiences included:
-
-#### Learning from highly skilled speakers
-- Experts from AWS and major tech organizations shared **best practices** in modern application design.  
-- Through real-world case studies, I gained a deeper understanding of applying **DDD** and **Event-Driven Architecture** to large projects.  
-
-#### Hands-on technical exposure
-- Participating in **event storming** sessions helped me visualize how to **model business processes** into domain events.  
-- Learned how to **split microservices** and define **bounded contexts** to manage large-system complexity.  
-- Understood trade-offs between **synchronous and asynchronous communication** and integration patterns like **pub/sub, point-to-point, streaming**.  
-
-#### Leveraging modern tools
-- Explored **Amazon Q Developer**, an AI tool for SDLC support from planning to maintenance.  
-- Learned to **automate code transformation** and pilot serverless with **AWS Lambda** to improve productivity.  
-
-#### Networking and discussions
-- The workshop offered opportunities to exchange ideas with experts, peers, and business teams, enhancing the **ubiquitous language** between business and tech.  
-- Real-world examples reinforced the importance of the **business-first approach** rather than focusing solely on technology.  
-
-#### Lessons learned
-- Applying DDD and event-driven patterns reduces **coupling** while improving **scalability** and **resilience**.  
-- Modernization requires a **phased approach** with **ROI measurement**; rushing the process can be risky.  
-- AI tools like Amazon Q Developer can significantly **boost productivity** when integrated into the current workflow.  
-
-#### Some event photos
-*Add your event photos here*  
-
-> Overall, the event not only provided technical knowledge but also helped me reshape my thinking about application design, system modernization, and cross-team collaboration.
+- [Official event page and speaker information](https://ocgroups.dev/cncf/group/d2e22fa/event/5z4fnze)
+- [VietOpenInfra official announcement](https://vn.linkedin.com/posts/voi-vn_vietopeninfra-cloudnativevietnam-awscommunityvietnam-activity-7516060456709550080-yaxC)
+- [Organizer's post-event recap](https://vn.linkedin.com/posts/voi-vn_vietopeninfra-cloudnativevietnam-awsfcaj-activity-7521419750535610369-mDaT)
