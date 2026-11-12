@@ -1,0 +1,654 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Internship Report</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/</link><description>Recent content on Internship Report</description><generator>Hugo</generator><language>en</language><lastBuildDate>Wed, 11 Nov 2026 00:00:00 +0700</lastBuildDate><atom:link href="https://tunduncode.github.io/nguyentungduong-fcj-report/index.xml" rel="self" type="application/rss+xml"/><item><title>5.1.1. AWS Sign-in and Region</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-1-preparation/5-1-1-region-budget/</link><pubDate>Wed, 11 Nov 2026 00:00:00 +0700</pubDate><guid>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-1-preparation/5-1-1-region-budget/</guid><description>&lt;h1 id="511-aws-sign-in-and-region">5.1.1. AWS Sign-in and Region&lt;/h1>
+&lt;h2 id="objective">Objective&lt;/h2>
+&lt;p>Select the correct &lt;code>us-east-1&lt;/code> Region, verify AWS Console access, and create budget alerts for the lab.&lt;/p>
+&lt;h2 id="steps">Steps&lt;/h2>
+&lt;ol>
+&lt;li>Sign in with an IAM user or a delegated account; &lt;strong>do not share the root account&lt;/strong> across the team.&lt;/li>
+&lt;li>Select &lt;strong>United States (N. Virginia) — us-east-1&lt;/strong> in the Region selector. Regional resources such as EC2, DynamoDB, Lambda, and API Gateway should be inspected in the same Region.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/01-aws-region-us-east-1.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/01-aws-region-us-east-1.png" alt="Select AWS region us-east-1" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 01 – Select AWS region us-east-1&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="3">
+&lt;li>
+&lt;p>Navigate to &lt;strong>Billing and Cost Management → Budgets → Create budget&lt;/strong>. Select a &lt;strong>Cost budget&lt;/strong> and enter the planned limit (the group&amp;rsquo;s earlier lab used &lt;strong>USD 20/month&lt;/strong>).&lt;/p></description></item><item><title>5.2.1. Create a VPC, Subnets, Routes, and IGW</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-2-infrastructure/5-2-1-vpc/</link><pubDate>Wed, 11 Nov 2026 00:00:00 +0700</pubDate><guid>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-2-infrastructure/5-2-1-vpc/</guid><description>&lt;h1 id="521-create-a-vpc-subnets-routes-and-igw">5.2.1. Create a VPC, Subnets, Routes, and IGW&lt;/h1>
+&lt;h2 id="objective">Objective&lt;/h2>
+&lt;p>Build a virtual network for the monitored EC2 instance, separating Internet-facing and internal resources.&lt;/p>
+&lt;h2 id="aws-console-steps">AWS Console steps&lt;/h2>
+&lt;ol>
+&lt;li>Go to &lt;strong>VPC → Your VPCs → Create VPC&lt;/strong>. Choose an appropriate configuration. observed VPC CIDR &lt;code>10.0.0.0/16&lt;/code>.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/06-netmon-vpc-resource-map.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/06-netmon-vpc-resource-map.png" alt="netmon-vpc resource map" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 06 – netmon-vpc resource map&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="2">
+&lt;li>Create a &lt;strong>public subnet&lt;/strong> (e.g., &lt;code>10.0.0.0/20&lt;/code>) and a &lt;strong>private subnet&lt;/strong> (e.g., &lt;code>10.0.128.0/20&lt;/code>) in the appropriate Availability Zone.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/07-subnet-list.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/07-subnet-list.png" alt="List of two subnets" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 07 – List of two subnets&lt;/figcaption>
+&lt;/figure>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/08-public-subnet-details.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/08-public-subnet-details.png" alt="Public subnet details" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 08 – Public subnet details&lt;/figcaption>
+&lt;/figure>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/09-private-subnet-details.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/09-private-subnet-details.png" alt="Private subnet details" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 09 – Private subnet details&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="3">
+&lt;li>Create an &lt;strong>Internet Gateway&lt;/strong> and attach it to the VPC.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/14-netmon-igw-details.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/14-netmon-igw-details.png" alt="netmon-igw internet gateway" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 14 – netmon-igw internet gateway&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="4">
+&lt;li>Create a &lt;strong>public route table&lt;/strong>, add &lt;code>0.0.0.0/0&lt;/code> pointing to the Internet Gateway, and associate it with the public subnet.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/10-route-tables-list.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/10-route-tables-list.png" alt="Route-table list" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 10 – Route-table list&lt;/figcaption>
+&lt;/figure>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/11-netmon-rtb-public-routes.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/11-netmon-rtb-public-routes.png" alt="Routes in netmon-rtb-public" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 11 – Routes in netmon-rtb-public&lt;/figcaption>
+&lt;/figure>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/12-netmon-main-route-table-no-name.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/12-netmon-main-route-table-no-name.png" alt="VPC main route table" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 12 – VPC main route table&lt;/figcaption>
+&lt;/figure>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/13-netmon-rtb-private1-us-east-1a-routes.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/13-netmon-rtb-private1-us-east-1a-routes.png" alt="Private subnet route table" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 13 – Private subnet route table&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="5">
+&lt;li>A private subnet has no automatic Internet access. If outbound Internet access is required, design NAT appropriately and consider the cost before creating it.&lt;/li>
+&lt;li>Review &lt;strong>Network ACLs&lt;/strong> and &lt;strong>Security Groups&lt;/strong> against the required traffic flows and deny unnecessary access.&lt;/li>
+&lt;/ol>
+&lt;h2 id="evidence-to-capture">Evidence to capture&lt;/h2>
+&lt;ul>
+&lt;li>VPC, CIDR ranges, and subnet list.&lt;/li>
+&lt;li>Route table and Internet Gateway association.&lt;/li>
+&lt;li>Security Group attached to EC2.&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>Do not create a NAT Gateway solely for screenshots. It can incur hourly and data-processing charges.&lt;/p></description></item><item><title>5.3.1. Collect CPU, RAM, and Disk Metrics</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-3-monitoring/5-3-1-metrics/</link><pubDate>Wed, 11 Nov 2026 00:00:00 +0700</pubDate><guid>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-3-monitoring/5-3-1-metrics/</guid><description>&lt;h1 id="531-collect-cpu-ram-and-disk-metrics">5.3.1. Collect CPU, RAM, and Disk Metrics&lt;/h1>
+&lt;h2 id="objective">Objective&lt;/h2>
+&lt;p>Publish EC2 CPU, memory, and disk utilization metrics to CloudWatch for monitoring and alert evaluation.&lt;/p>
+&lt;h2 id="steps">Steps&lt;/h2>
+&lt;ol>
+&lt;li>Open &lt;strong>CloudWatch → Metrics → All metrics&lt;/strong> and find &lt;code>AWS/EC2 → CPUUtilization&lt;/code> for the target InstanceId. CPU is an EC2 standard metric.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/50-ec2-netmon-monitoring-cpu-network-metrics.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/50-ec2-netmon-monitoring-cpu-network-metrics.png" alt="EC2 CPU and network metrics charts" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 50 – EC2 CPU and network metrics charts&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="2">
+&lt;li>
+&lt;p>For memory and disk, install and configure &lt;strong>Amazon CloudWatch Agent&lt;/strong> on Ubuntu. The instance role must permit metric publishing, for example through suitable &lt;code>CloudWatchAgentServerPolicy&lt;/code> permissions.&lt;/p></description></item><item><title>5.4.1. Create NetworkDevices and NetworkAlerts Tables</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-4-serverless/5-4-1-dynamodb/</link><pubDate>Wed, 11 Nov 2026 00:00:00 +0700</pubDate><guid>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-4-serverless/5-4-1-dynamodb/</guid><description>&lt;h1 id="541-create-networkdevices-and-networkalerts-tables">5.4.1. Create NetworkDevices and NetworkAlerts Tables&lt;/h1>
+&lt;h2 id="objective">Objective&lt;/h2>
+&lt;p>Design NoSQL storage for the device inventory and alert history. Reuse existing tables instead of creating duplicates.&lt;/p>
+&lt;h2 id="create-or-verify-tables">Create or verify tables&lt;/h2>
+&lt;ol>
+&lt;li>Open &lt;strong>DynamoDB → Tables&lt;/strong> in &lt;code>us-east-1&lt;/code>.&lt;/li>
+&lt;li>Create or verify &lt;strong>&lt;code>NetworkDevices&lt;/code>&lt;/strong> with String partition key &lt;code>deviceId&lt;/code> and &lt;strong>On-demand&lt;/strong> capacity.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/33-dynamodb-networkdevices-2-items.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/33-dynamodb-networkdevices-2-items.png" alt="Two items in NetworkDevices" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 33 – Two items in NetworkDevices&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="3">
+&lt;li>Create or verify &lt;strong>&lt;code>NetworkAlerts&lt;/code>&lt;/strong> with String partition key &lt;code>eventId&lt;/code> and On-demand capacity.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/32-dynamodb-networkalerts-7-items.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/32-dynamodb-networkalerts-7-items.png" alt="Items in NetworkAlerts" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 32 – Items in NetworkAlerts&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="4">
+&lt;li>A sort key is not needed for the current single-key design. Add indexes only after identifying a real query requirement.&lt;/li>
+&lt;/ol>
+&lt;h3 id="example-device-record">Example device record&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;deviceId&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;TEST-SW01&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;deviceName&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;Demo Switch&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;deviceType&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;Switch&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;ipAddress&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;10.0.0.10&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;status&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;Online&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>For EC2, optional fields include &lt;code>instanceId&lt;/code>, &lt;code>region&lt;/code>, &lt;code>monitoringSource&lt;/code>, and &lt;code>vpcId&lt;/code>. &lt;strong>Do not enter InstanceId in the IP field&lt;/strong>: the two fields identify different things.&lt;/p></description></item><item><title>5.5.1. Create a Cognito User Pool and Web Client</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-5-auth-frontend/5-5-1-cognito/</link><pubDate>Wed, 11 Nov 2026 00:00:00 +0700</pubDate><guid>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-5-auth-frontend/5-5-1-cognito/</guid><description>&lt;h1 id="551-create-a-cognito-user-pool-and-web-client">5.5.1. Create a Cognito User Pool and Web Client&lt;/h1>
+&lt;h2 id="objective">Objective&lt;/h2>
+&lt;p>Create a managed sign-in flow for NetMon administrators with Amazon Cognito rather than allowing unauthenticated browser access to the APIs.&lt;/p>
+&lt;h2 id="steps">Steps&lt;/h2>
+&lt;ol>
+&lt;li>Open &lt;strong>Amazon Cognito → User pools&lt;/strong>. Create a pool or select the existing one in &lt;code>us-east-1&lt;/code>.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/43-cognito-user-pool-overview.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/43-cognito-user-pool-overview.png" alt="Cognito user-pool overview" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 43 – Cognito user-pool overview&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="2">
+&lt;li>Create an &lt;strong>App client&lt;/strong> for a &lt;strong>Single-page application (SPA)&lt;/strong> and name it &lt;code>netmon-web-client&lt;/code>.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/44-cognito-app-client-netmon-web-client.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/44-cognito-app-client-netmon-web-client.png" alt="Cognito netmon-web-client app client" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 44 – Cognito netmon-web-client app client&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="3">
+&lt;li>
+&lt;p>Use &lt;strong>email&lt;/strong> as the sign-in identifier, and keep self-registration disabled if only approved team members should have accounts.&lt;/p></description></item><item><title>5.6.1. Test from the UI to CloudWatch/DynamoDB</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-6-testing-cleanup/5-6-1-e2e/</link><pubDate>Wed, 11 Nov 2026 00:00:00 +0700</pubDate><guid>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-6-testing-cleanup/5-6-1-e2e/</guid><description>&lt;h1 id="561-test-from-the-ui-to-cloudwatchdynamodb">5.6.1. Test from the UI to CloudWatch/DynamoDB&lt;/h1>
+&lt;h2 id="objective">Objective&lt;/h2>
+&lt;p>Run reproducible tests showing that the team&amp;rsquo;s infrastructure, backend, and monitoring/interface components work together as one workflow.&lt;/p>
+&lt;h2 id="suggested-test-cases">Suggested test cases&lt;/h2>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th style="text-align: left">ID&lt;/th>
+ &lt;th style="text-align: left">Test action&lt;/th>
+ &lt;th style="text-align: left">Expected result&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td style="text-align: left">T01&lt;/td>
+ &lt;td style="text-align: left">Request GET &lt;code>/devices&lt;/code> without JWT&lt;/td>
+ &lt;td style="text-align: left">&lt;code>401 Unauthorized&lt;/code>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">T02&lt;/td>
+ &lt;td style="text-align: left">Sign in with Cognito and PKCE&lt;/td>
+ &lt;td style="text-align: left">Obtain a valid Access Token&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">T03&lt;/td>
+ &lt;td style="text-align: left">GET &lt;code>/devices&lt;/code> with &lt;code>read&lt;/code> scope&lt;/td>
+ &lt;td style="text-align: left">Receive the device list&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">T04&lt;/td>
+ &lt;td style="text-align: left">POST &lt;code>/devices&lt;/code> with &lt;code>TEST-SW01&lt;/code>&lt;/td>
+ &lt;td style="text-align: left">Record created in &lt;code>NetworkDevices&lt;/code>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">T05&lt;/td>
+ &lt;td style="text-align: left">GET/PUT &lt;code>/devices/{id}&lt;/code>&lt;/td>
+ &lt;td style="text-align: left">Read and update the test device&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">T06&lt;/td>
+ &lt;td style="text-align: left">DELETE &lt;code>/devices/{id}&lt;/code>&lt;/td>
+ &lt;td style="text-align: left">Delete only the test device&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">T07&lt;/td>
+ &lt;td style="text-align: left">GET &lt;code>/alerts&lt;/code>&lt;/td>
+ &lt;td style="text-align: left">Read events in &lt;code>NetworkAlerts&lt;/code>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">T08&lt;/td>
+ &lt;td style="text-align: left">PUT &lt;code>/alerts/{id}&lt;/code>&lt;/td>
+ &lt;td style="text-align: left">Change &lt;code>handlingStatus&lt;/code> to &lt;code>Acknowledged&lt;/code> or &lt;code>Resolved&lt;/code>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">T09&lt;/td>
+ &lt;td style="text-align: left">GET &lt;code>/metrics&lt;/code>&lt;/td>
+ &lt;td style="text-align: left">Get real CloudWatch CPU data when available&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">T10&lt;/td>
+ &lt;td style="text-align: left">Change a demo alarm state in a controlled test&lt;/td>
+ &lt;td style="text-align: left">Verify SNS and stored alert history&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+&lt;/table>
+&lt;h2 id="evidence">Evidence&lt;/h2>
+&lt;p>Capture Cognito Users (hide email addresses for public use), JWT routes, Lambda Test, DynamoDB Scan, CloudWatch Alarms, EventBridge rule, redacted SNS email, and API Test results. Label evidence screenshots &lt;code>T01&lt;/code>, &lt;code>T02&lt;/code>, etc.&lt;/p></description></item><item><title>5.1.2. IAM Setup and Team Roles</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-1-preparation/5-1-2-iam/</link><pubDate>Wed, 11 Nov 2026 00:00:00 +0700</pubDate><guid>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-1-preparation/5-1-2-iam/</guid><description>&lt;h1 id="512-iam-setup-and-team-roles">5.1.2. IAM Setup and Team Roles&lt;/h1>
+&lt;h2 id="objective">Objective&lt;/h2>
+&lt;p>Assign project responsibilities and configure IAM so that each teammate can work without sharing credentials.&lt;/p>
+&lt;h2 id="team-responsibilities">Team responsibilities&lt;/h2>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th style="text-align: left">Member&lt;/th>
+ &lt;th style="text-align: left">Responsibility&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td style="text-align: left">Tung Duong&lt;/td>
+ &lt;td style="text-align: left">VPC, public/private subnets, route tables, Internet Gateway, Security Groups, EC2&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">Xuan Duc&lt;/td>
+ &lt;td style="text-align: left">Lambda, DynamoDB, API Gateway, device CRUD, and alert APIs&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">Manh Quan&lt;/td>
+ &lt;td style="text-align: left">CloudWatch, SNS, interface, and testing&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+&lt;/table>
+&lt;h2 id="steps">Steps&lt;/h2>
+&lt;ol>
+&lt;li>
+&lt;p>Open &lt;strong>IAM → Users&lt;/strong>. Create separate IAM users, or use AWS IAM Identity Center if it is available.&lt;/p></description></item><item><title>5.2.2. Launch an Ubuntu EC2 Instance</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-2-infrastructure/5-2-2-ec2/</link><pubDate>Wed, 11 Nov 2026 00:00:00 +0700</pubDate><guid>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-2-infrastructure/5-2-2-ec2/</guid><description>&lt;h1 id="522-launch-an-ubuntu-ec2-instance">5.2.2. Launch an Ubuntu EC2 Instance&lt;/h1>
+&lt;h2 id="objective">Objective&lt;/h2>
+&lt;p>Launch an Ubuntu server for CloudWatch monitoring tests while reducing unauthorized-access risks.&lt;/p>
+&lt;h2 id="steps">Steps&lt;/h2>
+&lt;ol>
+&lt;li>
+&lt;p>Open &lt;strong>EC2 → Instances → Launch instances&lt;/strong>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Set the instance name to &lt;code>netmon-ec2-server&lt;/code>, matching the lab naming convention.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Choose &lt;strong>Ubuntu Server 24.04 LTS&lt;/strong> and an instance type appropriate to the available budget and usage limits.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>In &lt;strong>Network settings&lt;/strong>, select the intended VPC and public subnet and review public IP assignment.&lt;/p></description></item><item><title>5.3.2. Create CloudWatch Alarms and SNS Email</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-3-monitoring/5-3-2-alarms-sns/</link><pubDate>Wed, 11 Nov 2026 00:00:00 +0700</pubDate><guid>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-3-monitoring/5-3-2-alarms-sns/</guid><description>&lt;h1 id="532-create-cloudwatch-alarms-and-sns-email">5.3.2. Create CloudWatch Alarms and SNS Email&lt;/h1>
+&lt;h2 id="objective">Objective&lt;/h2>
+&lt;p>Create CPU, memory, and disk alarms and use SNS to send notifications when configured thresholds are exceeded.&lt;/p>
+&lt;h2 id="create-an-sns-topic">Create an SNS Topic&lt;/h2>
+&lt;ol>
+&lt;li>
+&lt;p>Go to &lt;strong>Amazon SNS → Topics → Create topic&lt;/strong>, select Standard, and name it &lt;code>netmon-alerts&lt;/code>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Open the topic and choose &lt;strong>Create subscription&lt;/strong>. Select &lt;code>Email&lt;/code> and provide the recipient address.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Open the AWS SNS confirmation message and select &lt;strong>Confirm subscription&lt;/strong>. A &lt;code>Pending confirmation&lt;/code> subscription cannot receive notifications.&lt;/p></description></item><item><title>5.4.2. Build the netmon-api Python Lambda</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-4-serverless/5-4-2-lambda-api/</link><pubDate>Wed, 11 Nov 2026 00:00:00 +0700</pubDate><guid>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-4-serverless/5-4-2-lambda-api/</guid><description>&lt;h1 id="542-build-the-netmon-api-python-lambda">5.4.2. Build the netmon-api Python Lambda&lt;/h1>
+&lt;h2 id="objective">Objective&lt;/h2>
+&lt;p>Use a single Python Lambda named &lt;code>netmon-api&lt;/code> to serve eight HTTP operations based on the request method and path, avoiding unnecessary duplicate functions for the class project.&lt;/p>
+&lt;h2 id="steps">Steps&lt;/h2>
+&lt;ol>
+&lt;li>Open &lt;strong>Lambda → Functions → Create function → Author from scratch&lt;/strong>. Name the function &lt;code>netmon-api&lt;/code> and select a supported Python runtime.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/34-lambda-netmon-api-code-and-api-gateway.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/34-lambda-netmon-api-code-and-api-gateway.png" alt="netmon-api Lambda and API Gateway trigger" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 34 – netmon-api Lambda and API Gateway trigger&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="2">
+&lt;li>Attach an &lt;strong>execution role&lt;/strong> with access to both DynamoDB tables, &lt;code>cloudwatch:GetMetricStatistics&lt;/code>, and CloudWatch Logs. Prefer resource-scoped DynamoDB permissions.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/53-lambda-netmon-api-execution-role-permissions.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/53-lambda-netmon-api-execution-role-permissions.png" alt="Lambda netmon-api execution role" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 53 – Lambda netmon-api execution role&lt;/figcaption>
+&lt;/figure>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/54-iam-netmon-api-role-permission-policies.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/54-iam-netmon-api-role-permission-policies.png" alt="IAM role permission policies" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 54 – IAM role permission policies&lt;/figcaption>
+&lt;/figure>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/55-iam-netmon-api-access-policy-json.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/55-iam-netmon-api-access-policy-json.png" alt="JSON policy granting DynamoDB and CloudWatch actions" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 55 – JSON policy granting DynamoDB and CloudWatch actions&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="3">
+&lt;li>
+&lt;p>In code, read the method from &lt;code>event.requestContext.http.method&lt;/code> and the URL from &lt;code>event.rawPath&lt;/code> for &lt;strong>HTTP API payload format 2.0&lt;/strong>.&lt;/p></description></item><item><title>5.5.2. Create a JWT Authorizer and OAuth Scopes</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-5-auth-frontend/5-5-2-jwt/</link><pubDate>Wed, 11 Nov 2026 00:00:00 +0700</pubDate><guid>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-5-auth-frontend/5-5-2-jwt/</guid><description>&lt;h1 id="552-create-a-jwt-authorizer-and-oauth-scopes">5.5.2. Create a JWT Authorizer and OAuth Scopes&lt;/h1>
+&lt;h2 id="objective">Objective&lt;/h2>
+&lt;p>Require a valid access token and an appropriate scope before API Gateway allows NetMon read or write operations.&lt;/p>
+&lt;h2 id="resource-server-and-oauth-scopes">Resource server and OAuth scopes&lt;/h2>
+&lt;ol>
+&lt;li>Open &lt;strong>Cognito → User pool → Applications → Resource servers → Create resource server&lt;/strong>.&lt;/li>
+&lt;li>Set Name &lt;code>NetMon API&lt;/code>, Identifier &lt;code>netmon-api&lt;/code>, and add custom scopes &lt;code>read&lt;/code> and &lt;code>write&lt;/code>.&lt;/li>
+&lt;li>Under &lt;strong>App clients → netmon-web-client → Login pages → Edit&lt;/strong>, allow &lt;code>netmon-api/read&lt;/code>, &lt;code>netmon-api/write&lt;/code>, and the necessary OpenID scopes (such as &lt;code>openid&lt;/code> and &lt;code>email&lt;/code>). Save changes.&lt;/li>
+&lt;/ol>
+&lt;h2 id="jwt-authorizer">JWT Authorizer&lt;/h2>
+&lt;ol>
+&lt;li>
+&lt;p>Open &lt;strong>API Gateway → netmon-management-api → Authorization → Manage authorizers → Create&lt;/strong>.&lt;/p></description></item><item><title>5.6.2. Review Costs and Preserve Evidence</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-6-testing-cleanup/5-6-2-cleanup/</link><pubDate>Wed, 11 Nov 2026 00:00:00 +0700</pubDate><guid>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-6-testing-cleanup/5-6-2-cleanup/</guid><description>&lt;h1 id="562-review-costs-and-preserve-evidence">5.6.2. Review Costs and Preserve Evidence&lt;/h1>
+&lt;h2 id="objective">Objective&lt;/h2>
+&lt;p>Finish a lab session without avoidable charges while preserving the resources needed for the team&amp;rsquo;s final demonstration.&lt;/p>
+&lt;h2 id="cost-checklist">Cost checklist&lt;/h2>
+&lt;ol>
+&lt;li>Open &lt;strong>Billing → Cost Explorer / Bills&lt;/strong> and record actual spending by service and Region.&lt;/li>
+&lt;li>Review &lt;strong>AWS Budgets&lt;/strong> and recipient email addresses, especially around the 25%, 50%, and 100% thresholds of the group&amp;rsquo;s USD 20/month plan.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/02-aws-budget-overview.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/02-aws-budget-overview.png" alt="NetMon budget overview" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 02 – NetMon budget overview&lt;/figcaption>
+&lt;/figure>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/03-aws-budget-history.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/03-aws-budget-history.png" alt="Budget history" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 03 – Budget history&lt;/figcaption>
+&lt;/figure>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/04-aws-monthly-cost-history.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/04-aws-monthly-cost-history.png" alt="Monthly cost history" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 04 – Monthly cost history&lt;/figcaption>
+&lt;/figure>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/05-budget-alerts-25-50-100.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/05-budget-alerts-25-50-100.png" alt="Budget alerts at 25%, 50% and 100%" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 05 – Budget alerts at 25%, 50% and 100%&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="3">
+&lt;li>
+&lt;p>Check &lt;strong>EC2 → Instances&lt;/strong> and consider &lt;strong>Stop&lt;/strong> when monitoring is not required. EBS and some attached resources can still incur costs.&lt;/p></description></item><item><title>5.1.3. AWS Budgets and Cost Controls</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-1-preparation/5-1-3-budget/</link><pubDate>Wed, 11 Nov 2026 00:00:00 +0700</pubDate><guid>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-1-preparation/5-1-3-budget/</guid><description>&lt;h1 id="513-aws-budgets-and-cost-controls">5.1.3. AWS Budgets and Cost Controls&lt;/h1>
+&lt;h2 id="goal">Goal&lt;/h2>
+&lt;p>Set up AWS cost monitoring for the lab. &lt;strong>A USD 20 budget is an alert threshold—not actual spending or a hard spending cap&lt;/strong>.&lt;/p>
+&lt;h2 id="console-steps">Console steps&lt;/h2>
+&lt;ol>
+&lt;li>Open &lt;strong>Billing and Cost Management → Budgets → Create budget&lt;/strong>; choose &lt;strong>Cost budget&lt;/strong>.&lt;/li>
+&lt;li>Choose &lt;strong>Monthly&lt;/strong>, enter &lt;strong>USD 20&lt;/strong>, and name the budget &lt;code>netmon-monthly-budget&lt;/code> or another meaningful name.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/02-aws-budget-overview.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/02-aws-budget-overview.png" alt="NetMon budget overview" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 02 – NetMon budget overview&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="3">
+&lt;li>Configure percentage-based email alerts. During the lab, the team adjusted one alert threshold to &lt;strong>25%&lt;/strong>; other useful thresholds are 50% and 100%.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/05-budget-alerts-25-50-100.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/05-budget-alerts-25-50-100.png" alt="Budget alerts at 25%, 50% and 100%" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 05 – Budget alerts at 25%, 50% and 100%&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="4">
+&lt;li>Enter the alert recipient email and complete any email verification required.&lt;/li>
+&lt;li>Review actual charges under &lt;strong>Cost Explorer&lt;/strong> or &lt;strong>Bills&lt;/strong>, particularly EC2, EBS, CloudWatch, DynamoDB, and any networking resources.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/03-aws-budget-history.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/03-aws-budget-history.png" alt="Budget history" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 03 – Budget history&lt;/figcaption>
+&lt;/figure>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/04-aws-monthly-cost-history.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/04-aws-monthly-cost-history.png" alt="Monthly cost history" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 04 – Monthly cost history&lt;/figcaption>
+&lt;/figure>
+&lt;h2 id="verification">Verification&lt;/h2>
+&lt;ul>
+&lt;li>Confirm that the budget is listed and recipients are correct.&lt;/li>
+&lt;li>Check the currency, monthly period, and warning thresholds.&lt;/li>
+&lt;li>Redact email addresses before publishing cost-console screenshots.&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>Note: EC2 uptime, EBS storage, public IPv4, NAT Gateway (if used), and CloudWatch usage may incur charges. Do not assume the entire system is free.&lt;/p></description></item><item><title>5.2.3. Security Groups, IAM Roles, and Safe Access</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-2-infrastructure/5-2-3-security/</link><pubDate>Wed, 11 Nov 2026 00:00:00 +0700</pubDate><guid>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-2-infrastructure/5-2-3-security/</guid><description>&lt;h1 id="523-security-groups-iam-roles-and-safe-access">5.2.3. Security Groups, IAM Roles, and Safe Access&lt;/h1>
+&lt;h2 id="goal">Goal&lt;/h2>
+&lt;p>Protect &lt;code>netmon-ec2-server&lt;/code> and enable monitoring without exposing management ports to the entire Internet.&lt;/p>
+&lt;h2 id="console-steps">Console steps&lt;/h2>
+&lt;ol>
+&lt;li>Open &lt;strong>EC2 → Instances&lt;/strong>, select &lt;code>netmon-ec2-server&lt;/code>, and open &lt;strong>Security&lt;/strong>.&lt;/li>
+&lt;li>Inspect the attached &lt;strong>Security Group → Inbound rules&lt;/strong>. Do not expose TCP/22 to &lt;code>0.0.0.0/0&lt;/code> without a justified, reviewed need.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/15-security-groups-list.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/15-security-groups-list.png" alt="Security-group list" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 15 – Security-group list&lt;/figcaption>
+&lt;/figure>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/16-netmon-ec2-sg-inbound-no-rules.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/16-netmon-ec2-sg-inbound-no-rules.png" alt="Empty inbound rules of netmon-ec2-sg" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 16 – Empty inbound rules of netmon-ec2-sg&lt;/figcaption>
+&lt;/figure>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/17-netmon-ec2-sg-outbound-all-traffic.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/17-netmon-ec2-sg-outbound-all-traffic.png" alt="Outbound rules of netmon-ec2-sg" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 17 – Outbound rules of netmon-ec2-sg&lt;/figcaption>
+&lt;/figure>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/20-ec2-security-netmon-ec2-sg.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/20-ec2-security-netmon-ec2-sg.png" alt="EC2 security tab" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 20 – EC2 security tab&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="3">
+&lt;li>
+&lt;p>If using &lt;strong>AWS Systems Manager Session Manager&lt;/strong>, verify the SSM Agent, IAM instance profile, and required network connectivity; otherwise use another restricted administration path.&lt;/p></description></item><item><title>5.3.3. Route Alarm Changes with EventBridge</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-3-monitoring/5-3-3-eventbridge/</link><pubDate>Wed, 11 Nov 2026 00:00:00 +0700</pubDate><guid>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-3-monitoring/5-3-3-eventbridge/</guid><description>&lt;h1 id="533-route-alarm-changes-with-eventbridge">5.3.3. Route Alarm Changes with EventBridge&lt;/h1>
+&lt;h2 id="objective">Objective&lt;/h2>
+&lt;p>When a CloudWatch Alarm changes state, EventBridge invokes a Lambda function that stores alert history in DynamoDB for time tracking and incident handling.&lt;/p>
+&lt;h2 id="steps">Steps&lt;/h2>
+&lt;ol>
+&lt;li>
+&lt;p>Ensure that the &lt;code>NetworkAlerts&lt;/code> table exists with String partition key &lt;code>eventId&lt;/code>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Create the Python Lambda &lt;code>netmon-save-alert&lt;/code> and give its execution role &lt;code>dynamodb:PutItem&lt;/code> on the &lt;code>NetworkAlerts&lt;/code> table and CloudWatch Logs permissions.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Open &lt;strong>Amazon EventBridge → Event buses → default → Rules → Create rule&lt;/strong>. Name it &lt;code>netmon-alarm-state-rule&lt;/code> on the &lt;code>default&lt;/code> event bus.&lt;/p></description></item><item><title>5.4.3. Build an HTTP API with Eight Routes</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-4-serverless/5-4-3-api-gateway/</link><pubDate>Wed, 11 Nov 2026 00:00:00 +0700</pubDate><guid>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-4-serverless/5-4-3-api-gateway/</guid><description>&lt;h1 id="543-build-an-http-api-with-eight-routes">5.4.3. Build an HTTP API with Eight Routes&lt;/h1>
+&lt;h2 id="objective">Objective&lt;/h2>
+&lt;p>Create an HTTP API for NetMon management actions and integrate all routes with &lt;code>netmon-api&lt;/code> Lambda.&lt;/p>
+&lt;h2 id="aws-console-steps">AWS Console steps&lt;/h2>
+&lt;ol>
+&lt;li>Open &lt;strong>API Gateway → APIs → Create API → HTTP API&lt;/strong>. The group&amp;rsquo;s API is called &lt;code>netmon-management-api&lt;/code>.&lt;/li>
+&lt;li>Create or verify these routes:&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/38-api-gateway-netmon-management-api-routes.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/38-api-gateway-netmon-management-api-routes.png" alt="Eight API Gateway routes" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 38 – Eight API Gateway routes&lt;/figcaption>
+&lt;/figure>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th style="text-align: left">Route&lt;/th>
+ &lt;th style="text-align: left">Purpose&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;code>GET /devices&lt;/code>&lt;/td>
+ &lt;td style="text-align: left">List devices&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;code>POST /devices&lt;/code>&lt;/td>
+ &lt;td style="text-align: left">Create device&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;code>GET /devices/{id}&lt;/code>&lt;/td>
+ &lt;td style="text-align: left">Get device details&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;code>PUT /devices/{id}&lt;/code>&lt;/td>
+ &lt;td style="text-align: left">Update device&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;code>DELETE /devices/{id}&lt;/code>&lt;/td>
+ &lt;td style="text-align: left">Delete device&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;code>GET /alerts&lt;/code>&lt;/td>
+ &lt;td style="text-align: left">List alerts&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;code>PUT /alerts/{id}&lt;/code>&lt;/td>
+ &lt;td style="text-align: left">Update alert handling status&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;code>GET /metrics&lt;/code>&lt;/td>
+ &lt;td style="text-align: left">Retrieve CPU metrics (current Lambda behavior)&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+&lt;/table>
+&lt;ol start="3">
+&lt;li>Under &lt;strong>Develop → Integrations&lt;/strong>, select the &lt;code>netmon-api&lt;/code> &lt;strong>Lambda function&lt;/strong> in &lt;code>us-east-1&lt;/code>, payload format &lt;strong>2.0&lt;/strong>, and attach it to all eight routes.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/40-api-gateway-integrations-netmon-api.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/40-api-gateway-integrations-netmon-api.png" alt="API Gateway integrated with netmon-api" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 40 – API Gateway integrated with netmon-api&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="4">
+&lt;li>Under &lt;strong>Develop → CORS&lt;/strong>, set allowed origin &lt;code>http://localhost:5500&lt;/code>, methods GET/POST/PUT/DELETE/OPTIONS, and headers &lt;code>authorization&lt;/code> and &lt;code>content-type&lt;/code>. Credentials are not required when sending JWTs in the Authorization header.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/41-api-gateway-cors-localhost-5500.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/41-api-gateway-cors-localhost-5500.png" alt="CORS configuration for localhost:5500" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 41 – CORS configuration for localhost:5500&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="5">
+&lt;li>Under &lt;strong>Deploy → Stages → &lt;code>$default&lt;/code>&lt;/strong>, confirm &lt;strong>Automatic deployment = Enabled&lt;/strong>. If disabled, deploy manually.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/42-api-gateway-default-stage-auto-deploy.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/42-api-gateway-default-stage-auto-deploy.png" alt="Automatically deployed $default stage" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 42 – Automatically deployed $default stage&lt;/figcaption>
+&lt;/figure>
+&lt;h2 id="initial-test">Initial test&lt;/h2>
+&lt;p>Once routes have JWT authorization, requesting &lt;code>GET /devices&lt;/code> &lt;strong>without&lt;/strong> an Authorization header should return &lt;code>401 Unauthorized&lt;/code>. This verifies the authorization layer, not the full Lambda integration. Test with a valid access token to confirm the backend.&lt;/p></description></item><item><title>5.5.3. Build a VS Code Test Page</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-5-auth-frontend/5-5-3-test-ui/</link><pubDate>Wed, 11 Nov 2026 00:00:00 +0700</pubDate><guid>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-5-auth-frontend/5-5-3-test-ui/</guid><description>&lt;h1 id="553-build-a-vs-code-test-page">5.5.3. Build a VS Code Test Page&lt;/h1>
+&lt;h2 id="objective">Objective&lt;/h2>
+&lt;p>Use an HTML/CSS/JavaScript test interface in VS Code to sign in with Cognito, call the API, and verify real data without waiting for the final UI maintained by Manh Quan.&lt;/p>
+&lt;h2 id="preparation">Preparation&lt;/h2>
+&lt;ol>
+&lt;li>Open the prepared &lt;code>NetMon-API-Test&lt;/code> project in VS Code, or use a frontend with an equivalent PKCE implementation.&lt;/li>
+&lt;li>Run a local server from the directory containing &lt;code>index.html&lt;/code>:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>python -m http.server &lt;span style="color:#ae81ff">5500&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
+&lt;li>Open &lt;code>http://localhost:5500/&lt;/code> and make sure the page loads &lt;strong>before&lt;/strong> starting Cognito sign-in.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/48-cognito-managed-login-sign-in.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/48-cognito-managed-login-sign-in.png" alt="Managed-login sign-in page" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 48 – Managed-login sign-in page&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="4">
+&lt;li>Enter the correct &lt;strong>Cognito domain&lt;/strong>, &lt;strong>App Client ID&lt;/strong>, and &lt;strong>API Gateway Invoke URL&lt;/strong>. Never enter AWS Secret Keys or a Cognito client secret into browser code.&lt;/li>
+&lt;li>Use the frontend&amp;rsquo;s sign-in button. After Cognito redirects to &lt;code>/?code=...&lt;/code>, JavaScript completes the PKCE code exchange and receives an Access Token.&lt;/li>
+&lt;li>Test &lt;code>GET /devices&lt;/code> and &lt;code>GET /alerts&lt;/code>. If they succeed, create a &lt;code>TEST-SW01&lt;/code> device, update its details, read it, and delete only that test record.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/41-api-gateway-cors-localhost-5500.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/41-api-gateway-cors-localhost-5500.png" alt="CORS configuration for localhost:5500" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 41 – CORS configuration for localhost:5500&lt;/figcaption>
+&lt;/figure>
+&lt;h2 id="troubleshooting">Troubleshooting&lt;/h2>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th style="text-align: left">Symptom&lt;/th>
+ &lt;th style="text-align: left">What to check&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;code>ERR_CONNECTION_REFUSED&lt;/code>&lt;/td>
+ &lt;td style="text-align: left">No local server is listening on localhost:5500&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;code>401 Unauthorized&lt;/code>&lt;/td>
+ &lt;td style="text-align: left">Missing, invalid, or expired token&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;code>403 Forbidden&lt;/code>&lt;/td>
+ &lt;td style="text-align: left">Access Token lacks the required route scope&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">CORS blocked&lt;/td>
+ &lt;td style="text-align: left">Incorrect allowed origin or headers in API Gateway&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;code>500&lt;/code>&lt;/td>
+ &lt;td style="text-align: left">Lambda, DynamoDB, IAM, or CloudWatch Logs&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+&lt;/table>
+&lt;blockquote>
+&lt;p>Never publish a live &lt;code>?code=&lt;/code> URL or real tokens. Before integrating the final UI, check that all eight routes return expected responses from the backend.&lt;/p></description></item><item><title>5.6.3. Clean Up CloudWatch, SNS, and EventBridge</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-6-testing-cleanup/5-6-3-monitoring-cleanup/</link><pubDate>Wed, 11 Nov 2026 00:00:00 +0700</pubDate><guid>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-6-testing-cleanup/5-6-3-monitoring-cleanup/</guid><description>&lt;h1 id="563-clean-up-cloudwatch-sns-and-eventbridge">5.6.3. Clean Up CloudWatch, SNS, and EventBridge&lt;/h1>
+&lt;h2 id="when-to-do-this">When to do this&lt;/h2>
+&lt;p>&lt;strong>Only clean up after the demo is complete and all evidence has been backed up.&lt;/strong> Do not delete alarms, SNS topics, or EventBridge rules if alerting is still required.&lt;/p>
+&lt;h2 id="cleanup-steps">Cleanup steps&lt;/h2>
+&lt;ol>
+&lt;li>Open &lt;strong>CloudWatch → Alarms&lt;/strong> and capture the settings/history of &lt;code>netmon-cpu-high-80&lt;/code>, &lt;code>netmon-ram-high-80&lt;/code>, and &lt;code>netmon-disk-high-85&lt;/code>.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/21-cloudwatch-alarms-list.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/21-cloudwatch-alarms-list.png" alt="Three CloudWatch alarms" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 21 – Three CloudWatch alarms&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="2">
+&lt;li>
+&lt;p>Delete alarms individually only after their monitoring purpose has ended. This stops alarm evaluation; it does not delete EC2.&lt;/p></description></item><item><title>5.3.4. Store Alert History with Lambda and DynamoDB</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-3-monitoring/5-3-4-alert-history/</link><pubDate>Wed, 11 Nov 2026 00:00:00 +0700</pubDate><guid>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-3-monitoring/5-3-4-alert-history/</guid><description>&lt;h1 id="534-store-alert-history-with-lambda-and-dynamodb">5.3.4. Store Alert History with Lambda and DynamoDB&lt;/h1>
+&lt;h2 id="goal">Goal&lt;/h2>
+&lt;p>Store &lt;strong>CloudWatch Alarm State Change&lt;/strong> events in &lt;code>NetworkAlerts&lt;/code>, tracking occurrence time and whether the incident has been handled.&lt;/p>
+&lt;h2 id="console-steps">Console steps&lt;/h2>
+&lt;ol>
+&lt;li>Open &lt;strong>DynamoDB → Tables&lt;/strong> and verify &lt;code>NetworkAlerts&lt;/code>, with String partition key &lt;code>eventId&lt;/code>.&lt;/li>
+&lt;li>Open &lt;strong>Lambda → Functions → &lt;code>netmon-save-alert&lt;/code>&lt;/strong>. Deploy code that parses &lt;code>event.detail.alarmName&lt;/code>, &lt;code>event.detail.state.value&lt;/code>, &lt;code>event.id&lt;/code>, and the event timestamp.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/31-lambda-netmon-save-alert-code-overview.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/31-lambda-netmon-save-alert-code-overview.png" alt="netmon-save-alert Lambda code" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 31 – netmon-save-alert Lambda code&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="3">
+&lt;li>
+&lt;p>Under &lt;strong>Configuration → Permissions&lt;/strong>, grant the execution role &lt;strong>&lt;code>dynamodb:PutItem&lt;/code>&lt;/strong> to the &lt;code>NetworkAlerts&lt;/code> table ARN, plus CloudWatch Logs permissions.&lt;/p></description></item><item><title>5.4.4. Test CRUD and Data Queries</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-4-serverless/5-4-4-crud-test/</link><pubDate>Wed, 11 Nov 2026 00:00:00 +0700</pubDate><guid>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-4-serverless/5-4-4-crud-test/</guid><description>&lt;h1 id="544-test-crud-and-data-queries">5.4.4. Test CRUD and Data Queries&lt;/h1>
+&lt;h2 id="goal">Goal&lt;/h2>
+&lt;p>Validate CRUD operations on &lt;code>NetworkDevices&lt;/code> using a dedicated &lt;strong>test item&lt;/strong>, without changing the real EC2/device records used for the project.&lt;/p>
+&lt;h2 id="sample-test-record">Sample test record&lt;/h2>
+&lt;p>Use a &lt;code>deviceId&lt;/code> beginning with &lt;code>TEST-&lt;/code>, for example:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;deviceId&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;TEST-SW01&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;deviceName&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;Switch test NetMon&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;deviceType&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;Switch&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;ipAddress&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;10.0.0.250&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;status&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;Online&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="crud-scenario">CRUD scenario&lt;/h2>
+&lt;ol>
+&lt;li>&lt;strong>POST &lt;code>/devices&lt;/code>&lt;/strong>: create &lt;code>TEST-SW01&lt;/code> and verify it exists in DynamoDB.&lt;/li>
+&lt;li>&lt;strong>GET &lt;code>/devices&lt;/code>&lt;/strong>: list devices and locate the test item.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/33-dynamodb-networkdevices-2-items.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/33-dynamodb-networkdevices-2-items.png" alt="Two items in NetworkDevices" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 33 – Two items in NetworkDevices&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="3">
+&lt;li>
+&lt;p>&lt;strong>GET &lt;code>/devices/TEST-SW01&lt;/code>&lt;/strong>: verify device details.&lt;/p></description></item><item><title>5.5.4. Sign In with PKCE and Call Protected APIs</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-5-auth-frontend/5-5-4-frontend-login/</link><pubDate>Wed, 11 Nov 2026 00:00:00 +0700</pubDate><guid>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-5-auth-frontend/5-5-4-frontend-login/</guid><description>&lt;h1 id="554-sign-in-with-pkce-and-call-protected-apis">5.5.4. Sign In with PKCE and Call Protected APIs&lt;/h1>
+&lt;h2 id="goal">Goal&lt;/h2>
+&lt;p>Connect an HTML/JavaScript NetMon test page to Cognito and obtain an &lt;strong>Access Token&lt;/strong> through Authorization Code + PKCE.&lt;/p>
+&lt;h2 id="configuration">Configuration&lt;/h2>
+&lt;ol>
+&lt;li>In &lt;strong>Cognito → App clients → &lt;code>netmon-web-client&lt;/code>&lt;/strong>, verify SPA type and &lt;strong>Authorization code grant&lt;/strong>.&lt;/li>
+&lt;li>Use the exact callback &lt;code>http://localhost:5500/&lt;/code> and scopes &lt;code>openid email netmon-api/read netmon-api/write&lt;/code>; never include a client secret in browser code.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/47-cognito-app-client-managed-login-pages-oauth-scopes.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/47-cognito-app-client-managed-login-pages-oauth-scopes.png" alt="Cognito managed-login and OAuth configuration" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 47 – Cognito managed-login and OAuth configuration&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="3">
+&lt;li>
+&lt;p>Start the web server first, e.g. &lt;code>python -m http.server 5500&lt;/code>, and ensure &lt;code>http://localhost:5500/&lt;/code> loads.&lt;/p></description></item><item><title>5.6.4. Clean Up Lambda, DynamoDB, and API Gateway</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-6-testing-cleanup/5-6-4-serverless-cleanup/</link><pubDate>Wed, 11 Nov 2026 00:00:00 +0700</pubDate><guid>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-6-testing-cleanup/5-6-4-serverless-cleanup/</guid><description>&lt;h1 id="564-clean-up-lambda-dynamodb-and-api-gateway">5.6.4. Clean Up Lambda, DynamoDB, and API Gateway&lt;/h1>
+&lt;h2 id="before-removing-resources">Before removing resources&lt;/h2>
+&lt;p>Finish the demo and back up relevant screenshots, logs, API configuration, and test data. &lt;strong>Deleting a DynamoDB table may irreversibly remove data&lt;/strong>.&lt;/p>
+&lt;h2 id="steps">Steps&lt;/h2>
+&lt;ol>
+&lt;li>&lt;strong>DynamoDB:&lt;/strong> Export or back up &lt;code>NetworkDevices&lt;/code> and &lt;code>NetworkAlerts&lt;/code> before deletion. Do not remove them while the frontend is still being tested.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/32-dynamodb-networkalerts-7-items.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/32-dynamodb-networkalerts-7-items.png" alt="Items in NetworkAlerts" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 32 – Items in NetworkAlerts&lt;/figcaption>
+&lt;/figure>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/33-dynamodb-networkdevices-2-items.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/33-dynamodb-networkdevices-2-items.png" alt="Two items in NetworkDevices" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 33 – Two items in NetworkDevices&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="2">
+&lt;li>&lt;strong>API Gateway:&lt;/strong> Document the eight Routes, Authorizer, CORS, Stage, and Integration for &lt;code>netmon-management-api&lt;/code>, then delete it only when no frontend depends on it.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/38-api-gateway-netmon-management-api-routes.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/38-api-gateway-netmon-management-api-routes.png" alt="Eight API Gateway routes" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 38 – Eight API Gateway routes&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="3">
+&lt;li>&lt;strong>AWS Lambda:&lt;/strong> Review event targets and triggers before deleting &lt;code>netmon-api&lt;/code> or &lt;code>netmon-save-alert&lt;/code>.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/34-lambda-netmon-api-code-and-api-gateway.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/34-lambda-netmon-api-code-and-api-gateway.png" alt="netmon-api Lambda and API Gateway trigger" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 34 – netmon-api Lambda and API Gateway trigger&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="4">
+&lt;li>
+&lt;p>&lt;strong>IAM roles:&lt;/strong> Remove only roles dedicated to services that have been retired; preserve any role shared with EC2 or other applications.&lt;/p></description></item><item><title>5.6.5. Clean Up Cognito and Networking Resources</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-6-testing-cleanup/5-6-5-auth-cleanup/</link><pubDate>Wed, 11 Nov 2026 00:00:00 +0700</pubDate><guid>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-6-testing-cleanup/5-6-5-auth-cleanup/</guid><description>&lt;h1 id="565-clean-up-cognito-and-networking-resources">5.6.5. Clean Up Cognito and Networking Resources&lt;/h1>
+&lt;h2 id="goal">Goal&lt;/h2>
+&lt;p>Revoke access after the project and remove infrastructure that may continue generating charges.&lt;/p>
+&lt;h2 id="cleanup-steps">Cleanup steps&lt;/h2>
+&lt;ol>
+&lt;li>&lt;strong>Amazon Cognito:&lt;/strong> Confirm the User Pool used by &lt;code>netmon-web-client&lt;/code>. An application user in Cognito is different from an IAM user who accesses AWS Console.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/43-cognito-user-pool-overview.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/43-cognito-user-pool-overview.png" alt="Cognito user-pool overview" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 43 – Cognito user-pool overview&lt;/figcaption>
+&lt;/figure>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/44-cognito-app-client-netmon-web-client.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/44-cognito-app-client-netmon-web-client.png" alt="Cognito netmon-web-client app client" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 44 – Cognito netmon-web-client app client&lt;/figcaption>
+&lt;/figure>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/49-cognito-users-confirmed-enabled.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/49-cognito-users-confirmed-enabled.png" alt="Two verified Cognito accounts" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 49 – Two verified Cognito accounts&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="2">
+&lt;li>
+&lt;p>When testing is complete, back up relevant configuration and remove the App Client, Resource Server, and User Pool as appropriate. Deleting the pool prevents NetMon users from signing in.&lt;/p></description></item></channel></rss>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>5.3. CloudWatch, SNS, and EventBridge on Internship Report</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-3-monitoring/</link><description>Recent content in 5.3. CloudWatch, SNS, and EventBridge on Internship Report</description><generator>Hugo</generator><language>en</language><lastBuildDate>Wed, 11 Nov 2026 00:00:00 +0700</lastBuildDate><atom:link href="https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-3-monitoring/index.xml" rel="self" type="application/rss+xml"/><item><title>5.3.1. Collect CPU, RAM, and Disk Metrics</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-3-monitoring/5-3-1-metrics/</link><pubDate>Wed, 11 Nov 2026 00:00:00 +0700</pubDate><guid>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-3-monitoring/5-3-1-metrics/</guid><description>&lt;h1 id="531-collect-cpu-ram-and-disk-metrics">5.3.1. Collect CPU, RAM, and Disk Metrics&lt;/h1>
+&lt;h2 id="objective">Objective&lt;/h2>
+&lt;p>Publish EC2 CPU, memory, and disk utilization metrics to CloudWatch for monitoring and alert evaluation.&lt;/p>
+&lt;h2 id="steps">Steps&lt;/h2>
+&lt;ol>
+&lt;li>Open &lt;strong>CloudWatch → Metrics → All metrics&lt;/strong> and find &lt;code>AWS/EC2 → CPUUtilization&lt;/code> for the target InstanceId. CPU is an EC2 standard metric.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/50-ec2-netmon-monitoring-cpu-network-metrics.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/50-ec2-netmon-monitoring-cpu-network-metrics.png" alt="EC2 CPU and network metrics charts" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 50 – EC2 CPU and network metrics charts&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="2">
+&lt;li>
+&lt;p>For memory and disk, install and configure &lt;strong>Amazon CloudWatch Agent&lt;/strong> on Ubuntu. The instance role must permit metric publishing, for example through suitable &lt;code>CloudWatchAgentServerPolicy&lt;/code> permissions.&lt;/p></description></item><item><title>5.3.2. Create CloudWatch Alarms and SNS Email</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-3-monitoring/5-3-2-alarms-sns/</link><pubDate>Wed, 11 Nov 2026 00:00:00 +0700</pubDate><guid>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-3-monitoring/5-3-2-alarms-sns/</guid><description>&lt;h1 id="532-create-cloudwatch-alarms-and-sns-email">5.3.2. Create CloudWatch Alarms and SNS Email&lt;/h1>
+&lt;h2 id="objective">Objective&lt;/h2>
+&lt;p>Create CPU, memory, and disk alarms and use SNS to send notifications when configured thresholds are exceeded.&lt;/p>
+&lt;h2 id="create-an-sns-topic">Create an SNS Topic&lt;/h2>
+&lt;ol>
+&lt;li>
+&lt;p>Go to &lt;strong>Amazon SNS → Topics → Create topic&lt;/strong>, select Standard, and name it &lt;code>netmon-alerts&lt;/code>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Open the topic and choose &lt;strong>Create subscription&lt;/strong>. Select &lt;code>Email&lt;/code> and provide the recipient address.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Open the AWS SNS confirmation message and select &lt;strong>Confirm subscription&lt;/strong>. A &lt;code>Pending confirmation&lt;/code> subscription cannot receive notifications.&lt;/p></description></item><item><title>5.3.3. Route Alarm Changes with EventBridge</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-3-monitoring/5-3-3-eventbridge/</link><pubDate>Wed, 11 Nov 2026 00:00:00 +0700</pubDate><guid>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-3-monitoring/5-3-3-eventbridge/</guid><description>&lt;h1 id="533-route-alarm-changes-with-eventbridge">5.3.3. Route Alarm Changes with EventBridge&lt;/h1>
+&lt;h2 id="objective">Objective&lt;/h2>
+&lt;p>When a CloudWatch Alarm changes state, EventBridge invokes a Lambda function that stores alert history in DynamoDB for time tracking and incident handling.&lt;/p>
+&lt;h2 id="steps">Steps&lt;/h2>
+&lt;ol>
+&lt;li>
+&lt;p>Ensure that the &lt;code>NetworkAlerts&lt;/code> table exists with String partition key &lt;code>eventId&lt;/code>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Create the Python Lambda &lt;code>netmon-save-alert&lt;/code> and give its execution role &lt;code>dynamodb:PutItem&lt;/code> on the &lt;code>NetworkAlerts&lt;/code> table and CloudWatch Logs permissions.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Open &lt;strong>Amazon EventBridge → Event buses → default → Rules → Create rule&lt;/strong>. Name it &lt;code>netmon-alarm-state-rule&lt;/code> on the &lt;code>default&lt;/code> event bus.&lt;/p></description></item><item><title>5.3.4. Store Alert History with Lambda and DynamoDB</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-3-monitoring/5-3-4-alert-history/</link><pubDate>Wed, 11 Nov 2026 00:00:00 +0700</pubDate><guid>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-3-monitoring/5-3-4-alert-history/</guid><description>&lt;h1 id="534-store-alert-history-with-lambda-and-dynamodb">5.3.4. Store Alert History with Lambda and DynamoDB&lt;/h1>
+&lt;h2 id="goal">Goal&lt;/h2>
+&lt;p>Store &lt;strong>CloudWatch Alarm State Change&lt;/strong> events in &lt;code>NetworkAlerts&lt;/code>, tracking occurrence time and whether the incident has been handled.&lt;/p>
+&lt;h2 id="console-steps">Console steps&lt;/h2>
+&lt;ol>
+&lt;li>Open &lt;strong>DynamoDB → Tables&lt;/strong> and verify &lt;code>NetworkAlerts&lt;/code>, with String partition key &lt;code>eventId&lt;/code>.&lt;/li>
+&lt;li>Open &lt;strong>Lambda → Functions → &lt;code>netmon-save-alert&lt;/code>&lt;/strong>. Deploy code that parses &lt;code>event.detail.alarmName&lt;/code>, &lt;code>event.detail.state.value&lt;/code>, &lt;code>event.id&lt;/code>, and the event timestamp.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/31-lambda-netmon-save-alert-code-overview.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/31-lambda-netmon-save-alert-code-overview.png" alt="netmon-save-alert Lambda code" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 31 – netmon-save-alert Lambda code&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="3">
+&lt;li>
+&lt;p>Under &lt;strong>Configuration → Permissions&lt;/strong>, grant the execution role &lt;strong>&lt;code>dynamodb:PutItem&lt;/code>&lt;/strong> to the &lt;code>NetworkAlerts&lt;/code> table ARN, plus CloudWatch Logs permissions.&lt;/p></description></item></channel></rss>

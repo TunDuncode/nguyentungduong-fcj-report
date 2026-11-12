@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>5.1. Chuẩn bị môi trường &amp; chọn Region on Báo cáo thực tập</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/vi/5-workshop/5-1-preparation/</link><description>Recent content in 5.1. Chuẩn bị môi trường &amp; chọn Region on Báo cáo thực tập</description><generator>Hugo</generator><language>vi</language><lastBuildDate>Wed, 11 Nov 2026 00:00:00 +0700</lastBuildDate><atom:link href="https://tunduncode.github.io/nguyentungduong-fcj-report/vi/5-workshop/5-1-preparation/index.xml" rel="self" type="application/rss+xml"/><item><title>5.1.1. Đăng nhập AWS và chọn Region</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/vi/5-workshop/5-1-preparation/5-1-1-region-budget/</link><pubDate>Wed, 11 Nov 2026 00:00:00 +0700</pubDate><guid>https://tunduncode.github.io/nguyentungduong-fcj-report/vi/5-workshop/5-1-preparation/5-1-1-region-budget/</guid><description>&lt;h1 id="511-đăng-nhập-aws-và-chọn-region">5.1.1. Đăng nhập AWS và chọn Region&lt;/h1>
+&lt;h2 id="mục-tiêu">Mục tiêu&lt;/h2>
+&lt;p>Chọn đúng Region &lt;code>us-east-1&lt;/code>, kiểm tra quyền truy cập AWS Console và tạo cảnh báo ngân sách cho việc học tập.&lt;/p>
+&lt;h2 id="các-bước-thực-hiện">Các bước thực hiện&lt;/h2>
+&lt;ol>
+&lt;li>Đăng nhập AWS Console bằng IAM user hoặc tài khoản được quản trị viên cấp quyền; &lt;strong>không dùng chung root&lt;/strong> cho cả nhóm.&lt;/li>
+&lt;li>Ở góc trên bên phải, chọn &lt;strong>United States (N. Virginia) — us-east-1&lt;/strong>. Những dịch vụ theo vùng như EC2, DynamoDB, Lambda và API Gateway phải được kiểm tra trong cùng Region.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/01-aws-region-us-east-1.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/01-aws-region-us-east-1.png" alt="Chọn khu vực us-east-1" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Ảnh 01 – Chọn khu vực us-east-1&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="3">
+&lt;li>
+&lt;p>Mở &lt;strong>Billing and Cost Management → Budgets → Create budget&lt;/strong>. Chọn kiểu &lt;strong>Cost budget&lt;/strong>, đặt mức ngân sách theo kế hoạch nhóm (trong lần thử nghiệm trước: &lt;strong>20 USD/tháng&lt;/strong>).&lt;/p></description></item><item><title>5.1.2. Cấu hình IAM và phân công nhóm</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/vi/5-workshop/5-1-preparation/5-1-2-iam/</link><pubDate>Wed, 11 Nov 2026 00:00:00 +0700</pubDate><guid>https://tunduncode.github.io/nguyentungduong-fcj-report/vi/5-workshop/5-1-preparation/5-1-2-iam/</guid><description>&lt;h1 id="512-cấu-hình-iam-và-phân-công-nhóm">5.1.2. Cấu hình IAM và phân công nhóm&lt;/h1>
+&lt;h2 id="mục-tiêu">Mục tiêu&lt;/h2>
+&lt;p>Phân công trách nhiệm triển khai và cấu hình IAM để từng thành viên có thể thực hiện phần việc của mình mà không dùng chung thông tin đăng nhập.&lt;/p>
+&lt;h2 id="phân-công-nhóm">Phân công nhóm&lt;/h2>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th style="text-align: left">Thành viên&lt;/th>
+ &lt;th style="text-align: left">Vai trò&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td style="text-align: left">Tùng Dương&lt;/td>
+ &lt;td style="text-align: left">VPC, Public/Private Subnet, Route Table, Internet Gateway, Security Group, EC2&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">Xuân Đức&lt;/td>
+ &lt;td style="text-align: left">Lambda, DynamoDB, API Gateway, xử lý CRUD và API cảnh báo&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">Mạnh Quân&lt;/td>
+ &lt;td style="text-align: left">CloudWatch, SNS, giao diện và kiểm thử&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+&lt;/table>
+&lt;h2 id="thực-hiện">Thực hiện&lt;/h2>
+&lt;ol>
+&lt;li>
+&lt;p>Vào &lt;strong>IAM → Users&lt;/strong>. Tạo IAM user riêng hoặc sử dụng AWS IAM Identity Center theo khả năng của tài khoản.&lt;/p></description></item><item><title>5.1.3. Thiết lập AWS Budgets và kiểm soát chi phí</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/vi/5-workshop/5-1-preparation/5-1-3-budget/</link><pubDate>Wed, 11 Nov 2026 00:00:00 +0700</pubDate><guid>https://tunduncode.github.io/nguyentungduong-fcj-report/vi/5-workshop/5-1-preparation/5-1-3-budget/</guid><description>&lt;h1 id="513-thiết-lập-aws-budgets-và-kiểm-soát-chi-phí">5.1.3. Thiết lập AWS Budgets và kiểm soát chi phí&lt;/h1>
+&lt;h2 id="mục-tiêu">Mục tiêu&lt;/h2>
+&lt;p>Thiết lập mức theo dõi chi phí khi học tập trên AWS. &lt;strong>Budget 20 USD là ngưỡng theo dõi, không phải số tiền đã chi và cũng không tự khóa tài nguyên&lt;/strong>.&lt;/p>
+&lt;h2 id="các-bước-thao-tác">Các bước thao tác&lt;/h2>
+&lt;ol>
+&lt;li>Tại AWS Console, mở &lt;strong>Billing and Cost Management → Budgets → Create budget&lt;/strong>; chọn &lt;strong>Cost budget&lt;/strong>.&lt;/li>
+&lt;li>Chọn chu kỳ &lt;strong>Monthly&lt;/strong> và nhập mức dự kiến &lt;strong>20 USD&lt;/strong>. Điền tên rõ nghĩa, chẳng hạn &lt;code>netmon-monthly-budget&lt;/code>.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/02-aws-budget-overview.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/02-aws-budget-overview.png" alt="Tổng quan ngân sách NetMon" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Ảnh 02 – Tổng quan ngân sách NetMon&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="3">
+&lt;li>Cấu hình thông báo theo phần trăm budget. Trong quá trình thực hành, nhóm đã sửa một mốc xuống &lt;strong>25%&lt;/strong>; có thể đặt thêm 50% và 100% theo chính sách nhóm.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/05-budget-alerts-25-50-100.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/05-budget-alerts-25-50-100.png" alt="Ba ngưỡng cảnh báo 25%, 50%, 100%" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Ảnh 05 – Ba ngưỡng cảnh báo 25%, 50%, 100%&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="4">
+&lt;li>Điền email người nhận cảnh báo; xác nhận email nếu AWS yêu cầu.&lt;/li>
+&lt;li>Vào &lt;strong>Cost Explorer&lt;/strong> hoặc &lt;strong>Bills&lt;/strong> để xem chi phí thật của EC2, EBS, CloudWatch, DynamoDB và các dịch vụ đã bật.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/03-aws-budget-history.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/03-aws-budget-history.png" alt="Lịch sử ngân sách" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Ảnh 03 – Lịch sử ngân sách&lt;/figcaption>
+&lt;/figure>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/04-aws-monthly-cost-history.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/04-aws-monthly-cost-history.png" alt="Lịch sử chi phí hàng tháng" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Ảnh 04 – Lịch sử chi phí hàng tháng&lt;/figcaption>
+&lt;/figure>
+&lt;h2 id="kiểm-tra-kết-quả">Kiểm tra kết quả&lt;/h2>
+&lt;ul>
+&lt;li>Budget nằm trong danh sách và email người nhận chính xác.&lt;/li>
+&lt;li>Xác nhận đơn vị tiền tệ, chu kỳ tháng và mức cảnh báo.&lt;/li>
+&lt;li>Chụp trang Budget, nhưng che địa chỉ email nếu công khai lên GitHub Pages.&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>Chú ý: EC2 chạy liên tục, EBS, public IPv4, NAT Gateway (nếu có) và CloudWatch vượt hạn mức là các nguồn chi phí cần xem kỹ. Không khẳng định toàn bộ hệ thống là miễn phí.&lt;/p></description></item></channel></rss>

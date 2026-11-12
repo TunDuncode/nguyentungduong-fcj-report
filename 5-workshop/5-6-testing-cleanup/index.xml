@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>5.6. End-to-End Tests and Resource Cleanup on Internship Report</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-6-testing-cleanup/</link><description>Recent content in 5.6. End-to-End Tests and Resource Cleanup on Internship Report</description><generator>Hugo</generator><language>en</language><lastBuildDate>Wed, 11 Nov 2026 00:00:00 +0700</lastBuildDate><atom:link href="https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-6-testing-cleanup/index.xml" rel="self" type="application/rss+xml"/><item><title>5.6.1. Test from the UI to CloudWatch/DynamoDB</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-6-testing-cleanup/5-6-1-e2e/</link><pubDate>Wed, 11 Nov 2026 00:00:00 +0700</pubDate><guid>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-6-testing-cleanup/5-6-1-e2e/</guid><description>&lt;h1 id="561-test-from-the-ui-to-cloudwatchdynamodb">5.6.1. Test from the UI to CloudWatch/DynamoDB&lt;/h1>
+&lt;h2 id="objective">Objective&lt;/h2>
+&lt;p>Run reproducible tests showing that the team&amp;rsquo;s infrastructure, backend, and monitoring/interface components work together as one workflow.&lt;/p>
+&lt;h2 id="suggested-test-cases">Suggested test cases&lt;/h2>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th style="text-align: left">ID&lt;/th>
+ &lt;th style="text-align: left">Test action&lt;/th>
+ &lt;th style="text-align: left">Expected result&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td style="text-align: left">T01&lt;/td>
+ &lt;td style="text-align: left">Request GET &lt;code>/devices&lt;/code> without JWT&lt;/td>
+ &lt;td style="text-align: left">&lt;code>401 Unauthorized&lt;/code>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">T02&lt;/td>
+ &lt;td style="text-align: left">Sign in with Cognito and PKCE&lt;/td>
+ &lt;td style="text-align: left">Obtain a valid Access Token&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">T03&lt;/td>
+ &lt;td style="text-align: left">GET &lt;code>/devices&lt;/code> with &lt;code>read&lt;/code> scope&lt;/td>
+ &lt;td style="text-align: left">Receive the device list&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">T04&lt;/td>
+ &lt;td style="text-align: left">POST &lt;code>/devices&lt;/code> with &lt;code>TEST-SW01&lt;/code>&lt;/td>
+ &lt;td style="text-align: left">Record created in &lt;code>NetworkDevices&lt;/code>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">T05&lt;/td>
+ &lt;td style="text-align: left">GET/PUT &lt;code>/devices/{id}&lt;/code>&lt;/td>
+ &lt;td style="text-align: left">Read and update the test device&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">T06&lt;/td>
+ &lt;td style="text-align: left">DELETE &lt;code>/devices/{id}&lt;/code>&lt;/td>
+ &lt;td style="text-align: left">Delete only the test device&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">T07&lt;/td>
+ &lt;td style="text-align: left">GET &lt;code>/alerts&lt;/code>&lt;/td>
+ &lt;td style="text-align: left">Read events in &lt;code>NetworkAlerts&lt;/code>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">T08&lt;/td>
+ &lt;td style="text-align: left">PUT &lt;code>/alerts/{id}&lt;/code>&lt;/td>
+ &lt;td style="text-align: left">Change &lt;code>handlingStatus&lt;/code> to &lt;code>Acknowledged&lt;/code> or &lt;code>Resolved&lt;/code>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">T09&lt;/td>
+ &lt;td style="text-align: left">GET &lt;code>/metrics&lt;/code>&lt;/td>
+ &lt;td style="text-align: left">Get real CloudWatch CPU data when available&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">T10&lt;/td>
+ &lt;td style="text-align: left">Change a demo alarm state in a controlled test&lt;/td>
+ &lt;td style="text-align: left">Verify SNS and stored alert history&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+&lt;/table>
+&lt;h2 id="evidence">Evidence&lt;/h2>
+&lt;p>Capture Cognito Users (hide email addresses for public use), JWT routes, Lambda Test, DynamoDB Scan, CloudWatch Alarms, EventBridge rule, redacted SNS email, and API Test results. Label evidence screenshots &lt;code>T01&lt;/code>, &lt;code>T02&lt;/code>, etc.&lt;/p></description></item><item><title>5.6.2. Review Costs and Preserve Evidence</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-6-testing-cleanup/5-6-2-cleanup/</link><pubDate>Wed, 11 Nov 2026 00:00:00 +0700</pubDate><guid>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-6-testing-cleanup/5-6-2-cleanup/</guid><description>&lt;h1 id="562-review-costs-and-preserve-evidence">5.6.2. Review Costs and Preserve Evidence&lt;/h1>
+&lt;h2 id="objective">Objective&lt;/h2>
+&lt;p>Finish a lab session without avoidable charges while preserving the resources needed for the team&amp;rsquo;s final demonstration.&lt;/p>
+&lt;h2 id="cost-checklist">Cost checklist&lt;/h2>
+&lt;ol>
+&lt;li>Open &lt;strong>Billing → Cost Explorer / Bills&lt;/strong> and record actual spending by service and Region.&lt;/li>
+&lt;li>Review &lt;strong>AWS Budgets&lt;/strong> and recipient email addresses, especially around the 25%, 50%, and 100% thresholds of the group&amp;rsquo;s USD 20/month plan.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/02-aws-budget-overview.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/02-aws-budget-overview.png" alt="NetMon budget overview" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 02 – NetMon budget overview&lt;/figcaption>
+&lt;/figure>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/03-aws-budget-history.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/03-aws-budget-history.png" alt="Budget history" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 03 – Budget history&lt;/figcaption>
+&lt;/figure>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/04-aws-monthly-cost-history.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/04-aws-monthly-cost-history.png" alt="Monthly cost history" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 04 – Monthly cost history&lt;/figcaption>
+&lt;/figure>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/05-budget-alerts-25-50-100.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/05-budget-alerts-25-50-100.png" alt="Budget alerts at 25%, 50% and 100%" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 05 – Budget alerts at 25%, 50% and 100%&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="3">
+&lt;li>
+&lt;p>Check &lt;strong>EC2 → Instances&lt;/strong> and consider &lt;strong>Stop&lt;/strong> when monitoring is not required. EBS and some attached resources can still incur costs.&lt;/p></description></item><item><title>5.6.3. Clean Up CloudWatch, SNS, and EventBridge</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-6-testing-cleanup/5-6-3-monitoring-cleanup/</link><pubDate>Wed, 11 Nov 2026 00:00:00 +0700</pubDate><guid>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-6-testing-cleanup/5-6-3-monitoring-cleanup/</guid><description>&lt;h1 id="563-clean-up-cloudwatch-sns-and-eventbridge">5.6.3. Clean Up CloudWatch, SNS, and EventBridge&lt;/h1>
+&lt;h2 id="when-to-do-this">When to do this&lt;/h2>
+&lt;p>&lt;strong>Only clean up after the demo is complete and all evidence has been backed up.&lt;/strong> Do not delete alarms, SNS topics, or EventBridge rules if alerting is still required.&lt;/p>
+&lt;h2 id="cleanup-steps">Cleanup steps&lt;/h2>
+&lt;ol>
+&lt;li>Open &lt;strong>CloudWatch → Alarms&lt;/strong> and capture the settings/history of &lt;code>netmon-cpu-high-80&lt;/code>, &lt;code>netmon-ram-high-80&lt;/code>, and &lt;code>netmon-disk-high-85&lt;/code>.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/21-cloudwatch-alarms-list.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/21-cloudwatch-alarms-list.png" alt="Three CloudWatch alarms" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 21 – Three CloudWatch alarms&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="2">
+&lt;li>
+&lt;p>Delete alarms individually only after their monitoring purpose has ended. This stops alarm evaluation; it does not delete EC2.&lt;/p></description></item><item><title>5.6.4. Clean Up Lambda, DynamoDB, and API Gateway</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-6-testing-cleanup/5-6-4-serverless-cleanup/</link><pubDate>Wed, 11 Nov 2026 00:00:00 +0700</pubDate><guid>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-6-testing-cleanup/5-6-4-serverless-cleanup/</guid><description>&lt;h1 id="564-clean-up-lambda-dynamodb-and-api-gateway">5.6.4. Clean Up Lambda, DynamoDB, and API Gateway&lt;/h1>
+&lt;h2 id="before-removing-resources">Before removing resources&lt;/h2>
+&lt;p>Finish the demo and back up relevant screenshots, logs, API configuration, and test data. &lt;strong>Deleting a DynamoDB table may irreversibly remove data&lt;/strong>.&lt;/p>
+&lt;h2 id="steps">Steps&lt;/h2>
+&lt;ol>
+&lt;li>&lt;strong>DynamoDB:&lt;/strong> Export or back up &lt;code>NetworkDevices&lt;/code> and &lt;code>NetworkAlerts&lt;/code> before deletion. Do not remove them while the frontend is still being tested.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/32-dynamodb-networkalerts-7-items.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/32-dynamodb-networkalerts-7-items.png" alt="Items in NetworkAlerts" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 32 – Items in NetworkAlerts&lt;/figcaption>
+&lt;/figure>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/33-dynamodb-networkdevices-2-items.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/33-dynamodb-networkdevices-2-items.png" alt="Two items in NetworkDevices" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 33 – Two items in NetworkDevices&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="2">
+&lt;li>&lt;strong>API Gateway:&lt;/strong> Document the eight Routes, Authorizer, CORS, Stage, and Integration for &lt;code>netmon-management-api&lt;/code>, then delete it only when no frontend depends on it.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/38-api-gateway-netmon-management-api-routes.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/38-api-gateway-netmon-management-api-routes.png" alt="Eight API Gateway routes" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 38 – Eight API Gateway routes&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="3">
+&lt;li>&lt;strong>AWS Lambda:&lt;/strong> Review event targets and triggers before deleting &lt;code>netmon-api&lt;/code> or &lt;code>netmon-save-alert&lt;/code>.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/34-lambda-netmon-api-code-and-api-gateway.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/34-lambda-netmon-api-code-and-api-gateway.png" alt="netmon-api Lambda and API Gateway trigger" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 34 – netmon-api Lambda and API Gateway trigger&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="4">
+&lt;li>
+&lt;p>&lt;strong>IAM roles:&lt;/strong> Remove only roles dedicated to services that have been retired; preserve any role shared with EC2 or other applications.&lt;/p></description></item><item><title>5.6.5. Clean Up Cognito and Networking Resources</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-6-testing-cleanup/5-6-5-auth-cleanup/</link><pubDate>Wed, 11 Nov 2026 00:00:00 +0700</pubDate><guid>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-6-testing-cleanup/5-6-5-auth-cleanup/</guid><description>&lt;h1 id="565-clean-up-cognito-and-networking-resources">5.6.5. Clean Up Cognito and Networking Resources&lt;/h1>
+&lt;h2 id="goal">Goal&lt;/h2>
+&lt;p>Revoke access after the project and remove infrastructure that may continue generating charges.&lt;/p>
+&lt;h2 id="cleanup-steps">Cleanup steps&lt;/h2>
+&lt;ol>
+&lt;li>&lt;strong>Amazon Cognito:&lt;/strong> Confirm the User Pool used by &lt;code>netmon-web-client&lt;/code>. An application user in Cognito is different from an IAM user who accesses AWS Console.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/43-cognito-user-pool-overview.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/43-cognito-user-pool-overview.png" alt="Cognito user-pool overview" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 43 – Cognito user-pool overview&lt;/figcaption>
+&lt;/figure>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/44-cognito-app-client-netmon-web-client.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/44-cognito-app-client-netmon-web-client.png" alt="Cognito netmon-web-client app client" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 44 – Cognito netmon-web-client app client&lt;/figcaption>
+&lt;/figure>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/49-cognito-users-confirmed-enabled.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/49-cognito-users-confirmed-enabled.png" alt="Two verified Cognito accounts" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 49 – Two verified Cognito accounts&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="2">
+&lt;li>
+&lt;p>When testing is complete, back up relevant configuration and remove the App Client, Resource Server, and User Pool as appropriate. Deleting the pool prevents NetMon users from signing in.&lt;/p></description></item></channel></rss>

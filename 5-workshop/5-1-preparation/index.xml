@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>5.1. Environment Preparation &amp; Region on Internship Report</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-1-preparation/</link><description>Recent content in 5.1. Environment Preparation &amp; Region on Internship Report</description><generator>Hugo</generator><language>en</language><lastBuildDate>Wed, 11 Nov 2026 00:00:00 +0700</lastBuildDate><atom:link href="https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-1-preparation/index.xml" rel="self" type="application/rss+xml"/><item><title>5.1.1. AWS Sign-in and Region</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-1-preparation/5-1-1-region-budget/</link><pubDate>Wed, 11 Nov 2026 00:00:00 +0700</pubDate><guid>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-1-preparation/5-1-1-region-budget/</guid><description>&lt;h1 id="511-aws-sign-in-and-region">5.1.1. AWS Sign-in and Region&lt;/h1>
+&lt;h2 id="objective">Objective&lt;/h2>
+&lt;p>Select the correct &lt;code>us-east-1&lt;/code> Region, verify AWS Console access, and create budget alerts for the lab.&lt;/p>
+&lt;h2 id="steps">Steps&lt;/h2>
+&lt;ol>
+&lt;li>Sign in with an IAM user or a delegated account; &lt;strong>do not share the root account&lt;/strong> across the team.&lt;/li>
+&lt;li>Select &lt;strong>United States (N. Virginia) — us-east-1&lt;/strong> in the Region selector. Regional resources such as EC2, DynamoDB, Lambda, and API Gateway should be inspected in the same Region.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/01-aws-region-us-east-1.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/01-aws-region-us-east-1.png" alt="Select AWS region us-east-1" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 01 – Select AWS region us-east-1&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="3">
+&lt;li>
+&lt;p>Navigate to &lt;strong>Billing and Cost Management → Budgets → Create budget&lt;/strong>. Select a &lt;strong>Cost budget&lt;/strong> and enter the planned limit (the group&amp;rsquo;s earlier lab used &lt;strong>USD 20/month&lt;/strong>).&lt;/p></description></item><item><title>5.1.2. IAM Setup and Team Roles</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-1-preparation/5-1-2-iam/</link><pubDate>Wed, 11 Nov 2026 00:00:00 +0700</pubDate><guid>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-1-preparation/5-1-2-iam/</guid><description>&lt;h1 id="512-iam-setup-and-team-roles">5.1.2. IAM Setup and Team Roles&lt;/h1>
+&lt;h2 id="objective">Objective&lt;/h2>
+&lt;p>Assign project responsibilities and configure IAM so that each teammate can work without sharing credentials.&lt;/p>
+&lt;h2 id="team-responsibilities">Team responsibilities&lt;/h2>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th style="text-align: left">Member&lt;/th>
+ &lt;th style="text-align: left">Responsibility&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td style="text-align: left">Tung Duong&lt;/td>
+ &lt;td style="text-align: left">VPC, public/private subnets, route tables, Internet Gateway, Security Groups, EC2&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">Xuan Duc&lt;/td>
+ &lt;td style="text-align: left">Lambda, DynamoDB, API Gateway, device CRUD, and alert APIs&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">Manh Quan&lt;/td>
+ &lt;td style="text-align: left">CloudWatch, SNS, interface, and testing&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+&lt;/table>
+&lt;h2 id="steps">Steps&lt;/h2>
+&lt;ol>
+&lt;li>
+&lt;p>Open &lt;strong>IAM → Users&lt;/strong>. Create separate IAM users, or use AWS IAM Identity Center if it is available.&lt;/p></description></item><item><title>5.1.3. AWS Budgets and Cost Controls</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-1-preparation/5-1-3-budget/</link><pubDate>Wed, 11 Nov 2026 00:00:00 +0700</pubDate><guid>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-1-preparation/5-1-3-budget/</guid><description>&lt;h1 id="513-aws-budgets-and-cost-controls">5.1.3. AWS Budgets and Cost Controls&lt;/h1>
+&lt;h2 id="goal">Goal&lt;/h2>
+&lt;p>Set up AWS cost monitoring for the lab. &lt;strong>A USD 20 budget is an alert threshold—not actual spending or a hard spending cap&lt;/strong>.&lt;/p>
+&lt;h2 id="console-steps">Console steps&lt;/h2>
+&lt;ol>
+&lt;li>Open &lt;strong>Billing and Cost Management → Budgets → Create budget&lt;/strong>; choose &lt;strong>Cost budget&lt;/strong>.&lt;/li>
+&lt;li>Choose &lt;strong>Monthly&lt;/strong>, enter &lt;strong>USD 20&lt;/strong>, and name the budget &lt;code>netmon-monthly-budget&lt;/code> or another meaningful name.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/02-aws-budget-overview.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/02-aws-budget-overview.png" alt="NetMon budget overview" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 02 – NetMon budget overview&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="3">
+&lt;li>Configure percentage-based email alerts. During the lab, the team adjusted one alert threshold to &lt;strong>25%&lt;/strong>; other useful thresholds are 50% and 100%.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/05-budget-alerts-25-50-100.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/05-budget-alerts-25-50-100.png" alt="Budget alerts at 25%, 50% and 100%" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 05 – Budget alerts at 25%, 50% and 100%&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="4">
+&lt;li>Enter the alert recipient email and complete any email verification required.&lt;/li>
+&lt;li>Review actual charges under &lt;strong>Cost Explorer&lt;/strong> or &lt;strong>Bills&lt;/strong>, particularly EC2, EBS, CloudWatch, DynamoDB, and any networking resources.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/03-aws-budget-history.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/03-aws-budget-history.png" alt="Budget history" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 03 – Budget history&lt;/figcaption>
+&lt;/figure>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/04-aws-monthly-cost-history.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/04-aws-monthly-cost-history.png" alt="Monthly cost history" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 04 – Monthly cost history&lt;/figcaption>
+&lt;/figure>
+&lt;h2 id="verification">Verification&lt;/h2>
+&lt;ul>
+&lt;li>Confirm that the budget is listed and recipients are correct.&lt;/li>
+&lt;li>Check the currency, monthly period, and warning thresholds.&lt;/li>
+&lt;li>Redact email addresses before publishing cost-console screenshots.&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>Note: EC2 uptime, EBS storage, public IPv4, NAT Gateway (if used), and CloudWatch usage may incur charges. Do not assume the entire system is free.&lt;/p></description></item></channel></rss>

@@ -1,0 +1,690 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Báo cáo thực tập</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/vi/</link><description>Recent content on Báo cáo thực tập</description><generator>Hugo</generator><language>vi</language><lastBuildDate>Wed, 11 Nov 2026 00:00:00 +0700</lastBuildDate><atom:link href="https://tunduncode.github.io/nguyentungduong-fcj-report/vi/index.xml" rel="self" type="application/rss+xml"/><item><title>5.1.1. Đăng nhập AWS và chọn Region</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/vi/5-workshop/5-1-preparation/5-1-1-region-budget/</link><pubDate>Wed, 11 Nov 2026 00:00:00 +0700</pubDate><guid>https://tunduncode.github.io/nguyentungduong-fcj-report/vi/5-workshop/5-1-preparation/5-1-1-region-budget/</guid><description>&lt;h1 id="511-đăng-nhập-aws-và-chọn-region">5.1.1. Đăng nhập AWS và chọn Region&lt;/h1>
+&lt;h2 id="mục-tiêu">Mục tiêu&lt;/h2>
+&lt;p>Chọn đúng Region &lt;code>us-east-1&lt;/code>, kiểm tra quyền truy cập AWS Console và tạo cảnh báo ngân sách cho việc học tập.&lt;/p>
+&lt;h2 id="các-bước-thực-hiện">Các bước thực hiện&lt;/h2>
+&lt;ol>
+&lt;li>Đăng nhập AWS Console bằng IAM user hoặc tài khoản được quản trị viên cấp quyền; &lt;strong>không dùng chung root&lt;/strong> cho cả nhóm.&lt;/li>
+&lt;li>Ở góc trên bên phải, chọn &lt;strong>United States (N. Virginia) — us-east-1&lt;/strong>. Những dịch vụ theo vùng như EC2, DynamoDB, Lambda và API Gateway phải được kiểm tra trong cùng Region.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/01-aws-region-us-east-1.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/01-aws-region-us-east-1.png" alt="Chọn khu vực us-east-1" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Ảnh 01 – Chọn khu vực us-east-1&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="3">
+&lt;li>
+&lt;p>Mở &lt;strong>Billing and Cost Management → Budgets → Create budget&lt;/strong>. Chọn kiểu &lt;strong>Cost budget&lt;/strong>, đặt mức ngân sách theo kế hoạch nhóm (trong lần thử nghiệm trước: &lt;strong>20 USD/tháng&lt;/strong>).&lt;/p></description></item><item><title>5.2.1. Tạo VPC, Subnet, Route Table và IGW</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/vi/5-workshop/5-2-infrastructure/5-2-1-vpc/</link><pubDate>Wed, 11 Nov 2026 00:00:00 +0700</pubDate><guid>https://tunduncode.github.io/nguyentungduong-fcj-report/vi/5-workshop/5-2-infrastructure/5-2-1-vpc/</guid><description>&lt;h1 id="521-tạo-vpc-subnet-route-table-và-igw">5.2.1. Tạo VPC, Subnet, Route Table và IGW&lt;/h1>
+&lt;h2 id="mục-tiêu">Mục tiêu&lt;/h2>
+&lt;p>Thiết lập mạng ảo để triển khai máy chủ giám sát EC2, tách biệt các thành phần kết nối Internet và các thành phần nội bộ.&lt;/p>
+&lt;h2 id="thực-hiện-trên-aws-console">Thực hiện trên AWS Console&lt;/h2>
+&lt;ol>
+&lt;li>Vào &lt;strong>VPC → Your VPCs → Create VPC&lt;/strong>. Chọn kiểu VPC phù hợp. Dải CIDR của &lt;code>netmon-vpc&lt;/code> trong ảnh thực tế là &lt;code>10.0.0.0/16&lt;/code>.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/06-netmon-vpc-resource-map.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/06-netmon-vpc-resource-map.png" alt="Bản đồ tài nguyên VPC netmon-vpc" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Ảnh 06 – Bản đồ tài nguyên VPC netmon-vpc&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="2">
+&lt;li>Tạo &lt;strong>Public subnet&lt;/strong> &lt;code>10.0.0.0/20&lt;/code> và &lt;strong>Private subnet&lt;/strong> &lt;code>10.0.128.0/20&lt;/code> trong Availability Zone phù hợp.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/07-subnet-list.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/07-subnet-list.png" alt="Danh sách hai subnet" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Ảnh 07 – Danh sách hai subnet&lt;/figcaption>
+&lt;/figure>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/08-public-subnet-details.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/08-public-subnet-details.png" alt="Thông tin Public subnet" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Ảnh 08 – Thông tin Public subnet&lt;/figcaption>
+&lt;/figure>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/09-private-subnet-details.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/09-private-subnet-details.png" alt="Thông tin Private subnet" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Ảnh 09 – Thông tin Private subnet&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="3">
+&lt;li>Tạo &lt;strong>Internet Gateway&lt;/strong>, sau đó attach vào VPC.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/14-netmon-igw-details.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/14-netmon-igw-details.png" alt="Internet Gateway netmon-igw" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Ảnh 14 – Internet Gateway netmon-igw&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="4">
+&lt;li>Tạo &lt;strong>Public Route Table&lt;/strong>; đặt route &lt;code>0.0.0.0/0&lt;/code> trỏ tới Internet Gateway và liên kết với Public subnet.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/10-route-tables-list.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/10-route-tables-list.png" alt="Danh sách route table" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Ảnh 10 – Danh sách route table&lt;/figcaption>
+&lt;/figure>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/11-netmon-rtb-public-routes.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/11-netmon-rtb-public-routes.png" alt="Các route của netmon-rtb-public" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Ảnh 11 – Các route của netmon-rtb-public&lt;/figcaption>
+&lt;/figure>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/12-netmon-main-route-table-no-name.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/12-netmon-main-route-table-no-name.png" alt="Main route table của VPC" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Ảnh 12 – Main route table của VPC&lt;/figcaption>
+&lt;/figure>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/13-netmon-rtb-private1-us-east-1a-routes.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/13-netmon-rtb-private1-us-east-1a-routes.png" alt="Route table của Private subnet" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Ảnh 13 – Route table của Private subnet&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="5">
+&lt;li>Private subnet không tự có đường ra Internet. Nếu cần truy cập Internet từ Private subnet, phải thiết kế giải pháp NAT phù hợp và đánh giá chi phí trước khi triển khai.&lt;/li>
+&lt;li>Kiểm tra &lt;strong>Network ACL&lt;/strong> và &lt;strong>Security Group&lt;/strong> theo luồng traffic dự kiến; mặc định chặn những kết nối không cần thiết.&lt;/li>
+&lt;/ol>
+&lt;h2 id="kết-quả-cần-chụp">Kết quả cần chụp&lt;/h2>
+&lt;ul>
+&lt;li>VPC và dải CIDR, danh sách subnet.&lt;/li>
+&lt;li>Route table và liên kết đến Internet Gateway.&lt;/li>
+&lt;li>Security Group gắn cho máy chủ EC2.&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>Không tạo NAT Gateway chỉ để hoàn thiện hình minh họa nếu dự án không thật sự cần, vì dịch vụ này có thể phát sinh phí theo giờ và lưu lượng.&lt;/p></description></item><item><title>5.3.1. Thu thập các chỉ số CPU, RAM và Disk</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/vi/5-workshop/5-3-monitoring/5-3-1-metrics/</link><pubDate>Wed, 11 Nov 2026 00:00:00 +0700</pubDate><guid>https://tunduncode.github.io/nguyentungduong-fcj-report/vi/5-workshop/5-3-monitoring/5-3-1-metrics/</guid><description>&lt;h1 id="531-thu-thập-các-chỉ-số-cpu-ram-và-disk">5.3.1. Thu thập các chỉ số CPU, RAM và Disk&lt;/h1>
+&lt;h2 id="mục-tiêu">Mục tiêu&lt;/h2>
+&lt;p>Hiển thị CPU, RAM và Disk của máy chủ EC2 trong CloudWatch, làm dữ liệu đầu vào cho cảnh báo.&lt;/p>
+&lt;h2 id="thực-hiện">Thực hiện&lt;/h2>
+&lt;ol>
+&lt;li>Vào &lt;strong>CloudWatch → Metrics → All metrics&lt;/strong>; tìm metric &lt;code>AWS/EC2 → CPUUtilization&lt;/code> theo InstanceId. CPU là metric EC2 tiêu chuẩn.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/50-ec2-netmon-monitoring-cpu-network-metrics.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/50-ec2-netmon-monitoring-cpu-network-metrics.png" alt="Biểu đồ giám sát CPU và mạng của EC2" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Ảnh 50 – Biểu đồ giám sát CPU và mạng của EC2&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="2">
+&lt;li>
+&lt;p>Đối với RAM và Disk, triển khai &lt;strong>Amazon CloudWatch Agent&lt;/strong> trên Ubuntu. Agent cần IAM role cho phép xuất metrics, ví dụ policy phù hợp với &lt;code>CloudWatchAgentServerPolicy&lt;/code>.&lt;/p></description></item><item><title>5.4.1. Khởi tạo bảng NetworkDevices và NetworkAlerts</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/vi/5-workshop/5-4-serverless/5-4-1-dynamodb/</link><pubDate>Wed, 11 Nov 2026 00:00:00 +0700</pubDate><guid>https://tunduncode.github.io/nguyentungduong-fcj-report/vi/5-workshop/5-4-serverless/5-4-1-dynamodb/</guid><description>&lt;h1 id="541-khởi-tạo-bảng-networkdevices-và-networkalerts">5.4.1. Khởi tạo bảng NetworkDevices và NetworkAlerts&lt;/h1>
+&lt;h2 id="mục-tiêu">Mục tiêu&lt;/h2>
+&lt;p>Thiết kế cơ sở dữ liệu NoSQL cho danh sách thiết bị và lịch sử cảnh báo. Dùng các bảng đã có, không tạo trùng khi không cần thiết.&lt;/p>
+&lt;h2 id="tạo-bảng">Tạo bảng&lt;/h2>
+&lt;ol>
+&lt;li>Mở &lt;strong>DynamoDB → Tables&lt;/strong>, Region &lt;code>us-east-1&lt;/code>.&lt;/li>
+&lt;li>Tạo hoặc xác minh bảng &lt;strong>&lt;code>NetworkDevices&lt;/code>&lt;/strong>, Partition Key &lt;code>deviceId&lt;/code> (String), chế độ dung lượng &lt;strong>On-demand&lt;/strong>.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/33-dynamodb-networkdevices-2-items.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/33-dynamodb-networkdevices-2-items.png" alt="Hai bản ghi trong NetworkDevices" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Ảnh 33 – Hai bản ghi trong NetworkDevices&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="3">
+&lt;li>Tạo hoặc xác minh bảng &lt;strong>&lt;code>NetworkAlerts&lt;/code>&lt;/strong>, Partition Key &lt;code>eventId&lt;/code> (String), On-demand.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/32-dynamodb-networkalerts-7-items.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/32-dynamodb-networkalerts-7-items.png" alt="Các bản ghi trong NetworkAlerts" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Ảnh 32 – Các bản ghi trong NetworkAlerts&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="4">
+&lt;li>Không cần Sort Key nếu thiết kế hiện tại dùng khóa đơn; chỉ bổ sung index khi xác định được mẫu truy vấn cụ thể.&lt;/li>
+&lt;/ol>
+&lt;h3 id="dữ-liệu-thiết-bị-ví-dụ">Dữ liệu thiết bị ví dụ&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;deviceId&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;TEST-SW01&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;deviceName&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;Switch Demo&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;deviceType&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;Switch&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;ipAddress&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;10.0.0.10&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;status&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;Online&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Đối với EC2, có thể lưu thêm &lt;code>instanceId&lt;/code>, &lt;code>region&lt;/code>, &lt;code>monitoringSource&lt;/code>, &lt;code>vpcId&lt;/code>. &lt;strong>Không chép nhầm InstanceId vào ô IP&lt;/strong>: &lt;code>instanceId&lt;/code> là định danh của EC2, còn &lt;code>ipAddress&lt;/code> là địa chỉ mạng.&lt;/p></description></item><item><title>5.5.1. Tạo Cognito User Pool và Web Client</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/vi/5-workshop/5-5-auth-frontend/5-5-1-cognito/</link><pubDate>Wed, 11 Nov 2026 00:00:00 +0700</pubDate><guid>https://tunduncode.github.io/nguyentungduong-fcj-report/vi/5-workshop/5-5-auth-frontend/5-5-1-cognito/</guid><description>&lt;h1 id="551-tạo-cognito-user-pool-và-web-client">5.5.1. Tạo Cognito User Pool và Web Client&lt;/h1>
+&lt;h2 id="mục-tiêu">Mục tiêu&lt;/h2>
+&lt;p>Tạo cơ chế đăng nhập cho người quản lý NetMon bằng Amazon Cognito, thay vì để giao diện truy cập API không kiểm soát.&lt;/p>
+&lt;h2 id="các-bước">Các bước&lt;/h2>
+&lt;ol>
+&lt;li>Mở &lt;strong>Amazon Cognito → User pools&lt;/strong>. Tạo User Pool hoặc chọn pool đã tạo ở Region &lt;code>us-east-1&lt;/code>.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/43-cognito-user-pool-overview.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/43-cognito-user-pool-overview.png" alt="Tổng quan Cognito User Pool" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Ảnh 43 – Tổng quan Cognito User Pool&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="2">
+&lt;li>Tạo &lt;strong>App client&lt;/strong> cho loại &lt;strong>Single-page application (SPA)&lt;/strong>, đặt tên &lt;code>netmon-web-client&lt;/code>.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/44-cognito-app-client-netmon-web-client.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/44-cognito-app-client-netmon-web-client.png" alt="Cognito App Client netmon-web-client" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Ảnh 44 – Cognito App Client netmon-web-client&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="3">
+&lt;li>
+&lt;p>Chọn đăng nhập bằng &lt;strong>email&lt;/strong>, không mở self-registration nếu đây là hệ thống chỉ dành cho thành viên được cấp quyền.&lt;/p></description></item><item><title>5.6.1. Kiểm thử từ giao diện đến CloudWatch/DynamoDB</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/vi/5-workshop/5-6-testing-cleanup/5-6-1-e2e/</link><pubDate>Wed, 11 Nov 2026 00:00:00 +0700</pubDate><guid>https://tunduncode.github.io/nguyentungduong-fcj-report/vi/5-workshop/5-6-testing-cleanup/5-6-1-e2e/</guid><description>&lt;h1 id="561-kiểm-thử-từ-giao-diện-đến-cloudwatchdynamodb">5.6.1. Kiểm thử từ giao diện đến CloudWatch/DynamoDB&lt;/h1>
+&lt;h2 id="mục-tiêu">Mục tiêu&lt;/h2>
+&lt;p>Thực hiện kịch bản kiểm thử có thể chứng minh ba phần của nhóm (hạ tầng, backend, giám sát/giao diện) kết nối thành một quy trình thống nhất.&lt;/p>
+&lt;h2 id="kịch-bản-đề-xuất">Kịch bản đề xuất&lt;/h2>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th style="text-align: left">Mã&lt;/th>
+ &lt;th style="text-align: left">Bước kiểm thử&lt;/th>
+ &lt;th style="text-align: left">Kết quả mong đợi&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td style="text-align: left">T01&lt;/td>
+ &lt;td style="text-align: left">Truy cập GET &lt;code>/devices&lt;/code> không JWT&lt;/td>
+ &lt;td style="text-align: left">&lt;code>401 Unauthorized&lt;/code>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">T02&lt;/td>
+ &lt;td style="text-align: left">Đăng nhập Cognito bằng PKCE&lt;/td>
+ &lt;td style="text-align: left">Nhận Access Token hợp lệ&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">T03&lt;/td>
+ &lt;td style="text-align: left">GET &lt;code>/devices&lt;/code> có scope &lt;code>read&lt;/code>&lt;/td>
+ &lt;td style="text-align: left">Nhận danh sách thiết bị&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">T04&lt;/td>
+ &lt;td style="text-align: left">POST &lt;code>/devices&lt;/code> với &lt;code>TEST-SW01&lt;/code>&lt;/td>
+ &lt;td style="text-align: left">Tạo bản ghi trong &lt;code>NetworkDevices&lt;/code>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">T05&lt;/td>
+ &lt;td style="text-align: left">GET/PUT &lt;code>/devices/{id}&lt;/code>&lt;/td>
+ &lt;td style="text-align: left">Xem và sửa thiết bị thử&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">T06&lt;/td>
+ &lt;td style="text-align: left">DELETE &lt;code>/devices/{id}&lt;/code>&lt;/td>
+ &lt;td style="text-align: left">Xóa đúng thiết bị thử&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">T07&lt;/td>
+ &lt;td style="text-align: left">GET &lt;code>/alerts&lt;/code>&lt;/td>
+ &lt;td style="text-align: left">Đọc sự kiện trong &lt;code>NetworkAlerts&lt;/code>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">T08&lt;/td>
+ &lt;td style="text-align: left">PUT &lt;code>/alerts/{id}&lt;/code>&lt;/td>
+ &lt;td style="text-align: left">Chuyển &lt;code>handlingStatus&lt;/code> thành &lt;code>Acknowledged&lt;/code> hoặc &lt;code>Resolved&lt;/code>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">T09&lt;/td>
+ &lt;td style="text-align: left">GET &lt;code>/metrics&lt;/code>&lt;/td>
+ &lt;td style="text-align: left">Lấy CPU thực từ CloudWatch nếu metric có dữ liệu&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">T10&lt;/td>
+ &lt;td style="text-align: left">Đổi trạng thái một Alarm trong môi trường demo&lt;/td>
+ &lt;td style="text-align: left">SNS và lịch sử sự kiện được kiểm tra&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+&lt;/table>
+&lt;h2 id="lưu-bằng-chứng">Lưu bằng chứng&lt;/h2>
+&lt;p>Chụp trang Cognito Users (che email khi công khai), danh sách JWT routes, Lambda Test, DynamoDB Scan, CloudWatch Alarms, EventBridge rule, email SNS đã che người nhận và kết quả API Test. Gắn chú thích &lt;code>T01&lt;/code>, &lt;code>T02&lt;/code>&amp;hellip; cho từng ảnh.&lt;/p></description></item><item><title>5.1.2. Cấu hình IAM và phân công nhóm</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/vi/5-workshop/5-1-preparation/5-1-2-iam/</link><pubDate>Wed, 11 Nov 2026 00:00:00 +0700</pubDate><guid>https://tunduncode.github.io/nguyentungduong-fcj-report/vi/5-workshop/5-1-preparation/5-1-2-iam/</guid><description>&lt;h1 id="512-cấu-hình-iam-và-phân-công-nhóm">5.1.2. Cấu hình IAM và phân công nhóm&lt;/h1>
+&lt;h2 id="mục-tiêu">Mục tiêu&lt;/h2>
+&lt;p>Phân công trách nhiệm triển khai và cấu hình IAM để từng thành viên có thể thực hiện phần việc của mình mà không dùng chung thông tin đăng nhập.&lt;/p>
+&lt;h2 id="phân-công-nhóm">Phân công nhóm&lt;/h2>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th style="text-align: left">Thành viên&lt;/th>
+ &lt;th style="text-align: left">Vai trò&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td style="text-align: left">Tùng Dương&lt;/td>
+ &lt;td style="text-align: left">VPC, Public/Private Subnet, Route Table, Internet Gateway, Security Group, EC2&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">Xuân Đức&lt;/td>
+ &lt;td style="text-align: left">Lambda, DynamoDB, API Gateway, xử lý CRUD và API cảnh báo&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">Mạnh Quân&lt;/td>
+ &lt;td style="text-align: left">CloudWatch, SNS, giao diện và kiểm thử&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+&lt;/table>
+&lt;h2 id="thực-hiện">Thực hiện&lt;/h2>
+&lt;ol>
+&lt;li>
+&lt;p>Vào &lt;strong>IAM → Users&lt;/strong>. Tạo IAM user riêng hoặc sử dụng AWS IAM Identity Center theo khả năng của tài khoản.&lt;/p></description></item><item><title>5.2.2. Tạo máy chủ Ubuntu EC2</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/vi/5-workshop/5-2-infrastructure/5-2-2-ec2/</link><pubDate>Wed, 11 Nov 2026 00:00:00 +0700</pubDate><guid>https://tunduncode.github.io/nguyentungduong-fcj-report/vi/5-workshop/5-2-infrastructure/5-2-2-ec2/</guid><description>&lt;h1 id="522-tạo-máy-chủ-ubuntu-ec2">5.2.2. Tạo máy chủ Ubuntu EC2&lt;/h1>
+&lt;h2 id="mục-tiêu">Mục tiêu&lt;/h2>
+&lt;p>Khởi tạo máy chủ Ubuntu phục vụ kiểm thử giám sát CloudWatch mà vẫn hạn chế rủi ro truy cập trái phép.&lt;/p>
+&lt;h2 id="các-bước">Các bước&lt;/h2>
+&lt;ol>
+&lt;li>
+&lt;p>Mở &lt;strong>EC2 → Instances → Launch instances&lt;/strong>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Tên máy chủ: &lt;code>netmon-ec2-server&lt;/code> (đã sử dụng trong quá trình thử nghiệm).&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Chọn &lt;strong>Ubuntu Server 24.04 LTS&lt;/strong> và loại instance phù hợp với ngân sách, hạn mức hiện có.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Trong &lt;strong>Network settings&lt;/strong>, chọn VPC và Public subnet dự kiến; kiểm tra lựa chọn Public IP theo nhu cầu kết nối.&lt;/p></description></item><item><title>5.3.2. Tạo CloudWatch Alarm và gửi SNS Email</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/vi/5-workshop/5-3-monitoring/5-3-2-alarms-sns/</link><pubDate>Wed, 11 Nov 2026 00:00:00 +0700</pubDate><guid>https://tunduncode.github.io/nguyentungduong-fcj-report/vi/5-workshop/5-3-monitoring/5-3-2-alarms-sns/</guid><description>&lt;h1 id="532-tạo-cloudwatch-alarm-và-gửi-sns-email">5.3.2. Tạo CloudWatch Alarm và gửi SNS Email&lt;/h1>
+&lt;h2 id="mục-tiêu">Mục tiêu&lt;/h2>
+&lt;p>Tạo ba alarm CPU/RAM/Disk và kết nối SNS để gửi thông báo khi một chỉ số vượt ngưỡng.&lt;/p>
+&lt;h2 id="tạo-sns-topic">Tạo SNS Topic&lt;/h2>
+&lt;ol>
+&lt;li>Mở &lt;strong>Amazon SNS → Topics → Create topic&lt;/strong> (Standard), đặt tên &lt;code>netmon-alerts&lt;/code>.&lt;/li>
+&lt;li>Vào topic → &lt;strong>Create subscription&lt;/strong> → Protocol &lt;code>Email&lt;/code>, nhập email nhận cảnh báo.&lt;/li>
+&lt;li>Mở thư từ AWS SNS và bấm &lt;strong>Confirm subscription&lt;/strong>. Nếu còn &lt;code>Pending confirmation&lt;/code>, SNS chưa thể chuyển email đến subscription đó.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/25-sns-new-subscription-confirmed.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/25-sns-new-subscription-confirmed.png" alt="SNS subscription đã được xác nhận" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Ảnh 25 – SNS subscription đã được xác nhận&lt;/figcaption>
+&lt;/figure>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/26-sns-subscriptions-confirmed-list.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/26-sns-subscriptions-confirmed-list.png" alt="Danh sách SNS subscriptions" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Ảnh 26 – Danh sách SNS subscriptions&lt;/figcaption>
+&lt;/figure>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/27-sns-netmon-alerts-new-email-confirmed.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/27-sns-netmon-alerts-new-email-confirmed.png" alt="Topic SNS netmon-alerts với email đã xác nhận" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Ảnh 27 – Topic SNS netmon-alerts với email đã xác nhận&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="4">
+&lt;li>Dùng &lt;strong>Publish message&lt;/strong> gửi thông báo thử; kiểm tra Inbox và Spam. Trong quá trình thực hành, nhóm đã nhận thư thử thành công.&lt;/li>
+&lt;/ol>
+&lt;h2 id="tạo-cloudwatch-alarms">Tạo CloudWatch Alarms&lt;/h2>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th style="text-align: left">Alarm&lt;/th>
+ &lt;th style="text-align: left">Metric&lt;/th>
+ &lt;th style="text-align: left">Điều kiện thực hành&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;code>netmon-cpu-high-80&lt;/code>&lt;/td>
+ &lt;td style="text-align: left">&lt;code>AWS/EC2 / CPUUtilization&lt;/code>&lt;/td>
+ &lt;td style="text-align: left">Greater than 80%&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;code>netmon-ram-high-80&lt;/code>&lt;/td>
+ &lt;td style="text-align: left">&lt;code>NetMon/EC2 / mem_used_percent&lt;/code>&lt;/td>
+ &lt;td style="text-align: left">Greater than 80%&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;code>netmon-disk-high-85&lt;/code>&lt;/td>
+ &lt;td style="text-align: left">&lt;code>NetMon/EC2 / disk_used_percent&lt;/code>&lt;/td>
+ &lt;td style="text-align: left">Greater than 85%&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+&lt;/table>
+&lt;p>Với mỗi alarm, vào &lt;strong>CloudWatch → Alarms → Create alarm → Select metric&lt;/strong>. Chọn &lt;strong>Average&lt;/strong>, &lt;strong>5 minutes&lt;/strong>, &lt;strong>1 out of 1 datapoint&lt;/strong>, trạng thái &lt;code>In alarm&lt;/code> gửi thông báo vào SNS topic &lt;code>netmon-alerts&lt;/code>. Những ngưỡng trên là cấu hình thử nghiệm, không phải khuyến nghị chung cho mọi máy chủ.&lt;/p></description></item><item><title>5.4.2. Viết Lambda netmon-api bằng Python</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/vi/5-workshop/5-4-serverless/5-4-2-lambda-api/</link><pubDate>Wed, 11 Nov 2026 00:00:00 +0700</pubDate><guid>https://tunduncode.github.io/nguyentungduong-fcj-report/vi/5-workshop/5-4-serverless/5-4-2-lambda-api/</guid><description>&lt;h1 id="542-viết-lambda-netmon-api-bằng-python">5.4.2. Viết Lambda netmon-api bằng Python&lt;/h1>
+&lt;h2 id="mục-tiêu">Mục tiêu&lt;/h2>
+&lt;p>Dùng một Lambda Python &lt;code>netmon-api&lt;/code> để xử lý 8 chức năng HTTP theo phương thức và đường dẫn request, giảm nhu cầu tạo nhiều Lambda nhỏ cho đồ án.&lt;/p>
+&lt;h2 id="các-bước">Các bước&lt;/h2>
+&lt;ol>
+&lt;li>Vào &lt;strong>Lambda → Functions → Create function → Author from scratch&lt;/strong>; đặt tên &lt;code>netmon-api&lt;/code>, Runtime Python được AWS hỗ trợ.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/34-lambda-netmon-api-code-and-api-gateway.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/34-lambda-netmon-api-code-and-api-gateway.png" alt="Hàm netmon-api và kết nối API Gateway" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Ảnh 34 – Hàm netmon-api và kết nối API Gateway&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="2">
+&lt;li>Gắn &lt;strong>execution role&lt;/strong> cho phép thao tác với hai bảng DynamoDB và &lt;code>cloudwatch:GetMetricStatistics&lt;/code>, cùng CloudWatch Logs. Nên chỉ định ARN tài nguyên cụ thể cho quyền DynamoDB.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/53-lambda-netmon-api-execution-role-permissions.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/53-lambda-netmon-api-execution-role-permissions.png" alt="Execution role của Lambda netmon-api" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Ảnh 53 – Execution role của Lambda netmon-api&lt;/figcaption>
+&lt;/figure>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/54-iam-netmon-api-role-permission-policies.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/54-iam-netmon-api-role-permission-policies.png" alt="Danh sách IAM policies của role" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Ảnh 54 – Danh sách IAM policies của role&lt;/figcaption>
+&lt;/figure>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/55-iam-netmon-api-access-policy-json.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/55-iam-netmon-api-access-policy-json.png" alt="JSON chính sách quyền DynamoDB và CloudWatch" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Ảnh 55 – JSON chính sách quyền DynamoDB và CloudWatch&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="3">
+&lt;li>
+&lt;p>Trong mã nguồn, đọc phương thức từ &lt;code>event.requestContext.http.method&lt;/code> và đường dẫn &lt;code>event.rawPath&lt;/code> của &lt;strong>HTTP API payload format 2.0&lt;/strong>.&lt;/p></description></item><item><title>5.5.2. Tạo JWT Authorizer và OAuth Scopes</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/vi/5-workshop/5-5-auth-frontend/5-5-2-jwt/</link><pubDate>Wed, 11 Nov 2026 00:00:00 +0700</pubDate><guid>https://tunduncode.github.io/nguyentungduong-fcj-report/vi/5-workshop/5-5-auth-frontend/5-5-2-jwt/</guid><description>&lt;h1 id="552-tạo-jwt-authorizer-và-oauth-scopes">5.5.2. Tạo JWT Authorizer và OAuth Scopes&lt;/h1>
+&lt;h2 id="mục-tiêu">Mục tiêu&lt;/h2>
+&lt;p>Yêu cầu Access Token hợp lệ và scope tương ứng trước khi API Gateway cho phép truy cập các chức năng đọc/ghi của NetMon.&lt;/p>
+&lt;h2 id="tạo-resource-server-và-oauth-scopes">Tạo Resource Server và OAuth scopes&lt;/h2>
+&lt;ol>
+&lt;li>Mở &lt;strong>Cognito → User pool → Applications → Resource servers → Create resource server&lt;/strong>.&lt;/li>
+&lt;li>Đặt tên &lt;code>NetMon API&lt;/code>, Identifier &lt;code>netmon-api&lt;/code>; thêm custom scopes &lt;code>read&lt;/code> và &lt;code>write&lt;/code>.&lt;/li>
+&lt;li>Mở &lt;strong>App clients → netmon-web-client → Login pages → Edit&lt;/strong>, cho phép &lt;code>netmon-api/read&lt;/code>, &lt;code>netmon-api/write&lt;/code> và các OpenID scopes cần thiết (ví dụ &lt;code>openid&lt;/code>, &lt;code>email&lt;/code>). Lưu thay đổi.&lt;/li>
+&lt;/ol>
+&lt;h2 id="tạo-jwt-authorizer">Tạo JWT Authorizer&lt;/h2>
+&lt;ol>
+&lt;li>
+&lt;p>Vào &lt;strong>API Gateway → netmon-management-api → Authorization → Manage authorizers → Create&lt;/strong>.&lt;/p></description></item><item><title>5.6.2. Kiểm tra chi phí và sao lưu minh chứng</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/vi/5-workshop/5-6-testing-cleanup/5-6-2-cleanup/</link><pubDate>Wed, 11 Nov 2026 00:00:00 +0700</pubDate><guid>https://tunduncode.github.io/nguyentungduong-fcj-report/vi/5-workshop/5-6-testing-cleanup/5-6-2-cleanup/</guid><description>&lt;h1 id="562-kiểm-tra-chi-phí-và-sao-lưu-minh-chứng">5.6.2. Kiểm tra chi phí và sao lưu minh chứng&lt;/h1>
+&lt;h2 id="mục-tiêu">Mục tiêu&lt;/h2>
+&lt;p>Kết thúc buổi thực hành mà không tạo ra chi phí ngoài ý muốn, đồng thời giữ lại những tài nguyên nhóm còn cần cho demo.&lt;/p>
+&lt;h2 id="kiểm-tra-chi-phí">Kiểm tra chi phí&lt;/h2>
+&lt;ol>
+&lt;li>Mở &lt;strong>Billing → Cost Explorer / Bills&lt;/strong> và ghi lại chi phí thực tế theo dịch vụ và theo Region.&lt;/li>
+&lt;li>Xem lại &lt;strong>AWS Budgets&lt;/strong> và địa chỉ email nhận thông báo, nhất là khi gần ngưỡng 25%, 50%, 100% của kế hoạch 20 USD/tháng.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/02-aws-budget-overview.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/02-aws-budget-overview.png" alt="Tổng quan ngân sách NetMon" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Ảnh 02 – Tổng quan ngân sách NetMon&lt;/figcaption>
+&lt;/figure>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/03-aws-budget-history.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/03-aws-budget-history.png" alt="Lịch sử ngân sách" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Ảnh 03 – Lịch sử ngân sách&lt;/figcaption>
+&lt;/figure>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/04-aws-monthly-cost-history.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/04-aws-monthly-cost-history.png" alt="Lịch sử chi phí hàng tháng" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Ảnh 04 – Lịch sử chi phí hàng tháng&lt;/figcaption>
+&lt;/figure>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/05-budget-alerts-25-50-100.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/05-budget-alerts-25-50-100.png" alt="Ba ngưỡng cảnh báo 25%, 50%, 100%" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Ảnh 05 – Ba ngưỡng cảnh báo 25%, 50%, 100%&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="3">
+&lt;li>
+&lt;p>Mở &lt;strong>EC2 → Instances&lt;/strong>: nếu không cần giám sát, cân nhắc &lt;strong>Stop&lt;/strong> instance. Hiểu rằng EBS và một số tài nguyên gắn kèm vẫn có thể tính phí.&lt;/p></description></item><item><title>5.1.3. Thiết lập AWS Budgets và kiểm soát chi phí</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/vi/5-workshop/5-1-preparation/5-1-3-budget/</link><pubDate>Wed, 11 Nov 2026 00:00:00 +0700</pubDate><guid>https://tunduncode.github.io/nguyentungduong-fcj-report/vi/5-workshop/5-1-preparation/5-1-3-budget/</guid><description>&lt;h1 id="513-thiết-lập-aws-budgets-và-kiểm-soát-chi-phí">5.1.3. Thiết lập AWS Budgets và kiểm soát chi phí&lt;/h1>
+&lt;h2 id="mục-tiêu">Mục tiêu&lt;/h2>
+&lt;p>Thiết lập mức theo dõi chi phí khi học tập trên AWS. &lt;strong>Budget 20 USD là ngưỡng theo dõi, không phải số tiền đã chi và cũng không tự khóa tài nguyên&lt;/strong>.&lt;/p>
+&lt;h2 id="các-bước-thao-tác">Các bước thao tác&lt;/h2>
+&lt;ol>
+&lt;li>Tại AWS Console, mở &lt;strong>Billing and Cost Management → Budgets → Create budget&lt;/strong>; chọn &lt;strong>Cost budget&lt;/strong>.&lt;/li>
+&lt;li>Chọn chu kỳ &lt;strong>Monthly&lt;/strong> và nhập mức dự kiến &lt;strong>20 USD&lt;/strong>. Điền tên rõ nghĩa, chẳng hạn &lt;code>netmon-monthly-budget&lt;/code>.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/02-aws-budget-overview.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/02-aws-budget-overview.png" alt="Tổng quan ngân sách NetMon" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Ảnh 02 – Tổng quan ngân sách NetMon&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="3">
+&lt;li>Cấu hình thông báo theo phần trăm budget. Trong quá trình thực hành, nhóm đã sửa một mốc xuống &lt;strong>25%&lt;/strong>; có thể đặt thêm 50% và 100% theo chính sách nhóm.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/05-budget-alerts-25-50-100.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/05-budget-alerts-25-50-100.png" alt="Ba ngưỡng cảnh báo 25%, 50%, 100%" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Ảnh 05 – Ba ngưỡng cảnh báo 25%, 50%, 100%&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="4">
+&lt;li>Điền email người nhận cảnh báo; xác nhận email nếu AWS yêu cầu.&lt;/li>
+&lt;li>Vào &lt;strong>Cost Explorer&lt;/strong> hoặc &lt;strong>Bills&lt;/strong> để xem chi phí thật của EC2, EBS, CloudWatch, DynamoDB và các dịch vụ đã bật.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/03-aws-budget-history.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/03-aws-budget-history.png" alt="Lịch sử ngân sách" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Ảnh 03 – Lịch sử ngân sách&lt;/figcaption>
+&lt;/figure>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/04-aws-monthly-cost-history.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/04-aws-monthly-cost-history.png" alt="Lịch sử chi phí hàng tháng" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Ảnh 04 – Lịch sử chi phí hàng tháng&lt;/figcaption>
+&lt;/figure>
+&lt;h2 id="kiểm-tra-kết-quả">Kiểm tra kết quả&lt;/h2>
+&lt;ul>
+&lt;li>Budget nằm trong danh sách và email người nhận chính xác.&lt;/li>
+&lt;li>Xác nhận đơn vị tiền tệ, chu kỳ tháng và mức cảnh báo.&lt;/li>
+&lt;li>Chụp trang Budget, nhưng che địa chỉ email nếu công khai lên GitHub Pages.&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>Chú ý: EC2 chạy liên tục, EBS, public IPv4, NAT Gateway (nếu có) và CloudWatch vượt hạn mức là các nguồn chi phí cần xem kỹ. Không khẳng định toàn bộ hệ thống là miễn phí.&lt;/p></description></item><item><title>5.2.3. Security Group, IAM Role và truy cập an toàn</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/vi/5-workshop/5-2-infrastructure/5-2-3-security/</link><pubDate>Wed, 11 Nov 2026 00:00:00 +0700</pubDate><guid>https://tunduncode.github.io/nguyentungduong-fcj-report/vi/5-workshop/5-2-infrastructure/5-2-3-security/</guid><description>&lt;h1 id="523-security-group-iam-role-và-truy-cập-an-toàn">5.2.3. Security Group, IAM Role và truy cập an toàn&lt;/h1>
+&lt;h2 id="mục-tiêu">Mục tiêu&lt;/h2>
+&lt;p>Bảo vệ máy chủ &lt;code>netmon-ec2-server&lt;/code> và cấp quyền giám sát mà không mở toàn bộ cổng quản trị ra Internet.&lt;/p>
+&lt;h2 id="các-bước-thao-tác">Các bước thao tác&lt;/h2>
+&lt;ol>
+&lt;li>Vào &lt;strong>EC2 → Instances&lt;/strong>, chọn &lt;code>netmon-ec2-server&lt;/code> và mở tab &lt;strong>Security&lt;/strong>.&lt;/li>
+&lt;li>Nhấn vào &lt;strong>Security Group&lt;/strong> gắn với máy; kiểm tra các &lt;strong>Inbound rules&lt;/strong>. Không để SSH TCP/22 có Source &lt;code>0.0.0.0/0&lt;/code> nếu không có lý do bảo mật cụ thể.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/15-security-groups-list.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/15-security-groups-list.png" alt="Danh sách Security Group" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Ảnh 15 – Danh sách Security Group&lt;/figcaption>
+&lt;/figure>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/16-netmon-ec2-sg-inbound-no-rules.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/16-netmon-ec2-sg-inbound-no-rules.png" alt="Inbound rules của netmon-ec2-sg đang trống" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Ảnh 16 – Inbound rules của netmon-ec2-sg đang trống&lt;/figcaption>
+&lt;/figure>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/17-netmon-ec2-sg-outbound-all-traffic.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/17-netmon-ec2-sg-outbound-all-traffic.png" alt="Outbound rules của netmon-ec2-sg" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Ảnh 17 – Outbound rules của netmon-ec2-sg&lt;/figcaption>
+&lt;/figure>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/20-ec2-security-netmon-ec2-sg.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/20-ec2-security-netmon-ec2-sg.png" alt="Tab Security trên EC2" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Ảnh 20 – Tab Security trên EC2&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="3">
+&lt;li>
+&lt;p>Nếu truy cập bằng &lt;strong>AWS Systems Manager Session Manager&lt;/strong>, kiểm tra SSM Agent, IAM instance profile và kết nối mạng cần thiết; nếu điều kiện chưa đủ, dùng phương án kết nối khác được kiểm soát.&lt;/p></description></item><item><title>5.3.3. Tạo quy tắc EventBridge chuyển trạng thái Alarm</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/vi/5-workshop/5-3-monitoring/5-3-3-eventbridge/</link><pubDate>Wed, 11 Nov 2026 00:00:00 +0700</pubDate><guid>https://tunduncode.github.io/nguyentungduong-fcj-report/vi/5-workshop/5-3-monitoring/5-3-3-eventbridge/</guid><description>&lt;h1 id="533-tạo-quy-tắc-eventbridge-chuyển-trạng-thái-alarm">5.3.3. Tạo quy tắc EventBridge chuyển trạng thái Alarm&lt;/h1>
+&lt;h2 id="mục-tiêu">Mục tiêu&lt;/h2>
+&lt;p>Khi CloudWatch Alarm thay đổi trạng thái, EventBridge chuyển sự kiện đến Lambda để lưu lịch sử trong DynamoDB, hỗ trợ theo dõi thời điểm và trạng thái xử lý cảnh báo.&lt;/p>
+&lt;h2 id="thực-hiện">Thực hiện&lt;/h2>
+&lt;ol>
+&lt;li>
+&lt;p>Đảm bảo bảng &lt;code>NetworkAlerts&lt;/code> đã tồn tại với Partition Key &lt;code>eventId&lt;/code> kiểu String.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Tạo Lambda Python &lt;code>netmon-save-alert&lt;/code> và gắn execution role có quyền &lt;code>dynamodb:PutItem&lt;/code> vào bảng &lt;code>NetworkAlerts&lt;/code> cùng quyền ghi CloudWatch Logs.&lt;/p></description></item><item><title>5.4.3. Xây dựng HTTP API Gateway với 8 Routes</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/vi/5-workshop/5-4-serverless/5-4-3-api-gateway/</link><pubDate>Wed, 11 Nov 2026 00:00:00 +0700</pubDate><guid>https://tunduncode.github.io/nguyentungduong-fcj-report/vi/5-workshop/5-4-serverless/5-4-3-api-gateway/</guid><description>&lt;h1 id="543-xây-dựng-http-api-gateway-với-8-routes">5.4.3. Xây dựng HTTP API Gateway với 8 Routes&lt;/h1>
+&lt;h2 id="mục-tiêu">Mục tiêu&lt;/h2>
+&lt;p>Tạo HTTP API phục vụ thao tác quản lý NetMon và tích hợp vào Lambda &lt;code>netmon-api&lt;/code>.&lt;/p>
+&lt;h2 id="các-bước-trên-console">Các bước trên Console&lt;/h2>
+&lt;ol>
+&lt;li>Vào &lt;strong>API Gateway → APIs → Create API → HTTP API&lt;/strong>. Tên dùng trong nhóm: &lt;code>netmon-management-api&lt;/code>.&lt;/li>
+&lt;li>Tạo hoặc kiểm tra các routes sau:&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/38-api-gateway-netmon-management-api-routes.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/38-api-gateway-netmon-management-api-routes.png" alt="Tám route trên API Gateway" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Ảnh 38 – Tám route trên API Gateway&lt;/figcaption>
+&lt;/figure>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th style="text-align: left">Route&lt;/th>
+ &lt;th style="text-align: left">Công dụng&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;code>GET /devices&lt;/code>&lt;/td>
+ &lt;td style="text-align: left">Liệt kê thiết bị&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;code>POST /devices&lt;/code>&lt;/td>
+ &lt;td style="text-align: left">Thêm thiết bị&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;code>GET /devices/{id}&lt;/code>&lt;/td>
+ &lt;td style="text-align: left">Xem chi tiết&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;code>PUT /devices/{id}&lt;/code>&lt;/td>
+ &lt;td style="text-align: left">Sửa thiết bị&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;code>DELETE /devices/{id}&lt;/code>&lt;/td>
+ &lt;td style="text-align: left">Xóa thiết bị&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;code>GET /alerts&lt;/code>&lt;/td>
+ &lt;td style="text-align: left">Xem cảnh báo&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;code>PUT /alerts/{id}&lt;/code>&lt;/td>
+ &lt;td style="text-align: left">Cập nhật xử lý cảnh báo&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;code>GET /metrics&lt;/code>&lt;/td>
+ &lt;td style="text-align: left">Xem chỉ số CPU (theo Lambda hiện tại)&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+&lt;/table>
+&lt;ol start="3">
+&lt;li>Ở &lt;strong>Develop → Integrations&lt;/strong>, chọn &lt;strong>Lambda function&lt;/strong> &lt;code>netmon-api&lt;/code> tại &lt;code>us-east-1&lt;/code>, payload format &lt;strong>2.0&lt;/strong>, và gắn integration vào cả 8 routes.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/40-api-gateway-integrations-netmon-api.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/40-api-gateway-integrations-netmon-api.png" alt="API Gateway gắn với Lambda netmon-api" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Ảnh 40 – API Gateway gắn với Lambda netmon-api&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="4">
+&lt;li>Ở &lt;strong>Develop → CORS&lt;/strong>, cấu hình origin &lt;code>http://localhost:5500&lt;/code>, methods GET/POST/PUT/DELETE/OPTIONS, headers &lt;code>authorization&lt;/code>, &lt;code>content-type&lt;/code>; không bật credentials nếu chỉ gửi JWT trong header.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/41-api-gateway-cors-localhost-5500.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/41-api-gateway-cors-localhost-5500.png" alt="Cấu hình CORS localhost:5500" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Ảnh 41 – Cấu hình CORS localhost:5500&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="5">
+&lt;li>Mở &lt;strong>Deploy → Stages → &lt;code>$default&lt;/code>&lt;/strong>, kiểm tra &lt;strong>Automatic deployment = Enabled&lt;/strong>. Nếu tắt, cần deploy thủ công.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/42-api-gateway-default-stage-auto-deploy.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/42-api-gateway-default-stage-auto-deploy.png" alt="Stage $default tự động triển khai" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Ảnh 42 – Stage $default tự động triển khai&lt;/figcaption>
+&lt;/figure>
+&lt;h2 id="kiểm-thử-ban-đầu">Kiểm thử ban đầu&lt;/h2>
+&lt;p>Khi routes đã gắn JWT Authorizer, gọi &lt;code>GET /devices&lt;/code> mà &lt;strong>không&lt;/strong> gửi Authorization header phải nhận &lt;code>401 Unauthorized&lt;/code>. Điều này cho thấy lớp bảo vệ đang hoạt động; để xác nhận Lambda thật, cần thử với Access Token hợp lệ.&lt;/p></description></item><item><title>5.5.3. Xây dựng trang kiểm thử trên VS Code</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/vi/5-workshop/5-5-auth-frontend/5-5-3-test-ui/</link><pubDate>Wed, 11 Nov 2026 00:00:00 +0700</pubDate><guid>https://tunduncode.github.io/nguyentungduong-fcj-report/vi/5-workshop/5-5-auth-frontend/5-5-3-test-ui/</guid><description>&lt;h1 id="553-xây-dựng-trang-kiểm-thử-trên-vs-code">5.5.3. Xây dựng trang kiểm thử trên VS Code&lt;/h1>
+&lt;h2 id="mục-tiêu">Mục tiêu&lt;/h2>
+&lt;p>Dùng trang kiểm thử HTML/CSS/JavaScript chạy trên VS Code để đăng nhập Cognito, gọi API và kiểm tra dữ liệu thật; không cần chờ giao diện cuối cùng của Mạnh Quân.&lt;/p>
+&lt;h2 id="chuẩn-bị">Chuẩn bị&lt;/h2>
+&lt;ol>
+&lt;li>Mở dự án &lt;code>NetMon-API-Test&lt;/code> đã chuẩn bị trong VS Code, hoặc sử dụng một frontend có triển khai PKCE tương đương.&lt;/li>
+&lt;li>Tại thư mục chứa &lt;code>index.html&lt;/code>, chạy server cục bộ:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>python -m http.server &lt;span style="color:#ae81ff">5500&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
+&lt;li>Mở &lt;code>http://localhost:5500/&lt;/code> và xác nhận giao diện tải được &lt;strong>trước khi&lt;/strong> bấm đăng nhập Cognito.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/48-cognito-managed-login-sign-in.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/48-cognito-managed-login-sign-in.png" alt="Giao diện đăng nhập Managed Login" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Ảnh 48 – Giao diện đăng nhập Managed Login&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="4">
+&lt;li>Nhập đúng &lt;strong>Cognito domain&lt;/strong>, &lt;strong>App Client ID&lt;/strong>, &lt;strong>API Gateway Invoke URL&lt;/strong>. Đừng điền AWS Secret Key hoặc Cognito client secret vào trang web.&lt;/li>
+&lt;li>Bấm nút đăng nhập do frontend cung cấp. Sau khi Cognito redirect về &lt;code>/?code=...&lt;/code>, JavaScript xử lý PKCE và nhận Access Token.&lt;/li>
+&lt;li>Gọi thử &lt;code>GET /devices&lt;/code> và &lt;code>GET /alerts&lt;/code>. Nếu thành công, tiếp tục tạo thiết bị &lt;code>TEST-SW01&lt;/code>, sửa thông tin, xem chi tiết rồi xóa đúng thiết bị này.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/41-api-gateway-cors-localhost-5500.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/41-api-gateway-cors-localhost-5500.png" alt="Cấu hình CORS localhost:5500" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Ảnh 41 – Cấu hình CORS localhost:5500&lt;/figcaption>
+&lt;/figure>
+&lt;h2 id="các-lỗi-và-cách-đọc-kết-quả">Các lỗi và cách đọc kết quả&lt;/h2>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th style="text-align: left">Hiện tượng&lt;/th>
+ &lt;th style="text-align: left">Gợi ý kiểm tra&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;code>ERR_CONNECTION_REFUSED&lt;/code>&lt;/td>
+ &lt;td style="text-align: left">Server localhost:5500 chưa chạy&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;code>401 Unauthorized&lt;/code>&lt;/td>
+ &lt;td style="text-align: left">Thiếu, sai hoặc hết hạn token&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;code>403 Forbidden&lt;/code>&lt;/td>
+ &lt;td style="text-align: left">Access Token thiếu scope của route&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">CORS blocked&lt;/td>
+ &lt;td style="text-align: left">Origin hoặc headers trong API Gateway CORS chưa đúng&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;code>500&lt;/code>&lt;/td>
+ &lt;td style="text-align: left">Lambda, DynamoDB, IAM hoặc CloudWatch Logs&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+&lt;/table>
+&lt;blockquote>
+&lt;p>Không gửi ảnh chụp URL có &lt;code>?code=&lt;/code> còn hiệu lực hoặc token thật. Trước khi ghép sang giao diện chính, kiểm tra lại 8 Routes có trả đúng dữ liệu như Lambda đã xử lý hay không.&lt;/p></description></item><item><title>5.6.3. Dọn dẹp CloudWatch, SNS và EventBridge</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/vi/5-workshop/5-6-testing-cleanup/5-6-3-monitoring-cleanup/</link><pubDate>Wed, 11 Nov 2026 00:00:00 +0700</pubDate><guid>https://tunduncode.github.io/nguyentungduong-fcj-report/vi/5-workshop/5-6-testing-cleanup/5-6-3-monitoring-cleanup/</guid><description>&lt;h1 id="563-dọn-dẹp-cloudwatch-sns-và-eventbridge">5.6.3. Dọn dẹp CloudWatch, SNS và EventBridge&lt;/h1>
+&lt;h2 id="khi-nào-thực-hiện">Khi nào thực hiện?&lt;/h2>
+&lt;p>&lt;strong>Chỉ thực hiện sau khi đã demo xong và đã sao lưu toàn bộ minh chứng.&lt;/strong> Nếu còn cần nhận cảnh báo, không được xóa alarm, SNS hay rule EventBridge.&lt;/p>
+&lt;h2 id="các-bước-dọn-dẹp">Các bước dọn dẹp&lt;/h2>
+&lt;ol>
+&lt;li>Mở &lt;strong>CloudWatch → Alarms&lt;/strong>. Chụp cấu hình, lịch sử alarm và đối chiếu tên &lt;code>netmon-cpu-high-80&lt;/code>, &lt;code>netmon-ram-high-80&lt;/code>, &lt;code>netmon-disk-high-85&lt;/code>.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/21-cloudwatch-alarms-list.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/21-cloudwatch-alarms-list.png" alt="Danh sách ba CloudWatch Alarm" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Ảnh 21 – Danh sách ba CloudWatch Alarm&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="2">
+&lt;li>
+&lt;p>Nếu chắc chắn không cần nữa, chọn từng alarm và xóa. Hành động này dừng đánh giá alarm, không xóa EC2.&lt;/p></description></item><item><title>5.3.4. Lambda lưu lịch sử cảnh báo vào DynamoDB</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/vi/5-workshop/5-3-monitoring/5-3-4-alert-history/</link><pubDate>Wed, 11 Nov 2026 00:00:00 +0700</pubDate><guid>https://tunduncode.github.io/nguyentungduong-fcj-report/vi/5-workshop/5-3-monitoring/5-3-4-alert-history/</guid><description>&lt;h1 id="534-lambda-lưu-lịch-sử-cảnh-báo-vào-dynamodb">5.3.4. Lambda lưu lịch sử cảnh báo vào DynamoDB&lt;/h1>
+&lt;h2 id="mục-tiêu">Mục tiêu&lt;/h2>
+&lt;p>Lưu từng sự kiện &lt;strong>CloudWatch Alarm State Change&lt;/strong> vào bảng &lt;code>NetworkAlerts&lt;/code> để biết cảnh báo xảy ra lúc nào và đã xử lý hay chưa.&lt;/p>
+&lt;h2 id="các-bước-thao-tác">Các bước thao tác&lt;/h2>
+&lt;ol>
+&lt;li>Mở &lt;strong>DynamoDB → Tables&lt;/strong> và kiểm tra bảng &lt;code>NetworkAlerts&lt;/code>, Partition key &lt;code>eventId&lt;/code> (String).&lt;/li>
+&lt;li>Mở &lt;strong>Lambda → Functions → &lt;code>netmon-save-alert&lt;/code>&lt;/strong>. Chọn &lt;code>lambda_function.py&lt;/code>, bấm &lt;strong>Deploy&lt;/strong> sau khi hoàn thiện mã đọc &lt;code>event.detail.alarmName&lt;/code>, &lt;code>event.detail.state.value&lt;/code>, &lt;code>event.id&lt;/code> và thời gian sự kiện.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/31-lambda-netmon-save-alert-code-overview.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/31-lambda-netmon-save-alert-code-overview.png" alt="Mã nguồn hàm netmon-save-alert" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Ảnh 31 – Mã nguồn hàm netmon-save-alert&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="3">
+&lt;li>
+&lt;p>Trong &lt;strong>Configuration → Permissions&lt;/strong>, mở role. Cấp &lt;strong>&lt;code>dynamodb:PutItem&lt;/code>&lt;/strong> chỉ với ARN bảng &lt;code>NetworkAlerts&lt;/code>, đồng thời giữ quyền ghi CloudWatch Logs.&lt;/p></description></item><item><title>5.4.4. Kiểm thử CRUD và truy vấn dữ liệu</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/vi/5-workshop/5-4-serverless/5-4-4-crud-test/</link><pubDate>Wed, 11 Nov 2026 00:00:00 +0700</pubDate><guid>https://tunduncode.github.io/nguyentungduong-fcj-report/vi/5-workshop/5-4-serverless/5-4-4-crud-test/</guid><description>&lt;h1 id="544-kiểm-thử-crud-và-truy-vấn-dữ-liệu">5.4.4. Kiểm thử CRUD và truy vấn dữ liệu&lt;/h1>
+&lt;h2 id="mục-tiêu">Mục tiêu&lt;/h2>
+&lt;p>Kiểm tra CRUD trên bảng &lt;code>NetworkDevices&lt;/code> qua Lambda/API bằng &lt;strong>bản ghi thử riêng&lt;/strong> để không thay đổi dữ liệu EC2 thật đang phục vụ đồ án.&lt;/p>
+&lt;h2 id="chuẩn-bị-bản-ghi-thử">Chuẩn bị bản ghi thử&lt;/h2>
+&lt;p>Sử dụng &lt;code>deviceId&lt;/code> bắt đầu bằng &lt;code>TEST-&lt;/code> và IP private dành cho ví dụ, chẳng hạn &lt;code>TEST-SW01&lt;/code>.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;deviceId&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;TEST-SW01&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;deviceName&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;Switch test NetMon&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;deviceType&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;Switch&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;ipAddress&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;10.0.0.250&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;status&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;Online&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="kịch-bản-crud">Kịch bản CRUD&lt;/h2>
+&lt;ol>
+&lt;li>&lt;strong>POST &lt;code>/devices&lt;/code>&lt;/strong>: tạo thiết bị &lt;code>TEST-SW01&lt;/code>, kỳ vọng phản hồi thành công và bản ghi xuất hiện trong DynamoDB.&lt;/li>
+&lt;li>&lt;strong>GET &lt;code>/devices&lt;/code>&lt;/strong>: đọc danh sách, kiểm tra có thiết bị thử.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/33-dynamodb-networkdevices-2-items.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/33-dynamodb-networkdevices-2-items.png" alt="Hai bản ghi trong NetworkDevices" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Ảnh 33 – Hai bản ghi trong NetworkDevices&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="3">
+&lt;li>
+&lt;p>&lt;strong>GET &lt;code>/devices/TEST-SW01&lt;/code>&lt;/strong>: đọc chi tiết, đối chiếu đủ thuộc tính.&lt;/p></description></item><item><title>5.5.4. Đăng nhập bằng PKCE và gọi API bảo vệ</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/vi/5-workshop/5-5-auth-frontend/5-5-4-frontend-login/</link><pubDate>Wed, 11 Nov 2026 00:00:00 +0700</pubDate><guid>https://tunduncode.github.io/nguyentungduong-fcj-report/vi/5-workshop/5-5-auth-frontend/5-5-4-frontend-login/</guid><description>&lt;h1 id="554-đăng-nhập-bằng-pkce-và-gọi-api-bảo-vệ">5.5.4. Đăng nhập bằng PKCE và gọi API bảo vệ&lt;/h1>
+&lt;h2 id="mục-tiêu">Mục tiêu&lt;/h2>
+&lt;p>Kết nối trang NetMon HTML/JavaScript với Cognito và lấy &lt;strong>Access Token&lt;/strong> đúng chuẩn Authorization Code + PKCE.&lt;/p>
+&lt;h2 id="chuẩn-bị-cấu-hình">Chuẩn bị cấu hình&lt;/h2>
+&lt;ol>
+&lt;li>Trong &lt;strong>Cognito → App clients → &lt;code>netmon-web-client&lt;/code>&lt;/strong>, bảo đảm ứng dụng là SPA, dùng &lt;strong>Authorization code grant&lt;/strong>.&lt;/li>
+&lt;li>Cấu hình callback chính xác &lt;code>http://localhost:5500/&lt;/code>, các scope &lt;code>openid email netmon-api/read netmon-api/write&lt;/code>; không dùng client secret trong trình duyệt.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/47-cognito-app-client-managed-login-pages-oauth-scopes.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/47-cognito-app-client-managed-login-pages-oauth-scopes.png" alt="Cognito Managed Login và cấu hình OAuth" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Ảnh 47 – Cognito Managed Login và cấu hình OAuth&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="3">
+&lt;li>
+&lt;p>Khởi chạy web server trước khi đăng nhập, ví dụ &lt;code>python -m http.server 5500&lt;/code>, rồi kiểm tra &lt;code>http://localhost:5500/&lt;/code> đã tải được trang.&lt;/p></description></item><item><title>5.6.4. Dọn dẹp Lambda, DynamoDB và API Gateway</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/vi/5-workshop/5-6-testing-cleanup/5-6-4-serverless-cleanup/</link><pubDate>Wed, 11 Nov 2026 00:00:00 +0700</pubDate><guid>https://tunduncode.github.io/nguyentungduong-fcj-report/vi/5-workshop/5-6-testing-cleanup/5-6-4-serverless-cleanup/</guid><description>&lt;h1 id="564-dọn-dẹp-lambda-dynamodb-và-api-gateway">5.6.4. Dọn dẹp Lambda, DynamoDB và API Gateway&lt;/h1>
+&lt;h2 id="điều-kiện-trước-khi-xóa">Điều kiện trước khi xóa&lt;/h2>
+&lt;p>Sau khi hoàn tất đồ án, đã xuất ảnh minh chứng, nội dung log, cấu hình API và dữ liệu thử. &lt;strong>Xóa DynamoDB table có thể làm mất dữ liệu vĩnh viễn&lt;/strong>.&lt;/p>
+&lt;h2 id="thực-hiện">Thực hiện&lt;/h2>
+&lt;ol>
+&lt;li>&lt;strong>DynamoDB:&lt;/strong> Mở &lt;code>NetworkDevices&lt;/code> và &lt;code>NetworkAlerts&lt;/code>, Export/Backup theo nhu cầu rồi chỉ xóa khi không còn dùng; không nên xóa trong giai đoạn thử giao diện.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/32-dynamodb-networkalerts-7-items.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/32-dynamodb-networkalerts-7-items.png" alt="Các bản ghi trong NetworkAlerts" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Ảnh 32 – Các bản ghi trong NetworkAlerts&lt;/figcaption>
+&lt;/figure>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/33-dynamodb-networkdevices-2-items.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/33-dynamodb-networkdevices-2-items.png" alt="Hai bản ghi trong NetworkDevices" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Ảnh 33 – Hai bản ghi trong NetworkDevices&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="2">
+&lt;li>&lt;strong>API Gateway:&lt;/strong> Vào APIs → &lt;code>netmon-management-api&lt;/code>, lưu cấu hình tám Routes, Authorizer, CORS, Stage và Integration. Xóa API nếu chắc chắn không còn frontend sử dụng.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/38-api-gateway-netmon-management-api-routes.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/38-api-gateway-netmon-management-api-routes.png" alt="Tám route trên API Gateway" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Ảnh 38 – Tám route trên API Gateway&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="3">
+&lt;li>&lt;strong>AWS Lambda:&lt;/strong> Với &lt;code>netmon-api&lt;/code> và &lt;code>netmon-save-alert&lt;/code>, kiểm tra EventBridge target và các trigger trước khi xóa hàm.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/34-lambda-netmon-api-code-and-api-gateway.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/34-lambda-netmon-api-code-and-api-gateway.png" alt="Hàm netmon-api và kết nối API Gateway" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Ảnh 34 – Hàm netmon-api và kết nối API Gateway&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="4">
+&lt;li>
+&lt;p>&lt;strong>IAM Roles:&lt;/strong> Kiểm tra role nào chỉ dùng riêng cho Lambda đã xóa; không xóa role dùng chung với EC2 hoặc các dịch vụ khác.&lt;/p></description></item><item><title>5.6.5. Dọn dẹp Cognito và tài nguyên mạng</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/vi/5-workshop/5-6-testing-cleanup/5-6-5-auth-cleanup/</link><pubDate>Wed, 11 Nov 2026 00:00:00 +0700</pubDate><guid>https://tunduncode.github.io/nguyentungduong-fcj-report/vi/5-workshop/5-6-testing-cleanup/5-6-5-auth-cleanup/</guid><description>&lt;h1 id="565-dọn-dẹp-cognito-và-tài-nguyên-mạng">5.6.5. Dọn dẹp Cognito và tài nguyên mạng&lt;/h1>
+&lt;h2 id="mục-tiêu">Mục tiêu&lt;/h2>
+&lt;p>Thu hồi quyền truy cập khi kết thúc đồ án và xử lý các thành phần hạ tầng còn phát sinh phí.&lt;/p>
+&lt;h2 id="các-bước-dọn-dẹp">Các bước dọn dẹp&lt;/h2>
+&lt;ol>
+&lt;li>&lt;strong>Amazon Cognito:&lt;/strong> Kiểm tra User Pool được dùng bởi &lt;code>netmon-web-client&lt;/code>. Tài khoản ứng dụng Cognito khác với IAM user đăng nhập AWS Console.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/43-cognito-user-pool-overview.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/43-cognito-user-pool-overview.png" alt="Tổng quan Cognito User Pool" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Ảnh 43 – Tổng quan Cognito User Pool&lt;/figcaption>
+&lt;/figure>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/44-cognito-app-client-netmon-web-client.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/44-cognito-app-client-netmon-web-client.png" alt="Cognito App Client netmon-web-client" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Ảnh 44 – Cognito App Client netmon-web-client&lt;/figcaption>
+&lt;/figure>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/49-cognito-users-confirmed-enabled.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/49-cognito-users-confirmed-enabled.png" alt="Hai tài khoản được xác minh trong Cognito" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Ảnh 49 – Hai tài khoản được xác minh trong Cognito&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="2">
+&lt;li>
+&lt;p>Nếu demo đã kết thúc, sao lưu cấu hình cần lưu rồi xóa App Client, Resource Server và User Pool theo đúng thứ tự phù hợp; việc xóa pool sẽ làm người dùng không thể đăng nhập vào NetMon.&lt;/p></description></item></channel></rss>

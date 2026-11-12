@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="350">
+  <rect width="100%" height="100%" fill="#eef2ff"/>
+  <text x="50%" y="45%" font-size="20" text-anchor="middle" fill="#3730a3">Placeholder: sam pipeline init steps</text>
+  <text x="50%" y="60%" font-size="14" text-anchor="middle" fill="#3730a3">Place at static/images/5-Workshop/5.3-S3-vpc/sam-init.png</text>
+</svg>

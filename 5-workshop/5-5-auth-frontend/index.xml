@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>5.5. Cognito, JWT, and the Test Interface on Internship Report</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-5-auth-frontend/</link><description>Recent content in 5.5. Cognito, JWT, and the Test Interface on Internship Report</description><generator>Hugo</generator><language>en</language><lastBuildDate>Wed, 11 Nov 2026 00:00:00 +0700</lastBuildDate><atom:link href="https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-5-auth-frontend/index.xml" rel="self" type="application/rss+xml"/><item><title>5.5.1. Create a Cognito User Pool and Web Client</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-5-auth-frontend/5-5-1-cognito/</link><pubDate>Wed, 11 Nov 2026 00:00:00 +0700</pubDate><guid>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-5-auth-frontend/5-5-1-cognito/</guid><description>&lt;h1 id="551-create-a-cognito-user-pool-and-web-client">5.5.1. Create a Cognito User Pool and Web Client&lt;/h1>
+&lt;h2 id="objective">Objective&lt;/h2>
+&lt;p>Create a managed sign-in flow for NetMon administrators with Amazon Cognito rather than allowing unauthenticated browser access to the APIs.&lt;/p>
+&lt;h2 id="steps">Steps&lt;/h2>
+&lt;ol>
+&lt;li>Open &lt;strong>Amazon Cognito → User pools&lt;/strong>. Create a pool or select the existing one in &lt;code>us-east-1&lt;/code>.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/43-cognito-user-pool-overview.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/43-cognito-user-pool-overview.png" alt="Cognito user-pool overview" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 43 – Cognito user-pool overview&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="2">
+&lt;li>Create an &lt;strong>App client&lt;/strong> for a &lt;strong>Single-page application (SPA)&lt;/strong> and name it &lt;code>netmon-web-client&lt;/code>.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/44-cognito-app-client-netmon-web-client.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/44-cognito-app-client-netmon-web-client.png" alt="Cognito netmon-web-client app client" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 44 – Cognito netmon-web-client app client&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="3">
+&lt;li>
+&lt;p>Use &lt;strong>email&lt;/strong> as the sign-in identifier, and keep self-registration disabled if only approved team members should have accounts.&lt;/p></description></item><item><title>5.5.2. Create a JWT Authorizer and OAuth Scopes</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-5-auth-frontend/5-5-2-jwt/</link><pubDate>Wed, 11 Nov 2026 00:00:00 +0700</pubDate><guid>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-5-auth-frontend/5-5-2-jwt/</guid><description>&lt;h1 id="552-create-a-jwt-authorizer-and-oauth-scopes">5.5.2. Create a JWT Authorizer and OAuth Scopes&lt;/h1>
+&lt;h2 id="objective">Objective&lt;/h2>
+&lt;p>Require a valid access token and an appropriate scope before API Gateway allows NetMon read or write operations.&lt;/p>
+&lt;h2 id="resource-server-and-oauth-scopes">Resource server and OAuth scopes&lt;/h2>
+&lt;ol>
+&lt;li>Open &lt;strong>Cognito → User pool → Applications → Resource servers → Create resource server&lt;/strong>.&lt;/li>
+&lt;li>Set Name &lt;code>NetMon API&lt;/code>, Identifier &lt;code>netmon-api&lt;/code>, and add custom scopes &lt;code>read&lt;/code> and &lt;code>write&lt;/code>.&lt;/li>
+&lt;li>Under &lt;strong>App clients → netmon-web-client → Login pages → Edit&lt;/strong>, allow &lt;code>netmon-api/read&lt;/code>, &lt;code>netmon-api/write&lt;/code>, and the necessary OpenID scopes (such as &lt;code>openid&lt;/code> and &lt;code>email&lt;/code>). Save changes.&lt;/li>
+&lt;/ol>
+&lt;h2 id="jwt-authorizer">JWT Authorizer&lt;/h2>
+&lt;ol>
+&lt;li>
+&lt;p>Open &lt;strong>API Gateway → netmon-management-api → Authorization → Manage authorizers → Create&lt;/strong>.&lt;/p></description></item><item><title>5.5.3. Build a VS Code Test Page</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-5-auth-frontend/5-5-3-test-ui/</link><pubDate>Wed, 11 Nov 2026 00:00:00 +0700</pubDate><guid>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-5-auth-frontend/5-5-3-test-ui/</guid><description>&lt;h1 id="553-build-a-vs-code-test-page">5.5.3. Build a VS Code Test Page&lt;/h1>
+&lt;h2 id="objective">Objective&lt;/h2>
+&lt;p>Use an HTML/CSS/JavaScript test interface in VS Code to sign in with Cognito, call the API, and verify real data without waiting for the final UI maintained by Manh Quan.&lt;/p>
+&lt;h2 id="preparation">Preparation&lt;/h2>
+&lt;ol>
+&lt;li>Open the prepared &lt;code>NetMon-API-Test&lt;/code> project in VS Code, or use a frontend with an equivalent PKCE implementation.&lt;/li>
+&lt;li>Run a local server from the directory containing &lt;code>index.html&lt;/code>:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>python -m http.server &lt;span style="color:#ae81ff">5500&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
+&lt;li>Open &lt;code>http://localhost:5500/&lt;/code> and make sure the page loads &lt;strong>before&lt;/strong> starting Cognito sign-in.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/48-cognito-managed-login-sign-in.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/48-cognito-managed-login-sign-in.png" alt="Managed-login sign-in page" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 48 – Managed-login sign-in page&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="4">
+&lt;li>Enter the correct &lt;strong>Cognito domain&lt;/strong>, &lt;strong>App Client ID&lt;/strong>, and &lt;strong>API Gateway Invoke URL&lt;/strong>. Never enter AWS Secret Keys or a Cognito client secret into browser code.&lt;/li>
+&lt;li>Use the frontend&amp;rsquo;s sign-in button. After Cognito redirects to &lt;code>/?code=...&lt;/code>, JavaScript completes the PKCE code exchange and receives an Access Token.&lt;/li>
+&lt;li>Test &lt;code>GET /devices&lt;/code> and &lt;code>GET /alerts&lt;/code>. If they succeed, create a &lt;code>TEST-SW01&lt;/code> device, update its details, read it, and delete only that test record.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/41-api-gateway-cors-localhost-5500.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/41-api-gateway-cors-localhost-5500.png" alt="CORS configuration for localhost:5500" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 41 – CORS configuration for localhost:5500&lt;/figcaption>
+&lt;/figure>
+&lt;h2 id="troubleshooting">Troubleshooting&lt;/h2>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th style="text-align: left">Symptom&lt;/th>
+ &lt;th style="text-align: left">What to check&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;code>ERR_CONNECTION_REFUSED&lt;/code>&lt;/td>
+ &lt;td style="text-align: left">No local server is listening on localhost:5500&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;code>401 Unauthorized&lt;/code>&lt;/td>
+ &lt;td style="text-align: left">Missing, invalid, or expired token&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;code>403 Forbidden&lt;/code>&lt;/td>
+ &lt;td style="text-align: left">Access Token lacks the required route scope&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">CORS blocked&lt;/td>
+ &lt;td style="text-align: left">Incorrect allowed origin or headers in API Gateway&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;code>500&lt;/code>&lt;/td>
+ &lt;td style="text-align: left">Lambda, DynamoDB, IAM, or CloudWatch Logs&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+&lt;/table>
+&lt;blockquote>
+&lt;p>Never publish a live &lt;code>?code=&lt;/code> URL or real tokens. Before integrating the final UI, check that all eight routes return expected responses from the backend.&lt;/p></description></item><item><title>5.5.4. Sign In with PKCE and Call Protected APIs</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-5-auth-frontend/5-5-4-frontend-login/</link><pubDate>Wed, 11 Nov 2026 00:00:00 +0700</pubDate><guid>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-5-auth-frontend/5-5-4-frontend-login/</guid><description>&lt;h1 id="554-sign-in-with-pkce-and-call-protected-apis">5.5.4. Sign In with PKCE and Call Protected APIs&lt;/h1>
+&lt;h2 id="goal">Goal&lt;/h2>
+&lt;p>Connect an HTML/JavaScript NetMon test page to Cognito and obtain an &lt;strong>Access Token&lt;/strong> through Authorization Code + PKCE.&lt;/p>
+&lt;h2 id="configuration">Configuration&lt;/h2>
+&lt;ol>
+&lt;li>In &lt;strong>Cognito → App clients → &lt;code>netmon-web-client&lt;/code>&lt;/strong>, verify SPA type and &lt;strong>Authorization code grant&lt;/strong>.&lt;/li>
+&lt;li>Use the exact callback &lt;code>http://localhost:5500/&lt;/code> and scopes &lt;code>openid email netmon-api/read netmon-api/write&lt;/code>; never include a client secret in browser code.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/47-cognito-app-client-managed-login-pages-oauth-scopes.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/47-cognito-app-client-managed-login-pages-oauth-scopes.png" alt="Cognito managed-login and OAuth configuration" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 47 – Cognito managed-login and OAuth configuration&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="3">
+&lt;li>
+&lt;p>Start the web server first, e.g. &lt;code>python -m http.server 5500&lt;/code>, and ensure &lt;code>http://localhost:5500/&lt;/code> loads.&lt;/p></description></item></channel></rss>

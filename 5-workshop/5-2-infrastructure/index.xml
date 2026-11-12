@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>5.2. VPC and EC2 Infrastructure on Internship Report</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-2-infrastructure/</link><description>Recent content in 5.2. VPC and EC2 Infrastructure on Internship Report</description><generator>Hugo</generator><language>en</language><lastBuildDate>Wed, 11 Nov 2026 00:00:00 +0700</lastBuildDate><atom:link href="https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-2-infrastructure/index.xml" rel="self" type="application/rss+xml"/><item><title>5.2.1. Create a VPC, Subnets, Routes, and IGW</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-2-infrastructure/5-2-1-vpc/</link><pubDate>Wed, 11 Nov 2026 00:00:00 +0700</pubDate><guid>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-2-infrastructure/5-2-1-vpc/</guid><description>&lt;h1 id="521-create-a-vpc-subnets-routes-and-igw">5.2.1. Create a VPC, Subnets, Routes, and IGW&lt;/h1>
+&lt;h2 id="objective">Objective&lt;/h2>
+&lt;p>Build a virtual network for the monitored EC2 instance, separating Internet-facing and internal resources.&lt;/p>
+&lt;h2 id="aws-console-steps">AWS Console steps&lt;/h2>
+&lt;ol>
+&lt;li>Go to &lt;strong>VPC → Your VPCs → Create VPC&lt;/strong>. Choose an appropriate configuration. observed VPC CIDR &lt;code>10.0.0.0/16&lt;/code>.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/06-netmon-vpc-resource-map.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/06-netmon-vpc-resource-map.png" alt="netmon-vpc resource map" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 06 – netmon-vpc resource map&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="2">
+&lt;li>Create a &lt;strong>public subnet&lt;/strong> (e.g., &lt;code>10.0.0.0/20&lt;/code>) and a &lt;strong>private subnet&lt;/strong> (e.g., &lt;code>10.0.128.0/20&lt;/code>) in the appropriate Availability Zone.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/07-subnet-list.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/07-subnet-list.png" alt="List of two subnets" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 07 – List of two subnets&lt;/figcaption>
+&lt;/figure>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/08-public-subnet-details.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/08-public-subnet-details.png" alt="Public subnet details" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 08 – Public subnet details&lt;/figcaption>
+&lt;/figure>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/09-private-subnet-details.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/09-private-subnet-details.png" alt="Private subnet details" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 09 – Private subnet details&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="3">
+&lt;li>Create an &lt;strong>Internet Gateway&lt;/strong> and attach it to the VPC.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/14-netmon-igw-details.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/14-netmon-igw-details.png" alt="netmon-igw internet gateway" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 14 – netmon-igw internet gateway&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="4">
+&lt;li>Create a &lt;strong>public route table&lt;/strong>, add &lt;code>0.0.0.0/0&lt;/code> pointing to the Internet Gateway, and associate it with the public subnet.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/10-route-tables-list.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/10-route-tables-list.png" alt="Route-table list" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 10 – Route-table list&lt;/figcaption>
+&lt;/figure>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/11-netmon-rtb-public-routes.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/11-netmon-rtb-public-routes.png" alt="Routes in netmon-rtb-public" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 11 – Routes in netmon-rtb-public&lt;/figcaption>
+&lt;/figure>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/12-netmon-main-route-table-no-name.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/12-netmon-main-route-table-no-name.png" alt="VPC main route table" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 12 – VPC main route table&lt;/figcaption>
+&lt;/figure>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/13-netmon-rtb-private1-us-east-1a-routes.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/13-netmon-rtb-private1-us-east-1a-routes.png" alt="Private subnet route table" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 13 – Private subnet route table&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="5">
+&lt;li>A private subnet has no automatic Internet access. If outbound Internet access is required, design NAT appropriately and consider the cost before creating it.&lt;/li>
+&lt;li>Review &lt;strong>Network ACLs&lt;/strong> and &lt;strong>Security Groups&lt;/strong> against the required traffic flows and deny unnecessary access.&lt;/li>
+&lt;/ol>
+&lt;h2 id="evidence-to-capture">Evidence to capture&lt;/h2>
+&lt;ul>
+&lt;li>VPC, CIDR ranges, and subnet list.&lt;/li>
+&lt;li>Route table and Internet Gateway association.&lt;/li>
+&lt;li>Security Group attached to EC2.&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>Do not create a NAT Gateway solely for screenshots. It can incur hourly and data-processing charges.&lt;/p></description></item><item><title>5.2.2. Launch an Ubuntu EC2 Instance</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-2-infrastructure/5-2-2-ec2/</link><pubDate>Wed, 11 Nov 2026 00:00:00 +0700</pubDate><guid>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-2-infrastructure/5-2-2-ec2/</guid><description>&lt;h1 id="522-launch-an-ubuntu-ec2-instance">5.2.2. Launch an Ubuntu EC2 Instance&lt;/h1>
+&lt;h2 id="objective">Objective&lt;/h2>
+&lt;p>Launch an Ubuntu server for CloudWatch monitoring tests while reducing unauthorized-access risks.&lt;/p>
+&lt;h2 id="steps">Steps&lt;/h2>
+&lt;ol>
+&lt;li>
+&lt;p>Open &lt;strong>EC2 → Instances → Launch instances&lt;/strong>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Set the instance name to &lt;code>netmon-ec2-server&lt;/code>, matching the lab naming convention.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Choose &lt;strong>Ubuntu Server 24.04 LTS&lt;/strong> and an instance type appropriate to the available budget and usage limits.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>In &lt;strong>Network settings&lt;/strong>, select the intended VPC and public subnet and review public IP assignment.&lt;/p></description></item><item><title>5.2.3. Security Groups, IAM Roles, and Safe Access</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-2-infrastructure/5-2-3-security/</link><pubDate>Wed, 11 Nov 2026 00:00:00 +0700</pubDate><guid>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-2-infrastructure/5-2-3-security/</guid><description>&lt;h1 id="523-security-groups-iam-roles-and-safe-access">5.2.3. Security Groups, IAM Roles, and Safe Access&lt;/h1>
+&lt;h2 id="goal">Goal&lt;/h2>
+&lt;p>Protect &lt;code>netmon-ec2-server&lt;/code> and enable monitoring without exposing management ports to the entire Internet.&lt;/p>
+&lt;h2 id="console-steps">Console steps&lt;/h2>
+&lt;ol>
+&lt;li>Open &lt;strong>EC2 → Instances&lt;/strong>, select &lt;code>netmon-ec2-server&lt;/code>, and open &lt;strong>Security&lt;/strong>.&lt;/li>
+&lt;li>Inspect the attached &lt;strong>Security Group → Inbound rules&lt;/strong>. Do not expose TCP/22 to &lt;code>0.0.0.0/0&lt;/code> without a justified, reviewed need.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/15-security-groups-list.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/15-security-groups-list.png" alt="Security-group list" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 15 – Security-group list&lt;/figcaption>
+&lt;/figure>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/16-netmon-ec2-sg-inbound-no-rules.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/16-netmon-ec2-sg-inbound-no-rules.png" alt="Empty inbound rules of netmon-ec2-sg" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 16 – Empty inbound rules of netmon-ec2-sg&lt;/figcaption>
+&lt;/figure>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/17-netmon-ec2-sg-outbound-all-traffic.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/17-netmon-ec2-sg-outbound-all-traffic.png" alt="Outbound rules of netmon-ec2-sg" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 17 – Outbound rules of netmon-ec2-sg&lt;/figcaption>
+&lt;/figure>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/20-ec2-security-netmon-ec2-sg.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/20-ec2-security-netmon-ec2-sg.png" alt="EC2 security tab" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 20 – EC2 security tab&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="3">
+&lt;li>
+&lt;p>If using &lt;strong>AWS Systems Manager Session Manager&lt;/strong>, verify the SSM Agent, IAM instance profile, and required network connectivity; otherwise use another restricted administration path.&lt;/p></description></item></channel></rss>

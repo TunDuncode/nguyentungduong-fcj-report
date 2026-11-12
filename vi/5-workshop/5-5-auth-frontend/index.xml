@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>5.5. Cognito, JWT và giao diện kiểm thử on Báo cáo thực tập</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/vi/5-workshop/5-5-auth-frontend/</link><description>Recent content in 5.5. Cognito, JWT và giao diện kiểm thử on Báo cáo thực tập</description><generator>Hugo</generator><language>vi</language><lastBuildDate>Wed, 11 Nov 2026 00:00:00 +0700</lastBuildDate><atom:link href="https://tunduncode.github.io/nguyentungduong-fcj-report/vi/5-workshop/5-5-auth-frontend/index.xml" rel="self" type="application/rss+xml"/><item><title>5.5.1. Tạo Cognito User Pool và Web Client</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/vi/5-workshop/5-5-auth-frontend/5-5-1-cognito/</link><pubDate>Wed, 11 Nov 2026 00:00:00 +0700</pubDate><guid>https://tunduncode.github.io/nguyentungduong-fcj-report/vi/5-workshop/5-5-auth-frontend/5-5-1-cognito/</guid><description>&lt;h1 id="551-tạo-cognito-user-pool-và-web-client">5.5.1. Tạo Cognito User Pool và Web Client&lt;/h1>
+&lt;h2 id="mục-tiêu">Mục tiêu&lt;/h2>
+&lt;p>Tạo cơ chế đăng nhập cho người quản lý NetMon bằng Amazon Cognito, thay vì để giao diện truy cập API không kiểm soát.&lt;/p>
+&lt;h2 id="các-bước">Các bước&lt;/h2>
+&lt;ol>
+&lt;li>Mở &lt;strong>Amazon Cognito → User pools&lt;/strong>. Tạo User Pool hoặc chọn pool đã tạo ở Region &lt;code>us-east-1&lt;/code>.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/43-cognito-user-pool-overview.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/43-cognito-user-pool-overview.png" alt="Tổng quan Cognito User Pool" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Ảnh 43 – Tổng quan Cognito User Pool&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="2">
+&lt;li>Tạo &lt;strong>App client&lt;/strong> cho loại &lt;strong>Single-page application (SPA)&lt;/strong>, đặt tên &lt;code>netmon-web-client&lt;/code>.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/44-cognito-app-client-netmon-web-client.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/44-cognito-app-client-netmon-web-client.png" alt="Cognito App Client netmon-web-client" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Ảnh 44 – Cognito App Client netmon-web-client&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="3">
+&lt;li>
+&lt;p>Chọn đăng nhập bằng &lt;strong>email&lt;/strong>, không mở self-registration nếu đây là hệ thống chỉ dành cho thành viên được cấp quyền.&lt;/p></description></item><item><title>5.5.2. Tạo JWT Authorizer và OAuth Scopes</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/vi/5-workshop/5-5-auth-frontend/5-5-2-jwt/</link><pubDate>Wed, 11 Nov 2026 00:00:00 +0700</pubDate><guid>https://tunduncode.github.io/nguyentungduong-fcj-report/vi/5-workshop/5-5-auth-frontend/5-5-2-jwt/</guid><description>&lt;h1 id="552-tạo-jwt-authorizer-và-oauth-scopes">5.5.2. Tạo JWT Authorizer và OAuth Scopes&lt;/h1>
+&lt;h2 id="mục-tiêu">Mục tiêu&lt;/h2>
+&lt;p>Yêu cầu Access Token hợp lệ và scope tương ứng trước khi API Gateway cho phép truy cập các chức năng đọc/ghi của NetMon.&lt;/p>
+&lt;h2 id="tạo-resource-server-và-oauth-scopes">Tạo Resource Server và OAuth scopes&lt;/h2>
+&lt;ol>
+&lt;li>Mở &lt;strong>Cognito → User pool → Applications → Resource servers → Create resource server&lt;/strong>.&lt;/li>
+&lt;li>Đặt tên &lt;code>NetMon API&lt;/code>, Identifier &lt;code>netmon-api&lt;/code>; thêm custom scopes &lt;code>read&lt;/code> và &lt;code>write&lt;/code>.&lt;/li>
+&lt;li>Mở &lt;strong>App clients → netmon-web-client → Login pages → Edit&lt;/strong>, cho phép &lt;code>netmon-api/read&lt;/code>, &lt;code>netmon-api/write&lt;/code> và các OpenID scopes cần thiết (ví dụ &lt;code>openid&lt;/code>, &lt;code>email&lt;/code>). Lưu thay đổi.&lt;/li>
+&lt;/ol>
+&lt;h2 id="tạo-jwt-authorizer">Tạo JWT Authorizer&lt;/h2>
+&lt;ol>
+&lt;li>
+&lt;p>Vào &lt;strong>API Gateway → netmon-management-api → Authorization → Manage authorizers → Create&lt;/strong>.&lt;/p></description></item><item><title>5.5.3. Xây dựng trang kiểm thử trên VS Code</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/vi/5-workshop/5-5-auth-frontend/5-5-3-test-ui/</link><pubDate>Wed, 11 Nov 2026 00:00:00 +0700</pubDate><guid>https://tunduncode.github.io/nguyentungduong-fcj-report/vi/5-workshop/5-5-auth-frontend/5-5-3-test-ui/</guid><description>&lt;h1 id="553-xây-dựng-trang-kiểm-thử-trên-vs-code">5.5.3. Xây dựng trang kiểm thử trên VS Code&lt;/h1>
+&lt;h2 id="mục-tiêu">Mục tiêu&lt;/h2>
+&lt;p>Dùng trang kiểm thử HTML/CSS/JavaScript chạy trên VS Code để đăng nhập Cognito, gọi API và kiểm tra dữ liệu thật; không cần chờ giao diện cuối cùng của Mạnh Quân.&lt;/p>
+&lt;h2 id="chuẩn-bị">Chuẩn bị&lt;/h2>
+&lt;ol>
+&lt;li>Mở dự án &lt;code>NetMon-API-Test&lt;/code> đã chuẩn bị trong VS Code, hoặc sử dụng một frontend có triển khai PKCE tương đương.&lt;/li>
+&lt;li>Tại thư mục chứa &lt;code>index.html&lt;/code>, chạy server cục bộ:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>python -m http.server &lt;span style="color:#ae81ff">5500&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
+&lt;li>Mở &lt;code>http://localhost:5500/&lt;/code> và xác nhận giao diện tải được &lt;strong>trước khi&lt;/strong> bấm đăng nhập Cognito.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/48-cognito-managed-login-sign-in.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/48-cognito-managed-login-sign-in.png" alt="Giao diện đăng nhập Managed Login" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Ảnh 48 – Giao diện đăng nhập Managed Login&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="4">
+&lt;li>Nhập đúng &lt;strong>Cognito domain&lt;/strong>, &lt;strong>App Client ID&lt;/strong>, &lt;strong>API Gateway Invoke URL&lt;/strong>. Đừng điền AWS Secret Key hoặc Cognito client secret vào trang web.&lt;/li>
+&lt;li>Bấm nút đăng nhập do frontend cung cấp. Sau khi Cognito redirect về &lt;code>/?code=...&lt;/code>, JavaScript xử lý PKCE và nhận Access Token.&lt;/li>
+&lt;li>Gọi thử &lt;code>GET /devices&lt;/code> và &lt;code>GET /alerts&lt;/code>. Nếu thành công, tiếp tục tạo thiết bị &lt;code>TEST-SW01&lt;/code>, sửa thông tin, xem chi tiết rồi xóa đúng thiết bị này.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/41-api-gateway-cors-localhost-5500.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/41-api-gateway-cors-localhost-5500.png" alt="Cấu hình CORS localhost:5500" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Ảnh 41 – Cấu hình CORS localhost:5500&lt;/figcaption>
+&lt;/figure>
+&lt;h2 id="các-lỗi-và-cách-đọc-kết-quả">Các lỗi và cách đọc kết quả&lt;/h2>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th style="text-align: left">Hiện tượng&lt;/th>
+ &lt;th style="text-align: left">Gợi ý kiểm tra&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;code>ERR_CONNECTION_REFUSED&lt;/code>&lt;/td>
+ &lt;td style="text-align: left">Server localhost:5500 chưa chạy&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;code>401 Unauthorized&lt;/code>&lt;/td>
+ &lt;td style="text-align: left">Thiếu, sai hoặc hết hạn token&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;code>403 Forbidden&lt;/code>&lt;/td>
+ &lt;td style="text-align: left">Access Token thiếu scope của route&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">CORS blocked&lt;/td>
+ &lt;td style="text-align: left">Origin hoặc headers trong API Gateway CORS chưa đúng&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;code>500&lt;/code>&lt;/td>
+ &lt;td style="text-align: left">Lambda, DynamoDB, IAM hoặc CloudWatch Logs&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+&lt;/table>
+&lt;blockquote>
+&lt;p>Không gửi ảnh chụp URL có &lt;code>?code=&lt;/code> còn hiệu lực hoặc token thật. Trước khi ghép sang giao diện chính, kiểm tra lại 8 Routes có trả đúng dữ liệu như Lambda đã xử lý hay không.&lt;/p></description></item><item><title>5.5.4. Đăng nhập bằng PKCE và gọi API bảo vệ</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/vi/5-workshop/5-5-auth-frontend/5-5-4-frontend-login/</link><pubDate>Wed, 11 Nov 2026 00:00:00 +0700</pubDate><guid>https://tunduncode.github.io/nguyentungduong-fcj-report/vi/5-workshop/5-5-auth-frontend/5-5-4-frontend-login/</guid><description>&lt;h1 id="554-đăng-nhập-bằng-pkce-và-gọi-api-bảo-vệ">5.5.4. Đăng nhập bằng PKCE và gọi API bảo vệ&lt;/h1>
+&lt;h2 id="mục-tiêu">Mục tiêu&lt;/h2>
+&lt;p>Kết nối trang NetMon HTML/JavaScript với Cognito và lấy &lt;strong>Access Token&lt;/strong> đúng chuẩn Authorization Code + PKCE.&lt;/p>
+&lt;h2 id="chuẩn-bị-cấu-hình">Chuẩn bị cấu hình&lt;/h2>
+&lt;ol>
+&lt;li>Trong &lt;strong>Cognito → App clients → &lt;code>netmon-web-client&lt;/code>&lt;/strong>, bảo đảm ứng dụng là SPA, dùng &lt;strong>Authorization code grant&lt;/strong>.&lt;/li>
+&lt;li>Cấu hình callback chính xác &lt;code>http://localhost:5500/&lt;/code>, các scope &lt;code>openid email netmon-api/read netmon-api/write&lt;/code>; không dùng client secret trong trình duyệt.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/47-cognito-app-client-managed-login-pages-oauth-scopes.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/47-cognito-app-client-managed-login-pages-oauth-scopes.png" alt="Cognito Managed Login và cấu hình OAuth" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Ảnh 47 – Cognito Managed Login và cấu hình OAuth&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="3">
+&lt;li>
+&lt;p>Khởi chạy web server trước khi đăng nhập, ví dụ &lt;code>python -m http.server 5500&lt;/code>, rồi kiểm tra &lt;code>http://localhost:5500/&lt;/code> đã tải được trang.&lt;/p></description></item></channel></rss>

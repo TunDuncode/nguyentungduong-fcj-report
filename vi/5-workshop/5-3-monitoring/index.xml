@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>5.3. CloudWatch, SNS và EventBridge on Báo cáo thực tập</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/vi/5-workshop/5-3-monitoring/</link><description>Recent content in 5.3. CloudWatch, SNS và EventBridge on Báo cáo thực tập</description><generator>Hugo</generator><language>vi</language><lastBuildDate>Wed, 11 Nov 2026 00:00:00 +0700</lastBuildDate><atom:link href="https://tunduncode.github.io/nguyentungduong-fcj-report/vi/5-workshop/5-3-monitoring/index.xml" rel="self" type="application/rss+xml"/><item><title>5.3.1. Thu thập các chỉ số CPU, RAM và Disk</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/vi/5-workshop/5-3-monitoring/5-3-1-metrics/</link><pubDate>Wed, 11 Nov 2026 00:00:00 +0700</pubDate><guid>https://tunduncode.github.io/nguyentungduong-fcj-report/vi/5-workshop/5-3-monitoring/5-3-1-metrics/</guid><description>&lt;h1 id="531-thu-thập-các-chỉ-số-cpu-ram-và-disk">5.3.1. Thu thập các chỉ số CPU, RAM và Disk&lt;/h1>
+&lt;h2 id="mục-tiêu">Mục tiêu&lt;/h2>
+&lt;p>Hiển thị CPU, RAM và Disk của máy chủ EC2 trong CloudWatch, làm dữ liệu đầu vào cho cảnh báo.&lt;/p>
+&lt;h2 id="thực-hiện">Thực hiện&lt;/h2>
+&lt;ol>
+&lt;li>Vào &lt;strong>CloudWatch → Metrics → All metrics&lt;/strong>; tìm metric &lt;code>AWS/EC2 → CPUUtilization&lt;/code> theo InstanceId. CPU là metric EC2 tiêu chuẩn.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/50-ec2-netmon-monitoring-cpu-network-metrics.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/50-ec2-netmon-monitoring-cpu-network-metrics.png" alt="Biểu đồ giám sát CPU và mạng của EC2" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Ảnh 50 – Biểu đồ giám sát CPU và mạng của EC2&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="2">
+&lt;li>
+&lt;p>Đối với RAM và Disk, triển khai &lt;strong>Amazon CloudWatch Agent&lt;/strong> trên Ubuntu. Agent cần IAM role cho phép xuất metrics, ví dụ policy phù hợp với &lt;code>CloudWatchAgentServerPolicy&lt;/code>.&lt;/p></description></item><item><title>5.3.2. Tạo CloudWatch Alarm và gửi SNS Email</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/vi/5-workshop/5-3-monitoring/5-3-2-alarms-sns/</link><pubDate>Wed, 11 Nov 2026 00:00:00 +0700</pubDate><guid>https://tunduncode.github.io/nguyentungduong-fcj-report/vi/5-workshop/5-3-monitoring/5-3-2-alarms-sns/</guid><description>&lt;h1 id="532-tạo-cloudwatch-alarm-và-gửi-sns-email">5.3.2. Tạo CloudWatch Alarm và gửi SNS Email&lt;/h1>
+&lt;h2 id="mục-tiêu">Mục tiêu&lt;/h2>
+&lt;p>Tạo ba alarm CPU/RAM/Disk và kết nối SNS để gửi thông báo khi một chỉ số vượt ngưỡng.&lt;/p>
+&lt;h2 id="tạo-sns-topic">Tạo SNS Topic&lt;/h2>
+&lt;ol>
+&lt;li>Mở &lt;strong>Amazon SNS → Topics → Create topic&lt;/strong> (Standard), đặt tên &lt;code>netmon-alerts&lt;/code>.&lt;/li>
+&lt;li>Vào topic → &lt;strong>Create subscription&lt;/strong> → Protocol &lt;code>Email&lt;/code>, nhập email nhận cảnh báo.&lt;/li>
+&lt;li>Mở thư từ AWS SNS và bấm &lt;strong>Confirm subscription&lt;/strong>. Nếu còn &lt;code>Pending confirmation&lt;/code>, SNS chưa thể chuyển email đến subscription đó.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/25-sns-new-subscription-confirmed.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/25-sns-new-subscription-confirmed.png" alt="SNS subscription đã được xác nhận" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Ảnh 25 – SNS subscription đã được xác nhận&lt;/figcaption>
+&lt;/figure>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/26-sns-subscriptions-confirmed-list.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/26-sns-subscriptions-confirmed-list.png" alt="Danh sách SNS subscriptions" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Ảnh 26 – Danh sách SNS subscriptions&lt;/figcaption>
+&lt;/figure>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/27-sns-netmon-alerts-new-email-confirmed.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/27-sns-netmon-alerts-new-email-confirmed.png" alt="Topic SNS netmon-alerts với email đã xác nhận" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Ảnh 27 – Topic SNS netmon-alerts với email đã xác nhận&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="4">
+&lt;li>Dùng &lt;strong>Publish message&lt;/strong> gửi thông báo thử; kiểm tra Inbox và Spam. Trong quá trình thực hành, nhóm đã nhận thư thử thành công.&lt;/li>
+&lt;/ol>
+&lt;h2 id="tạo-cloudwatch-alarms">Tạo CloudWatch Alarms&lt;/h2>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th style="text-align: left">Alarm&lt;/th>
+ &lt;th style="text-align: left">Metric&lt;/th>
+ &lt;th style="text-align: left">Điều kiện thực hành&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;code>netmon-cpu-high-80&lt;/code>&lt;/td>
+ &lt;td style="text-align: left">&lt;code>AWS/EC2 / CPUUtilization&lt;/code>&lt;/td>
+ &lt;td style="text-align: left">Greater than 80%&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;code>netmon-ram-high-80&lt;/code>&lt;/td>
+ &lt;td style="text-align: left">&lt;code>NetMon/EC2 / mem_used_percent&lt;/code>&lt;/td>
+ &lt;td style="text-align: left">Greater than 80%&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;code>netmon-disk-high-85&lt;/code>&lt;/td>
+ &lt;td style="text-align: left">&lt;code>NetMon/EC2 / disk_used_percent&lt;/code>&lt;/td>
+ &lt;td style="text-align: left">Greater than 85%&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+&lt;/table>
+&lt;p>Với mỗi alarm, vào &lt;strong>CloudWatch → Alarms → Create alarm → Select metric&lt;/strong>. Chọn &lt;strong>Average&lt;/strong>, &lt;strong>5 minutes&lt;/strong>, &lt;strong>1 out of 1 datapoint&lt;/strong>, trạng thái &lt;code>In alarm&lt;/code> gửi thông báo vào SNS topic &lt;code>netmon-alerts&lt;/code>. Những ngưỡng trên là cấu hình thử nghiệm, không phải khuyến nghị chung cho mọi máy chủ.&lt;/p></description></item><item><title>5.3.3. Tạo quy tắc EventBridge chuyển trạng thái Alarm</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/vi/5-workshop/5-3-monitoring/5-3-3-eventbridge/</link><pubDate>Wed, 11 Nov 2026 00:00:00 +0700</pubDate><guid>https://tunduncode.github.io/nguyentungduong-fcj-report/vi/5-workshop/5-3-monitoring/5-3-3-eventbridge/</guid><description>&lt;h1 id="533-tạo-quy-tắc-eventbridge-chuyển-trạng-thái-alarm">5.3.3. Tạo quy tắc EventBridge chuyển trạng thái Alarm&lt;/h1>
+&lt;h2 id="mục-tiêu">Mục tiêu&lt;/h2>
+&lt;p>Khi CloudWatch Alarm thay đổi trạng thái, EventBridge chuyển sự kiện đến Lambda để lưu lịch sử trong DynamoDB, hỗ trợ theo dõi thời điểm và trạng thái xử lý cảnh báo.&lt;/p>
+&lt;h2 id="thực-hiện">Thực hiện&lt;/h2>
+&lt;ol>
+&lt;li>
+&lt;p>Đảm bảo bảng &lt;code>NetworkAlerts&lt;/code> đã tồn tại với Partition Key &lt;code>eventId&lt;/code> kiểu String.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Tạo Lambda Python &lt;code>netmon-save-alert&lt;/code> và gắn execution role có quyền &lt;code>dynamodb:PutItem&lt;/code> vào bảng &lt;code>NetworkAlerts&lt;/code> cùng quyền ghi CloudWatch Logs.&lt;/p></description></item><item><title>5.3.4. Lambda lưu lịch sử cảnh báo vào DynamoDB</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/vi/5-workshop/5-3-monitoring/5-3-4-alert-history/</link><pubDate>Wed, 11 Nov 2026 00:00:00 +0700</pubDate><guid>https://tunduncode.github.io/nguyentungduong-fcj-report/vi/5-workshop/5-3-monitoring/5-3-4-alert-history/</guid><description>&lt;h1 id="534-lambda-lưu-lịch-sử-cảnh-báo-vào-dynamodb">5.3.4. Lambda lưu lịch sử cảnh báo vào DynamoDB&lt;/h1>
+&lt;h2 id="mục-tiêu">Mục tiêu&lt;/h2>
+&lt;p>Lưu từng sự kiện &lt;strong>CloudWatch Alarm State Change&lt;/strong> vào bảng &lt;code>NetworkAlerts&lt;/code> để biết cảnh báo xảy ra lúc nào và đã xử lý hay chưa.&lt;/p>
+&lt;h2 id="các-bước-thao-tác">Các bước thao tác&lt;/h2>
+&lt;ol>
+&lt;li>Mở &lt;strong>DynamoDB → Tables&lt;/strong> và kiểm tra bảng &lt;code>NetworkAlerts&lt;/code>, Partition key &lt;code>eventId&lt;/code> (String).&lt;/li>
+&lt;li>Mở &lt;strong>Lambda → Functions → &lt;code>netmon-save-alert&lt;/code>&lt;/strong>. Chọn &lt;code>lambda_function.py&lt;/code>, bấm &lt;strong>Deploy&lt;/strong> sau khi hoàn thiện mã đọc &lt;code>event.detail.alarmName&lt;/code>, &lt;code>event.detail.state.value&lt;/code>, &lt;code>event.id&lt;/code> và thời gian sự kiện.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/31-lambda-netmon-save-alert-code-overview.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/31-lambda-netmon-save-alert-code-overview.png" alt="Mã nguồn hàm netmon-save-alert" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Ảnh 31 – Mã nguồn hàm netmon-save-alert&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="3">
+&lt;li>
+&lt;p>Trong &lt;strong>Configuration → Permissions&lt;/strong>, mở role. Cấp &lt;strong>&lt;code>dynamodb:PutItem&lt;/code>&lt;/strong> chỉ với ARN bảng &lt;code>NetworkAlerts&lt;/code>, đồng thời giữ quyền ghi CloudWatch Logs.&lt;/p></description></item></channel></rss>

@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>5.4. Lambda, DynamoDB, and API Gateway on Internship Report</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-4-serverless/</link><description>Recent content in 5.4. Lambda, DynamoDB, and API Gateway on Internship Report</description><generator>Hugo</generator><language>en</language><lastBuildDate>Wed, 11 Nov 2026 00:00:00 +0700</lastBuildDate><atom:link href="https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-4-serverless/index.xml" rel="self" type="application/rss+xml"/><item><title>5.4.1. Create NetworkDevices and NetworkAlerts Tables</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-4-serverless/5-4-1-dynamodb/</link><pubDate>Wed, 11 Nov 2026 00:00:00 +0700</pubDate><guid>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-4-serverless/5-4-1-dynamodb/</guid><description>&lt;h1 id="541-create-networkdevices-and-networkalerts-tables">5.4.1. Create NetworkDevices and NetworkAlerts Tables&lt;/h1>
+&lt;h2 id="objective">Objective&lt;/h2>
+&lt;p>Design NoSQL storage for the device inventory and alert history. Reuse existing tables instead of creating duplicates.&lt;/p>
+&lt;h2 id="create-or-verify-tables">Create or verify tables&lt;/h2>
+&lt;ol>
+&lt;li>Open &lt;strong>DynamoDB → Tables&lt;/strong> in &lt;code>us-east-1&lt;/code>.&lt;/li>
+&lt;li>Create or verify &lt;strong>&lt;code>NetworkDevices&lt;/code>&lt;/strong> with String partition key &lt;code>deviceId&lt;/code> and &lt;strong>On-demand&lt;/strong> capacity.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/33-dynamodb-networkdevices-2-items.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/33-dynamodb-networkdevices-2-items.png" alt="Two items in NetworkDevices" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 33 – Two items in NetworkDevices&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="3">
+&lt;li>Create or verify &lt;strong>&lt;code>NetworkAlerts&lt;/code>&lt;/strong> with String partition key &lt;code>eventId&lt;/code> and On-demand capacity.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/32-dynamodb-networkalerts-7-items.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/32-dynamodb-networkalerts-7-items.png" alt="Items in NetworkAlerts" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 32 – Items in NetworkAlerts&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="4">
+&lt;li>A sort key is not needed for the current single-key design. Add indexes only after identifying a real query requirement.&lt;/li>
+&lt;/ol>
+&lt;h3 id="example-device-record">Example device record&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;deviceId&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;TEST-SW01&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;deviceName&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;Demo Switch&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;deviceType&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;Switch&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;ipAddress&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;10.0.0.10&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;status&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;Online&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>For EC2, optional fields include &lt;code>instanceId&lt;/code>, &lt;code>region&lt;/code>, &lt;code>monitoringSource&lt;/code>, and &lt;code>vpcId&lt;/code>. &lt;strong>Do not enter InstanceId in the IP field&lt;/strong>: the two fields identify different things.&lt;/p></description></item><item><title>5.4.2. Build the netmon-api Python Lambda</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-4-serverless/5-4-2-lambda-api/</link><pubDate>Wed, 11 Nov 2026 00:00:00 +0700</pubDate><guid>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-4-serverless/5-4-2-lambda-api/</guid><description>&lt;h1 id="542-build-the-netmon-api-python-lambda">5.4.2. Build the netmon-api Python Lambda&lt;/h1>
+&lt;h2 id="objective">Objective&lt;/h2>
+&lt;p>Use a single Python Lambda named &lt;code>netmon-api&lt;/code> to serve eight HTTP operations based on the request method and path, avoiding unnecessary duplicate functions for the class project.&lt;/p>
+&lt;h2 id="steps">Steps&lt;/h2>
+&lt;ol>
+&lt;li>Open &lt;strong>Lambda → Functions → Create function → Author from scratch&lt;/strong>. Name the function &lt;code>netmon-api&lt;/code> and select a supported Python runtime.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/34-lambda-netmon-api-code-and-api-gateway.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/34-lambda-netmon-api-code-and-api-gateway.png" alt="netmon-api Lambda and API Gateway trigger" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 34 – netmon-api Lambda and API Gateway trigger&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="2">
+&lt;li>Attach an &lt;strong>execution role&lt;/strong> with access to both DynamoDB tables, &lt;code>cloudwatch:GetMetricStatistics&lt;/code>, and CloudWatch Logs. Prefer resource-scoped DynamoDB permissions.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/53-lambda-netmon-api-execution-role-permissions.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/53-lambda-netmon-api-execution-role-permissions.png" alt="Lambda netmon-api execution role" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 53 – Lambda netmon-api execution role&lt;/figcaption>
+&lt;/figure>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/54-iam-netmon-api-role-permission-policies.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/54-iam-netmon-api-role-permission-policies.png" alt="IAM role permission policies" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 54 – IAM role permission policies&lt;/figcaption>
+&lt;/figure>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/55-iam-netmon-api-access-policy-json.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/55-iam-netmon-api-access-policy-json.png" alt="JSON policy granting DynamoDB and CloudWatch actions" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 55 – JSON policy granting DynamoDB and CloudWatch actions&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="3">
+&lt;li>
+&lt;p>In code, read the method from &lt;code>event.requestContext.http.method&lt;/code> and the URL from &lt;code>event.rawPath&lt;/code> for &lt;strong>HTTP API payload format 2.0&lt;/strong>.&lt;/p></description></item><item><title>5.4.3. Build an HTTP API with Eight Routes</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-4-serverless/5-4-3-api-gateway/</link><pubDate>Wed, 11 Nov 2026 00:00:00 +0700</pubDate><guid>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-4-serverless/5-4-3-api-gateway/</guid><description>&lt;h1 id="543-build-an-http-api-with-eight-routes">5.4.3. Build an HTTP API with Eight Routes&lt;/h1>
+&lt;h2 id="objective">Objective&lt;/h2>
+&lt;p>Create an HTTP API for NetMon management actions and integrate all routes with &lt;code>netmon-api&lt;/code> Lambda.&lt;/p>
+&lt;h2 id="aws-console-steps">AWS Console steps&lt;/h2>
+&lt;ol>
+&lt;li>Open &lt;strong>API Gateway → APIs → Create API → HTTP API&lt;/strong>. The group&amp;rsquo;s API is called &lt;code>netmon-management-api&lt;/code>.&lt;/li>
+&lt;li>Create or verify these routes:&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/38-api-gateway-netmon-management-api-routes.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/38-api-gateway-netmon-management-api-routes.png" alt="Eight API Gateway routes" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 38 – Eight API Gateway routes&lt;/figcaption>
+&lt;/figure>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th style="text-align: left">Route&lt;/th>
+ &lt;th style="text-align: left">Purpose&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;code>GET /devices&lt;/code>&lt;/td>
+ &lt;td style="text-align: left">List devices&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;code>POST /devices&lt;/code>&lt;/td>
+ &lt;td style="text-align: left">Create device&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;code>GET /devices/{id}&lt;/code>&lt;/td>
+ &lt;td style="text-align: left">Get device details&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;code>PUT /devices/{id}&lt;/code>&lt;/td>
+ &lt;td style="text-align: left">Update device&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;code>DELETE /devices/{id}&lt;/code>&lt;/td>
+ &lt;td style="text-align: left">Delete device&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;code>GET /alerts&lt;/code>&lt;/td>
+ &lt;td style="text-align: left">List alerts&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;code>PUT /alerts/{id}&lt;/code>&lt;/td>
+ &lt;td style="text-align: left">Update alert handling status&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">&lt;code>GET /metrics&lt;/code>&lt;/td>
+ &lt;td style="text-align: left">Retrieve CPU metrics (current Lambda behavior)&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+&lt;/table>
+&lt;ol start="3">
+&lt;li>Under &lt;strong>Develop → Integrations&lt;/strong>, select the &lt;code>netmon-api&lt;/code> &lt;strong>Lambda function&lt;/strong> in &lt;code>us-east-1&lt;/code>, payload format &lt;strong>2.0&lt;/strong>, and attach it to all eight routes.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/40-api-gateway-integrations-netmon-api.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/40-api-gateway-integrations-netmon-api.png" alt="API Gateway integrated with netmon-api" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 40 – API Gateway integrated with netmon-api&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="4">
+&lt;li>Under &lt;strong>Develop → CORS&lt;/strong>, set allowed origin &lt;code>http://localhost:5500&lt;/code>, methods GET/POST/PUT/DELETE/OPTIONS, and headers &lt;code>authorization&lt;/code> and &lt;code>content-type&lt;/code>. Credentials are not required when sending JWTs in the Authorization header.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/41-api-gateway-cors-localhost-5500.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/41-api-gateway-cors-localhost-5500.png" alt="CORS configuration for localhost:5500" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 41 – CORS configuration for localhost:5500&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="5">
+&lt;li>Under &lt;strong>Deploy → Stages → &lt;code>$default&lt;/code>&lt;/strong>, confirm &lt;strong>Automatic deployment = Enabled&lt;/strong>. If disabled, deploy manually.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/42-api-gateway-default-stage-auto-deploy.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/42-api-gateway-default-stage-auto-deploy.png" alt="Automatically deployed $default stage" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 42 – Automatically deployed $default stage&lt;/figcaption>
+&lt;/figure>
+&lt;h2 id="initial-test">Initial test&lt;/h2>
+&lt;p>Once routes have JWT authorization, requesting &lt;code>GET /devices&lt;/code> &lt;strong>without&lt;/strong> an Authorization header should return &lt;code>401 Unauthorized&lt;/code>. This verifies the authorization layer, not the full Lambda integration. Test with a valid access token to confirm the backend.&lt;/p></description></item><item><title>5.4.4. Test CRUD and Data Queries</title><link>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-4-serverless/5-4-4-crud-test/</link><pubDate>Wed, 11 Nov 2026 00:00:00 +0700</pubDate><guid>https://tunduncode.github.io/nguyentungduong-fcj-report/5-workshop/5-4-serverless/5-4-4-crud-test/</guid><description>&lt;h1 id="544-test-crud-and-data-queries">5.4.4. Test CRUD and Data Queries&lt;/h1>
+&lt;h2 id="goal">Goal&lt;/h2>
+&lt;p>Validate CRUD operations on &lt;code>NetworkDevices&lt;/code> using a dedicated &lt;strong>test item&lt;/strong>, without changing the real EC2/device records used for the project.&lt;/p>
+&lt;h2 id="sample-test-record">Sample test record&lt;/h2>
+&lt;p>Use a &lt;code>deviceId&lt;/code> beginning with &lt;code>TEST-&lt;/code>, for example:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;deviceId&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;TEST-SW01&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;deviceName&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;Switch test NetMon&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;deviceType&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;Switch&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;ipAddress&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;10.0.0.250&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;status&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;Online&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="crud-scenario">CRUD scenario&lt;/h2>
+&lt;ol>
+&lt;li>&lt;strong>POST &lt;code>/devices&lt;/code>&lt;/strong>: create &lt;code>TEST-SW01&lt;/code> and verify it exists in DynamoDB.&lt;/li>
+&lt;li>&lt;strong>GET &lt;code>/devices&lt;/code>&lt;/strong>: list devices and locate the test item.&lt;/li>
+&lt;/ol>
+&lt;figure class="netmon-evidence" style="margin:1.25rem 0;max-width:1080px;">
+ &lt;a href="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/33-dynamodb-networkdevices-2-items.png" target="_blank" rel="noopener">&lt;img src="https://tunduncode.github.io/nguyentungduong-fcj-report/nguyentungduong-fcj-report/images/netmon-workshop/33-dynamodb-networkdevices-2-items.png" alt="Two items in NetworkDevices" loading="lazy" style="display:block;max-width:100%;width:100%;height:auto;border:1px solid #ddd;border-radius:6px;" />&lt;/a>
+ &lt;figcaption style="font-size:.9rem;line-height:1.5;color:#666;text-align:center;margin:.45rem 0;">Figure 33 – Two items in NetworkDevices&lt;/figcaption>
+&lt;/figure>
+&lt;ol start="3">
+&lt;li>
+&lt;p>&lt;strong>GET &lt;code>/devices/TEST-SW01&lt;/code>&lt;/strong>: verify device details.&lt;/p></description></item></channel></rss>
