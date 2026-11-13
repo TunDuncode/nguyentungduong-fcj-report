@@ -25,7 +25,7 @@ description: "DynamoDB design for devices and alert history"
 
 ### Week 5 Achievements:
 
-- Defined a shared **NetworkDevices** schema and device-based partition key.
-- Prepared **NetworkAlerts** to record alarm times and handling states.
-- Learned to verify writes using **Explore table items** rather than trusting the frontend alone.
+- Defined a shared NetworkDevices schema and device-based partition key.
+- Prepared NetworkAlerts to record alarm times and handling states.
+- Learned to verify writes using Explore table items rather than trusting the frontend alone.
 

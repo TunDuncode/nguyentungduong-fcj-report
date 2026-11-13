@@ -26,6 +26,6 @@ description: "Kiến trúc mạng VPC và phân tách hạ tầng"
 ### Kết quả đạt được tuần 3:
 
 - Đọc được kiến trúc mạng mô phỏng và luồng kết nối dịch vụ Serverless.
-- Hiểu **EC2 metrics** khác với số liệu thiết bị giả lập lưu trong **NetworkDevices**.
+- Hiểu EC2 metrics khác với số liệu thiết bị giả lập lưu trong NetworkDevices.
 - Phân định rõ phần VPC/EC2 do Tùng Dương phụ trách; em theo dõi để chuẩn bị tích hợp API.
 

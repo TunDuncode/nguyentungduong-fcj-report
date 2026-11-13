@@ -26,6 +26,6 @@ description: "IAM, phân quyền nhóm và AWS Budgets"
 ### Kết quả đạt được tuần 2:
 
 - Có phương án phân chia quyền theo ba mảng công việc; hiểu rằng không nên dùng chung thông tin đăng nhập root.
-- Nắm cấu hình **AWS Budget 20 USD/tháng** và các ngưỡng cảnh báo; đây không phải số tiền đã chi.
+- Nắm cấu hình AWS Budget 20 USD/tháng và các ngưỡng cảnh báo; đây không phải số tiền đã chi.
 - Biết kiểm tra IAM Role của Lambda khi gặp lỗi truy cập DynamoDB.
 

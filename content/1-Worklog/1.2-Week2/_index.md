@@ -26,6 +26,6 @@ description: "IAM, team permissions, and AWS Budgets"
 ### Week 2 Achievements:
 
 - Outlined permission separation for the three workstreams and why root credentials should not be shared.
-- Understood the **USD 20/month AWS Budget** and alert thresholds; these are not actual incurred charges.
+- Understood the USD 20/month AWS Budget and alert thresholds; these are not actual incurred charges.
 - Learned to inspect Lambda execution roles when DynamoDB access fails.
 

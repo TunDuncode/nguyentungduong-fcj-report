@@ -25,7 +25,7 @@ description: "EC2 Ubuntu, EBS và giám sát cơ bản"
 
 ### Kết quả đạt được tuần 4:
 
-- Hiểu quá trình khởi tạo máy chủ **netmon-ec2-server** và những yếu tố ảnh hưởng đến chi phí.
+- Hiểu quá trình khởi tạo máy chủ netmon-ec2-server và những yếu tố ảnh hưởng đến chi phí.
 - Biết CPUUtilization là chỉ số có sẵn, còn RAM/disk cần thu thập bổ sung tùy cấu hình.
 - Thống nhất không gộp số liệu giả lập và số liệu EC2 thành một chỉ số thiếu nguồn gốc.
 

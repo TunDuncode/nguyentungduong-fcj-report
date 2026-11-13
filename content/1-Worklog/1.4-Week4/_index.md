@@ -25,7 +25,7 @@ description: "Ubuntu EC2, EBS, and basic monitoring"
 
 ### Week 4 Achievements:
 
-- Understood provisioning and cost considerations for **netmon-ec2-server**.
+- Understood provisioning and cost considerations for netmon-ec2-server.
 - Learned that CPUUtilization is available by default while RAM/disk require additional collection depending on setup.
 - Agreed to label simulated and real EC2 metrics separately.
 

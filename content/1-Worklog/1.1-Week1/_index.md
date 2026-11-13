@@ -26,7 +26,7 @@ description: "Getting started with FCAJ, AWS, and the NetMon topic"
 
 ### Week 1 Achievements:
 
-- Selected a **simulated network-device** approach combined with real AWS resources to keep costs manageable.
+- Selected a simulated network-device approach combined with real AWS resources to keep costs manageable.
 - Identified four main functions: device management, CPU/RAM updates, alerts, and dashboard monitoring.
-- Gained an initial understanding of AWS services and my **Lambda + API Gateway + DynamoDB** responsibilities.
+- Gained an initial understanding of AWS services and my Lambda + API Gateway + DynamoDB responsibilities.
 

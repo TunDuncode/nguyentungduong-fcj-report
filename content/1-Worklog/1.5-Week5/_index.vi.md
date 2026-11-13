@@ -25,7 +25,7 @@ description: "Thiết kế DynamoDB cho thiết bị và lịch sử cảnh báo
 
 ### Kết quả đạt được tuần 5:
 
-- Có cấu trúc thống nhất cho bảng **NetworkDevices**; xác định khóa chính theo mã thiết bị.
-- Chuẩn bị mô hình **NetworkAlerts** để lưu thời gian và trạng thái xử lý cảnh báo.
-- Biết sử dụng **Explore table items** để xác nhận yêu cầu thêm/sửa có ghi thật vào DynamoDB hay không.
+- Có cấu trúc thống nhất cho bảng NetworkDevices; xác định khóa chính theo mã thiết bị.
+- Chuẩn bị mô hình NetworkAlerts để lưu thời gian và trạng thái xử lý cảnh báo.
+- Biết sử dụng Explore table items để xác nhận yêu cầu thêm/sửa có ghi thật vào DynamoDB hay không.
 

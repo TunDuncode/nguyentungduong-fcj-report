@@ -26,6 +26,6 @@ description: "VPC network design and infrastructure separation"
 ### Week 3 Achievements:
 
 - Understood the simulated network architecture and Serverless integration flow.
-- Distinguished **EC2 metrics** from simulated device readings stored in **NetworkDevices**.
+- Distinguished EC2 metrics from simulated device readings stored in NetworkDevices.
 - Kept VPC/EC2 ownership with Tùng Dương while preparing the API integration.
 

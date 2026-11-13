@@ -26,7 +26,7 @@ description: "Làm quen FCAJ, AWS và xác định đề tài NetMon"
 
 ### Kết quả đạt được tuần 1:
 
-- Chọn được hướng **mô phỏng thiết bị mạng** kết hợp tài nguyên AWS thật để phù hợp kinh phí.
+- Chọn được hướng mô phỏng thiết bị mạng kết hợp tài nguyên AWS thật để phù hợp kinh phí.
 - Xác định bốn nhóm chức năng: quản lý thiết bị, cập nhật CPU/RAM, cảnh báo và dashboard.
-- Nắm sơ bộ sự khác nhau giữa các dịch vụ AWS và phần công việc **Lambda + API Gateway + DynamoDB** của bản thân.
+- Nắm sơ bộ sự khác nhau giữa các dịch vụ AWS và phần công việc Lambda + API Gateway + DynamoDB của bản thân.
 
