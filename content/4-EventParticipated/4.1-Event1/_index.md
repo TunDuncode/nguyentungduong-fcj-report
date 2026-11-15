@@ -54,12 +54,12 @@ The meetup highlighted that reliable cloud operations depend on both observabili
 
 ## 5. Event photos
 
-**Photo 1:** Overall view of the FCAJ Weekly Meetup on October 17 *(insert a verified personal or licensed organizer photo)*.
-
-![FCAJ Community Day 17/10/2026](/images/4-Events/PicEvent/event1.jpg)
 
 
-**Photo 2:** A technical session from the same event *(insert only after verifying the date)*.
+![minh chung event](static/images/4-EventParticipated/event1.jpg)
+
+
+
 
 <!-- Uncomment after you save the matching image in static/images/4-EventParticipated/:
 [FCAJ Weekly Meetup on October 17](/images/4-EventParticipated/fcaj-2026-10-17.jpg)

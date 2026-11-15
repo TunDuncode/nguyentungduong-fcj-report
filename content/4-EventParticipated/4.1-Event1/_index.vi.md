@@ -56,13 +56,13 @@ Từ buổi tham dự này, tôi hiểu rõ hơn rằng giám sát hệ thống 
 
 ## 5. Hình ảnh minh chứng
 
-**Ảnh 1:** Toàn cảnh buổi FCAJ Weekly Meetup ngày 17/10/2026 *(thêm ảnh cá nhân hoặc ảnh ban tổ chức được phép sử dụng)*.
+
 
 
 ![FCAJ Community Day 17/10/2026](/images/4-Events/PicEvent/event1.jpg)
 
 
-**Ảnh 2:** Một phiên trình bày kỹ thuật tại sự kiện *(thêm sau khi xác nhận đúng ảnh)*.
+
 
 <!-- Khi đã lưu đúng ảnh tại static/images/4-EventParticipated/, bỏ dấu comment ở một dòng phù hợp:
 ![Buổi FCAJ Meetup ngày 17/10/2026](/images/4-EventParticipated/fcaj-2026-10-17.jpg)
