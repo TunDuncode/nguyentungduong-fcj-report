@@ -56,7 +56,7 @@ The meetup highlighted that reliable cloud operations depend on both observabili
 
 
 
-![minh chung event](static/images/4-EventParticipated/event1.jpg)
+![event picture](/nguyentungduong-fcj-report/images/minh-chung/event1.jpg)
 
 
 

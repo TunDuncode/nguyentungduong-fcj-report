@@ -5,71 +5,93 @@ weight: 2
 chapter: false
 ---
 
-# 4.2. CLOUD & AI INFRASTRUCTURE MEETUP
+# 4.2.  Hành trình lên mây của Riot Games
 
 ## 1. Thông tin chương trình
 
-- **Tên chính thức:** VOI & CNVN × AWS FCAJ (First Cloud AI Journey) Meetup: Cloud & AI Infrastructure
-- **Ngày:** Thứ Bảy, 24/10/2026
+- **Tên chính thức:** Recap re 2024 – Hành trình lên mây của Riot Games
+- **Ngày:** Thứ Bảy, 14/11/2026
 - **Giờ theo thông báo ban tổ chức:** 9:00-12:00 
 - **Địa điểm:** Tầng 7, Grand Terra, 36 Cát Linh, Hà Nội (văn phòng AWS Hà Nội)
-- **Đồng tổ chức:** VietOpenInfra, Cloud Native Vietnam và AWS First Cloud AI Journey
 
 ## 2. Giới thiệu
 
-Ngày 24/10/2026, tôi đã tham dự buổi Meetup với chủ đề **Cloud & AI Infrastructure** tại địa điểm thực tập ở 36 Cát Linh. Sự kiện mang tính chia sẻ kỹ thuật và thảo luận kinh nghiệm triển khai thực tế, tập trung vào ba nhóm vấn đề: lưu trữ dữ liệu quy mô lớn, tối ưu tài nguyên GPU phục vụ mô hình AI và xây dựng ứng dụng AI có thể khai thác dữ liệu riêng.
+Ngày 14/11/2026, trong buổi FCAJ Weekly Meetup tôi đã tham dự phần chia sẻ của diễn giả Nhân Nguyễn về hành trình Riot Games chuyển hạ tầng lên AWS. Đây là chủ đề tôi thấy khá gần với những gì mình đang tìm hiểu: một hệ thống lớn vận hành ra sao, khi nào thì nên lên mây, và lên rồi thì giải quyết được gì mà ở lại thì không.
 
 ## 3. Nội dung chính
+### 3.1. Khó khăn khi chưa lên mây
+Không chạy được nhiều game cùng lúc trên một hạ tầng
 
-### 3.1. Beyond S3: Kiến trúc Object Storage và cuộc chơi dữ liệu AI
+Mỗi game cần cấu hình và tài nguyên riêng, dẫn đến lãng phí
 
-**Diễn giả:** Hà Mạnh Đông (Dong Ha) – Tech Lead, OMZ JSC.
+Khó mở rộng theo mùa hoặc sự kiện vì phải chờ mua và lắp server mới
 
-Chủ đề phân tích vai trò của Object Storage đối với dataset, video và dữ liệu huấn luyện AI. Diễn giả so sánh các hướng thiết kế Ceph, MinIO và SeaweedFS; chỉ ra các yếu tố cần cân nhắc khi mở rộng hệ thống, như số lượng object, metadata, độ trễ thao tác PUT/GET và chi phí vận hành. Nội dung cũng đề cập hướng phát triển từ lưu trữ đối tượng sang dịch vụ hỗ trợ phân tích dữ liệu.
+Server đặt cố định một chỗ, người chơi ở xa chịu độ trễ cao
 
-### 3.2. Turning GPU-Hours into Tokens, and Tokens into a Service: Agent Router and NVIDIA Dynamo
+Vận hành nặng: vá lỗi, sao lưu, nâng cấp từng máy thủ công
 
-**Diễn giả:** Nguyễn Thế Anh và Phùng Quang Minh – Viettel Networks.
+Chi phí cố định cao vì datacenter chạy 24/7
 
-Phiên này giới thiệu kiến trúc phục vụ mô hình ngôn ngữ lớn (LLM) trên nhiều cụm GPU, cách định tuyến và kiểm soát request, tối ưu sử dụng bộ nhớ KV-cache và tăng khả năng mở rộng. Các khái niệm Agent Router, NVIDIA Dynamo, vLLM và SGLang được nhắc đến trong chương trình.
+### 3.2.  Lên mây giải quyết được gì
+Dùng Amazon EKS để chạy nhiều game trên cùng hạ tầng, tự động co giãn theo nhu cầu
 
-### 3.3. Confessions of an AI Addict
+Mở rộng nhanh, thêm server trong vài phút thay vì vài tuần
 
-**Diễn giả:** Quân Phương – Senior Solutions Architect, AWS Việt Nam.
+Chuyển cơ sở dữ liệu lên RDS/Aurora để cấp phát nhanh và ổn định hơn
 
-Bài nói chia sẻ quá trình ứng dụng AI từ chatbot, RAG (Retrieval-Augmented Generation) đến Agentic AI. Trọng tâm gồm hạn chế của mô hình khi thiếu ngữ cảnh, nhu cầu cập nhật kiến thức, quản lý bộ nhớ dài hạn và khả năng cho AI thực hiện các tác vụ thay vì chỉ trả lời câu hỏi.
+Chi phí linh hoạt, trả theo mức dùng thực tế
 
-### 3.4. Panel Discussion & Q&A
+Đội ngũ tập trung vào game thay vì vật lộn với hạ tầng
+### 3.3.  Dùng gì để không bị độ trễ
 
-Chương trình có phần trao đổi, hỏi đáp về hạ tầng Cloud và AI. Theo bài tổng kết của ban tổ chức, các thảo luận đề cập đến kinh nghiệm kỹ thuật và lựa chọn giải pháp trong thực tế.
+AWS Local Zones: đặt server đấu game ngay tại khu đô thị lớn, gần người chơi — không phải "nhảy" ra region xa rồi quay lại
+
+AWS Outposts: phần cứng AWS đặt trong datacenter của Riot ở nơi Local Zones chưa phủ tới, giảm thêm độ trễ đáng kể
+
+AWS Global Accelerator: tối ưu tuyến mạng cho gói tin đi đường ngắn và ổn định nhất đến server gần nhất, không đi qua mạng công cộng thông thường
+
+Kết quả: VALORANT giữ độ trễ dưới 35ms — mục tiêu bắt buộc để không bị "peeker's advantage" (nhìn trước ăn lợi thế) trong game bắn súng phản xạ.
+### 3.4.  Chuyển hệ điều hành thì riot gặp khó khăn gì?
+Việc chuyển từ Windows sang Linux không hề đơn giản. Vì code C++ cũ đã chạy trên Windows 15 năm, nó chứa nhiều "undefined behavior" (hành vi không xác định) – tức là code chạy được trên Windows theo một cách rất cụ thể, nhưng khi biên dịch và chạy trên Linux lại cho ra kết quả khác.
+
+Một ví dụ thực tế đã xảy ra với tướng Gangplank:
+
+Trên Windows, các thùng thuốc súng của Gangplank được xử lý theo một thứ tự cố định, giúp người chơi thực hiện combo đặt nhiều thùng và kích nổ cùng lúc.
+
+Khi máy chủ chuyển sang Linux, thứ tự xử lý này thay đổi. Kết quả là combo nhiều thùng của Gangplank không còn hoạt động ở những khu vực đã chuyển sang Linux, trong khi vẫn bình thường ở khu vực còn chạy Windows.
+
+Đội ngũ phải truy vết và phát hiện nguyên nhân đến từ một container trong thư viện chuẩn C++ có thứ tự duyệt phần tử khác nhau giữa hai hệ điều hành.
+
+Tóm lại: Riot Games đã chuyển máy chủ game từ Windows sang Linux để tối ưu vận hành, nhưng vẫn dùng C++. Chính việc chuyển hệ điều hành này đã làm lộ ra những lỗi ẩn trong code C++ cũ, gây ra những thay đổi hành vi trong game mà ví dụ điển hình là combo của Gangplank.
 
 ## 4. Liên hệ với đề tài AWS NetMon
 
-Mặc dù đồ án của nhóm chủ yếu sử dụng EC2, CloudWatch, Lambda, API Gateway và DynamoDB chứ không triển khai cụm GPU, buổi Meetup vẫn mang lại những gợi ý có ích:
+Chọn region gần người dùng: Riot kéo server gần người chơi để giảm độ trễ — NetMon cũng nên đặt EC2, CloudWatch, Lambda cùng region gần nơi monitoring
 
-- **Chi phí hệ thống:** Cần đánh giá chi phí lưu trữ và thao tác đọc/ghi, không chỉ tính riêng chi phí máy chủ.
-- **Giám sát và vận hành:** Với các hệ thống phức tạp, quan sát số liệu và phát hiện nút thắt là cơ sở để tối ưu hiệu năng.
-- **Bảo mật API:** Những ứng dụng dùng nhiều thành phần và request cần cơ chế phân quyền, kiểm soát và ghi log đầy đủ.
-- **Khả năng mở rộng:** Kiến trúc nên chia thành các thành phần độc lập để dễ kiểm thử và mở rộng trong tương lai.
+CloudWatch là trung tâm: cấu hình Alarm + SNS đúng ngưỡng, đúng quyền, tránh báo động giả hoặc bỏ sót sự cố
+
+Chọn dịch vụ theo bài toán: NetMon quy mô nhỏ chỉ cần Lambda + API Gateway + DynamoDB, không thêm tầng phức tạp
+
+Chi phí ẩn: để ý CloudWatch Logs, số lần gọi API Gateway, dung lượng DynamoDB — dễ vượt dự toán hơn tiền EC2
+
+Kiểm thử khi đổi môi trường: Riot chuyển Windows sang Linux làm lộ lỗi ẩn (combo Gangplank hỏng) — NetMon khi đổi từ local sang Lambda thật cũng phải test lại toàn bộ luồng, không giả định "chạy được ở đây thì chạy được ở kia"
 
 Sau sự kiện, tôi nhận thấy việc chọn công nghệ không chỉ dựa vào tính năng mà còn cần cân nhắc hiệu suất, chi phí và khả năng quản trị khi vận hành thật.
 
 ## 5. Hình ảnh minh chứng
 
-**Ảnh 1:** Toàn cảnh buổi Meetup tại tầng 7, Grand Terra ngày 24/10/2026 *(sử dụng ảnh bạn chụp hoặc ảnh ban tổ chức cho phép dùng)*.
+**Ảnh 1:** Toàn cảnh buổi Meetup tại tầng 7, Grand Terra ngày 14/11/2026 *(sử dụng ảnh bạn chụp hoặc ảnh ban tổ chức cho phép dùng)*.
 
-![FCAJ Event 24/10/2026](/images/4-Events/PicEvent/event2.jpg)
+![ảnh minh chứng](/nguyentungduong-fcj-report/images/minh-chung/event2.jpg)
 
-**Ảnh 2:** Hình chụp một trong các bài trình bày hoặc phần hỏi đáp *(kiểm tra đúng ngày và ghi nguồn)*.
 
-<!-- Khi có ảnh xác thực và đã lưu đúng đường dẫn, bỏ comment dòng sau:
-![Cloud and AI Infrastructure Meetup 24/10/2026](/images/4-EventParticipated/fcaj-2026-10-24.jpg)
--->
 
 ## 6. Tài liệu tham khảo
 
-- [Trang chương trình, nội dung bài nói và diễn giả](https://ocgroups.dev/cncf/group/d2e22fa/event/5z4fnze)
-- [Thông báo chính thức từ VietOpenInfra](https://vn.linkedin.com/posts/voi-vn_vietopeninfra-cloudnativevietnam-awscommunityvietnam-activity-7516060456709550080-yaxC)
-- [Bài tổng kết của ban tổ chức](https://vn.linkedin.com/posts/voi-vn_vietopeninfra-cloudnativevietnam-awsfcaj-activity-7521419750535610369-mDaT)
+
+1. AWS for Games. [Riot Games on AWS – Life After Metal](https://www.linkedin.com/posts/awsgametech_riot-games-on-aws-life-after-metal-activity-7274871685172932609-7TIX).
+
+2. Amazon Web Services. [AWS Business Transformed – Riot Games](https://www.linkedin.com/posts/amazon-web-services_aws-business-transformed-riot-games-activity-7138256673701257218-Voob).
+
 
 *Lưu ý: Nội dung trên tổng hợp thông tin được công bố. Không mô tả các hoạt động cá nhân chưa có minh chứng, ví dụ phát biểu, nhận giải thưởng hoặc chụp ảnh cùng diễn giả.*

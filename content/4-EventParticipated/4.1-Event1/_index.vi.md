@@ -59,7 +59,11 @@ Từ buổi tham dự này, tôi hiểu rõ hơn rằng giám sát hệ thống 
 
 
 
-![FCAJ Community Day 17/10/2026](/images/4-Events/PicEvent/event1.jpg)
+
+
+
+
+![Ảnh sự kiện](/nguyentungduong-fcj-report/images/minh-chung/event1.jpg)
 
 
 
@@ -67,6 +71,12 @@ Từ buổi tham dự này, tôi hiểu rõ hơn rằng giám sát hệ thống 
 <!-- Khi đã lưu đúng ảnh tại static/images/4-EventParticipated/, bỏ dấu comment ở một dòng phù hợp:
 ![Buổi FCAJ Meetup ngày 17/10/2026](/images/4-EventParticipated/fcaj-2026-10-17.jpg)
 -->
+
+
+
+
+
+
 
 ## 6. Nguồn tham khảo
 

@@ -1,5 +1,5 @@
 ---
-title: "3. Bài viết kỹ thuật"
+title: "3. Bài viết đã đăng"
 weight: 3
 chapter: true
 draft: false

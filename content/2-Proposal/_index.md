@@ -50,7 +50,7 @@ The system has two main data flows: **device administration through HTTP APIs** 
 
 ### 3.1. System Architecture Diagram
 
-{{< netmonarchitecture lang="en" >}}
+![Sơ đồ kiến trúc hệ thống AWS]({{< relURL "images/2-Proposal/edge_architecture.jpeg" >}})
 
 *Figure 3.1. Proposed AWS architecture for the NetMon infrastructure management and monitoring system (a design diagram, not an AWS Console screenshot).*
 

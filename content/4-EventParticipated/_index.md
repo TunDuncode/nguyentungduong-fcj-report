@@ -13,8 +13,8 @@ During my internship in Hanoi (August 8–November 14, 2026), I attended two tec
 | Date | Event | Main topics |
 |---|---|---|
 | **October 17, 2026** | **FCAJ Weekly Meetup – Hanoi** | AI security, AWS Landing Zone, Apache Iceberg, AWS network security |
-| **October 24, 2026** | **VOI & CNVN × AWS FCAJ – Cloud & AI Infrastructure** | Object storage, GPU/LLM serving, RAG, Agentic AI |
+| **November 14, 2026** | **FCAJ Weekly Meetup – Hanoi** | Riot Games’ Journey to the Cloud |
 
 The program descriptions are based on organizers' public recaps and event listings. Personal photographs can be inserted after selecting the correct photos from each date.
 
-**References:** [FCAJ October recaps](https://vn.linkedin.com/in/phongpham95) · [Official October 24 event page](https://ocgroups.dev/cncf/group/d2e22fa/event/5z4fnze)
+

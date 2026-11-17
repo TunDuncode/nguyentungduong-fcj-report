@@ -50,7 +50,7 @@ Hệ thống gồm hai luồng chính: **quản lý thiết bị qua API** và *
 
 ### 3.1. Sơ đồ kiến trúc hệ thống
 
-{{< netmonarchitecture lang="vi" >}}
+![Sơ đồ kiến trúc hệ thống AWS]({{< relURL "images/2-Proposal/edge_architecture.jpeg" >}})
 
 *Hình 3.1. Sơ đồ kiến trúc đề xuất cho hệ thống quản lý và giám sát NetMon trên AWS (sơ đồ thiết kế, không phải ảnh chụp AWS Console).*
 

@@ -49,18 +49,13 @@ Although our internship project does not include a GPU cluster, the event offere
 
 ## 5. Event photos
 
-**Photo 1:** Overall view of the meetup at Grand Terra on October 24 *(insert a verified personal or permitted organizer photo)*.
 
-![FCAJ Event 24/10/2026](/images/4-Events/PicEvent/event2.jpg)
 
-**Photo 2:** Technical presentation or Q&A from the same day *(confirm date and credit)*.
+![FCAJ Event 14/11/2026](/nguyentungduong-fcj-report/images/minh-chung/event2.jpg)
 
-<!-- Uncomment after saving the matching photo:
-![Cloud and AI Infrastructure Meetup, October 24](/images/4-EventParticipated/fcaj-2026-10-24.jpg)
--->
+
 
 ## 6. References
 
-- [Official event page and speaker information](https://ocgroups.dev/cncf/group/d2e22fa/event/5z4fnze)
 - [VietOpenInfra official announcement](https://vn.linkedin.com/posts/voi-vn_vietopeninfra-cloudnativevietnam-awscommunityvietnam-activity-7516060456709550080-yaxC)
 - [Organizer's post-event recap](https://vn.linkedin.com/posts/voi-vn_vietopeninfra-cloudnativevietnam-awsfcaj-activity-7521419750535610369-mDaT)
