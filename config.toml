@@ -3,7 +3,7 @@ relativeURLs = false
 canonifyURLs = false
 defaultContentLanguage = "en"
 # Change the default theme to be use when building the site with Hugo
-theme = "hugo-theme-learn"
+theme = "hugo-theme-learn-local"
 
 # For search functionality
 [outputs]
