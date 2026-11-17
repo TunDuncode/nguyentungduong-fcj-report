@@ -1,89 +1,36 @@
 ---
-title: "3.1. Building a Serverless Device Management API on AWS"
-date: 2026-11-12T00:00:00+07:00
+title: "3.1 AWS Monitoring: Is More Data Always Better?"
 weight: 1
 chapter: false
-draft: false
 ---
 
-## 1. Why Serverless for device management?
+## Introduction
 
-For our **NetMon** internship project, we needed a simple way to maintain network-device records and support create, read, update and delete (CRUD) operations. My assigned responsibilities were **AWS Lambda, Amazon API Gateway, and Amazon DynamoDB**. Since the system is an educational simulation, a Serverless backend allows us to focus on API behavior without operating a dedicated application server.
+While learning about AWS and developing the NetMon network monitoring project, I realized that monitoring plays an important role in system operations. Amazon CloudWatch collects metrics and logs, helps track performance, and can trigger alerts through Amazon SNS.
 
-We primarily worked in **us-east-1**. The team also created EC2 and VPC resources, but those belong to the infrastructure and monitoring part of the project rather than hosting the Lambda API.
+However, does collecting more monitoring data always make a system better?
 
-## 2. Request flow
+![Illustration of the relationship between monitoring frequency, visibility and cost](cloudwatch-monitoring.svg)
 
-`Browser → API Gateway (HTTP API) → Lambda netmon-api → DynamoDB NetworkDevices`
+*Figure 1. Balancing monitoring frequency, visibility and cost (conceptual illustration).*
 
-- **API Gateway** exposes HTTP routes used by the management UI.
-- **Lambda (`netmon-api`)** parses requests, applies business logic and performs CRUD operations.
-- **DynamoDB (`NetworkDevices`)** stores device records keyed by `deviceId`.
-- **IAM roles** grant Lambda access to the appropriate resources without embedding AWS account credentials in client code.
+## Two perspectives
 
-## 3. Data model
+- **More monitoring:** Frequent measurements help detect issues earlier, support troubleshooting and reduce the risk of downtime.
+- **Selective monitoring:** Collecting too much data may increase costs, generate unnecessary alerts and make analysis more difficult.
 
-| Attribute | Meaning |
-|---|---|
-| `deviceId` | Unique device identifier / primary key |
-| `deviceName` | Display name |
-| `deviceType` | Router, Switch, Server, and so on |
-| `ipAddress` | IP address |
-| `location` | Physical or logical location |
-| `status` | Simulated/monitored state |
-| `cpuUsage`, `memoryUsage` | Example utilization values |
-| `lastUpdated` | Last recorded update |
+For example, Amazon EC2 basic monitoring publishes most metrics every five minutes, while detailed monitoring provides one-minute metrics and may incur additional charges. In May 2025, AWS also introduced volume-based tiered pricing for Lambda logs and additional delivery destinations, including Amazon S3 and Amazon Data Firehose.
 
-**Important distinction:** simulated CPU/RAM fields in this table are not automatically EC2 metrics collected by CloudWatch.
+## My perspective
 
-## 4. API operations
+For a small or medium-sized business, I believe monitoring should match the importance of each resource. In the NetMon project, a reasonable approach is to monitor critical devices more frequently, use suitable alarm thresholds and limit unnecessary log retention.
 
-| Method | Example route | Purpose |
-|---|---|---|
-| `GET` | `/devices` | List devices |
-| `GET` | `/devices/{id}` | Retrieve details |
-| `POST` | `/devices` | Create a device |
-| `PUT` | `/devices/{id}` | Update a device |
-| `DELETE` | `/devices/{id}` | Delete a device |
+A good system is not necessarily the one that collects the most data, but the one that uses data effectively.
 
-*These are illustrative route conventions; verify the actual API Gateway route configuration before publishing a live endpoint.*
+**What do you think? Should businesses prioritize faster incident detection or lower operating costs?** I would love to hear different perspectives from the AWS community.
 
-One implementation detail was **DynamoDB pagination**. A single `scan()` call does not necessarily return the complete table; the code should continue while `LastEvaluatedKey` exists.
+## References
 
-```python
-import boto3
-
-table = boto3.resource("dynamodb").Table("NetworkDevices")
-
-def list_devices():
-    devices, options = [], {}
-    while True:
-        result = table.scan(**options)
-        devices.extend(result.get("Items", []))
-        if "LastEvaluatedKey" not in result:
-            break
-        options["ExclusiveStartKey"] = result["LastEvaluatedKey"]
-    return devices
-```
-
-This is a simplified teaching example rather than a copy of the deployed Lambda function.
-
-## 5. Frontend integration challenges
-
-Testing an API in the AWS Console is different from calling it through a browser. I had to examine the API stage URL, HTTP method, **CORS** headers and JSON serialization. DynamoDB numeric values returned through Boto3 can include Python `Decimal` instances, which need explicit JSON-safe conversion.
-
-I also tested calls from a localhost HTML page instead of relying only on Postman. A complete verification requires successful API responses, appropriate error handling, and correct access rules.
-
-## 6. Lessons learned
-
-This part of the internship helped me understand the separation between API routing, Lambda logic and persistent storage. My main takeaways are to agree on a stable JSON contract, give each function only the permissions it requires, and distinguish a backend that works from a fully tested end-to-end system.
-
-**Next steps:** stronger input validation, structured activity logs, suitable pagination for larger datasets, and end-to-end CRUD tests.
-
-## 7. References
-
-- [AWS Lambda](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html)
-- [DynamoDB Scan and pagination](https://docs.aws.amazon.com/boto3/latest/reference/services/dynamodb/table/scan.html)
-- [Programming DynamoDB with Python](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/programming-with-python.html)
-
-*Publication status: personal draft, not yet published on AWS Study Group.*
+- [AWS — Manage detailed monitoring for your EC2 instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/manage-detailed-monitoring.html)
+- [AWS Compute Blog — Tiered pricing for Lambda logs and additional logging destinations](https://aws.amazon.com/blogs/compute/aws-lambda-introduces-tiered-pricing-for-amazon-cloudwatch-logs-and-additional-logging-destinations/)
+- [Amazon CloudWatch Pricing](https://aws.amazon.com/cloudwatch/pricing/)

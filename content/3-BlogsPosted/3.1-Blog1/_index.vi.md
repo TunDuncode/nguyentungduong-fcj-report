@@ -1,96 +1,36 @@
 ---
-title: "3.1. Xây dựng API quản lý thiết bị mạng với AWS Serverless"
-date: 2026-11-12T00:00:00+07:00
+title: "3.1 Giám sát hệ thống trên AWS: Càng nhiều dữ liệu càng tốt?"
 weight: 1
 chapter: false
-draft: false
 ---
 
-## 1. Vì sao em chọn Serverless cho phần quản lý thiết bị?
+## Giới thiệu
 
-Trong đề tài NetMon, nhóm cần lưu thông tin thiết bị mạng và cung cấp chức năng **thêm, xem, sửa, xóa** cho người quản trị. Em phụ trách phần backend, gồm **AWS Lambda, Amazon API Gateway và Amazon DynamoDB**. Vì đây là mô hình học tập và mô phỏng, giải pháp Serverless giúp nhóm tập trung vào logic xử lý mà không phải tự duy trì một máy chủ API riêng.
+Trong quá trình tìm hiểu AWS và xây dựng đề tài giám sát hạ tầng mạng NetMon, mình nhận thấy việc giám sát đóng vai trò quan trọng trong vận hành hệ thống. Amazon CloudWatch giúp thu thập các chỉ số và nhật ký, theo dõi hiệu suất và có thể kích hoạt cảnh báo thông qua Amazon SNS.
 
-Em sử dụng Region **us-east-1**, triển khai các tài nguyên cơ bản và thử gọi API từ giao diện chạy trên máy cá nhân. Phần EC2/VPC là công việc của thành viên khác và không phải nơi chạy Lambda API.
+Tuy nhiên, liệu việc thu thập càng nhiều dữ liệu giám sát có thực sự giúp hệ thống tốt hơn?
 
-## 2. Kiến trúc xử lý yêu cầu
+![Minh họa mối quan hệ giữa tần suất giám sát, khả năng theo dõi và chi phí](cloudwatch-monitoring.svg)
 
-`Trình duyệt → API Gateway (HTTP API) → Lambda netmon-api → DynamoDB NetworkDevices`
+*Hình 1. Cân bằng giữa tần suất giám sát, khả năng theo dõi và chi phí (hình minh họa nguyên lý).*
 
-Các thành phần đảm nhận nhiệm vụ:
+## Hai góc nhìn
 
-- **API Gateway:** cung cấp các route HTTP cho phần mềm quản lý.
-- **Lambda (`netmon-api`):** nhận sự kiện API, xác định phương thức, kiểm tra dữ liệu và xử lý CRUD.
-- **DynamoDB (`NetworkDevices`):** lưu bản ghi thiết bị dưới khóa `deviceId`.
-- **IAM role:** cấp cho Lambda quyền cần thiết để thao tác với bảng, không dùng tài khoản AWS cá nhân trong mã nguồn.
+- **Giám sát nhiều hơn:** Đo lường thường xuyên giúp phát hiện sự cố sớm, hỗ trợ tìm nguyên nhân lỗi và giảm nguy cơ gián đoạn hệ thống.
+- **Giám sát có chọn lọc:** Thu thập quá nhiều dữ liệu có thể làm tăng chi phí, tạo ra cảnh báo không cần thiết và gây khó khăn khi phân tích.
 
-## 3. Thiết kế dữ liệu thiết bị
+Ví dụ, chế độ giám sát cơ bản của Amazon EC2 cung cấp phần lớn chỉ số sau mỗi 5 phút, còn chế độ giám sát chi tiết cung cấp chỉ số mỗi phút và có thể phát sinh thêm chi phí. Vào tháng 5/2025, AWS cũng giới thiệu cơ chế định giá theo bậc dựa trên dung lượng nhật ký Lambda và bổ sung đích lưu chuyển nhật ký như Amazon S3 và Amazon Data Firehose.
 
-Một bản ghi mô phỏng có các trường:
+## Góc nhìn cá nhân
 
-| Trường | Mục đích |
-|---|---|
-| `deviceId` | Mã thiết bị, dùng làm khóa chính |
-| `deviceName` | Tên hiển thị |
-| `deviceType` | Router, Switch, Server hoặc loại khác |
-| `ipAddress` | Địa chỉ IP của thiết bị |
-| `location` | Vị trí đặt thiết bị |
-| `status` | Trạng thái đang mô phỏng/theo dõi |
-| `cpuUsage`, `memoryUsage` | Tỷ lệ sử dụng CPU và RAM mẫu |
-| `lastUpdated` | Thời điểm cập nhật gần nhất |
+Đối với doanh nghiệp vừa và nhỏ, theo mình, việc giám sát nên phù hợp với mức độ quan trọng của từng tài nguyên. Trong dự án NetMon, một hướng hợp lý là giám sát thiết bị quan trọng thường xuyên hơn, đặt ngưỡng cảnh báo phù hợp và hạn chế lưu trữ nhật ký không cần thiết.
 
-Dữ liệu CPU/RAM của các thiết bị mô phỏng **không đồng nghĩa** với số liệu CloudWatch thu thập trực tiếp từ EC2. Đây là hai nguồn cần phân biệt khi viết báo cáo.
+Một hệ thống tốt không nhất thiết là hệ thống thu thập nhiều dữ liệu nhất, mà là hệ thống sử dụng dữ liệu hiệu quả.
 
-## 4. Các chức năng API
+**Theo mọi người, doanh nghiệp nên ưu tiên phát hiện sự cố nhanh hơn hay tiết kiệm chi phí vận hành?** Mình rất mong nhận được những góc nhìn khác nhau từ cộng đồng AWS.
 
-| Phương thức | Route ví dụ | Ý nghĩa |
-|---|---|---|
-| `GET` | `/devices` | Xem danh sách thiết bị |
-| `GET` | `/devices/{id}` | Xem chi tiết một thiết bị |
-| `POST` | `/devices` | Thêm thiết bị |
-| `PUT` | `/devices/{id}` | Sửa thông tin |
-| `DELETE` | `/devices/{id}` | Xóa thiết bị |
+## Tài liệu tham khảo
 
-*Các route là cách tổ chức dự kiến; khi tích hợp cần đối chiếu route thực tế của API Gateway.*
-
-Trong Lambda Python, thư viện `boto3` giúp làm việc với DynamoDB. Khi đọc danh sách bằng `scan()`, em lưu ý rằng một lần quét có thể chưa trả toàn bộ kết quả. Vì vậy phải kiểm tra `LastEvaluatedKey` để lấy tiếp các trang dữ liệu.
-
-Ví dụ minh họa cách phân trang:
-
-```python
-import boto3
-
-table = boto3.resource("dynamodb").Table("NetworkDevices")
-
-def list_devices():
-    items = []
-    options = {}
-    while True:
-        response = table.scan(**options)
-        items.extend(response.get("Items", []))
-        if "LastEvaluatedKey" not in response:
-            break
-        options["ExclusiveStartKey"] = response["LastEvaluatedKey"]
-    return items
-```
-
-Đây là mã minh họa nguyên tắc, không phải bản sao đầy đủ của Lambda đang triển khai.
-
-## 5. Những vấn đề gặp khi kết nối giao diện
-
-Lúc thử truy cập API từ trình duyệt, em phải kiểm tra **CORS**, URL của stage, phương thức HTTP và định dạng dữ liệu trả về. Với DynamoDB, số thập phân có thể được Python biểu diễn bằng `Decimal`, nên cần chuyển sang định dạng JSON phù hợp trước khi trả về.
-
-Em dùng trang HTML chạy trên localhost để gọi API, thay vì phụ thuộc hoàn toàn vào Postman. Một lần thử thành công ở AWS Console chưa đủ để khẳng định frontend đã tích hợp xong; cần kiểm tra cả request từ trình duyệt, thông báo lỗi và quyền truy cập.
-
-## 6. Kết quả và bài học
-
-Qua phần việc của mình, em đã thực hành thiết kế bảng dữ liệu, xây dựng Lambda và HTTP API, kiểm tra các thao tác quản lý thiết bị. Em rút ra ba kinh nghiệm: cần thống nhất cấu trúc JSON giữa frontend/backend; quản lý quyền IAM theo mức cần thiết; và phân biệt việc API đã chạy với việc toàn bộ giao diện đã hoàn thiện.
-
-**Hướng cải thiện:** kiểm tra dữ liệu đầu vào chặt hơn, bổ sung nhật ký thao tác, phân trang phù hợp với dữ liệu lớn, và kiểm thử đồng bộ các luồng CRUD.
-
-## 7. Tài liệu tham khảo
-
-- [AWS Lambda](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html)
-- [DynamoDB: Scan và phân trang](https://docs.aws.amazon.com/boto3/latest/reference/services/dynamodb/table/scan.html)
-- [DynamoDB với Python và Boto3](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/programming-with-python.html)
-
-*Trạng thái bài viết: Bản thảo cá nhân, chưa xuất bản lên AWS Study Group.*
+- [AWS — Quản lý giám sát chi tiết cho các phiên bản EC2](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/manage-detailed-monitoring.html)
+- [AWS Compute Blog — Định giá theo bậc cho nhật ký Lambda và các đích lưu chuyển bổ sung](https://aws.amazon.com/blogs/compute/aws-lambda-introduces-tiered-pricing-for-amazon-cloudwatch-logs-and-additional-logging-destinations/)
+- [Bảng giá Amazon CloudWatch](https://aws.amazon.com/cloudwatch/pricing/)
