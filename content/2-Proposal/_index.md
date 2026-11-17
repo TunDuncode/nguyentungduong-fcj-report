@@ -9,7 +9,7 @@ draft: false
 
 **Project title:** Building a Network Infrastructure Management and Monitoring System for Small and Medium-Sized Enterprises on AWS with Serverless Services.
 
-**Project format:** A three-member student team implementing a simulation-based AWS project, primarily in **US East (N. Virginia) – `us-east-1`**.
+**Project format:** A three-member student team:(Nguyen Tung Duong, Nguyen Xuan Duc, Le Manh Quan) implementing a simulation-based AWS project, primarily in **US East (N. Virginia) – `us-east-1`**.
 
 ## 1. Executive Summary
 

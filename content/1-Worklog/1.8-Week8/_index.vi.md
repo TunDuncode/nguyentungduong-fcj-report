@@ -1,31 +1,31 @@
 ---
-title: "8. Xử lý CRUD và chuẩn hóa API quản lý thiết bị"
+title: "8. Nghiên cứu các công nghệ sử dụng trong đề tài"
 date: 2026-10-10T09:00:00+07:00
 weight: 8
 draft: false
-description: "Xử lý CRUD và chuẩn hóa API quản lý thiết bị"
+description: "Nghiên cứu các công nghệ sử dụng trong đề tài"
 ---
 
-# 8. Xử lý CRUD và chuẩn hóa API quản lý thiết bị
+# 8. Nghiên cứu các công nghệ sử dụng trong đề tài
 
 ### Mục tiêu tuần 8:
 
-- Hoàn thiện thiết kế thêm, sửa, xóa, xem danh sách và xem chi tiết thiết bị.
-- Thống nhất phương thức HTTP và đường dẫn với giao diện.
-- Biết phân biệt route đã cấu hình và route đã kiểm thử đầy đủ.
+- Tìm hiểu các công nghệ phục vụ quản lý và giám sát hạ tầng mạng.
+- Nghiên cứu các dịch vụ AWS có thể sử dụng trong đề tài.
+- Tìm hiểu ưu điểm của mô hình Serverless.
 
 ### Các công việc cần triển khai trong tuần này:
 
 | Ngày | Công việc | Bắt đầu | Hoàn thành | Tài liệu tham khảo |
 | :--- | :--- | :--- | :--- | :--- |
-| Thứ Bảy (tại cơ sở) | Cấu hình GET /devices, POST /devices và GET /devices/{id}. | 10/10/2026 | 10/10/2026 | [Amazon API Gateway](https://docs.aws.amazon.com/apigateway/latest/developerguide/welcome.html) |
-| Chủ nhật (tự học) | Bổ sung PUT /devices/{id} và DELETE /devices/{id} trong Lambda và API Gateway. | 11/10/2026 | 11/10/2026 | [AWS Lambda](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html) |
-| Thứ Hai (tự học) | Đọc httpMethod hoặc requestContext.http.method, pathParameters, JSON body để chia nhánh xử lý. | 12/10/2026 | 12/10/2026 | [AWS Lambda](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html) |
-| Thứ Ba (tự học) | Kiểm tra bản ghi mẫu trong DynamoDB sau thao tác; bổ sung CORS và mã lỗi cho trường hợp không hợp lệ. | 13/10/2026 | 13/10/2026 | [Amazon DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html) |
+| Thứ Bảy (tại cơ sở) | Tìm hiểu các công nghệ quản lý và giám sát hạ tầng mạng trên nền tảng điện toán đám mây. | 10/10/2026 | 10/10/2026 | [AWS Overview](https://docs.aws.amazon.com/whitepapers/latest/aws-overview/introduction.html) |
+| Chủ nhật (tự học) | Nghiên cứu Amazon VPC và cách xây dựng hạ tầng mạng ảo. | 11/10/2026 | 11/10/2026 | [VPC](https://docs.aws.amazon.com/vpc/latest/userguide/how-it-works.html) |
+| Thứ Hai (tự học) | Tìm hiểu Amazon EC2 và khả năng sử dụng máy chủ ảo trong hệ thống giám sát. | 12/10/2026 | 12/10/2026 | [EC2](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/LaunchingAndUsingInstances.html) |
+| Thứ Ba (tự học) | Nghiên cứu mô hình Serverless với Lambda, API Gateway và DynamoDB. | 13/10/2026 | 13/10/2026 | [Lambda](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html) |
 
 ### Kết quả đạt được tuần 8:
 
-- Có cấu hình nhóm route quản lý thiết bị và định dạng JSON dùng chung với giao diện.
-- Biết xác minh bản ghi qua **DynamoDB Explore table items**, không chỉ nhìn thông báo trên trình duyệt.
-- Các route còn phải kiểm thử với access token thật trước khi khẳng định toàn bộ CRUD đã chạy end-to-end.
+- Hiểu được các công nghệ có thể sử dụng trong đề tài.
+- Nắm được vai trò của VPC, EC2 và Serverless.
+- Có kiến thức nền tảng để lựa chọn công nghệ phù hợp.
 

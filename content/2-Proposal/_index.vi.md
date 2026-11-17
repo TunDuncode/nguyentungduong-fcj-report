@@ -9,7 +9,7 @@ draft: false
 
 **Tên đề tài:** Xây dựng hệ thống quản lý và giám sát hạ tầng mạng doanh nghiệp vừa và nhỏ trên AWS tích hợp dịch vụ Serverless.
 
-**Hình thức thực hiện:** Đồ án nhóm (3 sinh viên), triển khai mô phỏng trên AWS tại khu vực **US East (N. Virginia) – `us-east-1`**.
+**Hình thức thực hiện:** Đồ án nhóm 3 sinh viên:( Nguyễn Tùng Dương, Nguyễn Xuân Đức, Lê Mạnh Quân) triển khai mô phỏng trên AWS tại khu vực **US East (N. Virginia) – `us-east-1`**.
 
 ## 1. Tóm tắt điều hành
 

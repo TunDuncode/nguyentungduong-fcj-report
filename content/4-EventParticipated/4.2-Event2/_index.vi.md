@@ -1,17 +1,17 @@
 ---
-title: "4.2. Cloud & AI Infrastructure Meetup – 24/10/2026"
-date: 2026-10-24T00:00:00+07:00
+title: "TECHNICAL SHARING | HÀNH TRÌNH LÊN MÂY CỦA RIOT GAMES"
+date: 2026-11-14T00:00:00+07:00
 weight: 2
 chapter: false
 ---
 
-# 4.2.  Hành trình lên mây của Riot Games
+# 4.2. Hành trình lên mây của Riot Games
 
 ## 1. Thông tin chương trình
 
 - **Tên chính thức:** Recap re 2024 – Hành trình lên mây của Riot Games
 - **Ngày:** Thứ Bảy, 14/11/2026
-- **Giờ theo thông báo ban tổ chức:** 9:00-12:00 
+- **Giờ theo thông báo ban tổ chức:** 9:00–12:00
 - **Địa điểm:** Tầng 7, Grand Terra, 36 Cát Linh, Hà Nội (văn phòng AWS Hà Nội)
 
 ## 2. Giới thiệu
@@ -19,62 +19,51 @@ chapter: false
 Ngày 14/11/2026, trong buổi FCAJ Weekly Meetup tôi đã tham dự phần chia sẻ của diễn giả Nhân Nguyễn về hành trình Riot Games chuyển hạ tầng lên AWS. Đây là chủ đề tôi thấy khá gần với những gì mình đang tìm hiểu: một hệ thống lớn vận hành ra sao, khi nào thì nên lên mây, và lên rồi thì giải quyết được gì mà ở lại thì không.
 
 ## 3. Nội dung chính
+
 ### 3.1. Khó khăn khi chưa lên mây
-Không chạy được nhiều game cùng lúc trên một hạ tầng
 
-Mỗi game cần cấu hình và tài nguyên riêng, dẫn đến lãng phí
+- Không chạy được nhiều game cùng lúc trên một hạ tầng
+- Mỗi game cần cấu hình và tài nguyên riêng, dẫn đến lãng phí
+- Khó mở rộng theo mùa hoặc sự kiện vì phải chờ mua và lắp server mới
+- Server đặt cố định một chỗ, người chơi ở xa chịu độ trễ cao
+- Vận hành nặng: vá lỗi, sao lưu, nâng cấp từng máy thủ công
+- Chi phí cố định cao vì datacenter chạy 24/7
 
-Khó mở rộng theo mùa hoặc sự kiện vì phải chờ mua và lắp server mới
+### 3.2. Lên mây giải quyết được gì
 
-Server đặt cố định một chỗ, người chơi ở xa chịu độ trễ cao
+- Dùng Amazon EKS để chạy nhiều game trên cùng hạ tầng, tự động co giãn theo nhu cầu
+- Mở rộng nhanh, thêm server trong vài phút thay vì vài tuần
+- Chuyển cơ sở dữ liệu lên RDS/Aurora để cấp phát nhanh và ổn định hơn
+- Chi phí linh hoạt, trả theo mức dùng thực tế
+- Đội ngũ tập trung vào game thay vì vật lộn với hạ tầng
 
-Vận hành nặng: vá lỗi, sao lưu, nâng cấp từng máy thủ công
+### 3.3. Dùng gì để không bị độ trễ
 
-Chi phí cố định cao vì datacenter chạy 24/7
-
-### 3.2.  Lên mây giải quyết được gì
-Dùng Amazon EKS để chạy nhiều game trên cùng hạ tầng, tự động co giãn theo nhu cầu
-
-Mở rộng nhanh, thêm server trong vài phút thay vì vài tuần
-
-Chuyển cơ sở dữ liệu lên RDS/Aurora để cấp phát nhanh và ổn định hơn
-
-Chi phí linh hoạt, trả theo mức dùng thực tế
-
-Đội ngũ tập trung vào game thay vì vật lộn với hạ tầng
-### 3.3.  Dùng gì để không bị độ trễ
-
-AWS Local Zones: đặt server đấu game ngay tại khu đô thị lớn, gần người chơi — không phải "nhảy" ra region xa rồi quay lại
-
-AWS Outposts: phần cứng AWS đặt trong datacenter của Riot ở nơi Local Zones chưa phủ tới, giảm thêm độ trễ đáng kể
-
-AWS Global Accelerator: tối ưu tuyến mạng cho gói tin đi đường ngắn và ổn định nhất đến server gần nhất, không đi qua mạng công cộng thông thường
+- **AWS Local Zones:** đặt server đấu game ngay tại khu đô thị lớn, gần người chơi — không phải "nhảy" ra region xa rồi quay lại
+- **AWS Outposts:** phần cứng AWS đặt trong datacenter của Riot ở nơi Local Zones chưa phủ tới, giảm thêm độ trễ đáng kể
+- **AWS Global Accelerator:** tối ưu tuyến mạng cho gói tin đi đường ngắn và ổn định nhất đến server gần nhất, không đi qua mạng công cộng thông thường
 
 Kết quả: VALORANT giữ độ trễ dưới 35ms — mục tiêu bắt buộc để không bị "peeker's advantage" (nhìn trước ăn lợi thế) trong game bắn súng phản xạ.
-### 3.4.  Chuyển hệ điều hành thì riot gặp khó khăn gì?
+
+### 3.4. Chuyển hệ điều hành thì Riot gặp khó khăn gì?
+
 Việc chuyển từ Windows sang Linux không hề đơn giản. Vì code C++ cũ đã chạy trên Windows 15 năm, nó chứa nhiều "undefined behavior" (hành vi không xác định) – tức là code chạy được trên Windows theo một cách rất cụ thể, nhưng khi biên dịch và chạy trên Linux lại cho ra kết quả khác.
 
 Một ví dụ thực tế đã xảy ra với tướng Gangplank:
 
-Trên Windows, các thùng thuốc súng của Gangplank được xử lý theo một thứ tự cố định, giúp người chơi thực hiện combo đặt nhiều thùng và kích nổ cùng lúc.
-
-Khi máy chủ chuyển sang Linux, thứ tự xử lý này thay đổi. Kết quả là combo nhiều thùng của Gangplank không còn hoạt động ở những khu vực đã chuyển sang Linux, trong khi vẫn bình thường ở khu vực còn chạy Windows.
-
-Đội ngũ phải truy vết và phát hiện nguyên nhân đến từ một container trong thư viện chuẩn C++ có thứ tự duyệt phần tử khác nhau giữa hai hệ điều hành.
+- Trên Windows, các thùng thuốc súng của Gangplank được xử lý theo một thứ tự cố định, giúp người chơi thực hiện combo đặt nhiều thùng và kích nổ cùng lúc.
+- Khi máy chủ chuyển sang Linux, thứ tự xử lý này thay đổi. Kết quả là combo nhiều thùng của Gangplank không còn hoạt động ở những khu vực đã chuyển sang Linux, trong khi vẫn bình thường ở khu vực còn chạy Windows.
+- Đội ngũ phải truy vết và phát hiện nguyên nhân đến từ một container trong thư viện chuẩn C++ có thứ tự duyệt phần tử khác nhau giữa hai hệ điều hành.
 
 Tóm lại: Riot Games đã chuyển máy chủ game từ Windows sang Linux để tối ưu vận hành, nhưng vẫn dùng C++. Chính việc chuyển hệ điều hành này đã làm lộ ra những lỗi ẩn trong code C++ cũ, gây ra những thay đổi hành vi trong game mà ví dụ điển hình là combo của Gangplank.
 
 ## 4. Liên hệ với đề tài AWS NetMon
 
-Chọn region gần người dùng: Riot kéo server gần người chơi để giảm độ trễ — NetMon cũng nên đặt EC2, CloudWatch, Lambda cùng region gần nơi monitoring
-
-CloudWatch là trung tâm: cấu hình Alarm + SNS đúng ngưỡng, đúng quyền, tránh báo động giả hoặc bỏ sót sự cố
-
-Chọn dịch vụ theo bài toán: NetMon quy mô nhỏ chỉ cần Lambda + API Gateway + DynamoDB, không thêm tầng phức tạp
-
-Chi phí ẩn: để ý CloudWatch Logs, số lần gọi API Gateway, dung lượng DynamoDB — dễ vượt dự toán hơn tiền EC2
-
-Kiểm thử khi đổi môi trường: Riot chuyển Windows sang Linux làm lộ lỗi ẩn (combo Gangplank hỏng) — NetMon khi đổi từ local sang Lambda thật cũng phải test lại toàn bộ luồng, không giả định "chạy được ở đây thì chạy được ở kia"
+- **Chọn region gần người dùng:** Riot kéo server gần người chơi để giảm độ trễ — NetMon cũng nên đặt EC2, CloudWatch, Lambda cùng region gần nơi monitoring
+- **CloudWatch là trung tâm:** cấu hình Alarm + SNS đúng ngưỡng, đúng quyền, tránh báo động giả hoặc bỏ sót sự cố
+- **Chọn dịch vụ theo bài toán:** NetMon quy mô nhỏ chỉ cần Lambda + API Gateway + DynamoDB, không thêm tầng phức tạp
+- **Chi phí ẩn:** để ý CloudWatch Logs, số lần gọi API Gateway, dung lượng DynamoDB — dễ vượt dự toán hơn tiền EC2
+- **Kiểm thử khi đổi môi trường:** Riot chuyển Windows sang Linux làm lộ lỗi ẩn (combo Gangplank hỏng) — NetMon khi đổi từ local sang Lambda thật cũng phải test lại toàn bộ luồng, không giả định "chạy được ở đây thì chạy được ở kia"
 
 Sau sự kiện, tôi nhận thấy việc chọn công nghệ không chỉ dựa vào tính năng mà còn cần cân nhắc hiệu suất, chi phí và khả năng quản trị khi vận hành thật.
 
@@ -84,14 +73,10 @@ Sau sự kiện, tôi nhận thấy việc chọn công nghệ không chỉ dự
 
 ![ảnh minh chứng](/nguyentungduong-fcj-report/images/minh-chung/event2.jpg)
 
-
-
 ## 6. Tài liệu tham khảo
-
 
 1. AWS for Games. [Riot Games on AWS – Life After Metal](https://www.linkedin.com/posts/awsgametech_riot-games-on-aws-life-after-metal-activity-7274871685172932609-7TIX).
 
 2. Amazon Web Services. [AWS Business Transformed – Riot Games](https://www.linkedin.com/posts/amazon-web-services_aws-business-transformed-riot-games-activity-7138256673701257218-Voob).
-
 
 *Lưu ý: Nội dung trên tổng hợp thông tin được công bố. Không mô tả các hoạt động cá nhân chưa có minh chứng, ví dụ phát biểu, nhận giải thưởng hoặc chụp ảnh cùng diễn giả.*

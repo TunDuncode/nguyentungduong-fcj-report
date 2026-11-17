@@ -1,61 +1,82 @@
 ---
-title: "4.2. Cloud & AI Infrastructure Meetup – October 24, 2026"
-date: 2026-10-24T00:00:00+07:00
+title: "TECHNICAL SHARING | RIOT GAMES' JOURNEY TO THE CLOUD"
+date: 2026-11-14T00:00:00+07:00
 weight: 2
 chapter: false
 ---
 
-# 4.2. CLOUD & AI INFRASTRUCTURE MEETUP
+# 4.2. Riot Games' Journey to the Cloud
 
-## 1. Event information
+## 1. Program Information
 
-- **Official title:** VOI & CNVN × AWS FCAJ (First Cloud AI Journey) Meetup: Cloud & AI Infrastructure
-- **Date:** Saturday, October 24, 2026
-- **Time:** 9:00-12:00 AM per the organizer announcement 
-- **Venue:** Level 7, Grand Terra, 36 Cat Linh Street, Hanoi (AWS Hanoi Office)
-- **Co-organizers:** VietOpenInfra, Cloud Native Vietnam and AWS First Cloud AI Journey
+- **Official name:** Recap re 2024 – Riot Games' Journey to the Cloud
+- **Date:** Saturday, 14/11/2026
+- **Time according to the organizer's announcement:** 9:00–12:00
+- **Location:** 7th Floor, Grand Terra, 36 Cat Linh, Hanoi (AWS Hanoi Office)
 
-## 2. Overview
+## 2. Introduction
 
-I attended the Cloud & AI Infrastructure Meetup on October 24, 2026, during my internship in Hanoi. The event brought together cloud engineers and AI practitioners to discuss data storage at scale, GPU infrastructure for LLMs, and practical AI applications.
+On 14/11/2026, during the FCAJ Weekly Meetup, I attended the sharing session by speaker Nhan Nguyen about Riot Games' journey of moving its infrastructure to AWS. This is a topic I found quite close to what I am currently exploring: how a large system operates, when it should move to the cloud, and what moving to the cloud solves that staying on-premises does not.
 
-## 3. Main sessions
+## 3. Main Content
 
-### 3.1. Beyond S3: Object Storage Architecture and the AI Data Landscape
+### 3.1. Challenges Before Moving to the Cloud
 
-**Speaker:** Hà Mạnh Đông (Dong Ha), Tech Lead at OMZ JSC.
+- Unable to run multiple games on the same infrastructure at the same time
+- Each game requires its own configuration and resources, leading to waste
+- Difficult to scale for seasons or events because new servers had to be purchased and installed
+- Servers were fixed in one location, so players farther away experienced higher latency
+- Heavy operations: patching, backup, and upgrades had to be done manually on each machine
+- High fixed costs because the data center ran 24/7
 
-The presentation compared Ceph, MinIO and SeaweedFS as object-storage architectures and discussed scalability, metadata management, PUT/GET latency and operational costs for large AI datasets and workloads.
+### 3.2. What Moving to the Cloud Solves
 
-### 3.2. Turning GPU-Hours into Tokens, and Tokens into a Service: Agent Router and NVIDIA Dynamo
+- Using Amazon EKS to run multiple games on the same infrastructure, with automatic scaling based on demand
+- Fast scaling: adding servers in minutes instead of weeks
+- Moving databases to RDS/Aurora for faster and more stable provisioning
+- Flexible costs: paying based on actual usage
+- Teams can focus on games instead of struggling with infrastructure
 
-**Speakers:** Nguyễn Thế Anh and Phùng Quang Minh, Viettel Networks.
+### 3.3. What They Use to Avoid Latency
 
-This talk covered multi-cluster LLM serving, request routing and authentication, GPU utilization, KV-cache-aware optimization and scaling. Agent Router, NVIDIA Dynamo, vLLM and SGLang were among the technologies discussed.
+- **AWS Local Zones:** placing game matchmaking servers in major urban areas, close to players — no need to "jump" to a distant region and back
+- **AWS Outposts:** AWS hardware placed in Riot's data centers in locations not yet covered by Local Zones, further reducing latency significantly
+- **AWS Global Accelerator:** optimizing network routes so packets take the shortest and most stable path to the nearest server, instead of going through the normal public internet
 
-### 3.3. Confessions of an AI Addict
+Result: VALORANT keeps latency below 35 ms — a mandatory target to avoid "peeker's advantage" in a reflexive shooter game.
 
-**Speaker:** Quân Phương, Senior Solutions Architect at AWS Vietnam.
+### 3.4. What Difficulties Did Riot Face When Switching Operating Systems?
 
-The presentation explored the progression from chatbots and retrieval-augmented generation (RAG) to Agentic AI, including long-term memory, digital twins and methods for enabling AI systems to perform practical tasks.
+Switching from Windows to Linux was not simple at all. Because the legacy C++ code had been running on Windows for 15 years, it contained a lot of "undefined behavior" — meaning the code worked on Windows in a very specific way, but when compiled and run on Linux, it produced different results.
 
-### 3.4. Panel discussion and Q&A
+A real example happened with the champion Gangplank:
 
-The event concluded with an open discussion about practical engineering decisions and lessons learned from infrastructure and AI deployments.
+- On Windows, Gangplank's powder kegs were processed in a fixed order, allowing players to perform a combo of placing multiple barrels and detonating them at the same time.
+- When the servers switched to Linux, this processing order changed. As a result, Gangplank's multi-barrel combo no longer worked in areas that had been switched to Linux, while it still worked normally in areas still running Windows.
+- The team had to trace the issue and found that the cause came from a container in the C++ standard library whose element traversal order differed between the two operating systems.
 
-## 4. Relevance to my AWS NetMon project
+Summary: Riot Games migrated game servers from Windows to Linux to optimize operations, but still used C++. The operating system migration itself exposed hidden bugs in the legacy C++ code, causing behavior changes in the game, with Gangplank's combo as a typical example.
 
-Although our internship project does not include a GPU cluster, the event offered useful lessons: evaluate storage as well as compute costs; observe performance bottlenecks before attempting optimization; protect APIs and control access; and use modular system components that are easier to test, monitor and scale.
+## 4. Relevance to the AWS NetMon Project
 
-## 5. Event photos
+- **Choose a region close to users:** Riot moved servers closer to players to reduce latency — NetMon should also place EC2, CloudWatch, and Lambda in the same region close to the monitoring location.
+- **CloudWatch as the center:** configure Alarms + SNS with the right thresholds and permissions to avoid false alarms or missed incidents.
+- **Choose services based on the problem:** a small-scale NetMon only needs Lambda + API Gateway + DynamoDB; do not add unnecessary complexity.
+- **Hidden costs:** pay attention to CloudWatch Logs, API Gateway invocation counts, and DynamoDB capacity — these can exceed the budget more easily than EC2 costs.
+- **Test when changing environments:** Riot's migration from Windows to Linux exposed hidden bugs (the Gangplank combo broke) — when NetMon moves from local to real Lambda, all flows must be retested; do not assume "if it works here, it will work there."
 
+After the event, I realized that choosing technology is not only about features but also requires considering performance, cost, and manageability in real operations.
 
+## 5. Supporting Images
 
-![FCAJ Event 14/11/2026](/nguyentungduong-fcj-report/images/minh-chung/event2.jpg)
+**Image 1:** Overall view of the Meetup on the 7th floor, Grand Terra on 14/11/2026 *(use your own photo or a photo permitted by the organizers)*.
 
-
+![supporting image](/nguyentungduong-fcj-report/images/minh-chung/event2.jpg)
 
 ## 6. References
 
-- [VietOpenInfra official announcement](https://vn.linkedin.com/posts/voi-vn_vietopeninfra-cloudnativevietnam-awscommunityvietnam-activity-7516060456709550080-yaxC)
-- [Organizer's post-event recap](https://vn.linkedin.com/posts/voi-vn_vietopeninfra-cloudnativevietnam-awsfcaj-activity-7521419750535610369-mDaT)
+1. AWS for Games. [Riot Games on AWS – Life After Metal](https://www.linkedin.com/posts/awsgametech_riot-games-on-aws-life-after-metal-activity-7274871685172932609-7TIX).
+
+2. Amazon Web Services. [AWS Business Transformed – Riot Games](https://www.linkedin.com/posts/amazon-web-services_aws-business-transformed-riot-games-activity-7138256673701257218-Voob).
+
+*Note: The above content summarizes publicly available information. It does not describe personal activities without evidence, such as speaking, receiving awards, or taking photos with the speaker.*

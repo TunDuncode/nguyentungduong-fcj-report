@@ -1,31 +1,31 @@
 ---
-title: "4. Ubuntu EC2, EBS, and basic monitoring"
+title: "4. Studying AWS network routing and security"
 date: 2026-09-12T09:00:00+07:00
 weight: 4
 draft: false
-description: "Ubuntu EC2, EBS, and basic monitoring"
+description: "Studying AWS network routing and security"
 ---
 
-# 4. Ubuntu EC2, EBS, and basic monitoring
+# 4. Studying AWS network routing and security
 
 ### Week 4 Objectives:
 
-- Understand how the NetMon team provisions EC2.
-- Learn the roles of AMIs, instance types, EBS, and IAM Roles.
-- Distinguish default EC2 CPU metrics from RAM/disk metrics requiring the CloudWatch Agent.
+- Understand how route tables and internet gateways work.
+- Distinguish security groups and network ACLs.
+- Learn the principles of controlling network access to resources.
 
 ### Tasks to be carried out this week:
 
 | Day | Task | Start Date | Completion Date | Reference Material |
 | :--- | :--- | :--- | :--- | :--- |
-| Saturday (on-site) | Follow Tùng Dương’s configuration of netmon-ec2-server using Ubuntu 24.04 LTS. | 12/09/2026 | 12/09/2026 | [Amazon EC2](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts.html) |
-| Sunday (independent study) | Review root EBS volumes, Security Groups, instance state, and displayed status checks. | 13/09/2026 | 13/09/2026 | [Amazon EBS](https://docs.aws.amazon.com/ebs/latest/userguide/what-is-ebs.html) |
-| Monday (independent study) | Review attaching an IAM Role after launch and locating EC2 metrics in CloudWatch. | 14/09/2026 | 14/09/2026 | [Amazon EC2](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts.html) |
-| Tuesday (independent study) | Discuss associating device records with EC2 using instanceId, region, and monitoringSource. | 15/09/2026 | 15/09/2026 | [Amazon DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html) |
+| Saturday (on-site) | Study route tables, local routes, and subnet associations during the internship session. | 12/09/2026 | 12/09/2026 | [Subnet route tables](https://docs.aws.amazon.com/vpc/latest/userguide/subnet-route-tables.html) |
+| Sunday (independent study) | Learn how to attach an internet gateway to a VPC and configure internet routing for a public subnet. | 13/09/2026 | 13/09/2026 | [Internet gateway](https://docs.aws.amazon.com/vpc/latest/userguide/working-with-igw.html) |
+| Monday (independent study) | Study security group inbound and outbound rules and how to restrict SSH access. | 14/09/2026 | 14/09/2026 | [VPC infrastructure security](https://docs.aws.amazon.com/vpc/latest/userguide/infrastructure-security.html) |
+| Tuesday (independent study) | Compare security groups with network ACLs and note how each controls traffic. | 15/09/2026 | 15/09/2026 | [Network ACLs](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-network-acls.html) |
 
 ### Week 4 Achievements:
 
-- Understood provisioning and cost considerations for netmon-ec2-server.
-- Learned that CPUUtilization is available by default while RAM/disk require additional collection depending on setup.
-- Agreed to label simulated and real EC2 metrics separately.
+- Understood the roles of route tables and internet gateways in internet connectivity.
+- Distinguished resource-level and subnet-level network security.
+- Understood the principle of opening only necessary ports.
 

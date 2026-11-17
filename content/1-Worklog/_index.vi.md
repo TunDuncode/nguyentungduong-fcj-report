@@ -6,19 +6,19 @@ draft: false
 
 # Nhật ký công việc — 12 tuần
 
-Thực tập AWS NetMon tại 36 Cát Linh, Hà Nội (08/08–14/11/2026). Các ngày ngoài thứ Bảy là lịch tự học/thực hành đề xuất, cần đối chiếu nhật ký thực tế.
+Nhật ký thực tập AWS của Tùng Dương tại 36 Cát Linh, Hà Nội (08/08–14/11/2026). Tuần 1–7 là thời gian thực tập và tự học; tuần 8–9 nghiên cứu công nghệ sử dụng trong đề tài; tuần 10–12 thực hiện, kết nối và kiểm thử đề tài nhóm NetMon, phụ trách VPC, EC2 và bảo mật. Nội dung theo từng ngày cần đối chiếu với nhật ký thực tế.
 
-- [1. Làm quen FCAJ, AWS và xác định đề tài NetMon]({{< relref "1.1-Week1" >}})
-- [2. IAM, phân quyền nhóm và AWS Budgets]({{< relref "1.2-Week2" >}})
-- [3. Kiến trúc mạng VPC và phân tách hạ tầng]({{< relref "1.3-Week3" >}})
-- [4. EC2 Ubuntu, EBS và giám sát cơ bản]({{< relref "1.4-Week4" >}})
-- [5. Thiết kế DynamoDB cho thiết bị và lịch sử cảnh báo]({{< relref "1.5-Week5" >}})
-- [6. Viết Lambda netmon-api và truy vấn DynamoDB]({{< relref "1.6-Week6" >}})
-- [7. API Gateway, HTTP routes và CORS]({{< relref "1.7-Week7" >}})
-- [8. Xử lý CRUD và chuẩn hóa API quản lý thiết bị]({{< relref "1.8-Week8" >}})
-- [9. Mô phỏng chỉ số thiết bị và tham gia FCAJ Community Day]({{< relref "1.9-Week9" >}})
-- [10. Phối hợp CloudWatch, SNS, EventBridge và lưu lịch sử cảnh báo]({{< relref "1.10-Week10" >}})
-- [11. Đăng nhập Cognito, JWT và kết nối giao diện thử nghiệm]({{< relref "1.11-Week11" >}})
-- [12. Tổng kết dự án NetMon, báo cáo và Worklog Hugo]({{< relref "1.12-Week12" >}})
+- [1. Làm quen môi trường thực tập FCAJ và điện toán đám mây]({{< relref "1.1-Week1" >}})
+- [2. Tìm hiểu IAM, bảo mật tài khoản và quản lý chi phí]({{< relref "1.2-Week2" >}})
+- [3. Kiến thức mạng máy tính và Amazon VPC]({{< relref "1.3-Week3" >}})
+- [4. Tự học định tuyến và bảo mật mạng trên AWS]({{< relref "1.4-Week4" >}})
+- [5. Tìm hiểu máy chủ Amazon EC2 và lưu trữ EBS]({{< relref "1.5-Week5" >}})
+- [6. Tìm hiểu giám sát hạ tầng bằng CloudWatch và SNS]({{< relref "1.6-Week6" >}})
+- [7. Tìm hiểu Serverless và ôn tập kiến trúc AWS]({{< relref "1.7-Week7" >}})
+- [8. Nghiên cứu các công nghệ sử dụng trong đề tài]({{< relref "1.8-Week8" >}})
+- [9. Tìm hiểu cách áp dụng các dịch vụ AWS vào đề tài]({{< relref "1.9-Week9" >}})
+- [10. Bắt đầu thực hiện đề tài NetMon]({{< relref "1.10-Week10" >}})
+- [11. Triển khai các phần công việc của nhóm]({{< relref "1.11-Week11" >}})
+- [12. Kết nối hệ thống, kiểm thử và hoàn thiện đề tài]({{< relref "1.12-Week12" >}})
 
-*Ngày 14/11/2026 là mốc dự kiến; chưa ghi nhận kết quả buổi này.*
+*Các mốc ngày giữ nguyên theo nhật ký gốc; nội dung ngày 14/11/2026 cần đối chiếu với kết quả thực tế của buổi cuối.*

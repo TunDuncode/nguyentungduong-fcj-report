@@ -1,31 +1,32 @@
 ---
-title: "10. CloudWatch, SNS, EventBridge, and alert history"
+title: "10. Starting the NetMon project"
 date: 2026-10-31T09:00:00+07:00
 weight: 10
 draft: false
-description: "CloudWatch, SNS, EventBridge, and alert history"
+description: "Starting the NetMon project"
 ---
 
-# 10. CloudWatch, SNS, EventBridge, and alert history
+# 10. Starting the NetMon project
 
 ### Week 10 Objectives:
 
-- Understand CloudWatch Alarm → SNS email and EventBridge → Lambda → DynamoDB.
-- Collaborate with the monitoring workstream led by Mạnh Quân.
-- Check stored alarm records and distinguish test events.
+- Agree on the project topic and objectives.
+- Divide responsibilities among team members.
+- Design the overall system architecture.
 
 ### Tasks to be carried out this week:
 
 | Day | Task | Start Date | Completion Date | Reference Material |
 | :--- | :--- | :--- | :--- | :--- |
-| Saturday (on-site) | Review the three CPU, RAM, and disk alarms with 80%, 80%, and 85% test thresholds. | 31/10/2026 | 31/10/2026 | [CloudWatch alarms](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Alarms.html) |
-| Sunday (independent study) | Inspect the netmon-alerts SNS topic, confirmed email subscription, and controlled test alerts. | 01/11/2026 | 01/11/2026 | [Amazon SNS](https://docs.aws.amazon.com/sns/latest/dg/welcome.html) |
-| Monday (independent study) | Review netmon-alarm-state-rule receiving CloudWatch Alarm State Change events. | 02/11/2026 | 02/11/2026 | [CloudWatch events and EventBridge](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch-and-eventbridge.html) |
-| Tuesday (independent study) | Check the netmon-save-alert Lambda and PutItem permission for recording alarms in NetworkAlerts. | 03/11/2026 | 03/11/2026 | [Amazon DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html) |
+| Saturday (on-site) | Meet as a team and agree on developing an AWS-based network infrastructure management and monitoring system for small and medium-sized businesses. | 31/10/2026 | 31/10/2026 | [AWS Overview](https://docs.aws.amazon.com/whitepapers/latest/aws-overview/introduction.html) |
+| Sunday (independent study) | Divide responsibilities among the three members and identify the functions to be developed. | 01/11/2026 | 01/11/2026 | [AWS Overview](https://docs.aws.amazon.com/whitepapers/latest/aws-overview/introduction.html) |
+| Monday (independent study) | Design the overall architecture and select AWS services for the system. | 02/11/2026 | 02/11/2026 | [VPC](https://docs.aws.amazon.com/vpc/latest/userguide/how-it-works.html) |
+| Tuesday (independent study) | Prepare the AWS account, assign permissions to team members, and plan network infrastructure deployment. | 03/11/2026 | 03/11/2026 | [IAM](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html) |
 
 ### Week 10 Achievements:
 
-- Documented the team’s alert workflow across **CloudWatch, SNS, EventBridge, and DynamoDB**.
-- The team confirmed SNS email delivery and resolved a `dynamodb:PutItem` access issue for alert recording.
-- Recognized that CloudWatch thresholds alone do not prove simulated-device alerting is fully integrated.
+- Agreed on the NetMon project topic.
+- Completed the division of responsibilities among team members.
+- Developed an overall architecture.
+- Identified my responsibilities: VPC, EC2, and security.
 

@@ -1,31 +1,31 @@
 ---
-title: "5. DynamoDB design for devices and alert history"
+title: "5. Learning Amazon EC2 servers and EBS storage"
 date: 2026-09-19T09:00:00+07:00
 weight: 5
 draft: false
-description: "DynamoDB design for devices and alert history"
+description: "Learning Amazon EC2 servers and EBS storage"
 ---
 
-# 5. DynamoDB design for devices and alert history
+# 5. Learning Amazon EC2 servers and EBS storage
 
 ### Week 5 Objectives:
 
-- Choose partition keys and attributes for device records.
-- Prepare the alert-history structure used by the dashboard.
-- Learn item operations through the AWS Console and boto3.
+- Understand how to select an EC2 server configuration.
+- Learn about AMIs, instance types, EBS, and the instance lifecycle.
+- Learn server management and how to limit unnecessary costs.
 
 ### Tasks to be carried out this week:
 
 | Day | Task | Start Date | Completion Date | Reference Material |
 | :--- | :--- | :--- | :--- | :--- |
-| Saturday (on-site) | Design NetworkDevices with deviceId (String) as its partition key. | 19/09/2026 | 19/09/2026 | [Amazon DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html) |
-| Sunday (independent study) | Agree on deviceName, deviceType, ipAddress, location, status, cpuUsage, memoryUsage, and lastUpdated. | 20/09/2026 | 20/09/2026 | [Amazon DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html) |
-| Monday (independent study) | Outline NetworkAlerts with eventId, alarmName, alarmState, eventTime, and handlingStatus. | 21/09/2026 | 21/09/2026 | [Amazon DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html) |
-| Tuesday (independent study) | Inspect items in Explore table items and distinguish String, Number, and Python Decimal values. | 22/09/2026 | 22/09/2026 | [Boto3 DynamoDB Table](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/dynamodb/table/index.html) |
+| Saturday (on-site) | Learn the steps for launching EC2 in the AWS Console and selecting an operating system and instance configuration. | 19/09/2026 | 19/09/2026 | [Launch an EC2 instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/LaunchingAndUsingInstances.html) |
+| Sunday (independent study) | Study the differences between AMIs, instance types, and networking options when launching EC2. | 20/09/2026 | 20/09/2026 | [Launch an EC2 instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/LaunchingAndUsingInstances.html) |
+| Monday (independent study) | Learn about EBS root volumes, storage capacity, and their relationship to EC2 servers. | 21/09/2026 | 21/09/2026 | [Amazon EBS](https://docs.aws.amazon.com/ebs/latest/userguide/what-is-ebs.html) |
+| Tuesday (independent study) | Read about the Running, Stopped, and Terminated states and resources that may continue to incur charges. | 22/09/2026 | 22/09/2026 | [EC2 instance lifecycle](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-lifecycle.html) |
 
 ### Week 5 Achievements:
 
-- Defined a shared NetworkDevices schema and device-based partition key.
-- Prepared NetworkAlerts to record alarm times and handling states.
-- Learned to verify writes using Explore table items rather than trusting the frontend alone.
+- Understood the basic process for launching an EC2 server.
+- Understood the roles of AMIs, instance types, and EBS.
+- Learned to check instance states and consider costs after stopping a server.
 

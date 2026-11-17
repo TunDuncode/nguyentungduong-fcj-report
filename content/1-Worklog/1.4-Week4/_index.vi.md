@@ -1,31 +1,31 @@
 ---
-title: "4. EC2 Ubuntu, EBS và giám sát cơ bản"
+title: "4. Tự học định tuyến và bảo mật mạng trên AWS"
 date: 2026-09-12T09:00:00+07:00
 weight: 4
 draft: false
-description: "EC2 Ubuntu, EBS và giám sát cơ bản"
+description: "Tự học định tuyến và bảo mật mạng trên AWS"
 ---
 
-# 4. EC2 Ubuntu, EBS và giám sát cơ bản
+# 4. Tự học định tuyến và bảo mật mạng trên AWS
 
 ### Mục tiêu tuần 4:
 
-- Hiểu các bước khởi tạo EC2 phục vụ hệ thống NetMon.
-- Biết vai trò của AMI, instance type, EBS và IAM Role.
-- Phân biệt CPU mặc định của EC2 với RAM/disk cần CloudWatch Agent.
+- Hiểu cơ chế hoạt động của Route Table và Internet Gateway.
+- Phân biệt Security Group và Network ACL.
+- Nắm nguyên tắc kiểm soát kết nối đến tài nguyên mạng.
 
 ### Các công việc cần triển khai trong tuần này:
 
 | Ngày | Công việc | Bắt đầu | Hoàn thành | Tài liệu tham khảo |
 | :--- | :--- | :--- | :--- | :--- |
-| Thứ Bảy (tại cơ sở) | Theo dõi Tùng Dương cấu hình netmon-ec2-server bằng Ubuntu 24.04 LTS. | 12/09/2026 | 12/09/2026 | [Amazon EC2](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts.html) |
-| Chủ nhật (tự học) | Tìm hiểu EBS root volume, Security Group, trạng thái instance và 2/2 hay 3/3 health checks tùy giao diện. | 13/09/2026 | 13/09/2026 | [Amazon EBS](https://docs.aws.amazon.com/ebs/latest/userguide/what-is-ebs.html) |
-| Thứ Hai (tự học) | Kiểm tra cách gán IAM Role sau khi tạo EC2 và xem Metrics trên CloudWatch. | 14/09/2026 | 14/09/2026 | [Amazon EC2](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts.html) |
-| Thứ Ba (tự học) | Thảo luận các trường liên hệ EC2 với bản ghi thiết bị như instanceId, region và monitoringSource. | 15/09/2026 | 15/09/2026 | [Amazon DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html) |
+| Thứ Bảy (tại cơ sở) | Tìm hiểu Route Table, tuyến nội bộ local và cách kết hợp với subnet trong buổi thực tập. | 12/09/2026 | 12/09/2026 | [Subnet route tables](https://docs.aws.amazon.com/vpc/latest/userguide/subnet-route-tables.html) |
+| Chủ nhật (tự học) | Đọc cách gắn Internet Gateway vào VPC và cấu hình tuyến ra Internet cho subnet công khai. | 13/09/2026 | 13/09/2026 | [Internet gateway](https://docs.aws.amazon.com/vpc/latest/userguide/working-with-igw.html) |
+| Thứ Hai (tự học) | Tự học các quy tắc inbound, outbound của Security Group và cách hạn chế cổng SSH. | 14/09/2026 | 14/09/2026 | [VPC infrastructure security](https://docs.aws.amazon.com/vpc/latest/userguide/infrastructure-security.html) |
+| Thứ Ba (tự học) | So sánh Security Group với Network ACL và ghi chú cách kiểm soát lưu lượng ở từng lớp. | 15/09/2026 | 15/09/2026 | [Network ACLs](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-network-acls.html) |
 
 ### Kết quả đạt được tuần 4:
 
-- Hiểu quá trình khởi tạo máy chủ netmon-ec2-server và những yếu tố ảnh hưởng đến chi phí.
-- Biết CPUUtilization là chỉ số có sẵn, còn RAM/disk cần thu thập bổ sung tùy cấu hình.
-- Thống nhất không gộp số liệu giả lập và số liệu EC2 thành một chỉ số thiếu nguồn gốc.
+- Hiểu vai trò của Route Table và Internet Gateway khi thiết lập kết nối Internet.
+- Phân biệt được bảo mật cấp tài nguyên và cấp subnet.
+- Nắm nguyên tắc chỉ mở các cổng thực sự cần thiết.
 

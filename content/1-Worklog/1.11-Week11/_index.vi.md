@@ -1,31 +1,32 @@
 ---
-title: "11. Đăng nhập Cognito, JWT và kết nối giao diện thử nghiệm"
+title: "11. Triển khai các phần công việc của nhóm"
 date: 2026-11-07T09:00:00+07:00
 weight: 11
 draft: false
-description: "Đăng nhập Cognito, JWT và kết nối giao diện thử nghiệm"
+description: "Triển khai các phần công việc của nhóm"
 ---
 
-# 11. Đăng nhập Cognito, JWT và kết nối giao diện thử nghiệm
+# 11. Triển khai các phần công việc của nhóm
 
 ### Mục tiêu tuần 11:
 
-- Hiểu User Pool, App Client, Resource Server và JWT Authorizer.
-- Kết nối đăng nhập với các API quản lý thiết bị.
-- Thử giao diện HTML/CSS/JavaScript tại localhost bằng VS Code.
+- Thực hiện các nhiệm vụ đã được phân công.
+- Xây dựng hạ tầng mạng và máy chủ trên AWS.
+- Phối hợp với các thành viên trong quá trình triển khai.
 
 ### Các công việc cần triển khai trong tuần này:
 
 | Ngày | Công việc | Bắt đầu | Hoàn thành | Tài liệu tham khảo |
 | :--- | :--- | :--- | :--- | :--- |
-| Thứ Bảy (tại cơ sở) | Kiểm tra Cognito User Pool, netmon-web-client và miền đăng nhập của ứng dụng. | 07/11/2026 | 07/11/2026 | [Amazon Cognito](https://docs.aws.amazon.com/cognito/latest/developerguide/what-is-amazon-cognito.html) |
-| Chủ nhật (tự học) | Tìm hiểu Authorization Code + PKCE, access token, ID token và sự khác biệt khi gọi API. | 08/11/2026 | 08/11/2026 | [Cognito Authorization Code + PKCE](https://docs.aws.amazon.com/cognito/latest/developerguide/using-pkce-in-authorization-code.html) |
-| Thứ Hai (tự học) | Rà soát netmon-jwt-authorizer, OAuth scopes đọc/ghi và các HTTP route cần xác thực. | 09/11/2026 | 09/11/2026 | [HTTP API JWT authorizer](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-jwt-authorizer.html) |
-| Thứ Ba (tự học) | Kiểm tra màn hình đăng nhập, danh sách thiết bị, chi tiết và lịch sử cảnh báo trên localhost; đối chiếu dữ liệu demo với dữ liệu AWS. | 10/11/2026 | 10/11/2026 | [HTTP API CORS](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-cors.html) |
+| Thứ Bảy (tại cơ sở) | Triển khai VPC, Public Subnet và Private Subnet cho hệ thống NetMon. | 07/11/2026 | 07/11/2026 | [VPC](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-subnet-basics.html) |
+| Chủ nhật (tự học) | Cấu hình Internet Gateway, Route Table và Security Group. | 08/11/2026 | 08/11/2026 | [Internet Gateway](https://docs.aws.amazon.com/vpc/latest/userguide/working-with-igw.html) |
+| Thứ Hai (tự học) | Khởi tạo máy chủ EC2, cấu hình lưu trữ EBS và quyền IAM cần thiết. | 09/11/2026 | 09/11/2026 | [EC2](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/LaunchingAndUsingInstances.html) |
+| Thứ Ba (tự học) | Phối hợp với Xuân Đức triển khai phần Serverless và Mạnh Quân triển khai phần giám sát, giao diện hệ thống. | 10/11/2026 | 10/11/2026 | [CloudWatch](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/viewing_metrics_with_cloudwatch.html) |
 
 ### Kết quả đạt được tuần 11:
 
-- Đã cấu hình luồng đăng nhập bằng Cognito và các thành phần JWT Authorizer trong dự án.
-- Có giao diện thử nghiệm localhost; biết lỗi 401 do token khác với lỗi CORS hoặc Lambda.
-- **Chưa khẳng định 8 route hoạt động end-to-end** nếu chưa kiểm thử đầy đủ với access token thật và dữ liệu DynamoDB.
+- Xây dựng được hạ tầng mạng trên AWS.
+- Triển khai máy chủ EC2 phục vụ đề tài.
+- Cấu hình các thành phần bảo mật mạng.
+- Phối hợp thực hiện các chức năng của hệ thống NetMon.
 
