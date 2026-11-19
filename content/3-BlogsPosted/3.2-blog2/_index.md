@@ -41,6 +41,10 @@ Small systems can start with a suitably sized server, monitoring, and backups. F
 
 In my opinion, rather than trying to build a server that never fails, we should build a system that can continue operating or recover quickly when failure occurs. Monitor proactively, test fault tolerance, and choose redundancy solutions that match actual needs. There is no need to deploy too many services from the start, but we should not wait until a system fails before preparing a response plan.
 
+## Linkmyblog
+
+https://www.facebook.com/groups/awsstudygroupfcj/permalink/2341484523283173/?rdid=ybztwhA7Gy935T5y#
+
 ## References
 
 - [Amazon EC2 Auto Scaling](https://docs.aws.amazon.com/autoscaling/ec2/userguide/)

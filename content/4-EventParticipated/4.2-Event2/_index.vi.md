@@ -1,5 +1,5 @@
 ---
-title: "TECHNICAL SHARING | HÀNH TRÌNH LÊN MÂY CỦA RIOT GAMES"
+title: "4.2 TECHNICAL SHARING | HÀNH TRÌNH LÊN MÂY CỦA RIOT GAMES"
 date: 2026-11-14T00:00:00+07:00
 weight: 2
 chapter: false
