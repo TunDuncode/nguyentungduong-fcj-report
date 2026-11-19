@@ -17,9 +17,7 @@ Revoke access after the project and remove infrastructure that may continue gene
 
 {{< netmonimg src="images/netmon-workshop/43-cognito-user-pool-overview.png" alt="Cognito user-pool overview" caption="Figure 43 – Cognito user-pool overview" >}}
 
-
 {{< netmonimg src="images/netmon-workshop/44-cognito-app-client-netmon-web-client.png" alt="Cognito netmon-web-client app client" caption="Figure 44 – Cognito netmon-web-client app client" >}}
-
 
 {{< netmonimg src="images/netmon-workshop/49-cognito-users-confirmed-enabled.png" alt="Two verified Cognito accounts" caption="Figure 49 – Two verified Cognito accounts" >}}
 
@@ -34,8 +32,9 @@ Revoke access after the project and remove infrastructure that may continue gene
 
 Do not delete the AWS root account, the default VPC, or shared resources just to tidy up the console.
 
----
+## Retire infrastructure in dependency order
 
-> **Publishing note:** Do not publish original images showing email addresses, login codes, or tokens. Screenshots in this pack come from the lab and have the account header removed; review them again before going public.
+After retiring the application, back up Cognito settings and delete the pool only when sign-in is no longer needed. For the VPC, terminate the intended EC2 instance, inspect remaining volumes, network interfaces, and Elastic IP/NAT Gateway if present; remove dependencies, detach the Internet Gateway, delete subnets/custom route tables/security groups, then delete the VPC. Do not delete shared or default resources. Recheck billing after charges update.
+
 
 [← Back to chapter](../)

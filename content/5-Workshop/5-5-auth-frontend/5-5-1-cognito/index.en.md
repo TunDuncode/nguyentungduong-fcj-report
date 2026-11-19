@@ -29,12 +29,9 @@ Create a managed sign-in flow for NetMon administrators with Amazon Cognito rath
 
 {{< netmonimg src="images/netmon-workshop/45-cognito-resource-server-netmon-api-scopes.png" alt="Resource server netmon-api and two scopes" caption="Figure 45 – Resource server netmon-api and two scopes" >}}
 
-
 {{< netmonimg src="images/netmon-workshop/46-cognito-domain-managed-login-issuer.png" alt="Cognito domain and issuer" caption="Figure 46 – Cognito domain and issuer" >}}
 
-
 {{< netmonimg src="images/netmon-workshop/47-cognito-app-client-managed-login-pages-oauth-scopes.png" alt="Cognito managed-login and OAuth configuration" caption="Figure 47 – Cognito managed-login and OAuth configuration" >}}
-
 
 {{< netmonimg src="images/netmon-workshop/48-cognito-managed-login-sign-in.png" alt="Managed-login sign-in page" caption="Figure 48 – Managed-login sign-in page" >}}
 
@@ -42,15 +39,15 @@ Create a managed sign-in flow for NetMon administrators with Amazon Cognito rath
 
 {{< netmonimg src="images/netmon-workshop/49-cognito-users-confirmed-enabled.png" alt="Two verified Cognito accounts" caption="Figure 49 – Two verified Cognito accounts" >}}
 
-
 ## Verification
 
 After sign-in, Cognito redirects to the callback URL with `?code=...`. A local server must be listening at `localhost:5500`, and the frontend needs PKCE logic to exchange the code for tokens. `ERR_CONNECTION_REFUSED` typically means the local server is not running, not that Lambda is down.
 
 > Authorization codes and tokens are temporary sensitive data and should not appear in published screenshots.
 
----
+## NetMon accounts
 
-> **Publishing note:** Do not publish original images showing email addresses, login codes, or tokens. Screenshots in this pack come from the lab and have the account header removed; review them again before going public.
+The user pool contains application users, not IAM users. Grant accounts only to authorized device managers. For `FORCE_CHANGE_PASSWORD`, complete the first-time password change; if the localhost redirect fails, first serve the correct directory containing `index.html`. Match callback and sign-out URLs to the deployment environment; do not automatically use the Hugo report website as the callback.
+
 
 [← Back to chapter](../)

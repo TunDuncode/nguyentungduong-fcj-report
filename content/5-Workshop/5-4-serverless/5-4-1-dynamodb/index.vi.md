@@ -18,12 +18,9 @@ Thiết kế cơ sở dữ liệu NoSQL cho danh sách thiết bị và lịch s
 
 {{< netmonimg src="images/netmon-workshop/33-dynamodb-networkdevices-2-items.png" alt="Hai bản ghi trong NetworkDevices" caption="Ảnh 33 – Hai bản ghi trong NetworkDevices" >}}
 
-
 3. Tạo hoặc xác minh bảng **`NetworkAlerts`**, Partition Key `eventId` (String), On-demand.
 
 {{< netmonimg src="images/netmon-workshop/32-dynamodb-networkalerts-7-items.png" alt="Các bản ghi trong NetworkAlerts" caption="Ảnh 32 – Các bản ghi trong NetworkAlerts" >}}
-
-
 
 4. Không cần Sort Key nếu thiết kế hiện tại dùng khóa đơn; chỉ bổ sung index khi xác định được mẫu truy vấn cụ thể.
 
@@ -39,7 +36,7 @@ Thiết kế cơ sở dữ liệu NoSQL cho danh sách thiết bị và lịch s
 }
 ```
 
-Đối với EC2, có thể lưu thêm `instanceId`, `region`, `monitoringSource`, `vpcId`. **Không chép nhầm InstanceId vào ô IP**: `instanceId` là định danh của EC2, còn `ipAddress` là địa chỉ mạng.
+Đối với EC2, có thể lưu thêm `instanceId`, `region`, `metricsSource` (hoặc tên trường theo code thực tế), `vpcId`. **Không chép nhầm InstanceId vào ô IP**: `instanceId` là định danh của EC2, còn `ipAddress` là địa chỉ mạng.
 
 ### Dữ liệu lịch sử cảnh báo
 
@@ -51,8 +48,18 @@ Vào **Explore items → chọn bảng → Scan → Run** và xác nhận bản 
 
 > Tránh xóa bảng `NetworkDevices` cũ nếu Lambda hoặc giao diện đang tham chiếu tới bảng đó.
 
----
+## Mô hình dữ liệu mở rộng
 
-> **Lưu ý khi xuất bản:** Không đăng ảnh nguyên gốc có email, mã đăng nhập hoặc token. Hình trong bộ này được lấy từ các ảnh quá trình thực hành và cắt bỏ thanh tài khoản; hãy tự kiểm tra lại trước khi đưa lên website công khai.
+| Trường | Ý nghĩa |
+|---|---|
+| `deviceId` | Khóa định danh thiết bị |
+| `deviceName`, `deviceType`, `ipAddress`, `location` | Tên, loại, địa chỉ và vị trí lắp đặt |
+| `status`, `lastUpdated` | Trạng thái quản lý và thời điểm cập nhật |
+| `cpuUsage`, `memoryUsage` | Chỉ số mô phỏng nếu thiết bị không có nguồn đo thật |
+| `instanceId` | Khóa liên kết EC2 để đọc CloudWatch |
+| `metricsSource` | Phân biệt nguồn mô phỏng và nguồn AWS (đối chiếu tên trường trong bản code triển khai) |
+
+Các mục DynamoDB có thể có thuộc tính khác nhau. Không nhập tay CPU/RAM cho EC2 nếu giá trị phải lấy từ CloudWatch. Khi chuyển dữ liệu giữa Lambda và JSON, lưu ý kiểu `Decimal` và giá trị `null`.
+
 
 [← Về chương](../)

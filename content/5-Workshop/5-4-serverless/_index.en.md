@@ -15,4 +15,4 @@ Build DynamoDB tables and a Python Lambda-backed HTTP API with eight routes and 
 - [5.4.2. Build the netmon-api Python Lambda](5-4-2-lambda-api/)
 - [5.4.3. Build an HTTP API with Eight Routes](5-4-3-api-gateway/)
 - [5.4.4. Test CRUD and Data Queries](5-4-4-crud-test/)
-
+- [5.4.5. Device Simulation and Automated Monitoring](5-4-5-simulation/)

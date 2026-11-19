@@ -21,4 +21,3 @@ Tung Duong’s AWS internship worklog at 36 Cat Linh, Hanoi (Aug 8–Nov 14, 202
 - [11. Implementing the team’s assigned tasks]({{< relref "1.11-Week11" >}})
 - [12. System integration, testing, and project completion]({{< relref "1.12-Week12" >}})
 
-*Dates are preserved from the original worklog; the November 14, 2026 entry should be checked against the actual outcome of the final session.*

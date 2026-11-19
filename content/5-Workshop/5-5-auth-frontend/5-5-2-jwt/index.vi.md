@@ -35,10 +35,11 @@ Yêu cầu Access Token hợp lệ và scope tương ứng trước khi API Gate
 
 Frontend phải yêu cầu scopes này trong luồng đăng nhập và sử dụng **Access Token**, không dùng ID Token để gọi API. Chỉ thêm scope ở App Client không tự phân quyền vai trò cho từng tài khoản; phân quyền người dùng chi tiết cần thiết kế riêng.
 
+## Kiểm tra phân quyền từ giao diện
+
+Thử API khi chưa đăng nhập, với token hợp lệ có scope đọc và với yêu cầu ghi có scope ghi. Không coi việc ẩn nút Thêm/Xóa trên UI là phân quyền backend. Nếu mọi tài khoản ứng dụng đều được cấp cả hai scope, đó chưa phải cơ chế role-based access control phân biệt admin và người xem. Xác minh cấu hình ở từng route và không công bố Access Token trong log/demo.
 
 ---
-
-> **Lưu ý khi xuất bản:** Không đăng ảnh nguyên gốc có email, mã đăng nhập hoặc token. Hình trong bộ này được lấy từ các ảnh quá trình thực hành và cắt bỏ thanh tài khoản; hãy tự kiểm tra lại trước khi đưa lên website công khai.
 
 ## Các ảnh minh chứng liên quan
 

@@ -24,13 +24,11 @@ python -m http.server 5500
 
 {{< netmonimg src="images/netmon-workshop/48-cognito-managed-login-sign-in.png" alt="Managed-login sign-in page" caption="Figure 48 – Managed-login sign-in page" >}}
 
-
 4. Enter the correct **Cognito domain**, **App Client ID**, and **API Gateway Invoke URL**. Never enter AWS Secret Keys or a Cognito client secret into browser code.
 5. Use the frontend's sign-in button. After Cognito redirects to `/?code=...`, JavaScript completes the PKCE code exchange and receives an Access Token.
 6. Test `GET /devices` and `GET /alerts`. If they succeed, create a `TEST-SW01` device, update its details, read it, and delete only that test record.
 
 {{< netmonimg src="images/netmon-workshop/41-api-gateway-cors-localhost-5500.png" alt="CORS configuration for localhost:5500" caption="Figure 41 – CORS configuration for localhost:5500" >}}
-
 
 ## Troubleshooting
 
@@ -44,8 +42,11 @@ python -m http.server 5500
 
 > Never publish a live `?code=` URL or real tokens. Before integrating the final UI, check that all eight routes return expected responses from the backend.
 
----
+## Run NetMon in VS Code
 
-> **Publishing note:** Do not publish original images showing email addresses, login codes, or tokens. Screenshots in this pack come from the lab and have the account header removed; review them again before going public.
+Open the directory containing NetMon's `index.html`, use Live Server (or the server command above), and navigate to `http://localhost:5500/`. Do not open the HTML directly via `file://`. If Live Server starts from a parent folder, the URL may include another path and fail to match the registered callback.
+
+Demo mode supports presentations without AWS; connected mode requires an API URL, Cognito, and a valid token. Use the Network tab to identify the active source. The Hugo report website contains workshop documentation; it does not automatically host or start the NetMon application.
+
 
 [← Back to chapter](../)

@@ -27,15 +27,15 @@ weight: 3
 
 {{< netmonimg src="images/netmon-workshop/26-sns-subscriptions-confirmed-list.png" alt="Danh sách SNS subscriptions" caption="Ảnh 26 – Danh sách SNS subscriptions" >}}
 
-
 5. Kiểm tra **CloudWatch → Log groups**; xuất log cần giữ và xóa log groups thử nghiệm khi chắc chắn không còn cần đối chiếu lỗi.
 
 ## Kiểm tra
 
 Danh sách alarm, rule, topic và log được xử lý theo quyết định của nhóm; không xóa nhầm tài nguyên của dự án khác trong cùng tài khoản AWS.
 
----
+## Kiểm tra lịch chạy bổ sung
 
-> **Lưu ý khi xuất bản:** Không đăng ảnh nguyên gốc có email, mã đăng nhập hoặc token. Hình trong bộ này được lấy từ các ảnh quá trình thực hành và cắt bỏ thanh tài khoản; hãy tự kiểm tra lại trước khi đưa lên website công khai.
+Nếu có EventBridge Scheduler hoặc rule định kỳ cho `netmon-device-monitor`, vô hiệu hóa trước khi xóa Lambda và bảng. Kiểm tra CloudWatch Agent trên EC2, metric tùy chỉnh và log retention. Dọn dẹp SNS sau khi các nguồn cảnh báo đã ngừng gửi; nếu đang bảo vệ đồ án, giữ tất cả thành phần cần cho phần demo.
+
 
 [← Về chương](../)

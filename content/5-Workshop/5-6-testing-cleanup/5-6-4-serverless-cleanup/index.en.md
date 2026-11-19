@@ -17,13 +17,11 @@ Finish the demo and back up relevant screenshots, logs, API configuration, and t
 
 {{< netmonimg src="images/netmon-workshop/32-dynamodb-networkalerts-7-items.png" alt="Items in NetworkAlerts" caption="Figure 32 – Items in NetworkAlerts" >}}
 
-
 {{< netmonimg src="images/netmon-workshop/33-dynamodb-networkdevices-2-items.png" alt="Two items in NetworkDevices" caption="Figure 33 – Two items in NetworkDevices" >}}
 
 2. **API Gateway:** Document the eight Routes, Authorizer, CORS, Stage, and Integration for `netmon-management-api`, then delete it only when no frontend depends on it.
 
 {{< netmonimg src="images/netmon-workshop/38-api-gateway-netmon-management-api-routes.png" alt="Eight API Gateway routes" caption="Figure 38 – Eight API Gateway routes" >}}
-
 
 3. **AWS Lambda:** Review event targets and triggers before deleting `netmon-api` or `netmon-save-alert`.
 
@@ -37,8 +35,9 @@ Finish the demo and back up relevant screenshots, logs, API configuration, and t
 
 Confirm resource identities in `us-east-1` before deleting anything; do not affect other team members' projects.
 
----
+## Dependency-aware order
 
-> **Publishing note:** Do not publish original images showing email addresses, login codes, or tokens. Screenshots in this pack come from the lab and have the account header removed; review them again before going public.
+After backing up data: stop periodic/EventBridge triggers and preserve configuration; retire unused APIs, then remove associated Lambda functions; finally delete DynamoDB tables and dedicated roles only after confirming no remaining dependencies. Review extension routes/functions such as observability if they were created. Preserve all resources still required for the demonstration.
+
 
 [← Back to chapter](../)

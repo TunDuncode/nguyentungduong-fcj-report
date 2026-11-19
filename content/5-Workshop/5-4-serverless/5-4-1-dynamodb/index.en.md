@@ -18,11 +18,9 @@ Design NoSQL storage for the device inventory and alert history. Reuse existing 
 
 {{< netmonimg src="images/netmon-workshop/33-dynamodb-networkdevices-2-items.png" alt="Two items in NetworkDevices" caption="Figure 33 – Two items in NetworkDevices" >}}
 
-
 3. Create or verify **`NetworkAlerts`** with String partition key `eventId` and On-demand capacity.
 
 {{< netmonimg src="images/netmon-workshop/32-dynamodb-networkalerts-7-items.png" alt="Items in NetworkAlerts" caption="Figure 32 – Items in NetworkAlerts" >}}
-
 
 4. A sort key is not needed for the current single-key design. Add indexes only after identifying a real query requirement.
 
@@ -38,7 +36,7 @@ Design NoSQL storage for the device inventory and alert history. Reuse existing 
 }
 ```
 
-For EC2, optional fields include `instanceId`, `region`, `monitoringSource`, and `vpcId`. **Do not enter InstanceId in the IP field**: the two fields identify different things.
+For EC2, optional fields include `instanceId`, `region`, `metricsSource` (or the field used by the deployed code), and `vpcId`. **Do not enter InstanceId in the IP field**: the two fields identify different things.
 
 ### Alert history model
 
@@ -50,8 +48,18 @@ Use **Explore items → select table → Scan → Run** and confirm the records 
 
 > Avoid deleting the original `NetworkDevices` table while Lambda or the interface still depends on it.
 
----
+## Extended data model
 
-> **Publishing note:** Do not publish original images showing email addresses, login codes, or tokens. Screenshots in this pack come from the lab and have the account header removed; review them again before going public.
+| Field | Meaning |
+|---|---|
+| `deviceId` | Device identifier and key |
+| `deviceName`, `deviceType`, `ipAddress`, `location` | Name, type, address and installation location |
+| `status`, `lastUpdated` | Management state and update time |
+| `cpuUsage`, `memoryUsage` | Simulated values for devices without real measurements |
+| `instanceId` | EC2 link used for CloudWatch queries |
+| `metricsSource` | Distinguish simulated and AWS sources (verify the deployed code's field name) |
+
+DynamoDB items can have different attributes. Do not manually enter EC2 CPU/memory when the values should come from CloudWatch. Handle `Decimal` and `null` correctly when serializing Lambda responses as JSON.
+
 
 [← Back to chapter](../)

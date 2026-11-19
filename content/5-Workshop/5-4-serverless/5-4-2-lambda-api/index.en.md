@@ -21,12 +21,9 @@ Use a single Python Lambda named `netmon-api` to serve eight HTTP operations bas
 
 {{< netmonimg src="images/netmon-workshop/53-lambda-netmon-api-execution-role-permissions.png" alt="Lambda netmon-api execution role" caption="Figure 53 – Lambda netmon-api execution role" >}}
 
-
 {{< netmonimg src="images/netmon-workshop/54-iam-netmon-api-role-permission-policies.png" alt="IAM role permission policies" caption="Figure 54 – IAM role permission policies" >}}
 
-
 {{< netmonimg src="images/netmon-workshop/55-iam-netmon-api-access-policy-json.png" alt="JSON policy granting DynamoDB and CloudWatch actions" caption="Figure 55 – JSON policy granting DynamoDB and CloudWatch actions" >}}
-
 
 3. In code, read the method from `event.requestContext.http.method` and the URL from `event.rawPath` for **HTTP API payload format 2.0**.
 
@@ -34,7 +31,6 @@ Use a single Python Lambda named `netmon-api` to serve eight HTTP operations bas
 5. Click **Deploy**. Under **Test**, create a GET `/devices` event:
 
 {{< netmonimg src="images/netmon-workshop/35-lambda-netmon-api-test-succeeded-details-collapsed.png" alt="Lambda execution result (details collapsed)" caption="Figure 35 – Lambda execution result (details collapsed)" >}}
-
 
 ```json
 {
@@ -48,9 +44,7 @@ Use a single Python Lambda named `netmon-api` to serve eight HTTP operations bas
 
 {{< netmonimg src="images/netmon-workshop/36-cloudwatch-logs-netmon-api-6-streams.png" alt="netmon-api CloudWatch log streams" caption="Figure 36 – netmon-api CloudWatch log streams" >}}
 
-
 {{< netmonimg src="images/netmon-workshop/37-lambda-netmon-api-get-devices-test-200.png" alt="GET /devices returned HTTP 200 and device data" caption="Figure 37 – GET /devices returned HTTP 200 and device data" >}}
-
 
 ## What has been verified
 
@@ -62,8 +56,27 @@ The team previously received `statusCode: 200` from a Lambda test event. That pr
 - `KeyError` or `None`: API Gateway payload differs from the test event; inspect `rawPath`, `pathParameters`, and `requestContext`.
 - `Internal server error`: check the stack trace under **Monitor → View CloudWatch logs**.
 
----
+## How the NetMon backend processes data
 
-> **Publishing note:** Do not publish original images showing email addresses, login codes, or tokens. Screenshots in this pack come from the lab and have the account header removed; review them again before going public.
+- `GET /devices`: read DynamoDB; follow `LastEvaluatedKey` if Scan spans multiple pages.
+- `POST /devices`: validate ID/name, store location and source; simulated devices may generate missing CPU/memory values. Avoid unintended duplicate-ID overwrites.
+- `PUT /devices/{id}`: update allowed fields and timestamp; do not overwrite EC2 metrics with simulated values. `DELETE` removes only the matching ID; detail `GET` reads the key.
+- `GET /metrics`: aggregate simulated CPU/memory or CloudWatch values using `instanceId`, with an explicit source; NetworkIn/NetworkOut can be `null` for simulated devices.
+- `GET /alerts`, `PUT /alerts/{id}`: read and handle alerts; check accepted `handlingStatus` values.
+
+In the integrated backend, `X-Netmon-Build: netmon-integrated-v2` helps identify the running Lambda version if the header is retained. Do not replace an otherwise working Lambda just to add metrics; test changes separately and preserve JWT/CORS behavior.
+
+Example metric test:
+
+```json
+{
+  "version": "2.0",
+  "rawPath": "/metrics",
+  "requestContext": {"http": {"method": "GET", "path": "/metrics"}}
+}
+```
+
+Verify HTTP 200, the source field, and EC2 values. A Console test bypasses the JWT authorizer, so browser testing is still required.
+
 
 [← Back to chapter](../)

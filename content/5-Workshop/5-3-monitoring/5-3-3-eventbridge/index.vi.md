@@ -20,11 +20,9 @@ Khi CloudWatch Alarm thay đổi trạng thái, EventBridge chuyển sự kiện
 
 {{< netmonimg src="images/netmon-workshop/28-eventbridge-default-bus-rule-enabled.png" alt="EventBridge default bus và rule" caption="Ảnh 28 – EventBridge default bus và rule" >}}
 
-
 4. Trong **Custom pattern (JSON editor)** nhập mẫu sau:
 
 {{< netmonimg src="images/netmon-workshop/29-eventbridge-netmon-alarm-state-rule-pattern.png" alt="Mẫu lọc sự kiện CloudWatch Alarm" caption="Ảnh 29 – Mẫu lọc sự kiện CloudWatch Alarm" >}}
-
 
 ```json
 {
@@ -44,7 +42,6 @@ Khi CloudWatch Alarm thay đổi trạng thái, EventBridge chuyển sự kiện
 
 {{< netmonimg src="images/netmon-workshop/30-eventbridge-netmon-alarm-state-rule-lambda-target.png" alt="Lambda đích trong EventBridge Rule" caption="Ảnh 30 – Lambda đích trong EventBridge Rule" >}}
 
-
 6. Kiểm thử bằng một sự kiện CloudWatch hợp lệ hoặc chuyển trạng thái alarm có kiểm soát trong môi trường demo, sau đó vào **DynamoDB → Explore items → NetworkAlerts → Scan → Run**.
 
 ## Kiểm tra kết quả
@@ -53,9 +50,9 @@ Bản ghi cần có `eventId`, `alarmName`, `alarmState`, `eventTime` và trư�
 
 > Lỗi hay gặp: `AccessDeniedException` với `dynamodb:PutItem`. Hãy sửa chính xác policy execution role và test lại, không tạo bảng mới chỉ vì thiếu quyền.
 
+## Hai loại kích hoạt cần phân biệt
 
----
+Rule `netmon-alarm-state-rule` xử lý sự kiện đổi trạng thái CloudWatch, không phải bộ tạo CPU/RAM ngẫu nhiên cho router/switch. Nếu triển khai hàm `netmon-device-monitor` theo chu kỳ, cần kiểm tra trigger định kỳ riêng, quyền đọc/ghi bảng và quyền `sns:Publish` nếu gửi mail. Ghi nhận lần chạy trong CloudWatch Logs; nếu EventBridge gửi lại cùng event, dùng `eventId` để tránh bản ghi trùng. Không khẳng định đã kích hoạt lịch mô phỏng chỉ dựa trên ảnh rule alarm.
 
-> **Lưu ý khi xuất bản:** Không đăng ảnh nguyên gốc có email, mã đăng nhập hoặc token. Hình trong bộ này được lấy từ các ảnh quá trình thực hành và cắt bỏ thanh tài khoản; hãy tự kiểm tra lại trước khi đưa lên website công khai.
 
 [← Về chương](../)

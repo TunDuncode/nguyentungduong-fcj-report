@@ -29,12 +29,9 @@ Tạo cơ chế đăng nhập cho người quản lý NetMon bằng Amazon Cogni
 
 {{< netmonimg src="images/netmon-workshop/45-cognito-resource-server-netmon-api-scopes.png" alt="Resource Server netmon-api và hai scopes" caption="Ảnh 45 – Resource Server netmon-api và hai scopes" >}}
 
-
 {{< netmonimg src="images/netmon-workshop/46-cognito-domain-managed-login-issuer.png" alt="Cognito Domain và Issuer" caption="Ảnh 46 – Cognito Domain và Issuer" >}}
 
-
 {{< netmonimg src="images/netmon-workshop/47-cognito-app-client-managed-login-pages-oauth-scopes.png" alt="Cognito Managed Login và cấu hình OAuth" caption="Ảnh 47 – Cognito Managed Login và cấu hình OAuth" >}}
-
 
 {{< netmonimg src="images/netmon-workshop/48-cognito-managed-login-sign-in.png" alt="Giao diện đăng nhập Managed Login" caption="Ảnh 48 – Giao diện đăng nhập Managed Login" >}}
 
@@ -42,15 +39,15 @@ Tạo cơ chế đăng nhập cho người quản lý NetMon bằng Amazon Cogni
 
 {{< netmonimg src="images/netmon-workshop/49-cognito-users-confirmed-enabled.png" alt="Hai tài khoản được xác minh trong Cognito" caption="Ảnh 49 – Hai tài khoản được xác minh trong Cognito" >}}
 
-
 ## Kiểm tra
 
 Sau khi đăng nhập thành công, Cognito sẽ chuyển hướng về callback URL với `?code=...`. Trang frontend phải đang chạy tại `localhost:5500` và xử lý PKCE để đổi code lấy token. Nếu hiện `ERR_CONNECTION_REFUSED`, thường là chưa có server local đang lắng nghe ở cổng này, không phải Lambda hỏng.
 
 > Mã `code` và token là dữ liệu nhạy cảm tạm thời; không đưa vào ảnh chụp báo cáo.
 
----
+## Tài khoản dùng trong NetMon
 
-> **Lưu ý khi xuất bản:** Không đăng ảnh nguyên gốc có email, mã đăng nhập hoặc token. Hình trong bộ này được lấy từ các ảnh quá trình thực hành và cắt bỏ thanh tài khoản; hãy tự kiểm tra lại trước khi đưa lên website công khai.
+User Pool chứa người dùng ứng dụng, không phải IAM users. Chỉ cấp cho người được phép quản lý thiết bị. Nếu trạng thái `FORCE_CHANGE_PASSWORD`, hoàn tất đổi mật khẩu lần đầu; nếu quay về localhost không mở được, chạy đúng thư mục chứa `index.html` trước. Giữ callback và sign-out URL phù hợp với môi trường triển khai; không tự trỏ callback về website báo cáo Hugo.
+
 
 [← Về chương](../)

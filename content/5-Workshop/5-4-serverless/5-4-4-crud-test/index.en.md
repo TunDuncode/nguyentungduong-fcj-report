@@ -41,15 +41,17 @@ Use a `deviceId` beginning with `TEST-`, for example:
 
 {{< netmonimg src="images/netmon-workshop/37-lambda-netmon-api-get-devices-test-200.png" alt="GET /devices returned HTTP 200 and device data" caption="Figure 37 – GET /devices returned HTTP 200 and device data" >}}
 
-
 ## Access control
 
 For JWT-protected API routes, supply a Cognito Access Token carrying `netmon-api/read` or `netmon-api/write`, as required. A call without a token should receive 401.
 
 **Status:** This is an end-to-end test plan. The available screenshots do not establish that all browser-based CRUD operations have completed successfully.
 
----
+## Compare frontend operations with stored data
 
-> **Publishing note:** Do not publish original images showing email addresses, login codes, or tokens. Screenshots in this pack come from the lab and have the account header removed; review them again before going public.
+Open **Devices**, add a test switch, and omit CPU/memory if the simulation build supports generation. Search by name or ID, inspect details, update location/status, reload, and verify DynamoDB when in AWS mode. Delete only the test record. For EC2, preserve its `instanceId` and AWS source; do not manually edit CPU/memory.
+
+The local demo was tested for CRUD and simulated memory generation. In AWS mode, independently check each request in the Network tab and actual table, not just success notifications in the UI.
+
 
 [← Back to chapter](../)

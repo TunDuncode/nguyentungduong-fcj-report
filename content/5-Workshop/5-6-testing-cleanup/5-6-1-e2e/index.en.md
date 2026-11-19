@@ -11,7 +11,6 @@ weight: 1
 
 Run reproducible tests showing that the team's infrastructure, backend, and monitoring/interface components work together as one workflow.
 
-
 ## Suggested test cases
 
 | ID | Test action | Expected result |
@@ -24,7 +23,7 @@ Run reproducible tests showing that the team's infrastructure, backend, and moni
 | T06 | DELETE `/devices/{id}` | Delete only the test device |
 | T07 | GET `/alerts` | Read events in `NetworkAlerts` |
 | T08 | PUT `/alerts/{id}` | Change `handlingStatus` to `Acknowledged` or `Resolved` |
-| T09 | GET `/metrics` | Get real CloudWatch CPU data when available |
+| T09 | GET `/metrics` | Get actual EC2 CPU, memory and traffic when available |
 | T10 | Change a demo alarm state in a controlled test | Verify SNS and stored alert history |
 
 ## Evidence
@@ -35,9 +34,25 @@ Capture Cognito Users (hide email addresses for public use), JWT routes, Lambda 
 
 Mark a case **Pass** only after executing it and collecting evidence. Mark untested cases as `Pending`, rather than assuming success. Never delete actual EC2 records; operate on `TEST-` device IDs only.
 
+## Recorded results and additional tests
+
+| Area | Recorded outcome |
+|---|---|
+| Lambda device list | HTTP 200 in Lambda Test |
+| CloudWatch EC2 | Backend retrieved CPU, memory, and NetworkIn/Out after namespace correction |
+| SNS | Test email received; automatic incident delivery still needs verification |
+| Local demo UI | CRUD, simulation, alerts, and handling were tested locally |
+| Browser-to-AWS | Separately verify sign-in, CRUD, status persistence, and extension routes |
+
+Additional scenario: add a simulated switch, observe CPU/memory changes over a cycle, test 96% CPU against an appropriate threshold, inspect the alert center, handle an alert, and review history. In AWS mode, compare DynamoDB items, Lambda logs, and email if enabled. Capture the network and infrastructure diagrams, labeling simulated devices; do not describe them as discovered physical links.
+
+Use small test data and avoid heavy EC2 load. Label simulations as demo mode. If values remain unchanged after a UI refresh, check the monitoring trigger, timestamps, API data, and refresh interval.
+
 ---
 
-> **Publishing note:** Do not publish original images showing email addresses, login codes, or tokens. Screenshots in this pack come from the lab and have the account header removed; review them again before going public.
+## Interface evidence on November 18, 2026
+
+TEST005 scenario: add a simulated switch with 95% CPU/RAM, observe its warning label, view details, open the edit form, confirm deletion and check that the list returns to five devices. Browser history records the add/delete actions. See Figures 60–66 and 68 in section 5.5.5. Figure 70 flags Router-A002 above the threshold but does not confirm SNS email delivery. Verify DynamoDB records, API responses and email separately before declaring end-to-end success.
 
 ## Related evidence screenshots
 

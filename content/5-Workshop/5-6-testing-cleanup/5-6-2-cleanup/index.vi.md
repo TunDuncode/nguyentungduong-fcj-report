@@ -18,12 +18,9 @@ Kết thúc buổi thực hành mà không tạo ra chi phí ngoài ý muốn, �
 
 {{< netmonimg src="images/netmon-workshop/02-aws-budget-overview.png" alt="Tổng quan ngân sách NetMon" caption="Ảnh 02 – Tổng quan ngân sách NetMon" >}}
 
-
 {{< netmonimg src="images/netmon-workshop/03-aws-budget-history.png" alt="Lịch sử ngân sách" caption="Ảnh 03 – Lịch sử ngân sách" >}}
 
-
 {{< netmonimg src="images/netmon-workshop/04-aws-monthly-cost-history.png" alt="Lịch sử chi phí hàng tháng" caption="Ảnh 04 – Lịch sử chi phí hàng tháng" >}}
-
 
 {{< netmonimg src="images/netmon-workshop/05-budget-alerts-25-50-100.png" alt="Ba ngưỡng cảnh báo 25%, 50%, 100%" caption="Ảnh 05 – Ba ngưỡng cảnh báo 25%, 50%, 100%" >}}
 
@@ -43,8 +40,9 @@ Kết thúc buổi thực hành mà không tạo ra chi phí ngoài ý muốn, �
 
 Workshop NetMon cung cấp quy trình thực hành từ VPC và EC2, giám sát CloudWatch, gửi cảnh báo SNS, lưu lịch sử bằng EventBridge/Lambda/DynamoDB đến bảo vệ HTTP API bằng Cognito. Kết quả cuối cùng cần được chứng minh bằng kịch bản kiểm thử đầu cuối thực tế.
 
----
+## Trước khi nộp và bảo vệ đồ án
 
-> **Lưu ý khi xuất bản:** Không đăng ảnh nguyên gốc có email, mã đăng nhập hoặc token. Hình trong bộ này được lấy từ các ảnh quá trình thực hành và cắt bỏ thanh tài khoản; hãy tự kiểm tra lại trước khi đưa lên website công khai.
+Sao lưu source frontend, mã Lambda, cấu hình route/JWT/CORS, schema bảng và ảnh minh chứng đã che dữ liệu nhạy cảm. Kiểm tra đường dẫn ảnh Hugo và bản tiếng Anh/Việt. Đừng nhầm website báo cáo với địa chỉ giao diện NetMon. Chỉ dừng các tác vụ mô phỏng không cần thiết nếu vẫn phải giữ demo, và xác nhận với cả nhóm trước khi xóa tài nguyên.
+
 
 [← Về chương](../)

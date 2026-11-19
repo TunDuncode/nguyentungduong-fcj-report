@@ -26,9 +26,7 @@ Launch an Ubuntu server for CloudWatch monitoring tests while reducing unauthori
 
 {{< netmonimg src="images/netmon-workshop/18-ec2-instances-netmon-list.png" alt="EC2 instance list" caption="Figure 18 – EC2 instance list" >}}
 
-
 {{< netmonimg src="images/netmon-workshop/19-ec2-netmon-ec2-server-details.png" alt="netmon-ec2-server instance details" caption="Figure 19 – netmon-ec2-server instance details" >}}
-
 
 ## Verification
 
@@ -38,8 +36,9 @@ Launch an Ubuntu server for CloudWatch monitoring tests while reducing unauthori
 
 > Stopping EC2 generally stops running compute charges, but not necessarily EBS or public IPv4 charges.
 
----
+## Register EC2 as a device
 
-> **Publishing note:** Do not publish original images showing email addresses, login codes, or tokens. Screenshots in this pack come from the lab and have the account header removed; review them again before going public.
+Identify the instance ID, appropriate IP address, and Region on the **Instances** page. In NetMon, store a separate `deviceId` and the `instanceId` used for CloudWatch queries. Select the AWS EC2 source according to the frontend configuration rather than entering simulated CPU/memory. If EC2 stops or metrics are missing, display the relevant status or unavailable data instead of assigning 0%.
+
 
 [← Back to chapter](../)

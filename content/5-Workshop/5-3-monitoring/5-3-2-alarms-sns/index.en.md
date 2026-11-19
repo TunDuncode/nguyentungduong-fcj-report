@@ -20,12 +20,9 @@ Create CPU, memory, and disk alarms and use SNS to send notifications when confi
 
 {{< netmonimg src="images/netmon-workshop/25-sns-new-subscription-confirmed.png" alt="Confirmed SNS subscription" caption="Figure 25 – Confirmed SNS subscription" >}}
 
-
 {{< netmonimg src="images/netmon-workshop/26-sns-subscriptions-confirmed-list.png" alt="SNS subscription list" caption="Figure 26 – SNS subscription list" >}}
 
-
 {{< netmonimg src="images/netmon-workshop/27-sns-netmon-alerts-new-email-confirmed.png" alt="SNS netmon-alerts with confirmed email" caption="Figure 27 – SNS netmon-alerts with confirmed email" >}}
-
 
 4. Use **Publish message** to send a test message; check Inbox and Spam. The group previously confirmed successful test email delivery.
 
@@ -43,9 +40,13 @@ For each one, select **CloudWatch → Alarms → Create alarm → Select metric*
 
 In **CloudWatch → Alarms**, review all three alarms and their `OK`, `ALARM`, or `INSUFFICIENT_DATA` state. An `OK` state only indicates that the monitored metric is not breaching at that moment; it does not prove the entire SNS or EventBridge flow works.
 
----
+## EC2 and simulated-device alerts
 
-> **Publishing note:** Do not publish original images showing email addresses, login codes, or tokens. Screenshots in this pack come from the lab and have the account header removed; review them again before going public.
+The pictured alarms show the initial EC2 configuration (80% CPU/memory and 85% disk). UI thresholds may be configured separately for simulated devices; they do not change CloudWatch alarms without an alarm-update API. To alert above 90%, adjust the appropriate alert source and confirm whether the comparator is `>` or `>=`.
+
+CloudWatch evaluates by period and datapoints; email is not guaranteed immediately when a value crosses the threshold. Successful SNS Publish message confirms the email channel. To test automatic delivery, trigger a controlled threshold breach and compare the event record, timestamp, and email. Avoid repeat notifications for one incident on every UI refresh.
+
+---
 
 ## Related evidence screenshots
 

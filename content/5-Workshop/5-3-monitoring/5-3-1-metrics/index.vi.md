@@ -25,9 +25,7 @@ Hiển thị CPU, RAM và Disk của máy chủ EC2 trong CloudWatch, làm dữ 
 
 {{< netmonimg src="images/netmon-workshop/51-cloudwatch-netmon-ec2-ram-mem-used-percent.png" alt="Biểu đồ RAM mem_used_percent" caption="Ảnh 51 – Biểu đồ RAM mem_used_percent" >}}
 
-
 {{< netmonimg src="images/netmon-workshop/52-cloudwatch-netmon-ec2-disk-used-percent.png" alt="Biểu đồ Disk disk_used_percent" caption="Ảnh 52 – Biểu đồ Disk disk_used_percent" >}}
-
 
 5. Chọn `Statistic: Average`, `Period: 5 minutes` khi thiết lập cảnh báo, theo cấu hình nhóm đã sử dụng.
 
@@ -41,8 +39,11 @@ Amazon EC2 không tự gửi metric phần trăm RAM hoặc sử dụng ổ đĩ
 - Có dữ liệu `mem_used_percent`, `disk_used_percent` ở namespace đã chọn.
 - Nếu biểu đồ hiển thị **No data available**, kiểm tra Agent, execution role, đúng Region và dimensions trước khi tạo alarm.
 
----
+## Đọc chỉ số từ giao diện NetMon
 
-> **Lưu ý khi xuất bản:** Không đăng ảnh nguyên gốc có email, mã đăng nhập hoặc token. Hình trong bộ này được lấy từ các ảnh quá trình thực hành và cắt bỏ thanh tài khoản; hãy tự kiểm tra lại trước khi đưa lên website công khai.
+API `GET /metrics` có hai nguồn: dữ liệu mô phỏng từ DynamoDB và số liệu EC2 từ CloudWatch. Với EC2, truy vấn `CPUUtilization`, `NetworkIn`, `NetworkOut` ở `AWS/EC2` và `mem_used_percent` ở `NetMon/EC2`, đúng InstanceId và khoảng thời gian. Disk được theo dõi bằng CloudWatch Agent; chỉ hiển thị trên giao diện nếu API thực sự trả trường tương ứng.
+
+Ở lần kiểm thử backend sau khi sửa namespace RAM, EC2 trả CPU khoảng **0,54%**, RAM **27,14%**, NetworkIn **45.479 bytes** và NetworkOut **37.426 bytes**. Đây là một mẫu tại thời điểm test, không phải giá trị cố định hoặc tốc độ truyền. Nếu tính tốc độ, cần dùng tổng bytes và khoảng đo phù hợp. Dữ liệu thiếu nên hiển thị `—` thay vì 0 hoặc số giả.
+
 
 [← Về chương](../)

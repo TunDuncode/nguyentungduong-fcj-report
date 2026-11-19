@@ -15,4 +15,3 @@ CloudWatch theo dõi CPU/RAM/Disk; SNS gửi email, EventBridge chuyển alarm s
 - [5.3.2. Tạo CloudWatch Alarm và gửi SNS Email](5-3-2-alarms-sns/)
 - [5.3.3. Tạo quy tắc EventBridge chuyển trạng thái Alarm](5-3-3-eventbridge/)
 - [5.3.4. Lambda lưu lịch sử cảnh báo vào DynamoDB](5-3-4-alert-history/)
-

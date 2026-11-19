@@ -21,4 +21,4 @@ Nhật ký thực tập AWS của Tùng Dương tại 36 Cát Linh, Hà Nội (0
 - [11. Triển khai các phần công việc của nhóm]({{< relref "1.11-Week11" >}})
 - [12. Kết nối hệ thống, kiểm thử và hoàn thiện đề tài]({{< relref "1.12-Week12" >}})
 
-*Các mốc ngày giữ nguyên theo nhật ký gốc; nội dung ngày 14/11/2026 cần đối chiếu với kết quả thực tế của buổi cuối.*
+

@@ -29,9 +29,7 @@ Phân công trách nhiệm triển khai và cấu hình IAM để từng thành 
 
 {{< netmonimg src="images/netmon-workshop/53-lambda-netmon-api-execution-role-permissions.png" alt="Execution role của Lambda netmon-api" caption="Ảnh 53 – Execution role của Lambda netmon-api" >}}
 
-
 {{< netmonimg src="images/netmon-workshop/54-iam-netmon-api-role-permission-policies.png" alt="Danh sách IAM policies của role" caption="Ảnh 54 – Danh sách IAM policies của role" >}}
-
 
 {{< netmonimg src="images/netmon-workshop/55-iam-netmon-api-access-policy-json.png" alt="JSON chính sách quyền DynamoDB và CloudWatch" caption="Ảnh 55 – JSON chính sách quyền DynamoDB và CloudWatch" >}}
 
@@ -43,8 +41,13 @@ Phân công trách nhiệm triển khai và cấu hình IAM để từng thành 
 
 > **Phân biệt:** IAM user quản trị AWS khác với Cognito user đăng nhập ứng dụng NetMon. Xóa tài khoản Cognito không xóa tài nguyên IAM hoặc EC2.
 
----
+## Phân biệt ba lớp quyền
 
-> **Lưu ý khi xuất bản:** Không đăng ảnh nguyên gốc có email, mã đăng nhập hoặc token. Hình trong bộ này được lấy từ các ảnh quá trình thực hành và cắt bỏ thanh tài khoản; hãy tự kiểm tra lại trước khi đưa lên website công khai.
+- IAM user/role của thành viên: quản trị tài nguyên trên AWS Console theo phần việc.
+- Execution role của Lambda và instance role của EC2: cho phép dịch vụ truy cập đúng tài nguyên cần dùng, không dùng access key cứng.
+- Cognito user: đăng nhập ứng dụng NetMon; không mặc nhiên được truy cập AWS Console.
+
+Khi gặp lỗi `AccessDenied`, xác định yêu cầu phát sinh từ người quản trị, Lambda hay EC2 trước khi sửa policy. Không cấp quyền AdministratorAccess cho toàn bộ dịch vụ để xử lý lỗi.
+
 
 [← Về chương](../)

@@ -25,9 +25,7 @@ Publish EC2 CPU, memory, and disk utilization metrics to CloudWatch for monitori
 
 {{< netmonimg src="images/netmon-workshop/51-cloudwatch-netmon-ec2-ram-mem-used-percent.png" alt="RAM mem_used_percent graph" caption="Figure 51 – RAM mem_used_percent graph" >}}
 
-
 {{< netmonimg src="images/netmon-workshop/52-cloudwatch-netmon-ec2-disk-used-percent.png" alt="Disk disk_used_percent graph" caption="Figure 52 – Disk disk_used_percent graph" >}}
-
 
 5. For the alarm configuration, select `Statistic: Average` and `Period: 5 minutes`, matching the lab settings.
 
@@ -41,8 +39,11 @@ The standard EC2 metrics do not include operating-system-level memory and filesy
 - `mem_used_percent` and `disk_used_percent` show recent datapoints under the selected namespace.
 - If the graph says **No data available**, check the agent, IAM role, Region, and dimension combinations before creating alarms.
 
----
+## Read metrics from the NetMon interface
 
-> **Publishing note:** Do not publish original images showing email addresses, login codes, or tokens. Screenshots in this pack come from the lab and have the account header removed; review them again before going public.
+`GET /metrics` has two sources: simulated data in DynamoDB and EC2 measurements from CloudWatch. For EC2, query `CPUUtilization`, `NetworkIn`, and `NetworkOut` in `AWS/EC2`, plus `mem_used_percent` in `NetMon/EC2`, using the correct instance ID and time window. Disk is monitored by CloudWatch Agent; show it in the UI only if the API actually returns the corresponding field.
+
+After correcting the memory namespace, a backend test returned approximately **0.54% CPU**, **27.14% memory**, **45,479 bytes NetworkIn**, and **37,426 bytes NetworkOut**. These are one test sample, not fixed values or transfer rates. For a rate, use total bytes and the matching measurement interval. Display missing data as `—` rather than zero or fabricated values.
+
 
 [← Back to chapter](../)

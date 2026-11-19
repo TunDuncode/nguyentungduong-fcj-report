@@ -27,15 +27,15 @@ weight: 3
 
 {{< netmonimg src="images/netmon-workshop/26-sns-subscriptions-confirmed-list.png" alt="SNS subscription list" caption="Figure 26 – SNS subscription list" >}}
 
-
 5. Inspect **CloudWatch → Log groups**, export logs needed for the report, and remove disposable test log groups.
 
 ## Verification
 
 Use exact resource names and verify every removal to avoid deleting unrelated resources in the same AWS account.
 
----
+## Check additional schedules
 
-> **Publishing note:** Do not publish original images showing email addresses, login codes, or tokens. Screenshots in this pack come from the lab and have the account header removed; review them again before going public.
+If an EventBridge Scheduler or periodic rule invokes `netmon-device-monitor`, disable it before removing Lambda and tables. Review CloudWatch Agent on EC2, custom metrics, and log retention. Remove SNS only after alert producers stop publishing; retain all components required for the project demonstration.
+
 
 [← Back to chapter](../)

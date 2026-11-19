@@ -29,9 +29,7 @@ Assign project responsibilities and configure IAM so that each teammate can work
 
 {{< netmonimg src="images/netmon-workshop/53-lambda-netmon-api-execution-role-permissions.png" alt="Lambda netmon-api execution role" caption="Figure 53 – Lambda netmon-api execution role" >}}
 
-
 {{< netmonimg src="images/netmon-workshop/54-iam-netmon-api-role-permission-policies.png" alt="IAM role permission policies" caption="Figure 54 – IAM role permission policies" >}}
-
 
 {{< netmonimg src="images/netmon-workshop/55-iam-netmon-api-access-policy-json.png" alt="JSON policy granting DynamoDB and CloudWatch actions" caption="Figure 55 – JSON policy granting DynamoDB and CloudWatch actions" >}}
 
@@ -43,8 +41,13 @@ Sign in as each user and validate granted operations. For `AccessDeniedException
 
 > **Identity note:** AWS IAM users administer AWS resources; Cognito users sign in to NetMon. Deleting a Cognito user does not remove IAM or EC2 resources.
 
----
+## Distinguish three permission layers
 
-> **Publishing note:** Do not publish original images showing email addresses, login codes, or tokens. Screenshots in this pack come from the lab and have the account header removed; review them again before going public.
+- Team IAM identities: manage AWS resources according to assigned responsibilities.
+- Lambda execution and EC2 instance roles: grant service access only to required resources, without hard-coded keys.
+- Cognito users: sign in to NetMon; this does not grant AWS Console access.
+
+For `AccessDenied`, identify whether the request comes from an administrator, Lambda, or EC2 before changing a policy. Do not grant AdministratorAccess to every service as a troubleshooting shortcut.
+
 
 [← Back to chapter](../)

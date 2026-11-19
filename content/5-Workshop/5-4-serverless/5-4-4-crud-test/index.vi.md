@@ -41,15 +41,17 @@ Sử dụng `deviceId` bắt đầu bằng `TEST-` và IP private dành cho ví 
 
 {{< netmonimg src="images/netmon-workshop/37-lambda-netmon-api-get-devices-test-200.png" alt="GET /devices trả về HTTP 200 và dữ liệu thiết bị" caption="Ảnh 37 – GET /devices trả về HTTP 200 và dữ liệu thiết bị" >}}
 
-
 ## Lưu ý bảo mật
 
 Nếu đã gắn JWT Authorizer, hãy gọi API bằng Access Token có scope `netmon-api/read` hoặc `netmon-api/write` thích hợp. Nếu không có token, 401 là kết quả mong đợi.
 
 **Trạng thái:** Đây là kế hoạch kiểm thử đầu-cuối; từ những ảnh đã có, chưa đủ căn cứ khẳng định tất cả thao tác CRUD trên trình duyệt đều thành công.
 
----
+## Đối chiếu thao tác trên giao diện
 
-> **Lưu ý khi xuất bản:** Không đăng ảnh nguyên gốc có email, mã đăng nhập hoặc token. Hình trong bộ này được lấy từ các ảnh quá trình thực hành và cắt bỏ thanh tài khoản; hãy tự kiểm tra lại trước khi đưa lên website công khai.
+Mở trang **Thiết bị**, thêm một Switch thử nghiệm, để trống CPU/RAM khi bản mô phỏng hỗ trợ tự sinh. Tìm bằng tên hoặc ID, mở chi tiết, sửa vị trí/trạng thái, tải lại trang rồi kiểm tra DynamoDB nếu đang dùng chế độ AWS. Xóa đúng bản ghi thử. Với thiết bị EC2, giữ `instanceId` và nguồn AWS, không sửa CPU/RAM bằng tay.
+
+Chế độ demo đã kiểm thử CRUD và sinh RAM mô phỏng. Khi dùng AWS, kiểm tra riêng từng yêu cầu trong Network tab và bảng thật, không chỉ dựa vào thông báo thành công trên UI.
+
 
 [← Về chương](../)

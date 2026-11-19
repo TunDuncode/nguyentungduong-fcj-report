@@ -16,4 +16,3 @@ Collect demo evidence, separate verified from pending capabilities, track spendi
 - [5.6.3. Clean Up CloudWatch, SNS, and EventBridge](5-6-3-monitoring-cleanup/)
 - [5.6.4. Clean Up Lambda, DynamoDB, and API Gateway](5-6-4-serverless-cleanup/)
 - [5.6.5. Clean Up Cognito and Networking Resources](5-6-5-auth-cleanup/)
-

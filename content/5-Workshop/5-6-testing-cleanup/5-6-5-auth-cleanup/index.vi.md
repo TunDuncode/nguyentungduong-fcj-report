@@ -17,9 +17,7 @@ Thu hồi quyền truy cập khi kết thúc đồ án và xử lý các thành 
 
 {{< netmonimg src="images/netmon-workshop/43-cognito-user-pool-overview.png" alt="Tổng quan Cognito User Pool" caption="Ảnh 43 – Tổng quan Cognito User Pool" >}}
 
-
 {{< netmonimg src="images/netmon-workshop/44-cognito-app-client-netmon-web-client.png" alt="Cognito App Client netmon-web-client" caption="Ảnh 44 – Cognito App Client netmon-web-client" >}}
-
 
 {{< netmonimg src="images/netmon-workshop/49-cognito-users-confirmed-enabled.png" alt="Hai tài khoản được xác minh trong Cognito" caption="Ảnh 49 – Hai tài khoản được xác minh trong Cognito" >}}
 
@@ -34,8 +32,9 @@ Thu hồi quyền truy cập khi kết thúc đồ án và xử lý các thành 
 
 Không xóa tài khoản root AWS, không xóa VPC mặc định hoặc tài nguyên dùng chung chỉ để làm sạch danh sách.
 
----
+## Thu hồi hạ tầng đúng thứ tự
 
-> **Lưu ý khi xuất bản:** Không đăng ảnh nguyên gốc có email, mã đăng nhập hoặc token. Hình trong bộ này được lấy từ các ảnh quá trình thực hành và cắt bỏ thanh tài khoản; hãy tự kiểm tra lại trước khi đưa lên website công khai.
+Sau khi dừng ứng dụng, sao lưu cấu hình Cognito và chỉ xóa pool khi không cần đăng nhập. Với VPC, terminate đúng EC2, kiểm tra volume còn sót, network interface, Elastic IP/NAT Gateway nếu có; gỡ các phụ thuộc, detach Internet Gateway, xóa subnet/route table/security group tùy chỉnh rồi mới xóa VPC. Không xóa tài nguyên mặc định hoặc dùng chung. Kiểm tra hóa đơn sau khi số liệu cập nhật.
+
 
 [← Về chương](../)

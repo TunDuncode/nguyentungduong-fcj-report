@@ -17,13 +17,11 @@ Sau khi hoàn tất đồ án, đã xuất ảnh minh chứng, nội dung log, c
 
 {{< netmonimg src="images/netmon-workshop/32-dynamodb-networkalerts-7-items.png" alt="Các bản ghi trong NetworkAlerts" caption="Ảnh 32 – Các bản ghi trong NetworkAlerts" >}}
 
-
 {{< netmonimg src="images/netmon-workshop/33-dynamodb-networkdevices-2-items.png" alt="Hai bản ghi trong NetworkDevices" caption="Ảnh 33 – Hai bản ghi trong NetworkDevices" >}}
 
 2. **API Gateway:** Vào APIs → `netmon-management-api`, lưu cấu hình tám Routes, Authorizer, CORS, Stage và Integration. Xóa API nếu chắc chắn không còn frontend sử dụng.
 
 {{< netmonimg src="images/netmon-workshop/38-api-gateway-netmon-management-api-routes.png" alt="Tám route trên API Gateway" caption="Ảnh 38 – Tám route trên API Gateway" >}}
-
 
 3. **AWS Lambda:** Với `netmon-api` và `netmon-save-alert`, kiểm tra EventBridge target và các trigger trước khi xóa hàm.
 
@@ -37,8 +35,9 @@ Sau khi hoàn tất đồ án, đã xuất ảnh minh chứng, nội dung log, c
 
 Truy cập AWS Console trong Region `us-east-1`, xác nhận tài nguyên đã xóa thực sự là tài nguyên thuộc NetMon, không phải dự án của thành viên khác.
 
----
+## Thứ tự tránh lỗi phụ thuộc
 
-> **Lưu ý khi xuất bản:** Không đăng ảnh nguyên gốc có email, mã đăng nhập hoặc token. Hình trong bộ này được lấy từ các ảnh quá trình thực hành và cắt bỏ thanh tài khoản; hãy tự kiểm tra lại trước khi đưa lên website công khai.
+Sau khi sao lưu dữ liệu: ngừng các trigger định kỳ/EventBridge và lưu cấu hình; ngừng hoặc xóa API không còn dùng, sau đó xóa các Lambda liên quan; cuối cùng mới xóa DynamoDB và role chuyên dụng nếu chắc chắn không còn phụ thuộc. Kiểm tra thêm các route/hàm mở rộng nếu đã tạo, chẳng hạn observability. Giữ nguyên toàn bộ tài nguyên đang phục vụ demo.
+
 
 [← Về chương](../)

@@ -21,9 +21,7 @@ Build a virtual network for the monitored EC2 instance, separating Internet-faci
 
 {{< netmonimg src="images/netmon-workshop/07-subnet-list.png" alt="List of two subnets" caption="Figure 07 – List of two subnets" >}}
 
-
 {{< netmonimg src="images/netmon-workshop/08-public-subnet-details.png" alt="Public subnet details" caption="Figure 08 – Public subnet details" >}}
-
 
 {{< netmonimg src="images/netmon-workshop/09-private-subnet-details.png" alt="Private subnet details" caption="Figure 09 – Private subnet details" >}}
 
@@ -31,17 +29,13 @@ Build a virtual network for the monitored EC2 instance, separating Internet-faci
 
 {{< netmonimg src="images/netmon-workshop/14-netmon-igw-details.png" alt="netmon-igw internet gateway" caption="Figure 14 – netmon-igw internet gateway" >}}
 
-
 4. Create a **public route table**, add `0.0.0.0/0` pointing to the Internet Gateway, and associate it with the public subnet.
 
 {{< netmonimg src="images/netmon-workshop/10-route-tables-list.png" alt="Route-table list" caption="Figure 10 – Route-table list" >}}
 
-
 {{< netmonimg src="images/netmon-workshop/11-netmon-rtb-public-routes.png" alt="Routes in netmon-rtb-public" caption="Figure 11 – Routes in netmon-rtb-public" >}}
 
-
 {{< netmonimg src="images/netmon-workshop/12-netmon-main-route-table-no-name.png" alt="VPC main route table" caption="Figure 12 – VPC main route table" >}}
-
 
 {{< netmonimg src="images/netmon-workshop/13-netmon-rtb-private1-us-east-1a-routes.png" alt="Private subnet route table" caption="Figure 13 – Private subnet route table" >}}
 
@@ -56,8 +50,9 @@ Build a virtual network for the monitored EC2 instance, separating Internet-faci
 
 > Do not create a NAT Gateway solely for screenshots. It can incur hourly and data-processing charges.
 
----
+## Relationship to NetMon architecture
 
-> **Publishing note:** Do not publish original images showing email addresses, login codes, or tokens. Screenshots in this pack come from the lab and have the account header removed; review them again before going public.
+EC2 resides in the public subnet for the lab. The private subnet is available for future internal components; this does not imply that a server has been deployed there. API Gateway, Cognito, DynamoDB and Lambda do not automatically reside in these subnets; connect Lambda to the VPC only when private resources require it. Infrastructure diagrams should reflect AWS resources; the interface's network map may display simulated devices and is not an automatically discovered physical topology.
+
 
 [← Back to chapter](../)

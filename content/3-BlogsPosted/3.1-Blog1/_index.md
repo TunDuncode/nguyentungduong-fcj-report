@@ -28,6 +28,9 @@ For a small or medium-sized business, I believe monitoring should match the impo
 A good system is not necessarily the one that collects the most data, but the one that uses data effectively.
 
 **What do you think? Should businesses prioritize faster incident detection or lower operating costs?** I would love to hear different perspectives from the AWS community.
+## Linkmyblogs
+
+https://www.facebook.com/share/p/19kxKGVGNd/?mibextid=wwXIfr
 
 ## References
 

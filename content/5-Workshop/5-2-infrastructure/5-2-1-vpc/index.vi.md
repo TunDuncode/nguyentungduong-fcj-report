@@ -21,9 +21,7 @@ Thiết lập mạng ảo để triển khai máy chủ giám sát EC2, tách bi
 
 {{< netmonimg src="images/netmon-workshop/07-subnet-list.png" alt="Danh sách hai subnet" caption="Ảnh 07 – Danh sách hai subnet" >}}
 
-
 {{< netmonimg src="images/netmon-workshop/08-public-subnet-details.png" alt="Thông tin Public subnet" caption="Ảnh 08 – Thông tin Public subnet" >}}
-
 
 {{< netmonimg src="images/netmon-workshop/09-private-subnet-details.png" alt="Thông tin Private subnet" caption="Ảnh 09 – Thông tin Private subnet" >}}
 
@@ -31,17 +29,13 @@ Thiết lập mạng ảo để triển khai máy chủ giám sát EC2, tách bi
 
 {{< netmonimg src="images/netmon-workshop/14-netmon-igw-details.png" alt="Internet Gateway netmon-igw" caption="Ảnh 14 – Internet Gateway netmon-igw" >}}
 
-
 4. Tạo **Public Route Table**; đặt route `0.0.0.0/0` trỏ tới Internet Gateway và liên kết với Public subnet.
 
 {{< netmonimg src="images/netmon-workshop/10-route-tables-list.png" alt="Danh sách route table" caption="Ảnh 10 – Danh sách route table" >}}
 
-
 {{< netmonimg src="images/netmon-workshop/11-netmon-rtb-public-routes.png" alt="Các route của netmon-rtb-public" caption="Ảnh 11 – Các route của netmon-rtb-public" >}}
 
-
 {{< netmonimg src="images/netmon-workshop/12-netmon-main-route-table-no-name.png" alt="Main route table của VPC" caption="Ảnh 12 – Main route table của VPC" >}}
-
 
 {{< netmonimg src="images/netmon-workshop/13-netmon-rtb-private1-us-east-1a-routes.png" alt="Route table của Private subnet" caption="Ảnh 13 – Route table của Private subnet" >}}
 
@@ -56,8 +50,9 @@ Thiết lập mạng ảo để triển khai máy chủ giám sát EC2, tách bi
 
 > Không tạo NAT Gateway chỉ để hoàn thiện hình minh họa nếu dự án không thật sự cần, vì dịch vụ này có thể phát sinh phí theo giờ và lưu lượng.
 
----
+## Liên hệ với kiến trúc NetMon
 
-> **Lưu ý khi xuất bản:** Không đăng ảnh nguyên gốc có email, mã đăng nhập hoặc token. Hình trong bộ này được lấy từ các ảnh quá trình thực hành và cắt bỏ thanh tài khoản; hãy tự kiểm tra lại trước khi đưa lên website công khai.
+EC2 nằm trong Public subnet phục vụ bài thực hành. Private subnet dành cho thành phần nội bộ khi mở rộng, không đồng nghĩa đã có máy chủ ở đó. API Gateway, Cognito, DynamoDB và Lambda không tự động nằm trong subnet này; chỉ cấu hình Lambda kết nối VPC nếu có nhu cầu truy cập tài nguyên private. Sơ đồ hạ tầng nên phản ánh các tài nguyên AWS; sơ đồ mạng của giao diện có thể hiển thị thiết bị mô phỏng và không phải bản đồ kết nối vật lý được phát hiện tự động.
+
 
 [← Về chương](../)

@@ -9,11 +9,33 @@ weight: 5
 
 ## Overview
 
-This workshop documents how to reproduce **An SME Network Infrastructure Management and Monitoring System on AWS with Serverless Services**. It follows the team's lab in **us-east-1**, presenting Console steps, checklists, and actual evidence screenshots in the same navigational format as the reference workshop.
+NetMon is an SME network infrastructure management and monitoring system on AWS, combining EC2 infrastructure with serverless services. This workshop follows the team's implementation in `us-east-1`, from account preparation, networking, and metric collection to API design, authentication, interface operation, and testing.
 
-**Data flow:** UI → Cognito → API Gateway → Lambda → DynamoDB; EC2 → CloudWatch → SNS / EventBridge → Lambda → DynamoDB.
+## Architecture and system operation
 
+| Component | Role |
+|---|---|
+| VPC, Subnet, Security Group, EC2 | Network infrastructure and the monitored Ubuntu server |
+| CloudWatch and CloudWatch Agent | Collect EC2 CPU, memory, disk, and traffic metrics |
+| SNS | Send alert notifications by email |
+| EventBridge and Lambda | Route alarm state changes and store event history |
+| DynamoDB | Store devices and alert events |
+| API Gateway and Lambda | Provide management, metric retrieval, and alert handling APIs |
+| Cognito | Authenticate users and issue access tokens |
+| HTML, CSS, JavaScript | Provide the NetMon interface and display data |
 
+**Management flow:** The browser authenticates with Cognito, then sends its JWT to API Gateway → Lambda → DynamoDB. Lambda also reads CloudWatch when retrieving EC2 metrics.
+
+**EC2 monitoring flow:** EC2/CloudWatch Agent → CloudWatch → Alarm. The alarm sends notifications to SNS; state-change events are separately routed by EventBridge to Lambda for persistence in DynamoDB.
+
+**Simulation flow:** Routers, switches, and devices without live collectors are represented by simulated data. CPU, memory, and status change according to simulation logic; automatic alert generation and SNS delivery depend on the deployed monitor and trigger schedule. Simulated values are not physical-device measurements.
+
+## Workshop outcomes
+
+- Manage, search, and inspect devices using CRUD.
+- Monitor CPU, memory, and EC2 traffic while distinguishing live and simulated sources.
+- Inspect and handle alerts, review logs, and check AWS connectivity.
+- Protect APIs with JWT, restrict permissions, and control costs.
 
 ## Hands-on chapters
 
@@ -38,12 +60,14 @@ This workshop documents how to reproduce **An SME Network Infrastructure Managem
    - [5.4.2. Build the netmon-api Python Lambda](5-4-serverless/5-4-2-lambda-api/)
    - [5.4.3. Build an HTTP API with Eight Routes](5-4-serverless/5-4-3-api-gateway/)
    - [5.4.4. Test CRUD and Data Queries](5-4-serverless/5-4-4-crud-test/)
+   - [5.4.5. Device Simulation and Automated Monitoring](5-4-serverless/5-4-5-simulation/)
 
-5. [5.5. Cognito, JWT, and the Test Interface](5-5-auth-frontend/)
+5. [5.5. Cognito, JWT, and the NetMon Interface](5-5-auth-frontend/)
    - [5.5.1. Create a Cognito User Pool and Web Client](5-5-auth-frontend/5-5-1-cognito/)
    - [5.5.2. Create a JWT Authorizer and OAuth Scopes](5-5-auth-frontend/5-5-2-jwt/)
    - [5.5.3. Build a VS Code Test Page](5-5-auth-frontend/5-5-3-test-ui/)
    - [5.5.4. Sign In with PKCE and Call Protected APIs](5-5-auth-frontend/5-5-4-frontend-login/)
+   - [5.5.5. Operate the NetMon Management Interface](5-5-auth-frontend/5-5-5-netmon-interface/)
 
 6. [5.6. End-to-End Tests and Resource Cleanup](5-6-testing-cleanup/)
    - [5.6.1. Test from the UI to CloudWatch/DynamoDB](5-6-testing-cleanup/5-6-1-e2e/)
@@ -52,11 +76,10 @@ This workshop documents how to reproduce **An SME Network Infrastructure Managem
    - [5.6.4. Clean Up Lambda, DynamoDB, and API Gateway](5-6-testing-cleanup/5-6-4-serverless-cleanup/)
    - [5.6.5. Clean Up Cognito and Networking Resources](5-6-testing-cleanup/5-6-5-auth-cleanup/)
 
+## Results and verification scope
 
-## Observed progress and scope
+The lab recorded VPC/EC2 configuration, three alarms, test SNS email delivery, EventBridge, DynamoDB data, the HTTP API, and the JWT authorizer. Lambda returned HTTP 200 in a device-list test and retrieved EC2 CPU, memory, NetworkIn, and NetworkOut. The local demo interface was tested for CRUD, simulated data, and alert handling.
 
-- **Evidence available:** EC2, three CloudWatch alarms, SNS email, DynamoDB items, alert-storage Lambda, EventBridge rule, eight HTTP API routes, JWT Authorizer, CORS, and Lambda integration.
-- **Still to verify:** final UI, the PKCE token exchange, and complete browser-to-DynamoDB CRUD.
-- **Safety:** never publish addresses, passwords, AWS access keys, or tokens. Budget alerts do not cap spending.
+For a live AWS demonstration, revalidate browser sign-in, CRUD, handling-status persistence, and automatic email delivery. Configuration screenshots or a local demo do not establish these outcomes. Network topology is illustrative; automatic physical router/switch discovery through SNMP has not been established.
 
-> Screenshots are drawn from the user's own AWS lab captures; no GameHub Console images are represented as NetMon evidence.
+Evidence screenshots reflect different implementation stages. Keep resources required for the project presentation until the demonstration is complete. Never publish credentials or tokens.

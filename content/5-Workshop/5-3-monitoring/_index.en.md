@@ -15,4 +15,3 @@ CloudWatch monitors CPU/RAM/Disk; SNS emails alerts, while EventBridge routes al
 - [5.3.2. Create CloudWatch Alarms and SNS Email](5-3-2-alarms-sns/)
 - [5.3.3. Route Alarm Changes with EventBridge](5-3-3-eventbridge/)
 - [5.3.4. Store Alert History with Lambda and DynamoDB](5-3-4-alert-history/)
-

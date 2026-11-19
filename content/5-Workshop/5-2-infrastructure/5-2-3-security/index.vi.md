@@ -18,16 +18,11 @@ Bảo vệ máy chủ `netmon-ec2-server` và cấp quyền giám sát mà khôn
 
 {{< netmonimg src="images/netmon-workshop/15-security-groups-list.png" alt="Danh sách Security Group" caption="Ảnh 15 – Danh sách Security Group" >}}
 
-
 {{< netmonimg src="images/netmon-workshop/16-netmon-ec2-sg-inbound-no-rules.png" alt="Inbound rules của netmon-ec2-sg đang trống" caption="Ảnh 16 – Inbound rules của netmon-ec2-sg đang trống" >}}
-
 
 {{< netmonimg src="images/netmon-workshop/17-netmon-ec2-sg-outbound-all-traffic.png" alt="Outbound rules của netmon-ec2-sg" caption="Ảnh 17 – Outbound rules của netmon-ec2-sg" >}}
 
-
 {{< netmonimg src="images/netmon-workshop/20-ec2-security-netmon-ec2-sg.png" alt="Tab Security trên EC2" caption="Ảnh 20 – Tab Security trên EC2" >}}
-
-
 
 3. Nếu truy cập bằng **AWS Systems Manager Session Manager**, kiểm tra SSM Agent, IAM instance profile và kết nối mạng cần thiết; nếu điều kiện chưa đủ, dùng phương án kết nối khác được kiểm soát.
 4. Tại **EC2 → Actions → Security → Modify IAM role**, gắn instance profile có quyền xuất metrics cho CloudWatch Agent (ví dụ policy quản lý phù hợp).
@@ -40,8 +35,9 @@ Bảo vệ máy chủ `netmon-ec2-server` và cấp quyền giám sát mà khôn
 - Instance có role phù hợp, không lưu AWS Access Key trực tiếp trên máy.
 - Truy cập quản trị được thử nghiệm bằng cách an toàn và có thể thu hồi.
 
----
+## Kiểm tra kết nối và bảo mật
 
-> **Lưu ý khi xuất bản:** Không đăng ảnh nguyên gốc có email, mã đăng nhập hoặc token. Hình trong bộ này được lấy từ các ảnh quá trình thực hành và cắt bỏ thanh tài khoản; hãy tự kiểm tra lại trước khi đưa lên website công khai.
+Security Group của EC2 có thể không có inbound rules trong bài thực hành; agent gửi metric qua kết nối outbound và không cần mở SSH cho Internet. Nếu dùng Session Manager, kiểm tra SSM Agent, quyền và đường ra HTTPS. Kiểm tra `CloudWatchAgentServerPolicy` trên role của EC2 nếu agent không gửi số liệu; quyền này không thay thế role của Lambda đọc metric. Không công bố IP quản trị hoặc thông tin đăng nhập trong báo cáo.
+
 
 [← Về chương](../)

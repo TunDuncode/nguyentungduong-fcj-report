@@ -18,12 +18,9 @@ Finish a lab session without avoidable charges while preserving the resources ne
 
 {{< netmonimg src="images/netmon-workshop/02-aws-budget-overview.png" alt="NetMon budget overview" caption="Figure 02 – NetMon budget overview" >}}
 
-
 {{< netmonimg src="images/netmon-workshop/03-aws-budget-history.png" alt="Budget history" caption="Figure 03 – Budget history" >}}
 
-
 {{< netmonimg src="images/netmon-workshop/04-aws-monthly-cost-history.png" alt="Monthly cost history" caption="Figure 04 – Monthly cost history" >}}
-
 
 {{< netmonimg src="images/netmon-workshop/05-budget-alerts-25-50-100.png" alt="Budget alerts at 25%, 50% and 100%" caption="Figure 05 – Budget alerts at 25%, 50% and 100%" >}}
 
@@ -43,8 +40,9 @@ Finish a lab session without avoidable charges while preserving the resources ne
 
 The NetMon workshop covers VPC and EC2, CloudWatch monitoring, SNS notifications, EventBridge/Lambda/DynamoDB alert history, and a Cognito-protected HTTP API. Completion should be supported by actual end-to-end test evidence.
 
----
+## Before submission and presentation
 
-> **Publishing note:** Do not publish original images showing email addresses, login codes, or tokens. Screenshots in this pack come from the lab and have the account header removed; review them again before going public.
+Back up the frontend source, Lambda code, route/JWT/CORS settings, table schema, and redacted screenshots. Check Hugo image paths and both language versions. Do not confuse the report website with the NetMon interface URL. Pause only unnecessary simulation jobs if the demo must remain available, and confirm with the team before deleting resources.
+
 
 [← Back to chapter](../)

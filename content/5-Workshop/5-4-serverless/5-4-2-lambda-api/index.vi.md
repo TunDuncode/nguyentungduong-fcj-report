@@ -21,12 +21,9 @@ Dùng một Lambda Python `netmon-api` để xử lý 8 chức năng HTTP theo p
 
 {{< netmonimg src="images/netmon-workshop/53-lambda-netmon-api-execution-role-permissions.png" alt="Execution role của Lambda netmon-api" caption="Ảnh 53 – Execution role của Lambda netmon-api" >}}
 
-
 {{< netmonimg src="images/netmon-workshop/54-iam-netmon-api-role-permission-policies.png" alt="Danh sách IAM policies của role" caption="Ảnh 54 – Danh sách IAM policies của role" >}}
 
-
 {{< netmonimg src="images/netmon-workshop/55-iam-netmon-api-access-policy-json.png" alt="JSON chính sách quyền DynamoDB và CloudWatch" caption="Ảnh 55 – JSON chính sách quyền DynamoDB và CloudWatch" >}}
-
 
 3. Trong mã nguồn, đọc phương thức từ `event.requestContext.http.method` và đường dẫn `event.rawPath` của **HTTP API payload format 2.0**.
 
@@ -34,7 +31,6 @@ Dùng một Lambda Python `netmon-api` để xử lý 8 chức năng HTTP theo p
 5. Bấm **Deploy** mã nguồn. Vào tab **Test**, tạo sự kiện GET `/devices` theo mẫu:
 
 {{< netmonimg src="images/netmon-workshop/35-lambda-netmon-api-test-succeeded-details-collapsed.png" alt="Kết quả chạy Lambda (chưa mở Details)" caption="Ảnh 35 – Kết quả chạy Lambda (chưa mở Details)" >}}
-
 
 ```json
 {
@@ -48,9 +44,7 @@ Dùng một Lambda Python `netmon-api` để xử lý 8 chức năng HTTP theo p
 
 {{< netmonimg src="images/netmon-workshop/36-cloudwatch-logs-netmon-api-6-streams.png" alt="CloudWatch log streams của netmon-api" caption="Ảnh 36 – CloudWatch log streams của netmon-api" >}}
 
-
 {{< netmonimg src="images/netmon-workshop/37-lambda-netmon-api-get-devices-test-200.png" alt="GET /devices trả về HTTP 200 và dữ liệu thiết bị" caption="Ảnh 37 – GET /devices trả về HTTP 200 và dữ liệu thiết bị" >}}
-
 
 ## Lưu ý kết quả thực tế
 
@@ -62,8 +56,27 @@ Trong quá trình thực hiện, nhóm đã nhận được phản hồi `status
 - `KeyError` hoặc `None`: payload từ API Gateway khác test event; kiểm tra `rawPath`, `pathParameters`, `requestContext`.
 - `Internal server error`: mở **Monitor → View CloudWatch logs** và đọc stack trace.
 
----
+## Cách backend NetMon xử lý dữ liệu
 
-> **Lưu ý khi xuất bản:** Không đăng ảnh nguyên gốc có email, mã đăng nhập hoặc token. Hình trong bộ này được lấy từ các ảnh quá trình thực hành và cắt bỏ thanh tài khoản; hãy tự kiểm tra lại trước khi đưa lên website công khai.
+- `GET /devices`: đọc danh sách DynamoDB; xử lý `LastEvaluatedKey` nếu Scan có nhiều trang.
+- `POST /devices`: kiểm tra mã/tên, lưu vị trí và nguồn dữ liệu; với thiết bị mô phỏng có thể sinh CPU/RAM nếu chưa nhập. Không ghi đè thiết bị trùng ID ngoài ý muốn.
+- `PUT /devices/{id}`: cập nhật các trường cho phép và thời gian; không dùng dữ liệu mô phỏng ghi đè metric EC2. `DELETE` chỉ xóa mục đúng ID, `GET` chi tiết đối chiếu khóa.
+- `GET /metrics`: tổng hợp CPU/RAM mô phỏng hoặc số liệu CloudWatch theo `instanceId` và trả rõ nguồn; NetworkIn/NetworkOut có thể `null` đối với thiết bị mô phỏng.
+- `GET /alerts`, `PUT /alerts/{id}`: đọc và xử lý cảnh báo; kiểm tra giá trị `handlingStatus` được backend hỗ trợ.
+
+Trong bản backend tích hợp, header `X-Netmon-Build: netmon-integrated-v2` giúp đối chiếu bản Lambda đang chạy nếu header này vẫn được giữ. Không thay toàn bộ Lambda đang hoạt động chỉ để thêm dữ liệu; kiểm thử hàm mới hoặc thay đổi từng phần và giữ nguyên JWT/CORS.
+
+Ví dụ test riêng cho chỉ số:
+
+```json
+{
+  "version": "2.0",
+  "rawPath": "/metrics",
+  "requestContext": {"http": {"method": "GET", "path": "/metrics"}}
+}
+```
+
+Xác nhận HTTP 200, trường nguồn và số liệu EC2; test event Console không đi qua JWT Authorizer nên vẫn cần kiểm tra với trình duyệt.
+
 
 [← Về chương](../)

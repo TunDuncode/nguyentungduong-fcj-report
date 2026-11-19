@@ -14,4 +14,3 @@ Start with AWS account access, us-east-1, IAM roles, and budget monitoring.
 - [5.1.1. AWS Sign-in and Region](5-1-1-region-budget/)
 - [5.1.2. IAM Setup and Team Roles](5-1-2-iam/)
 - [5.1.3. AWS Budgets and Cost Controls](5-1-3-budget/)
-

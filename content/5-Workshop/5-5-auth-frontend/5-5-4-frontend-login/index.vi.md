@@ -24,12 +24,20 @@ Kết nối trang NetMon HTML/JavaScript với Cognito và lấy **Access Token*
 
 {{< netmonimg src="images/netmon-workshop/48-cognito-managed-login-sign-in.png" alt="Giao diện đăng nhập Managed Login" caption="Ảnh 48 – Giao diện đăng nhập Managed Login" >}}
 
-
 5. Sau khi xác thực, Cognito redirect về URL callback mang query `code=...`. Frontend đổi code lấy token tại OAuth `/oauth2/token` với đúng PKCE verifier.
 6. Dùng `Authorization: Bearer <access_token>` khi gọi `GET /devices`; lấy `401`/`403` để phân biệt thiếu token/thiếu scope.
 
 {{< netmonimg src="images/netmon-workshop/49-cognito-users-confirmed-enabled.png" alt="Hai tài khoản được xác minh trong Cognito" caption="Ảnh 49 – Hai tài khoản được xác minh trong Cognito" >}}
 
+## Đăng nhập trên phiên bản NetMon Cloud V2.5
+
+Nhập email của tài khoản Cognito đã được cấp, bấm **Next**.
+
+{{< netmonimg src="images/netmon-workshop/56-cognito-sign-in-email.png" alt="Đăng nhập Cognito bằng email" caption="Ảnh 56 – Đăng nhập Cognito bằng email" >}}
+
+Nhập mật khẩu, bấm **Continue**. Sau khi xác thực thành công, quay về ứng dụng và kiểm tra API hoạt động. Không công khai mật khẩu hoặc token.
+
+{{< netmonimg src="images/netmon-workshop/57-cognito-sign-in-password.png" alt="Nhập mật khẩu tại Cognito" caption="Ảnh 57 – Nhập mật khẩu tại Cognito" >}}
 
 ## Khắc phục lỗi thường gặp
 
@@ -40,8 +48,11 @@ Kết nối trang NetMon HTML/JavaScript với Cognito và lấy **Access Token*
 
 **Trạng thái:** Nhóm đã thử đổi mật khẩu và nhận redirect về localhost; phần xử lý PKCE và đọc dữ liệu thật qua web cần được xác minh riêng.
 
----
+## Sau khi đăng nhập
 
-> **Lưu ý khi xuất bản:** Không đăng ảnh nguyên gốc có email, mã đăng nhập hoặc token. Hình trong bộ này được lấy từ các ảnh quá trình thực hành và cắt bỏ thanh tài khoản; hãy tự kiểm tra lại trước khi đưa lên website công khai.
+Frontend dùng Access Token gửi trong header Authorization; kiểm tra danh sách thiết bị và chỉ số thay vì chỉ thấy trang Dashboard. Khi token hết hạn, đăng nhập lại hoặc dùng cơ chế làm mới hợp lệ nếu ứng dụng hỗ trợ. Khi đăng xuất, xóa trạng thái xác thực của ứng dụng và kết thúc phiên Cognito theo URL đã cấu hình. Không dùng ID token thay cho Access Token có custom scopes.
+
+Chế độ demo và kiểm thử backend đã có kết quả; việc trao đổi PKCE và toàn bộ API qua trình duyệt AWS vẫn cần kiểm thử riêng với phiên bản giao diện đang dùng.
+
 
 [← Về chương](../)

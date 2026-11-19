@@ -27,9 +27,7 @@ Set up AWS cost monitoring for the lab. **A USD 20 budget is an alert threshold‚
 
 {{< netmonimg src="images/netmon-workshop/03-aws-budget-history.png" alt="Budget history" caption="Figure 03 ‚Äì Budget history" >}}
 
-
 {{< netmonimg src="images/netmon-workshop/04-aws-monthly-cost-history.png" alt="Monthly cost history" caption="Figure 04 ‚Äì Monthly cost history" >}}
-
 
 ## Verification
 
@@ -39,8 +37,9 @@ Set up AWS cost monitoring for the lab. **A USD 20 budget is an alert threshold‚
 
 > Note: EC2 uptime, EBS storage, public IPv4, NAT Gateway (if used), and CloudWatch usage may incur charges. Do not assume the entire system is free.
 
----
+## Monitor operating costs
 
-> **Publishing note:** Do not publish original images showing email addresses, login codes, or tokens. Screenshots in this pack come from the lab and have the account header removed; review them again before going public.
+Review EC2/EBS, public IPv4, custom metrics and CloudWatch Logs, API/Lambda requests, DynamoDB and SNS. A very short simulation interval may increase service requests. The 25% threshold is an early warning, not a resource spending cap. A lab account does not guarantee zero charges.
+
 
 [‚Üê Back to chapter](../)

@@ -18,7 +18,6 @@ Select the correct `us-east-1` Region, verify AWS Console access, and create bud
 
 {{< netmonimg src="images/netmon-workshop/01-aws-region-us-east-1.png" alt="Select AWS region us-east-1" caption="Figure 01 – Select AWS region us-east-1" >}}
 
-
 3. Navigate to **Billing and Cost Management → Budgets → Create budget**. Select a **Cost budget** and enter the planned limit (the group's earlier lab used **USD 20/month**).
 4. Add alerts at **25%, 50%, and 100%**, if supported by your budget configuration, and verify the recipient email addresses.
 
@@ -32,8 +31,9 @@ Select the correct `us-east-1` Region, verify AWS Console access, and create bud
 
 > **Cost note:** AWS Budgets sends notifications; it does not stop charges. EC2, EBS, CloudWatch, DynamoDB, SNS, and other services may still incur costs depending on usage.
 
----
+## NetMon environment conventions
 
-> **Publishing note:** Do not publish original images showing email addresses, login codes, or tokens. Screenshots in this pack come from the lab and have the account header removed; review them again before going public.
+Use the group's AWS account and `us-east-1` for EC2, CloudWatch, Lambda, API Gateway, DynamoDB and Cognito. IAM and Billing have a different scope from regional services. Record resource names and the API URL for frontend configuration; never store access keys or passwords in source code. Section 5.1.3 covers Budgets in detail.
+
 
 [← Back to chapter](../)

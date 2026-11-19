@@ -19,9 +19,7 @@ Tạo ba alarm CPU/RAM/Disk và kết nối SNS để gửi thông báo khi mộ
 
 {{< netmonimg src="images/netmon-workshop/25-sns-new-subscription-confirmed.png" alt="SNS subscription đã được xác nhận" caption="Ảnh 25 – SNS subscription đã được xác nhận" >}}
 
-
 {{< netmonimg src="images/netmon-workshop/26-sns-subscriptions-confirmed-list.png" alt="Danh sách SNS subscriptions" caption="Ảnh 26 – Danh sách SNS subscriptions" >}}
-
 
 {{< netmonimg src="images/netmon-workshop/27-sns-netmon-alerts-new-email-confirmed.png" alt="Topic SNS netmon-alerts với email đã xác nhận" caption="Ảnh 27 – Topic SNS netmon-alerts với email đã xác nhận" >}}
 
@@ -41,9 +39,13 @@ Với mỗi alarm, vào **CloudWatch → Alarms → Create alarm → Select metr
 
 Trong **CloudWatch → Alarms**, xem đủ ba alarm và trạng thái `OK`, `ALARM` hoặc `INSUFFICIENT_DATA`. `OK` chỉ cho biết metric chưa vượt ngưỡng tại thời điểm xét; không chứng minh SNS hay EventBridge đã chạy một cách đầy đủ.
 
----
+## Cảnh báo EC2 và thiết bị mô phỏng
 
-> **Lưu ý khi xuất bản:** Không đăng ảnh nguyên gốc có email, mã đăng nhập hoặc token. Hình trong bộ này được lấy từ các ảnh quá trình thực hành và cắt bỏ thanh tài khoản; hãy tự kiểm tra lại trước khi đưa lên website công khai.
+Các alarm trong ảnh là cấu hình EC2 ban đầu (80% CPU/RAM, 85% Disk). Ngưỡng cảnh báo trong giao diện có thể được cấu hình riêng cho thiết bị mô phỏng; không tự thay đổi CloudWatch Alarm nếu không có API cập nhật alarm. Nếu muốn cảnh báo trên 90%, điều chỉnh đúng nguồn cảnh báo và kiểm tra lại điều kiện `>` hay `>=`.
+
+CloudWatch đánh giá theo Period và số datapoint, không bảo đảm email ngay khi chỉ số vừa vượt ngưỡng. SNS Publish message thành công xác minh kênh gửi email; để kiểm tra tự động, cần tạo một sự kiện vượt ngưỡng có kiểm soát rồi đối chiếu bản ghi, thời gian và email. Tránh gửi lặp cùng một sự cố ở mỗi lần làm mới giao diện.
+
+---
 
 ## Các ảnh minh chứng liên quan
 

@@ -20,11 +20,9 @@ When a CloudWatch Alarm changes state, EventBridge invokes a Lambda function tha
 
 {{< netmonimg src="images/netmon-workshop/28-eventbridge-default-bus-rule-enabled.png" alt="EventBridge default bus and rule" caption="Figure 28 – EventBridge default bus and rule" >}}
 
-
 4. Choose **Custom pattern (JSON editor)** and enter:
 
 {{< netmonimg src="images/netmon-workshop/29-eventbridge-netmon-alarm-state-rule-pattern.png" alt="CloudWatch alarm event pattern" caption="Figure 29 – CloudWatch alarm event pattern" >}}
-
 
 ```json
 {
@@ -44,7 +42,6 @@ When a CloudWatch Alarm changes state, EventBridge invokes a Lambda function tha
 
 {{< netmonimg src="images/netmon-workshop/30-eventbridge-netmon-alarm-state-rule-lambda-target.png" alt="EventBridge Lambda target" caption="Figure 30 – EventBridge Lambda target" >}}
 
-
 6. Test with a valid CloudWatch event or a controlled alarm state change in the demo environment. Then open **DynamoDB → Explore items → NetworkAlerts → Scan → Run**.
 
 ## Verification
@@ -53,9 +50,9 @@ Records should include fields such as `eventId`, `alarmName`, `alarmState`, `eve
 
 > Common issue: `AccessDeniedException` for `dynamodb:PutItem`. Fix the execution role policy and retry; do not recreate the table to work around an IAM issue.
 
+## Distinguish the two trigger types
 
----
+`netmon-alarm-state-rule` handles CloudWatch state changes; it does not generate random router/switch CPU or memory. If a scheduled `netmon-device-monitor` function is deployed, verify its separate recurring trigger, table permissions, and `sns:Publish` if email is required. Check each invocation in CloudWatch Logs; use `eventId` to avoid duplicate records if EventBridge redelivers a state change. An alarm-rule screenshot does not establish an active simulation schedule.
 
-> **Publishing note:** Do not publish original images showing email addresses, login codes, or tokens. Screenshots in this pack come from the lab and have the account header removed; review them again before going public.
 
 [← Back to chapter](../)

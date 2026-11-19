@@ -35,10 +35,11 @@ Require a valid access token and an appropriate scope before API Gateway allows 
 
 The frontend must request these scopes during login and use the **Access Token**, not the ID Token, when calling the API. Allowing both scopes on the app client does not automatically assign distinct user roles; fine-grained user authorization requires a separate design.
 
+## Verify authorization from the frontend
+
+Test without a token, with a valid read-scope token, and with a write-scope token for write requests. Hiding Add/Delete buttons is not backend authorization. If every application account receives both scopes, this does not constitute role-based separation of administrators and viewers. Verify each route's configuration and never expose access tokens in logs or demonstrations.
 
 ---
-
-> **Publishing note:** Do not publish original images showing email addresses, login codes, or tokens. Screenshots in this pack come from the lab and have the account header removed; review them again before going public.
 
 ## Related evidence screenshots
 

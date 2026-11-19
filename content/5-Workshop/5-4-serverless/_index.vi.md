@@ -7,7 +7,7 @@ weight: 4
 
 # 5.4. Lambda, DynamoDB và API Gateway
 
-Tạo cơ sở dữ liệu và xây dựng HTTP API Serverless với Lambda Python, tám routes và các phép kiểm thử CRUD.
+Thiết kế DynamoDB, xây dựng HTTP API với Lambda Python, kiểm thử CRUD, truy xuất metric và mô phỏng thiết bị.
 
 ## Danh sách bài thực hành chi tiết
 
@@ -15,4 +15,4 @@ Tạo cơ sở dữ liệu và xây dựng HTTP API Serverless với Lambda Pyth
 - [5.4.2. Viết Lambda netmon-api bằng Python](5-4-2-lambda-api/)
 - [5.4.3. Xây dựng HTTP API Gateway với 8 Routes](5-4-3-api-gateway/)
 - [5.4.4. Kiểm thử CRUD và truy vấn dữ liệu](5-4-4-crud-test/)
-
+- [5.4.5. Mô phỏng thiết bị và giám sát tự động](5-4-5-simulation/)

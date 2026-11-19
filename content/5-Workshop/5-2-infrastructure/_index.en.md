@@ -14,4 +14,3 @@ Build a VPC and Ubuntu 24.04 LTS EC2 instance; verify networking and security be
 - [5.2.1. Create a VPC, Subnets, Routes, and IGW](5-2-1-vpc/)
 - [5.2.2. Launch an Ubuntu EC2 Instance](5-2-2-ec2/)
 - [5.2.3. Security Groups, IAM Roles, and Safe Access](5-2-3-security/)
-

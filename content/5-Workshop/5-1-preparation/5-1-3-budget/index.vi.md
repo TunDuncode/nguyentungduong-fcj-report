@@ -27,9 +27,7 @@ Thiết lập mức theo dõi chi phí khi học tập trên AWS. **Budget 20 US
 
 {{< netmonimg src="images/netmon-workshop/03-aws-budget-history.png" alt="Lịch sử ngân sách" caption="Ảnh 03 – Lịch sử ngân sách" >}}
 
-
 {{< netmonimg src="images/netmon-workshop/04-aws-monthly-cost-history.png" alt="Lịch sử chi phí hàng tháng" caption="Ảnh 04 – Lịch sử chi phí hàng tháng" >}}
-
 
 ## Kiểm tra kết quả
 
@@ -39,8 +37,9 @@ Thiết lập mức theo dõi chi phí khi học tập trên AWS. **Budget 20 US
 
 > Chú ý: EC2 chạy liên tục, EBS, public IPv4, NAT Gateway (nếu có) và CloudWatch vượt hạn mức là các nguồn chi phí cần xem kỹ. Không khẳng định toàn bộ hệ thống là miễn phí.
 
----
+## Theo dõi chi phí khi vận hành
 
-> **Lưu ý khi xuất bản:** Không đăng ảnh nguyên gốc có email, mã đăng nhập hoặc token. Hình trong bộ này được lấy từ các ảnh quá trình thực hành và cắt bỏ thanh tài khoản; hãy tự kiểm tra lại trước khi đưa lên website công khai.
+Kiểm tra EC2/EBS, public IPv4, custom metrics và CloudWatch Logs, số lượt gọi API/Lambda, DynamoDB và SNS. Chu kỳ mô phỏng quá ngắn có thể làm tăng lượt gọi dịch vụ. Mốc 25% là cảnh báo sớm, không phải giới hạn chặn tài nguyên. Không khẳng định hệ thống miễn phí chỉ vì đang dùng tài khoản thực hành.
+
 
 [← Về chương](../)

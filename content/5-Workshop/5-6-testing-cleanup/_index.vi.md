@@ -16,4 +16,3 @@ Thu thập minh chứng demo, phân biệt chức năng đã chạy với phần
 - [5.6.3. Dọn dẹp CloudWatch, SNS và EventBridge](5-6-3-monitoring-cleanup/)
 - [5.6.4. Dọn dẹp Lambda, DynamoDB và API Gateway](5-6-4-serverless-cleanup/)
 - [5.6.5. Dọn dẹp Cognito và tài nguyên mạng](5-6-5-auth-cleanup/)
-

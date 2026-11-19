@@ -28,7 +28,8 @@ Ví dụ, chế độ giám sát cơ bản của Amazon EC2 cung cấp phần l�
 Một hệ thống tốt không nhất thiết là hệ thống thu thập nhiều dữ liệu nhất, mà là hệ thống sử dụng dữ liệu hiệu quả.
 
 **Theo mọi người, doanh nghiệp nên ưu tiên phát hiện sự cố nhanh hơn hay tiết kiệm chi phí vận hành?** Mình rất mong nhận được những góc nhìn khác nhau từ cộng đồng AWS.
-
+## Blog của tôi
+https://www.facebook.com/share/p/19kxKGVGNd/?mibextid=wwXIfr
 ## Tài liệu tham khảo
 
 - [AWS — Quản lý giám sát chi tiết cho các phiên bản EC2](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/manage-detailed-monitoring.html)
